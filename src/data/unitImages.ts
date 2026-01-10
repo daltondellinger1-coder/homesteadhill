@@ -62,6 +62,18 @@ import unit11Office from "@/assets/units/unit-11/office.jpg";
 import unit11Exterior from "@/assets/units/unit-11/exterior.jpg";
 import unit11Bathroom from "@/assets/units/unit-11/bathroom.jpg";
 
+// Unit 13 Images (Cottage)
+import unit13LivingRoom1 from "@/assets/units/unit-13/living-room-1.jpg";
+import unit13LivingRoom2 from "@/assets/units/unit-13/living-room-2.jpg";
+import unit13Dining from "@/assets/units/unit-13/dining.jpg";
+import unit13Kitchen from "@/assets/units/unit-13/kitchen.jpg";
+import unit13Bedroom from "@/assets/units/unit-13/bedroom.jpg";
+import unit13Office from "@/assets/units/unit-13/office.jpg";
+import unit13Bathroom from "@/assets/units/unit-13/bathroom.jpg";
+import unit13Shower from "@/assets/units/unit-13/shower.jpg";
+import unit13Exterior from "@/assets/units/unit-13/exterior.jpg";
+import unit13Hallway from "@/assets/units/unit-13/hallway.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -158,6 +170,21 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit11Bedroom, alt: "Cottage 11 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
       { src: unit11Office, alt: "Cottage 11 - Office space with desk, chair, and TV", category: "Living" },
       { src: unit11Bathroom, alt: "Cottage 11 - Full bathroom with shower and stocked towels", category: "Bath" },
+    ],
+  },
+  "unit-13": {
+    primary: unit13LivingRoom1,
+    gallery: [
+      { src: unit13Exterior, alt: "Cottage 13 - Welcoming white door with wreath and smart lock", category: "Exterior" },
+      { src: unit13LivingRoom1, alt: "Cottage 13 - Bright living room with sectional sofa and botanical art", category: "Living" },
+      { src: unit13LivingRoom2, alt: "Cottage 13 - Entertainment area with smart TV and rustic console", category: "Living" },
+      { src: unit13Dining, alt: "Cottage 13 - Expandable dining table with seating", category: "Dining" },
+      { src: unit13Kitchen, alt: "Cottage 13 - Modern kitchen with marble countertops and Keurig", category: "Kitchen" },
+      { src: unit13Bedroom, alt: "Cottage 13 - King bedroom with 'Be Our Guest' decor", category: "Bedroom" },
+      { src: unit13Office, alt: "Cottage 13 - Workspace with desk and wall clock", category: "Living" },
+      { src: unit13Bathroom, alt: "Cottage 13 - Stylish bathroom with towel storage and modern fixtures", category: "Bath" },
+      { src: unit13Shower, alt: "Cottage 13 - Rainfall shower with modern black fixtures", category: "Bath" },
+      { src: unit13Hallway, alt: "Cottage 13 - Hallway with floating shelves and decor", category: "Living" },
     ],
   },
 };

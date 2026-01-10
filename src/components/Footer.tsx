@@ -125,6 +125,9 @@ export function Footer() {
             <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
               Terms of Service
             </Link>
+            <Link to="/admin" className="text-muted-foreground/50 hover:text-muted-foreground transition-colors text-xs">
+              Admin
+            </Link>
           </div>
         </div>
       </div>

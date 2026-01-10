@@ -68,6 +68,7 @@ const Admin = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
           body: JSON.stringify({ action: "sync-all" }),
         }
@@ -142,6 +143,9 @@ const Admin = () => {
                 <p className="text-xs text-muted-foreground">
                   POST with body: {`{"action": "sync-all"}`}
                 </p>
+                <p className="text-xs text-muted-foreground">
+                  Required header: Authorization: Bearer {"<your-anon-key>"}
+                </p>
               </div>
 
               <div className="border-t pt-4">
@@ -177,8 +181,9 @@ const Admin = () => {
               <p><strong>2.</strong> Add a "Schedule by Zapier" trigger (daily or weekly)</p>
               <p><strong>3.</strong> Add a "Webhooks by Zapier" action (POST request)</p>
               <p><strong>4.</strong> Set the URL to your sync endpoint shown above</p>
-              <p><strong>5.</strong> Set the payload type to JSON and body to: {`{"action": "sync-all"}`}</p>
-              <p><strong>6.</strong> Turn on your Zap!</p>
+              <p><strong>5.</strong> Add Authorization header with your anon key</p>
+              <p><strong>6.</strong> Set the payload type to JSON and body to: {`{"action": "sync-all"}`}</p>
+              <p><strong>7.</strong> Turn on your Zap!</p>
             </CardContent>
           </Card>
         </div>

@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Calendar, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar as CalendarIcon, Send, CheckCircle } from "lucide-react";
 import { units } from "@/data/units";
 import { toast } from "sonner";
-import { useAvailability, isDateBlocked } from "@/hooks/useAvailability";
+import { useAvailability, getBlockedDatesForUnit } from "@/hooks/useAvailability";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 export function BookingForm() {
   const [searchParams] = useSearchParams();
@@ -18,46 +22,52 @@ export function BookingForm() {
     email: "",
     phone: "",
     unit: preselectedUnit,
-    checkIn: "",
-    checkOut: "",
     guests: "1",
     message: "",
   });
+  const [checkInDate, setCheckInDate] = useState<Date | undefined>();
+  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Fetch availability data
-  const { data: events, isLoading: isLoadingAvailability } = useAvailability(formData.unit || undefined);
+  const { data: events } = useAvailability(formData.unit || undefined);
 
-  // Check if selected dates conflict with blocked dates
-  const dateConflict = useMemo(() => {
-    if (!formData.checkIn || !formData.checkOut || !formData.unit || !events) {
-      return false;
-    }
+  // Get blocked dates for the selected unit
+  const blockedDates = useMemo(() => {
+    if (!formData.unit || !events) return [];
+    return getBlockedDatesForUnit(events, formData.unit);
+  }, [formData.unit, events]);
+
+  // Disable dates that are blocked or in the past
+  const isDateDisabled = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     
-    const checkIn = new Date(formData.checkIn);
-    const checkOut = new Date(formData.checkOut);
-    const current = new Date(checkIn);
+    if (date < today) return true;
     
-    while (current < checkOut) {
-      if (isDateBlocked(events, current, formData.unit)) {
-        return true;
-      }
-      current.setDate(current.getDate() + 1);
-    }
-    
-    return false;
-  }, [formData.checkIn, formData.checkOut, formData.unit, events]);
+    // Check if date is in blocked dates
+    return blockedDates.some(blocked => 
+      blocked.toDateString() === date.toDateString()
+    );
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Reset dates when unit changes
+    if (name === 'unit') {
+      setCheckInDate(undefined);
+      setCheckOutDate(undefined);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (dateConflict) {
-      toast.error("Selected dates are not available. Please choose different dates.");
+    if (!checkInDate || !checkOutDate) {
+      toast.error("Please select check-in and check-out dates.");
       return;
     }
     
@@ -137,15 +147,16 @@ export function BookingForm() {
 
         {/* Unit Selection */}
         <div className="space-y-2">
-          <Label htmlFor="unit">Preferred Unit</Label>
+          <Label htmlFor="unit">Preferred Unit *</Label>
           <select
             id="unit"
             name="unit"
             value={formData.unit}
             onChange={handleChange}
+            required
             className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            <option value="">Any Available Unit</option>
+            <option value="">Select a Unit</option>
             {units.map((unit) => (
               <option key={unit.id} value={unit.id}>
                 {unit.name} - Sleeps {unit.sleeps}
@@ -156,36 +167,78 @@ export function BookingForm() {
 
         {/* Check-in Date */}
         <div className="space-y-2">
-          <Label htmlFor="checkIn">Check-in Date *</Label>
-          <div className="relative">
-            <Input
-              id="checkIn"
-              name="checkIn"
-              type="date"
-              required
-              value={formData.checkIn}
-              onChange={handleChange}
-              min={new Date().toISOString().split("T")[0]}
-            />
-            <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-          </div>
+          <Label>Check-in Date *</Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full justify-start text-left font-normal",
+                  !checkInDate && "text-muted-foreground"
+                )}
+                disabled={!formData.unit}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {checkInDate ? format(checkInDate, "PPP") : "Select date"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={checkInDate}
+                onSelect={(date) => {
+                  setCheckInDate(date);
+                  // Reset checkout if it's before the new checkin
+                  if (checkOutDate && date && checkOutDate <= date) {
+                    setCheckOutDate(undefined);
+                  }
+                }}
+                disabled={isDateDisabled}
+                initialFocus
+                className="pointer-events-auto"
+              />
+            </PopoverContent>
+          </Popover>
+          {!formData.unit && (
+            <p className="text-xs text-muted-foreground">Select a unit first to see availability</p>
+          )}
         </div>
 
         {/* Check-out Date */}
         <div className="space-y-2">
-          <Label htmlFor="checkOut">Check-out Date *</Label>
-          <div className="relative">
-            <Input
-              id="checkOut"
-              name="checkOut"
-              type="date"
-              required
-              value={formData.checkOut}
-              onChange={handleChange}
-              min={formData.checkIn || new Date().toISOString().split("T")[0]}
-            />
-            <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-          </div>
+          <Label>Check-out Date *</Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full justify-start text-left font-normal",
+                  !checkOutDate && "text-muted-foreground"
+                )}
+                disabled={!checkInDate}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {checkOutDate ? format(checkOutDate, "PPP") : "Select date"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={checkOutDate}
+                onSelect={setCheckOutDate}
+                disabled={(date) => {
+                  if (!checkInDate) return true;
+                  if (date <= checkInDate) return true;
+                  return isDateDisabled(date);
+                }}
+                initialFocus
+                className="pointer-events-auto"
+              />
+            </PopoverContent>
+          </Popover>
+          {!checkInDate && formData.unit && (
+            <p className="text-xs text-muted-foreground">Select check-in date first</p>
+          )}
         </div>
 
         {/* Number of Guests */}
@@ -207,24 +260,14 @@ export function BookingForm() {
         </div>
       </div>
 
-      {/* Date Conflict Warning */}
-      {dateConflict && (
-        <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-          <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm font-medium text-destructive">Dates Not Available</p>
-            <p className="text-sm text-destructive/80">
-              The selected dates overlap with an existing booking. Please choose different dates or select a different unit.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Availability Status */}
-      {formData.unit && !dateConflict && formData.checkIn && formData.checkOut && (
-        <div className="flex items-center gap-2 text-sm text-primary">
+      {/* Selected Dates Summary */}
+      {checkInDate && checkOutDate && (
+        <div className="flex items-center gap-2 text-sm text-primary bg-primary/5 p-3 rounded-lg">
           <CheckCircle className="w-4 h-4" />
-          Dates appear to be available!
+          <span>
+            {format(checkInDate, "MMM d, yyyy")} → {format(checkOutDate, "MMM d, yyyy")} 
+            {" "}({Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24))} nights)
+          </span>
         </div>
       )}
 
@@ -246,7 +289,7 @@ export function BookingForm() {
         type="submit" 
         size="lg" 
         className="w-full" 
-        disabled={isSubmitting || dateConflict}
+        disabled={isSubmitting || !checkInDate || !checkOutDate}
       >
         {isSubmitting ? (
           <>

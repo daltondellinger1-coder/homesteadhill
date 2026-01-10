@@ -6,12 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { RefreshCw, Webhook, Calendar } from "lucide-react";
+import { Webhook, Calendar, Shield, Copy } from "lucide-react";
 
 const Admin = () => {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSyncing, setIsSyncing] = useState(false);
   const { toast } = useToast();
 
   const handleTestWebhook = async (e: React.FormEvent) => {
@@ -59,42 +58,15 @@ const Admin = () => {
     }
   };
 
-  const handleManualSync = async () => {
-    setIsSyncing(true);
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sync-calendar`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-          },
-          body: JSON.stringify({ action: "sync-all" }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast({
-          title: "Sync Complete",
-          description: `Successfully synced ${data.synced?.length || 0} calendars.`,
-        });
-      } else {
-        throw new Error(data.error || "Sync failed");
-      }
-    } catch (error) {
-      console.error("Error syncing calendars:", error);
-      toast({
-        title: "Sync Failed",
-        description: "Failed to sync calendars. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSyncing(false);
-    }
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: "Copied!",
+      description: `${label} copied to clipboard`,
+    });
   };
+
+  const syncEndpoint = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sync-calendar`;
 
   return (
     <div className="min-h-screen bg-background">
@@ -103,22 +75,83 @@ const Admin = () => {
         <h1 className="text-3xl font-bold text-foreground mb-8">Admin Dashboard</h1>
 
         <div className="space-y-6">
-          {/* Manual Sync Card */}
+          {/* Security Notice */}
+          <Card className="border-amber-200 bg-amber-50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-amber-800">
+                <Shield className="h-5 w-5" />
+                Security Notice
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-amber-700">
+              <p>
+                Calendar sync operations require the <strong>service role key</strong> for authentication. 
+                This key should never be exposed in client-side code. Use Zapier or another secure 
+                backend service to automate calendar syncing.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Calendar Sync Instructions */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
-                Manual Calendar Sync
+                Calendar Sync Endpoint
               </CardTitle>
               <CardDescription>
-                Sync all unit calendars with their Airbnb iCal feeds right now.
+                Use this endpoint with your service role key to sync unit calendars.
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Button onClick={handleManualSync} disabled={isSyncing}>
-                <RefreshCw className={`mr-2 h-4 w-4 ${isSyncing ? "animate-spin" : ""}`} />
-                {isSyncing ? "Syncing..." : "Sync All Calendars"}
-              </Button>
+            <CardContent className="space-y-4">
+              <div className="p-4 bg-muted rounded-lg space-y-3">
+                <div>
+                  <p className="text-sm font-medium mb-1">Endpoint URL:</p>
+                  <div className="flex items-center gap-2">
+                    <code className="text-xs bg-background p-2 rounded flex-1 break-all">
+                      {syncEndpoint}
+                    </code>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => copyToClipboard(syncEndpoint, "Endpoint URL")}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+                
+                <div>
+                  <p className="text-sm font-medium mb-1">Method:</p>
+                  <code className="text-xs bg-background p-2 rounded block">POST</code>
+                </div>
+                
+                <div>
+                  <p className="text-sm font-medium mb-1">Required Headers:</p>
+                  <code className="text-xs bg-background p-2 rounded block">
+                    Authorization: Bearer {"<SERVICE_ROLE_KEY>"}
+                  </code>
+                  <code className="text-xs bg-background p-2 rounded block mt-1">
+                    Content-Type: application/json
+                  </code>
+                </div>
+                
+                <div>
+                  <p className="text-sm font-medium mb-1">Request Body:</p>
+                  <code className="text-xs bg-background p-2 rounded block whitespace-pre">
+{`{
+  "action": "sync-all"
+}`}
+                  </code>
+                </div>
+              </div>
+
+              <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Note:</strong> The service role key can be found in your backend settings. 
+                  Never expose this key in client-side code or public repositories.
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -131,23 +164,10 @@ const Admin = () => {
               </CardTitle>
               <CardDescription>
                 Set up automatic calendar syncing using Zapier. Create a Zap with a Schedule trigger
-                that calls your sync endpoint.
+                that calls your sync endpoint with the service role key.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="p-4 bg-muted rounded-lg space-y-2">
-                <p className="text-sm font-medium">Your Sync Endpoint:</p>
-                <code className="text-xs bg-background p-2 rounded block break-all">
-                  {import.meta.env.VITE_SUPABASE_URL}/functions/v1/sync-calendar
-                </code>
-                <p className="text-xs text-muted-foreground">
-                  POST with body: {`{"action": "sync-all"}`}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Required header: Authorization: Bearer {"<your-anon-key>"}
-                </p>
-              </div>
-
               <div className="border-t pt-4">
                 <form onSubmit={handleTestWebhook} className="space-y-4">
                   <div className="space-y-2">
@@ -181,9 +201,10 @@ const Admin = () => {
               <p><strong>2.</strong> Add a "Schedule by Zapier" trigger (daily or weekly)</p>
               <p><strong>3.</strong> Add a "Webhooks by Zapier" action (POST request)</p>
               <p><strong>4.</strong> Set the URL to your sync endpoint shown above</p>
-              <p><strong>5.</strong> Add Authorization header with your anon key</p>
-              <p><strong>6.</strong> Set the payload type to JSON and body to: {`{"action": "sync-all"}`}</p>
-              <p><strong>7.</strong> Turn on your Zap!</p>
+              <p><strong>5.</strong> Add Authorization header with your <strong>service role key</strong> (not anon key)</p>
+              <p><strong>6.</strong> Set Content-Type header to: application/json</p>
+              <p><strong>7.</strong> Set the payload type to JSON and body to: {`{"action": "sync-all"}`}</p>
+              <p><strong>8.</strong> Turn on your Zap!</p>
             </CardContent>
           </Card>
         </div>

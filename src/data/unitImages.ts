@@ -46,6 +46,14 @@ import unit5Bedroom1 from "@/assets/units/unit-5/bedroom-1.jpg";
 import unit5Bedroom2 from "@/assets/units/unit-5/bedroom-2.jpg";
 import unit5Bathroom from "@/assets/units/unit-5/bathroom.jpg";
 
+// Unit 6 Images
+import unit6LivingRoom from "@/assets/units/unit-6/living-room.jpg";
+import unit6Kitchen from "@/assets/units/unit-6/kitchen.jpg";
+import unit6KitchenDining from "@/assets/units/unit-6/kitchen-dining.jpg";
+import unit6Bedroom1 from "@/assets/units/unit-6/bedroom-1.jpg";
+import unit6Bedroom2 from "@/assets/units/unit-6/bedroom-2.jpg";
+import unit6Bathroom from "@/assets/units/unit-6/bathroom.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -120,6 +128,17 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit5Bedroom1, alt: "Unit 5 - Queen bedroom with TV and natural light", category: "Bedroom" },
       { src: unit5Bedroom2, alt: "Unit 5 - Spacious bedroom with ceiling fan", category: "Bedroom" },
       { src: unit5Bathroom, alt: "Unit 5 - Modern bathroom with shower", category: "Bath" },
+    ],
+  },
+  "unit-6": {
+    primary: unit6LivingRoom,
+    gallery: [
+      { src: unit6LivingRoom, alt: "Unit 6 - Spacious living room with sectional sofa, TV, and ceiling fan", category: "Living" },
+      { src: unit6Kitchen, alt: "Unit 6 - Full kitchen with stainless steel appliances", category: "Kitchen" },
+      { src: unit6KitchenDining, alt: "Unit 6 - Open kitchen and dining area with breakfast bar", category: "Kitchen" },
+      { src: unit6Bedroom1, alt: "Unit 6 - Queen bedroom with wardrobe and botanical art", category: "Bedroom" },
+      { src: unit6Bedroom2, alt: "Unit 6 - Cozy bedroom with TV and ceiling fan", category: "Bedroom" },
+      { src: unit6Bathroom, alt: "Unit 6 - Modern bathroom with stocked towels and essentials", category: "Bath" },
     ],
   },
 };

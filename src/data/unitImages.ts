@@ -38,6 +38,14 @@ import unit4Bedroom1 from "@/assets/units/unit-4/bedroom-1.jpg";
 import unit4Bedroom2 from "@/assets/units/unit-4/bedroom-2.jpg";
 import unit4Bathroom from "@/assets/units/unit-4/bathroom.jpg";
 
+// Unit 5 Images
+import unit5LivingRoom from "@/assets/units/unit-5/living-room.jpg";
+import unit5KitchenLiving from "@/assets/units/unit-5/kitchen-living.jpg";
+import unit5Kitchen from "@/assets/units/unit-5/kitchen.jpg";
+import unit5Bedroom1 from "@/assets/units/unit-5/bedroom-1.jpg";
+import unit5Bedroom2 from "@/assets/units/unit-5/bedroom-2.jpg";
+import unit5Bathroom from "@/assets/units/unit-5/bathroom.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -101,6 +109,17 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit4Bedroom1, alt: "Unit 4 - Queen bedroom with natural light", category: "Bedroom" },
       { src: unit4Bedroom2, alt: "Unit 4 - Comfortable bedroom with storage", category: "Bedroom" },
       { src: unit4Bathroom, alt: "Unit 4 - Modern bathroom with vanity", category: "Bath" },
+    ],
+  },
+  "unit-5": {
+    primary: unit5LivingRoom,
+    gallery: [
+      { src: unit5LivingRoom, alt: "Unit 5 - Cozy living room with sectional sofa and TV", category: "Living" },
+      { src: unit5KitchenLiving, alt: "Unit 5 - Open kitchen and living area", category: "Kitchen" },
+      { src: unit5Kitchen, alt: "Unit 5 - Full kitchen with marble countertops and stainless appliances", category: "Kitchen" },
+      { src: unit5Bedroom1, alt: "Unit 5 - Queen bedroom with TV and natural light", category: "Bedroom" },
+      { src: unit5Bedroom2, alt: "Unit 5 - Spacious bedroom with ceiling fan", category: "Bedroom" },
+      { src: unit5Bathroom, alt: "Unit 5 - Modern bathroom with shower", category: "Bath" },
     ],
   },
 };

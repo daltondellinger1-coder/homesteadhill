@@ -28,6 +28,16 @@ import unit3Bedroom2 from "@/assets/units/unit-3/bedroom-2.jpg";
 import unit3Bathroom from "@/assets/units/unit-3/bathroom.jpg";
 import unit3Shower from "@/assets/units/unit-3/shower.jpg";
 
+// Unit 4 Images
+import unit4LivingRoom from "@/assets/units/unit-4/living-room.jpg";
+import unit4Kitchen from "@/assets/units/unit-4/kitchen.jpg";
+import unit4Kitchen2 from "@/assets/units/unit-4/kitchen-2.jpg";
+import unit4Dining from "@/assets/units/unit-4/dining.jpg";
+import unit4Entry from "@/assets/units/unit-4/entry.jpg";
+import unit4Bedroom1 from "@/assets/units/unit-4/bedroom-1.jpg";
+import unit4Bedroom2 from "@/assets/units/unit-4/bedroom-2.jpg";
+import unit4Bathroom from "@/assets/units/unit-4/bathroom.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -78,6 +88,19 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit3Bedroom2, alt: "Unit 3 - Cozy queen bedroom with decorative pillows", category: "Bedroom" },
       { src: unit3Bathroom, alt: "Unit 3 - Modern bathroom with vanity and towel storage", category: "Bath" },
       { src: unit3Shower, alt: "Unit 3 - Shower with stylish curtain", category: "Bath" },
+    ],
+  },
+  "unit-4": {
+    primary: unit4LivingRoom,
+    gallery: [
+      { src: unit4LivingRoom, alt: "Unit 4 - Cozy living room with comfortable seating", category: "Living" },
+      { src: unit4Kitchen, alt: "Unit 4 - Full kitchen with modern appliances", category: "Kitchen" },
+      { src: unit4Kitchen2, alt: "Unit 4 - Kitchen with stove and counter space", category: "Kitchen" },
+      { src: unit4Dining, alt: "Unit 4 - Dining area with table", category: "Dining" },
+      { src: unit4Entry, alt: "Unit 4 - Entry with smart lock", category: "Living" },
+      { src: unit4Bedroom1, alt: "Unit 4 - Queen bedroom with natural light", category: "Bedroom" },
+      { src: unit4Bedroom2, alt: "Unit 4 - Comfortable bedroom with storage", category: "Bedroom" },
+      { src: unit4Bathroom, alt: "Unit 4 - Modern bathroom with vanity", category: "Bath" },
     ],
   },
 };

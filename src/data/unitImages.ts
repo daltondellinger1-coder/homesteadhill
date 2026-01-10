@@ -19,6 +19,15 @@ import unit2Bedroom2 from "@/assets/units/unit-2/bedroom-2.jpg";
 import unit2Bedroom3 from "@/assets/units/unit-2/bedroom-3.jpg";
 import unit2Bathroom from "@/assets/units/unit-2/bathroom.jpg";
 
+// Unit 3 Images
+import unit3LivingRoom from "@/assets/units/unit-3/living-room.jpg";
+import unit3Kitchen from "@/assets/units/unit-3/kitchen.jpg";
+import unit3KitchenDining from "@/assets/units/unit-3/kitchen-dining.jpg";
+import unit3Bedroom1 from "@/assets/units/unit-3/bedroom-1.jpg";
+import unit3Bedroom2 from "@/assets/units/unit-3/bedroom-2.jpg";
+import unit3Bathroom from "@/assets/units/unit-3/bathroom.jpg";
+import unit3Shower from "@/assets/units/unit-3/shower.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -59,7 +68,20 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit2Bathroom, alt: "Unit 2 - Bathroom with stocked towels", category: "Bath" },
     ],
   },
+  "unit-3": {
+    primary: unit3LivingRoom,
+    gallery: [
+      { src: unit3LivingRoom, alt: "Unit 3 - Stylish living room with sectional sofa and TV", category: "Living" },
+      { src: unit3Kitchen, alt: "Unit 3 - Full kitchen with marble countertops and Keurig", category: "Kitchen" },
+      { src: unit3KitchenDining, alt: "Unit 3 - Kitchen and dining area with rustic table", category: "Kitchen" },
+      { src: unit3Bedroom1, alt: "Unit 3 - Bedroom with queen bed and storage", category: "Bedroom" },
+      { src: unit3Bedroom2, alt: "Unit 3 - Cozy queen bedroom with decorative pillows", category: "Bedroom" },
+      { src: unit3Bathroom, alt: "Unit 3 - Modern bathroom with vanity and towel storage", category: "Bath" },
+      { src: unit3Shower, alt: "Unit 3 - Shower with stylish curtain", category: "Bath" },
+    ],
+  },
 };
+
 // Get all gallery images across all units
 export const getAllGalleryImages = (): (UnitImage & { unitId: string })[] => {
   return Object.entries(unitImages).flatMap(([unitId, images]) =>

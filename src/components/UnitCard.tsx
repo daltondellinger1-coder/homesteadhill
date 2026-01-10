@@ -67,15 +67,19 @@ export function UnitCard({ unit }: UnitCardProps) {
               {unit.name}
             </h3>
             {/* Pricing */}
-            <div className="text-right">
-              <div className="text-lg font-semibold text-primary">
-                ${unit.monthlyPrice.toLocaleString()}
+            <div className="text-right text-xs space-y-0.5">
+              <div>
+                <span className="font-semibold text-primary text-base">${unit.monthlyPrice.toLocaleString()}</span>
+                <span className="text-muted-foreground">/mo</span>
               </div>
-              <div className="text-xs text-muted-foreground">/month</div>
-              <div className="text-sm text-foreground mt-1">
-                ${Math.round((unit.monthlyPrice / 30) * 1.25 * 7).toLocaleString()}
+              <div>
+                <span className="font-medium text-foreground">${Math.round((unit.monthlyPrice / 30) * 1.25 * 7).toLocaleString()}</span>
+                <span className="text-muted-foreground">/wk</span>
               </div>
-              <div className="text-xs text-muted-foreground">/week</div>
+              <div>
+                <span className="font-medium text-foreground">$95</span>
+                <span className="text-muted-foreground">/night</span>
+              </div>
             </div>
           </div>
 

@@ -222,23 +222,29 @@ const UnitDetail = () => {
               <div className="sticky top-28 bg-gradient-card rounded-2xl border border-border p-6">
               {/* Price Display */}
                 <div className="text-center mb-6 pb-6 border-b border-border">
-                  <div className="flex justify-center gap-6">
+                  <div className="grid grid-cols-3 gap-4">
                     <div>
-                      <div className="text-2xl font-semibold text-primary">
+                      <div className="text-xl font-semibold text-primary">
                         ${unit.monthlyPrice.toLocaleString()}
                       </div>
-                      <div className="text-muted-foreground text-sm">per month</div>
+                      <div className="text-muted-foreground text-xs">per month</div>
                     </div>
-                    <div className="border-l border-border" />
-                    <div>
-                      <div className="text-2xl font-semibold text-foreground">
+                    <div className="border-l border-r border-border px-4">
+                      <div className="text-xl font-semibold text-foreground">
                         ${Math.round((unit.monthlyPrice / 30) * 1.25 * 7).toLocaleString()}
                       </div>
-                      <div className="text-muted-foreground text-sm">per week</div>
+                      <div className="text-muted-foreground text-xs">per week</div>
+                    </div>
+                    <div>
+                      <div className="text-xl font-semibold text-foreground">
+                        $95
+                      </div>
+                      <div className="text-muted-foreground text-xs">per night</div>
                     </div>
                   </div>
+                  <p className="text-xs text-muted-foreground mt-3">3 night minimum</p>
                   {unit.priceNote && (
-                    <p className="text-xs text-primary mt-3">{unit.priceNote}</p>
+                    <p className="text-xs text-primary mt-1">{unit.priceNote}</p>
                   )}
                 </div>
 

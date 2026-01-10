@@ -23,17 +23,18 @@ const Location = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {/* Map Placeholder */}
-            <div className="aspect-[4/3] lg:aspect-auto lg:min-h-[400px] bg-navy-light rounded-2xl border border-border flex items-center justify-center relative overflow-hidden">
-              <div className="text-center p-8">
-                <MapPin className="w-16 h-16 text-primary/30 mx-auto mb-4" />
-                <p className="text-muted-foreground">
-                  Interactive map coming soon
-                </p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Vincennes, Indiana 47591
-                </p>
-              </div>
+            {/* Interactive Map */}
+            <div className="aspect-[4/3] lg:aspect-auto lg:min-h-[400px] rounded-2xl border border-border overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3093.8!2d-87.5186!3d38.6847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886de5c1f3e8df0d%3A0x0!2s2818%20Washington%20Ave%2C%20Vincennes%2C%20IN%2047591!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '400px' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Homestead Hill Location - 2818 Washington Ave, Vincennes, IN 47591"
+              />
             </div>
 
             {/* Nearby Locations */}
@@ -114,6 +115,7 @@ const Location = () => {
               Homestead Hill
             </h3>
             <p className="text-muted-foreground">
+              2818 Washington Ave<br />
               Vincennes, Indiana 47591
             </p>
             <p className="text-primary mt-4 text-sm font-medium">

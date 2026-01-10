@@ -220,14 +220,25 @@ const UnitDetail = () => {
             {/* Booking Sidebar */}
             <div className="lg:col-span-2">
               <div className="sticky top-28 bg-gradient-card rounded-2xl border border-border p-6">
-                {/* Price Display */}
+              {/* Price Display */}
                 <div className="text-center mb-6 pb-6 border-b border-border">
-                  <div className="text-3xl font-semibold text-primary">
-                    ${unit.monthlyPrice.toLocaleString()}
+                  <div className="flex justify-center gap-6">
+                    <div>
+                      <div className="text-2xl font-semibold text-primary">
+                        ${unit.monthlyPrice.toLocaleString()}
+                      </div>
+                      <div className="text-muted-foreground text-sm">per month</div>
+                    </div>
+                    <div className="border-l border-border" />
+                    <div>
+                      <div className="text-2xl font-semibold text-foreground">
+                        ${Math.round((unit.monthlyPrice / 30) * 1.25 * 7).toLocaleString()}
+                      </div>
+                      <div className="text-muted-foreground text-sm">per week</div>
+                    </div>
                   </div>
-                  <div className="text-muted-foreground text-sm">per month</div>
                   {unit.priceNote && (
-                    <p className="text-xs text-primary mt-2">{unit.priceNote}</p>
+                    <p className="text-xs text-primary mt-3">{unit.priceNote}</p>
                   )}
                 </div>
 

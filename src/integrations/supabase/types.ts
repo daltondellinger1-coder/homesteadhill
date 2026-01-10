@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      calendar_events: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: string
+          source: string | null
+          start_date: string
+          summary: string | null
+          unit_id: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: string
+          source?: string | null
+          start_date: string
+          summary?: string | null
+          unit_id: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: string
+          source?: string | null
+          start_date?: string
+          summary?: string | null
+          unit_id?: string
+        }
+        Relationships: []
+      }
+      unit_calendars: {
+        Row: {
+          created_at: string
+          ical_url: string
+          id: string
+          last_synced_at: string | null
+          unit_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          ical_url: string
+          id?: string
+          last_synced_at?: string | null
+          unit_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          ical_url?: string
+          id?: string
+          last_synced_at?: string | null
+          unit_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

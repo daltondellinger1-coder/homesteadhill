@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Calendar, Send, CheckCircle } from "lucide-react";
+import { Calendar, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { units } from "@/data/units";
 import { toast } from "sonner";
+import { useAvailability, isDateBlocked } from "@/hooks/useAvailability";
 
 export function BookingForm() {
   const [searchParams] = useSearchParams();
@@ -25,12 +26,41 @@ export function BookingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Fetch availability data
+  const { data: events, isLoading: isLoadingAvailability } = useAvailability(formData.unit || undefined);
+
+  // Check if selected dates conflict with blocked dates
+  const dateConflict = useMemo(() => {
+    if (!formData.checkIn || !formData.checkOut || !formData.unit || !events) {
+      return false;
+    }
+    
+    const checkIn = new Date(formData.checkIn);
+    const checkOut = new Date(formData.checkOut);
+    const current = new Date(checkIn);
+    
+    while (current < checkOut) {
+      if (isDateBlocked(events, current, formData.unit)) {
+        return true;
+      }
+      current.setDate(current.getDate() + 1);
+    }
+    
+    return false;
+  }, [formData.checkIn, formData.checkOut, formData.unit, events]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (dateConflict) {
+      toast.error("Selected dates are not available. Please choose different dates.");
+      return;
+    }
+    
     setIsSubmitting(true);
     
     // Simulate form submission
@@ -177,6 +207,27 @@ export function BookingForm() {
         </div>
       </div>
 
+      {/* Date Conflict Warning */}
+      {dateConflict && (
+        <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+          <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-medium text-destructive">Dates Not Available</p>
+            <p className="text-sm text-destructive/80">
+              The selected dates overlap with an existing booking. Please choose different dates or select a different unit.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Availability Status */}
+      {formData.unit && !dateConflict && formData.checkIn && formData.checkOut && (
+        <div className="flex items-center gap-2 text-sm text-primary">
+          <CheckCircle className="w-4 h-4" />
+          Dates appear to be available!
+        </div>
+      )}
+
       {/* Message */}
       <div className="space-y-2">
         <Label htmlFor="message">Additional Message</Label>
@@ -191,7 +242,12 @@ export function BookingForm() {
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+      <Button 
+        type="submit" 
+        size="lg" 
+        className="w-full" 
+        disabled={isSubmitting || dateConflict}
+      >
         {isSubmitting ? (
           <>
             <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />

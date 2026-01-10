@@ -54,6 +54,14 @@ import unit6Bedroom1 from "@/assets/units/unit-6/bedroom-1.jpg";
 import unit6Bedroom2 from "@/assets/units/unit-6/bedroom-2.jpg";
 import unit6Bathroom from "@/assets/units/unit-6/bathroom.jpg";
 
+// Unit 11 Images (Cottage)
+import unit11LivingRoom from "@/assets/units/unit-11/living-room.jpg";
+import unit11Kitchen from "@/assets/units/unit-11/kitchen.jpg";
+import unit11Bedroom from "@/assets/units/unit-11/bedroom.jpg";
+import unit11Office from "@/assets/units/unit-11/office.jpg";
+import unit11Exterior from "@/assets/units/unit-11/exterior.jpg";
+import unit11Bathroom from "@/assets/units/unit-11/bathroom.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -139,6 +147,17 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit6Bedroom1, alt: "Unit 6 - Queen bedroom with wardrobe and botanical art", category: "Bedroom" },
       { src: unit6Bedroom2, alt: "Unit 6 - Cozy bedroom with TV and ceiling fan", category: "Bedroom" },
       { src: unit6Bathroom, alt: "Unit 6 - Modern bathroom with stocked towels and essentials", category: "Bath" },
+    ],
+  },
+  "unit-11": {
+    primary: unit11LivingRoom,
+    gallery: [
+      { src: unit11Exterior, alt: "Cottage 11 - Charming cottage exterior with covered porch", category: "Exterior" },
+      { src: unit11LivingRoom, alt: "Cottage 11 - Spacious living room with sectional sofa, TV, and ceiling fan", category: "Living" },
+      { src: unit11Kitchen, alt: "Cottage 11 - Galley kitchen with marble countertops and full appliances", category: "Kitchen" },
+      { src: unit11Bedroom, alt: "Cottage 11 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
+      { src: unit11Office, alt: "Cottage 11 - Office space with desk, chair, and TV", category: "Living" },
+      { src: unit11Bathroom, alt: "Cottage 11 - Full bathroom with shower and stocked towels", category: "Bath" },
     ],
   },
 };

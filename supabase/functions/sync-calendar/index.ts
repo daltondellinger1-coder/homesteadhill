@@ -82,6 +82,26 @@ Deno.serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
+    
+    // Validate authorization header
+    const authHeader = req.headers.get('authorization')
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ error: 'Missing authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    const token = authHeader.replace('Bearer ', '')
+    
+    // Validate the token - accept service role key or anon key
+    if (token !== supabaseServiceKey && token !== supabaseAnonKey) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid authorization token' }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
     
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 

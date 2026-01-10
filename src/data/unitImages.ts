@@ -8,6 +8,17 @@ import unit1Bedroom1 from "@/assets/units/unit-1/bedroom-1.jpg";
 import unit1Bedroom2 from "@/assets/units/unit-1/bedroom-2.jpg";
 import unit1Bathroom from "@/assets/units/unit-1/bathroom.jpg";
 
+// Unit 2 Images
+import unit2LivingRoom1 from "@/assets/units/unit-2/living-room-1.jpg";
+import unit2LivingRoom2 from "@/assets/units/unit-2/living-room-2.jpg";
+import unit2TvCorner from "@/assets/units/unit-2/tv-corner.jpg";
+import unit2KitchenDining from "@/assets/units/unit-2/kitchen-dining.jpg";
+import unit2Kitchen from "@/assets/units/unit-2/kitchen.jpg";
+import unit2Bedroom1 from "@/assets/units/unit-2/bedroom-1.jpg";
+import unit2Bedroom2 from "@/assets/units/unit-2/bedroom-2.jpg";
+import unit2Bedroom3 from "@/assets/units/unit-2/bedroom-3.jpg";
+import unit2Bathroom from "@/assets/units/unit-2/bathroom.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -34,8 +45,21 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit1Bathroom, alt: "Unit 1 - Modern bathroom with vanity", category: "Bath" },
     ],
   },
+  "unit-2": {
+    primary: unit2LivingRoom1,
+    gallery: [
+      { src: unit2LivingRoom1, alt: "Unit 2 - Open living area with TV and ceiling fan", category: "Living" },
+      { src: unit2LivingRoom2, alt: "Unit 2 - Comfortable seating with industrial lamp", category: "Living" },
+      { src: unit2TvCorner, alt: "Unit 2 - Entertainment corner with smart TV", category: "Living" },
+      { src: unit2KitchenDining, alt: "Unit 2 - Kitchen and dining area with rustic table", category: "Kitchen" },
+      { src: unit2Kitchen, alt: "Unit 2 - Full kitchen with granite countertops", category: "Kitchen" },
+      { src: unit2Bedroom1, alt: "Unit 2 - Bedroom with queen bed and storage", category: "Bedroom" },
+      { src: unit2Bedroom2, alt: "Unit 2 - Queen bedroom with decorative pillows", category: "Bedroom" },
+      { src: unit2Bedroom3, alt: "Unit 2 - Cozy bedroom with natural light", category: "Bedroom" },
+      { src: unit2Bathroom, alt: "Unit 2 - Bathroom with stocked towels", category: "Bath" },
+    ],
+  },
 };
-
 // Get all gallery images across all units
 export const getAllGalleryImages = (): (UnitImage & { unitId: string })[] => {
   return Object.entries(unitImages).flatMap(([unitId, images]) =>

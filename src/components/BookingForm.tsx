@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +27,8 @@ export function BookingForm() {
   });
   const [checkInDate, setCheckInDate] = useState<Date | undefined>();
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
+  const [checkInOpen, setCheckInOpen] = useState(false);
+  const [checkOutOpen, setCheckOutOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -39,18 +41,28 @@ export function BookingForm() {
     return getBlockedDatesForUnit(events, formData.unit);
   }, [formData.unit, events]);
 
+  // Create a Set of blocked date strings for faster lookup
+  const blockedDateStrings = useMemo(() => {
+    return new Set(blockedDates.map(d => d.toDateString()));
+  }, [blockedDates]);
+
   // Disable dates that are blocked or in the past
-  const isDateDisabled = (date: Date) => {
+  const isDateDisabled = useCallback((date: Date): boolean => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
     if (date < today) return true;
     
-    // Check if date is in blocked dates
-    return blockedDates.some(blocked => 
-      blocked.toDateString() === date.toDateString()
-    );
-  };
+    // Check if date is in blocked dates using the Set
+    return blockedDateStrings.has(date.toDateString());
+  }, [blockedDateStrings]);
+
+  // Disable checkout dates
+  const isCheckoutDisabled = useCallback((date: Date): boolean => {
+    if (!checkInDate) return true;
+    if (date <= checkInDate) return true;
+    return isDateDisabled(date);
+  }, [checkInDate, isDateDisabled]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -61,6 +73,20 @@ export function BookingForm() {
       setCheckInDate(undefined);
       setCheckOutDate(undefined);
     }
+  };
+
+  const handleCheckInSelect = (date: Date | undefined) => {
+    setCheckInDate(date);
+    setCheckInOpen(false);
+    // Reset checkout if it's before the new checkin
+    if (checkOutDate && date && checkOutDate <= date) {
+      setCheckOutDate(undefined);
+    }
+  };
+
+  const handleCheckOutSelect = (date: Date | undefined) => {
+    setCheckOutDate(date);
+    setCheckOutOpen(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -168,9 +194,10 @@ export function BookingForm() {
         {/* Check-in Date */}
         <div className="space-y-2">
           <Label>Check-in Date *</Label>
-          <Popover>
+          <Popover open={checkInOpen} onOpenChange={setCheckInOpen}>
             <PopoverTrigger asChild>
               <Button
+                type="button"
                 variant="outline"
                 className={cn(
                   "w-full justify-start text-left font-normal",
@@ -182,20 +209,14 @@ export function BookingForm() {
                 {checkInDate ? format(checkInDate, "PPP") : "Select date"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 z-50" align="start">
               <Calendar
                 mode="single"
                 selected={checkInDate}
-                onSelect={(date) => {
-                  setCheckInDate(date);
-                  // Reset checkout if it's before the new checkin
-                  if (checkOutDate && date && checkOutDate <= date) {
-                    setCheckOutDate(undefined);
-                  }
-                }}
+                onSelect={handleCheckInSelect}
                 disabled={isDateDisabled}
                 initialFocus
-                className="pointer-events-auto"
+                className="p-3 pointer-events-auto"
               />
             </PopoverContent>
           </Popover>
@@ -207,9 +228,10 @@ export function BookingForm() {
         {/* Check-out Date */}
         <div className="space-y-2">
           <Label>Check-out Date *</Label>
-          <Popover>
+          <Popover open={checkOutOpen} onOpenChange={setCheckOutOpen}>
             <PopoverTrigger asChild>
               <Button
+                type="button"
                 variant="outline"
                 className={cn(
                   "w-full justify-start text-left font-normal",
@@ -221,18 +243,14 @@ export function BookingForm() {
                 {checkOutDate ? format(checkOutDate, "PPP") : "Select date"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 z-50" align="start">
               <Calendar
                 mode="single"
                 selected={checkOutDate}
-                onSelect={setCheckOutDate}
-                disabled={(date) => {
-                  if (!checkInDate) return true;
-                  if (date <= checkInDate) return true;
-                  return isDateDisabled(date);
-                }}
+                onSelect={handleCheckOutSelect}
+                disabled={isCheckoutDisabled}
                 initialFocus
-                className="pointer-events-auto"
+                className="p-3 pointer-events-auto"
               />
             </PopoverContent>
           </Popover>

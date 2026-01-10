@@ -17,6 +17,8 @@ import { cn } from "@/lib/utils";
 function calculatePricing(monthlyPrice: number, nights: number) {
   const dailyMonthlyRate = monthlyPrice / 30;
   const dailyWeeklyRate = dailyMonthlyRate * 1.25;
+  const nightlyRate = 95; // Fixed nightly rate for short stays
+  const minimumNights = 3;
   
   if (nights >= 30) {
     // Monthly rate
@@ -26,23 +28,30 @@ function calculatePricing(monthlyPrice: number, nights: number) {
     const remainingTotal = remainingDays * dailyMonthlyRate;
     return {
       total: Math.round(monthlyTotal + remainingTotal),
-      rateType: "monthly",
+      rateType: "monthly" as const,
       perNight: Math.round(dailyMonthlyRate),
     };
   } else if (nights >= 7) {
     // Weekly rate
     return {
       total: Math.round(nights * dailyWeeklyRate),
-      rateType: "weekly",
+      rateType: "weekly" as const,
       perNight: Math.round(dailyWeeklyRate),
     };
-  } else {
-    // Minimum 7 nights required
+  } else if (nights >= minimumNights) {
+    // Nightly rate ($95/night)
     return {
-      total: Math.round(7 * dailyWeeklyRate),
-      rateType: "minimum",
-      perNight: Math.round(dailyWeeklyRate),
-      minimumNights: 7,
+      total: nights * nightlyRate,
+      rateType: "nightly" as const,
+      perNight: nightlyRate,
+    };
+  } else {
+    // Minimum 3 nights required
+    return {
+      total: minimumNights * nightlyRate,
+      rateType: "minimum" as const,
+      perNight: nightlyRate,
+      minimumNights,
     };
   }
 }
@@ -336,7 +345,8 @@ export function BookingForm() {
                     <span>
                       {pricing.rateType === "monthly" && "Monthly rate"}
                       {pricing.rateType === "weekly" && "Weekly rate"}
-                      {pricing.rateType === "minimum" && `Minimum stay (7 nights)`}
+                      {pricing.rateType === "nightly" && "Nightly rate"}
+                      {pricing.rateType === "minimum" && `Minimum stay (3 nights)`}
                       {" · "}${pricing.perNight}/night
                     </span>
                   </div>
@@ -352,9 +362,14 @@ export function BookingForm() {
                     🎉 You qualify for our best monthly rate!
                   </p>
                 )}
-                {nights < 7 && (
+                {nights >= 7 && nights < 30 && (
+                  <p className="text-xs text-primary mt-2">
+                    💡 Stay 30+ nights for our best monthly rate!
+                  </p>
+                )}
+                {nights < 3 && (
                   <p className="text-xs text-muted-foreground mt-2">
-                    Note: Minimum stay is 7 nights. Price shown for 7 nights.
+                    Note: Minimum stay is 3 nights. Price shown for 3 nights.
                   </p>
                 )}
               </div>

@@ -1,9 +1,46 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
+
+// Input validation schema
+const RequestSchema = z.object({
+  action: z.enum(['add', 'sync', 'sync-all']),
+  unit_id: z.string().min(1).max(50).regex(/^[a-zA-Z0-9_-]+$/).optional(),
+  ical_url: z.string().url().optional()
+}).refine(
+  (data) => {
+    // unit_id is required for 'add' and 'sync' actions
+    if (data.action === 'add' || data.action === 'sync') {
+      return !!data.unit_id
+    }
+    return true
+  },
+  { message: 'unit_id is required for add and sync actions' }
+).refine(
+  (data) => {
+    // ical_url is required for 'add' action
+    if (data.action === 'add') {
+      return !!data.ical_url
+    }
+    return true
+  },
+  { message: 'ical_url is required for add action' }
+)
+
+// Allowed iCal URL hosts for SSRF protection
+const ALLOWED_ICAL_HOSTS = [
+  'airbnb.com',
+  'calendar.google.com',
+  'vrbo.com',
+  'booking.com',
+  'icalendar.net',
+  'outlook.live.com',
+  'outlook.office365.com'
+]
 
 interface CalendarEvent {
   unit_id: string
@@ -11,6 +48,31 @@ interface CalendarEvent {
   end_date: string
   summary: string | null
   source: string
+}
+
+// Validate iCal URL against allowed hosts (SSRF protection)
+function validateIcalUrl(icalUrl: string): { valid: boolean; error?: string } {
+  try {
+    const url = new URL(icalUrl)
+    
+    // Only allow HTTPS
+    if (url.protocol !== 'https:') {
+      return { valid: false, error: 'iCal URL must use HTTPS' }
+    }
+    
+    // Check against allowed hosts
+    const isAllowed = ALLOWED_ICAL_HOSTS.some(host => 
+      url.hostname === host || url.hostname.endsWith('.' + host)
+    )
+    
+    if (!isAllowed) {
+      return { valid: false, error: 'iCal URL must be from a trusted provider (Airbnb, Google Calendar, VRBO, Booking.com)' }
+    }
+    
+    return { valid: true }
+  } catch {
+    return { valid: false, error: 'Invalid URL format' }
+  }
 }
 
 // Parse iCal format to extract events
@@ -82,9 +144,8 @@ Deno.serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
     
-    // Validate authorization header
+    // Validate authorization header - ONLY accept service role key
     const authHeader = req.headers.get('authorization')
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return new Response(
@@ -95,25 +156,56 @@ Deno.serve(async (req) => {
     
     const token = authHeader.replace('Bearer ', '')
     
-    // Validate the token - accept service role key or anon key
-    if (token !== supabaseServiceKey && token !== supabaseAnonKey) {
+    // Only accept service role key for admin operations (not anon key)
+    if (token !== supabaseServiceKey) {
       return new Response(
-        JSON.stringify({ error: 'Invalid authorization token' }),
+        JSON.stringify({ error: 'Unauthorized - admin access required' }),
         { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
     
+    // Parse and validate input
+    let rawBody: unknown
+    try {
+      rawBody = await req.json()
+    } catch {
+      return new Response(
+        JSON.stringify({ error: 'Invalid JSON body' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    const parseResult = RequestSchema.safeParse(rawBody)
+    if (!parseResult.success) {
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid input', 
+          details: parseResult.error.errors.map(e => e.message) 
+        }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    const { action, unit_id, ical_url } = parseResult.data
+    
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
-    const { unit_id, ical_url, action } = await req.json()
-
     if (action === 'add') {
+      // Validate iCal URL against allowed hosts (SSRF protection)
+      const urlValidation = validateIcalUrl(ical_url!)
+      if (!urlValidation.valid) {
+        return new Response(
+          JSON.stringify({ error: urlValidation.error }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+      
       // Add or update iCal URL for a unit
       const { error: upsertError } = await supabase
         .from('unit_calendars')
         .upsert({
-          unit_id,
-          ical_url,
+          unit_id: unit_id!,
+          ical_url: ical_url!,
           updated_at: new Date().toISOString()
         }, { onConflict: 'unit_id' })
 
@@ -122,7 +214,7 @@ Deno.serve(async (req) => {
       }
 
       // Immediately sync the calendar
-      await syncUnitCalendar(supabase, unit_id, ical_url)
+      await syncUnitCalendar(supabase, unit_id!, ical_url!)
 
       return new Response(
         JSON.stringify({ success: true, message: 'Calendar URL saved and synced' }),
@@ -158,7 +250,7 @@ Deno.serve(async (req) => {
       }
 
       return new Response(
-        JSON.stringify({ success: true, results }),
+        JSON.stringify({ success: true, synced: results }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
@@ -169,14 +261,14 @@ Deno.serve(async (req) => {
     )
   } catch (error: unknown) {
     console.error('Error:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ error: 'Internal server error' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
   }
 })
 
+// deno-lint-ignore no-explicit-any
 async function syncUnitCalendar(supabase: any, unitId: string, icalUrl: string) {
   console.log(`Syncing calendar for unit ${unitId}`)
   

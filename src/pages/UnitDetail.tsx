@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { units } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages } from "@/data/unitImages";
+import { ImageLightbox } from "@/components/ImageLightbox";
 import { 
   Bed, Bath, Users, Home, ArrowLeft, Check, 
   Star, Wifi, Car, KeyRound, Thermometer, ChevronLeft, ChevronRight
@@ -14,6 +15,7 @@ const UnitDetail = () => {
   const { id } = useParams();
   const unit = units.find(u => u.id === id);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   
   const primaryImage = id ? getUnitPrimaryImage(id) : null;
   const galleryImages = id ? getUnitGalleryImages(id) : [];
@@ -59,13 +61,17 @@ const UnitDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-3">
-              {/* Main Image */}
-              <div className="aspect-video bg-navy-light rounded-2xl mb-4 relative overflow-hidden">
+              {/* Main Image - Clickable */}
+              <button
+                onClick={() => hasImages && setLightboxOpen(true)}
+                className="w-full aspect-video bg-navy-light rounded-2xl mb-4 relative overflow-hidden cursor-pointer group"
+                aria-label="View all photos"
+              >
                 {hasImages ? (
                   <img
                     src={galleryImages[activeImageIndex].src}
                     alt={galleryImages[activeImageIndex].alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -84,31 +90,43 @@ const UnitDetail = () => {
                   </span>
                 </div>
                 
+                {/* Click to view hint */}
+                {hasImages && (
+                  <div className="absolute bottom-4 right-4 bg-background/80 text-foreground text-sm font-medium px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    Click to view all {galleryImages.length} photos
+                  </div>
+                )}
+                
                 {/* Navigation arrows */}
                 {hasImages && galleryImages.length > 1 && (
                   <>
                     {activeImageIndex > 0 && (
-                      <button
-                        onClick={() => setActiveImageIndex(activeImageIndex - 1)}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground rounded-full p-2 transition-colors"
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveImageIndex(activeImageIndex - 1);
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground rounded-full p-2 transition-colors cursor-pointer"
                         aria-label="Previous image"
                       >
                         <ChevronLeft className="w-5 h-5" />
-                      </button>
+                      </div>
                     )}
                     {activeImageIndex < galleryImages.length - 1 && (
-                      <button
-                        onClick={() => setActiveImageIndex(activeImageIndex + 1)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground rounded-full p-2 transition-colors"
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveImageIndex(activeImageIndex + 1);
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground rounded-full p-2 transition-colors cursor-pointer"
                         aria-label="Next image"
                       >
                         <ChevronRight className="w-5 h-5" />
-                      </button>
+                      </div>
                     )}
                   </>
                 )}
-              </div>
-
+              </button>
               {/* Image Thumbnails */}
               {hasImages && galleryImages.length > 1 && (
                 <div className="flex gap-2 overflow-x-auto pb-4 mb-8 scrollbar-hide">
@@ -246,6 +264,14 @@ const UnitDetail = () => {
       </main>
 
       <Footer />
+
+      {/* Lightbox */}
+      <ImageLightbox
+        images={galleryImages}
+        initialIndex={activeImageIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+      />
     </div>
   );
 };

@@ -133,7 +133,7 @@ export const amenitiesData = [
 export const faqData = [
   {
     question: "What time is check-in and check-out?",
-    answer: "Check-in is at 3:00 PM and check-out is at 11:00 AM. Self check-in is available 24/7 via smart lock—you'll receive your unique access code before arrival.",
+    answer: "Check-in is at 2:00 PM and check-out is at 11:00 AM. Self check-in is available 24/7 via smart lock—you'll receive your unique access code before arrival.",
   },
   {
     question: "Is parking available?",

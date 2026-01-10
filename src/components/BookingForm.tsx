@@ -6,12 +6,46 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar as CalendarIcon, Send, CheckCircle } from "lucide-react";
+import { Calendar as CalendarIcon, Send, CheckCircle, DollarSign } from "lucide-react";
 import { units } from "@/data/units";
 import { toast } from "sonner";
 import { useAvailability, getBlockedDatesForUnit } from "@/hooks/useAvailability";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+
+// Helper to calculate pricing based on stay duration
+function calculatePricing(monthlyPrice: number, nights: number) {
+  const dailyMonthlyRate = monthlyPrice / 30;
+  const dailyWeeklyRate = dailyMonthlyRate * 1.25;
+  
+  if (nights >= 30) {
+    // Monthly rate
+    const months = Math.floor(nights / 30);
+    const remainingDays = nights % 30;
+    const monthlyTotal = months * monthlyPrice;
+    const remainingTotal = remainingDays * dailyMonthlyRate;
+    return {
+      total: Math.round(monthlyTotal + remainingTotal),
+      rateType: "monthly",
+      perNight: Math.round(dailyMonthlyRate),
+    };
+  } else if (nights >= 7) {
+    // Weekly rate
+    return {
+      total: Math.round(nights * dailyWeeklyRate),
+      rateType: "weekly",
+      perNight: Math.round(dailyWeeklyRate),
+    };
+  } else {
+    // Minimum 7 nights required
+    return {
+      total: Math.round(7 * dailyWeeklyRate),
+      rateType: "minimum",
+      perNight: Math.round(dailyWeeklyRate),
+      minimumNights: 7,
+    };
+  }
+}
 
 export function BookingForm() {
   const [searchParams] = useSearchParams();
@@ -278,16 +312,56 @@ export function BookingForm() {
         </div>
       </div>
 
-      {/* Selected Dates Summary */}
-      {checkInDate && checkOutDate && (
-        <div className="flex items-center gap-2 text-sm text-primary bg-primary/5 p-3 rounded-lg">
-          <CheckCircle className="w-4 h-4" />
-          <span>
-            {format(checkInDate, "MMM d, yyyy")} → {format(checkOutDate, "MMM d, yyyy")} 
-            {" "}({Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24))} nights)
-          </span>
-        </div>
-      )}
+      {/* Selected Dates Summary with Pricing */}
+      {checkInDate && checkOutDate && (() => {
+        const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+        const selectedUnit = units.find(u => u.id === formData.unit);
+        const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights) : null;
+        
+        return (
+          <div className="bg-primary/5 p-4 rounded-lg space-y-3">
+            <div className="flex items-center gap-2 text-sm text-primary">
+              <CheckCircle className="w-4 h-4" />
+              <span>
+                {format(checkInDate, "MMM d, yyyy")} → {format(checkOutDate, "MMM d, yyyy")} 
+                {" "}({nights} night{nights !== 1 ? 's' : ''})
+              </span>
+            </div>
+            
+            {pricing && selectedUnit && (
+              <div className="border-t border-primary/20 pt-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                    <DollarSign className="w-4 h-4" />
+                    <span>
+                      {pricing.rateType === "monthly" && "Monthly rate"}
+                      {pricing.rateType === "weekly" && "Weekly rate"}
+                      {pricing.rateType === "minimum" && `Minimum stay (7 nights)`}
+                      {" · "}${pricing.perNight}/night
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-semibold text-primary">
+                      ${pricing.total.toLocaleString()}
+                    </div>
+                    <div className="text-xs text-muted-foreground">estimated total</div>
+                  </div>
+                </div>
+                {nights >= 30 && (
+                  <p className="text-xs text-primary mt-2">
+                    🎉 You qualify for our best monthly rate!
+                  </p>
+                )}
+                {nights < 7 && (
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Note: Minimum stay is 7 nights. Price shown for 7 nights.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       {/* Message */}
       <div className="space-y-2">

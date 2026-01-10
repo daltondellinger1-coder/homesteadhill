@@ -61,8 +61,8 @@ const Units = () => {
               Book directly with us and save on platform fees. We offer flexible terms for 
               short-term and extended stays.
             </p>
-            <Button asChild size="lg">
-              <Link to="/contact">Book Direct – No Platform Fees</Link>
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <Link to="/contact">Book Direct</Link>
             </Button>
           </div>
         </div>

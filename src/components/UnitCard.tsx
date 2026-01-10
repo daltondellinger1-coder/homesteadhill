@@ -2,12 +2,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Bed, Bath, Users, Home, Star } from "lucide-react";
 import type { Unit } from "@/data/units";
+import { getUnitPrimaryImage } from "@/data/unitImages";
 
 interface UnitCardProps {
   unit: Unit;
 }
 
 export function UnitCard({ unit }: UnitCardProps) {
+  const primaryImage = getUnitPrimaryImage(unit.id);
+
   return (
     <div className="group relative bg-gradient-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated">
       {/* Featured Badge */}
@@ -18,12 +21,20 @@ export function UnitCard({ unit }: UnitCardProps) {
         </div>
       )}
 
-      {/* Image Placeholder */}
+      {/* Unit Image */}
       <div className="aspect-[4/3] bg-navy-light relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Home className="w-16 h-16 text-primary/30" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+        {primaryImage ? (
+          <img
+            src={primaryImage}
+            alt={unit.name}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Home className="w-16 h-16 text-primary/30" />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
         
         {/* Unit Type Badge */}
         <div className="absolute bottom-4 left-4">

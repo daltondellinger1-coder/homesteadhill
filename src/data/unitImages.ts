@@ -1,0 +1,54 @@
+// Unit 1 Images
+import unit1LivingRoom from "@/assets/units/unit-1/living-room.jpg";
+import unit1Kitchen1 from "@/assets/units/unit-1/kitchen-1.jpg";
+import unit1Kitchen2 from "@/assets/units/unit-1/kitchen-2.jpg";
+import unit1Entry from "@/assets/units/unit-1/entry.jpg";
+import unit1Dining from "@/assets/units/unit-1/dining.jpg";
+import unit1Bedroom1 from "@/assets/units/unit-1/bedroom-1.jpg";
+import unit1Bedroom2 from "@/assets/units/unit-1/bedroom-2.jpg";
+import unit1Bathroom from "@/assets/units/unit-1/bathroom.jpg";
+
+export interface UnitImage {
+  src: string;
+  alt: string;
+  category: "Living" | "Bedroom" | "Kitchen" | "Bath" | "Exterior" | "Dining";
+}
+
+export interface UnitImages {
+  primary: string;
+  gallery: UnitImage[];
+}
+
+// Images organized by unit
+export const unitImages: Record<string, UnitImages> = {
+  "unit-1": {
+    primary: unit1LivingRoom,
+    gallery: [
+      { src: unit1LivingRoom, alt: "Unit 1 - Cozy living room with TV and comfortable seating", category: "Living" },
+      { src: unit1Bedroom1, alt: "Unit 1 - Queen bedroom with natural light", category: "Bedroom" },
+      { src: unit1Bedroom2, alt: "Unit 1 - Bedroom with mirror and storage", category: "Bedroom" },
+      { src: unit1Kitchen1, alt: "Unit 1 - Full kitchen with stainless appliances", category: "Kitchen" },
+      { src: unit1Kitchen2, alt: "Unit 1 - Kitchen with stove, microwave, and Keurig", category: "Kitchen" },
+      { src: unit1Dining, alt: "Unit 1 - Dining area by the window", category: "Dining" },
+      { src: unit1Entry, alt: "Unit 1 - Entry with smart lock", category: "Living" },
+      { src: unit1Bathroom, alt: "Unit 1 - Modern bathroom with vanity", category: "Bath" },
+    ],
+  },
+};
+
+// Get all gallery images across all units
+export const getAllGalleryImages = (): (UnitImage & { unitId: string })[] => {
+  return Object.entries(unitImages).flatMap(([unitId, images]) =>
+    images.gallery.map((img) => ({ ...img, unitId }))
+  );
+};
+
+// Get primary image for a unit (returns placeholder if not available)
+export const getUnitPrimaryImage = (unitId: string): string | null => {
+  return unitImages[unitId]?.primary || null;
+};
+
+// Get gallery images for a unit
+export const getUnitGalleryImages = (unitId: string): UnitImage[] => {
+  return unitImages[unitId]?.gallery || [];
+};

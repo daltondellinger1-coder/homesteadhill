@@ -1,16 +1,23 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { units } from "@/data/units";
+import { getUnitPrimaryImage, getUnitGalleryImages } from "@/data/unitImages";
 import { 
   Bed, Bath, Users, Home, ArrowLeft, Check, 
-  Star, Wifi, Car, KeyRound, Thermometer 
+  Star, Wifi, Car, KeyRound, Thermometer, ChevronLeft, ChevronRight
 } from "lucide-react";
 
 const UnitDetail = () => {
   const { id } = useParams();
   const unit = units.find(u => u.id === id);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  
+  const primaryImage = id ? getUnitPrimaryImage(id) : null;
+  const galleryImages = id ? getUnitGalleryImages(id) : [];
+  const hasImages = galleryImages.length > 0;
 
   if (!unit) {
     return (
@@ -52,9 +59,19 @@ const UnitDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-3">
-              {/* Image Placeholder */}
-              <div className="aspect-video bg-navy-light rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden">
-                <Home className="w-24 h-24 text-primary/30" />
+              {/* Main Image */}
+              <div className="aspect-video bg-navy-light rounded-2xl mb-4 relative overflow-hidden">
+                {hasImages ? (
+                  <img
+                    src={galleryImages[activeImageIndex].src}
+                    alt={galleryImages[activeImageIndex].alt}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Home className="w-24 h-24 text-primary/30" />
+                  </div>
+                )}
                 {unit.featured && (
                   <div className="absolute top-4 right-4 flex items-center gap-1 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded-full">
                     <Star className="w-4 h-4" />
@@ -66,7 +83,54 @@ const UnitDetail = () => {
                     {unit.type}
                   </span>
                 </div>
+                
+                {/* Navigation arrows */}
+                {hasImages && galleryImages.length > 1 && (
+                  <>
+                    {activeImageIndex > 0 && (
+                      <button
+                        onClick={() => setActiveImageIndex(activeImageIndex - 1)}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground rounded-full p-2 transition-colors"
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                    )}
+                    {activeImageIndex < galleryImages.length - 1 && (
+                      <button
+                        onClick={() => setActiveImageIndex(activeImageIndex + 1)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground rounded-full p-2 transition-colors"
+                        aria-label="Next image"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                    )}
+                  </>
+                )}
               </div>
+
+              {/* Image Thumbnails */}
+              {hasImages && galleryImages.length > 1 && (
+                <div className="flex gap-2 overflow-x-auto pb-4 mb-8 scrollbar-hide">
+                  {galleryImages.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveImageIndex(index)}
+                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
+                        activeImageIndex === index 
+                          ? "border-primary" 
+                          : "border-transparent hover:border-primary/50"
+                      }`}
+                    >
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Unit Title */}
               <h1 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">

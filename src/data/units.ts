@@ -11,6 +11,7 @@ export interface Unit {
   amenities: string[];
   featured?: boolean;
   priceNote?: string;
+  monthlyPrice: number;
 }
 
 export const units: Unit[] = [
@@ -25,6 +26,7 @@ export const units: Unit[] = [
     baths: 1,
     description: "Cozy 1-bedroom with dedicated workspace, full kitchen (refrigerator, microwave, stove, Keurig), Wi-Fi, TV, A/C & heat, smart-lock entry, free parking.",
     amenities: ["Dedicated Workspace", "Full Kitchen", "Refrigerator", "Microwave", "Stove", "Keurig", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
+    monthlyPrice: 1450,
   },
   {
     id: "unit-2",
@@ -37,6 +39,7 @@ export const units: Unit[] = [
     baths: 1,
     description: "Comfortable 1-bedroom with full kitchen, Wi-Fi, TV, smart-lock self check-in, and free parking. Perfect for solo travelers or couples.",
     amenities: ["Full Kitchen", "Refrigerator", "Microwave", "Stove", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
+    monthlyPrice: 1450,
   },
   {
     id: "unit-3",
@@ -50,6 +53,7 @@ export const units: Unit[] = [
     description: "Highly rated 1-bedroom with queen bed, stylish living area, full kitchen, Wi-Fi, and free parking. Guest favorite!",
     amenities: ["Full Kitchen", "Stylish Living Area", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
     featured: true,
+    monthlyPrice: 1450,
   },
   {
     id: "unit-4",
@@ -62,6 +66,7 @@ export const units: Unit[] = [
     baths: 1,
     description: "Queen bed, smart-lock entry, fast Wi-Fi, kitchen with stove/oven & microwave, dedicated workspace. Ideal for business travelers.",
     amenities: ["Dedicated Workspace", "Full Kitchen", "Stove/Oven", "Microwave", "Fast Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
+    monthlyPrice: 1450,
   },
   {
     id: "unit-5",
@@ -75,6 +80,7 @@ export const units: Unit[] = [
     description: "Spacious 2-bedroom for professionals; large living area, full kitchen (electric stove/oven, refrigerator, cooking basics), private entrance, long-term stays welcome.",
     amenities: ["2 Bedrooms", "Large Living Area", "Full Kitchen", "Electric Stove/Oven", "Refrigerator", "Private Entrance", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
     priceNote: "Long-term discounts available",
+    monthlyPrice: 1650,
   },
   {
     id: "unit-6",
@@ -87,6 +93,7 @@ export const units: Unit[] = [
     baths: 1,
     description: "Bright 2-bedroom with large living area, full kitchen, modern bath, free parking, and exterior security cameras for peace of mind.",
     amenities: ["2 Bedrooms", "Bright Living Area", "Full Kitchen", "Modern Bath", "Security Cameras", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
+    monthlyPrice: 1650,
   },
   {
     id: "unit-11",
@@ -100,6 +107,7 @@ export const units: Unit[] = [
     description: "Standalone cottage with dedicated workspace, compact kitchen, modern bath, and private feel. Perfect for those seeking extra privacy.",
     amenities: ["Standalone Cottage", "Dedicated Workspace", "Compact Kitchen", "Modern Bath", "Private Setting", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
     featured: true,
+    monthlyPrice: 1500,
   },
   {
     id: "unit-13",
@@ -113,6 +121,7 @@ export const units: Unit[] = [
     description: "Premium cottage with king-size bed, stylish living area, kitchenette, modern bath. Our most luxurious standalone option.",
     amenities: ["Premium Cottage", "King Bed", "Stylish Living Area", "Kitchenette", "Modern Bath", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
     featured: true,
+    monthlyPrice: 1500,
   },
 ];
 

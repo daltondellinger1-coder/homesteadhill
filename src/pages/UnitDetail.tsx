@@ -208,7 +208,7 @@ const UnitDetail = () => {
                   House Rules
                 </h2>
                 <ul className="space-y-2 text-muted-foreground text-sm">
-                  <li>• Check-in: 3:00 PM / Check-out: 11:00 AM</li>
+                  <li>• Check-in: 2:00 PM / Check-out: 11:00 AM</li>
                   <li>• Self check-in with smart lock</li>
                   <li>• No smoking</li>
                   <li>• Quiet hours: 10:00 PM – 8:00 AM</li>

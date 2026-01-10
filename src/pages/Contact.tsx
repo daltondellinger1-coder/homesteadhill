@@ -82,7 +82,7 @@ const Contact = () => {
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">Check-in/out</p>
                       <p className="text-foreground text-sm">
-                        Check-in: 3:00 PM<br />
+                        Check-in: 2:00 PM<br />
                         Check-out: 11:00 AM<br />
                         <span className="text-primary">Self check-in available 24/7</span>
                       </p>

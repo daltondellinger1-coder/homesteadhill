@@ -96,6 +96,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Homestead Hill <admin@homestead-hill.com>",
         to: [booking.email],
+        bcc: ["admin@homestead-hill.com"],
         subject: "We received your booking request - Homestead Hill",
         html: `
           <h1>Thank you for your booking request, ${booking.name}!</h1>

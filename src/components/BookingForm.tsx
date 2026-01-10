@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { useAvailability, getBlockedDatesForUnit } from "@/hooks/useAvailability";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 // Helper to calculate pricing based on stay duration
 function calculatePricing(monthlyPrice: number, nights: number) {
@@ -142,12 +143,42 @@ export function BookingForm() {
     
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast.success("Booking request submitted! We'll be in touch soon.");
+    try {
+      const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+      const selectedUnit = units.find(u => u.id === formData.unit);
+      const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights) : { total: 0, rateType: "unknown" };
+      
+      const { data, error } = await supabase.functions.invoke('send-booking-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          unit: selectedUnit?.name || formData.unit,
+          checkIn: format(checkInDate, "PPP"),
+          checkOut: format(checkOutDate, "PPP"),
+          guests: parseInt(formData.guests),
+          message: formData.message,
+          nights,
+          totalPrice: pricing.total,
+          rateType: pricing.rateType,
+        },
+      });
+
+      if (error) {
+        console.error("Error sending booking email:", error);
+        toast.error("Failed to submit booking. Please try again or contact us directly.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      toast.success("Booking request submitted! We'll be in touch soon.");
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      toast.error("Failed to submit booking. Please try again or contact us directly.");
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {

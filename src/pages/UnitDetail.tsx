@@ -220,6 +220,17 @@ const UnitDetail = () => {
             {/* Booking Sidebar */}
             <div className="lg:col-span-2">
               <div className="sticky top-28 bg-gradient-card rounded-2xl border border-border p-6">
+                {/* Price Display */}
+                <div className="text-center mb-6 pb-6 border-b border-border">
+                  <div className="text-3xl font-semibold text-primary">
+                    ${unit.monthlyPrice.toLocaleString()}
+                  </div>
+                  <div className="text-muted-foreground text-sm">per month</div>
+                  {unit.priceNote && (
+                    <p className="text-xs text-primary mt-2">{unit.priceNote}</p>
+                  )}
+                </div>
+
                 <h3 className="font-serif text-xl font-semibold text-foreground mb-6 text-center">
                   Book This Unit
                 </h3>
@@ -242,12 +253,6 @@ const UnitDetail = () => {
                     <Thermometer className="w-4 h-4 text-primary" />
                     A/C & Heat
                   </div>
-                </div>
-
-                <div className="border-t border-border pt-6 mb-6">
-                  <p className="text-center text-sm text-muted-foreground mb-4">
-                    Contact us for rates and availability
-                  </p>
                 </div>
 
                 <Button asChild size="lg" className="w-full mb-3">

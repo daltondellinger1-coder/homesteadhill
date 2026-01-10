@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Bed, Bath, Users, Home, Star } from "lucide-react";
+import { Bed, Bath, Users, Home, Star, DollarSign } from "lucide-react";
 import type { Unit } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
@@ -62,9 +62,18 @@ export function UnitCard({ unit }: UnitCardProps) {
 
         {/* Content */}
         <div className="p-6">
-          <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
-            {unit.name}
-          </h3>
+          <div className="flex items-start justify-between mb-2">
+            <h3 className="font-serif text-xl font-semibold text-foreground">
+              {unit.name}
+            </h3>
+            {/* Monthly Price */}
+            <div className="text-right">
+              <div className="text-lg font-semibold text-primary">
+                ${unit.monthlyPrice.toLocaleString()}
+              </div>
+              <div className="text-xs text-muted-foreground">/month</div>
+            </div>
+          </div>
 
           {/* Quick Stats */}
           <div className="flex items-center gap-4 text-muted-foreground text-sm mb-4">

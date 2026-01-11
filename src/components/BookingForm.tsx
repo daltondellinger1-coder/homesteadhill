@@ -101,10 +101,13 @@ export function BookingForm() {
     return blockedDateStrings.has(date.toDateString());
   }, [blockedDateStrings]);
 
-  // Disable checkout dates
+  // Disable checkout dates - must be at least 3 nights after check-in
   const isCheckoutDisabled = useCallback((date: Date): boolean => {
     if (!checkInDate) return true;
-    if (date <= checkInDate) return true;
+    const minimumNights = 3;
+    const minCheckoutDate = new Date(checkInDate);
+    minCheckoutDate.setDate(minCheckoutDate.getDate() + minimumNights);
+    if (date < minCheckoutDate) return true;
     return isDateDisabled(date);
   }, [checkInDate, isDateDisabled]);
 

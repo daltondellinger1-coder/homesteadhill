@@ -323,6 +323,7 @@ export function BookingForm() {
                 selected={checkOutDate}
                 onSelect={handleCheckOutSelect}
                 disabled={isCheckoutDisabled}
+                defaultMonth={checkInDate}
                 initialFocus
                 className="p-3 pointer-events-auto"
               />

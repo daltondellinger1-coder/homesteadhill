@@ -235,7 +235,7 @@ const UnitDetail = () => {
                     </div>
                     <div className="border-l border-r border-border px-4">
                       <div className="text-xl font-semibold text-foreground">
-                        ${Math.round((unit.monthlyPrice / 30) * 1.25 * 7).toLocaleString()}
+                        ${Math.round(unit.monthlyPrice / 3.75).toLocaleString()}
                       </div>
                       <div className="text-muted-foreground text-xs">per week</div>
                     </div>
@@ -247,6 +247,9 @@ const UnitDetail = () => {
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-3">3 night minimum</p>
+                  <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                    Direct booking rates include furnishings, utilities, Wi-Fi, and flexible terms.
+                  </p>
                   {unit.priceNote && (
                     <p className="text-xs text-primary mt-1">{unit.priceNote}</p>
                   )}

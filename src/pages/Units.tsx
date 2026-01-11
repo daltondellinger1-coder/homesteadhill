@@ -54,6 +54,13 @@ const Units = () => {
             </div>
           </section>
 
+          {/* Pricing Context */}
+          <div className="bg-secondary/50 rounded-xl p-6 mb-12 text-center">
+            <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
+              Direct booking rates are designed for extended stays and include furnishings, utilities, Wi-Fi, and flexible terms. Rates are stable and not subject to nightly platform fluctuations.
+            </p>
+          </div>
+
           {/* CTA */}
           <div className="text-center bg-gradient-card rounded-2xl border border-border p-8 md:p-12">
             <h3 className="font-serif text-2xl md:text-3xl font-semibold text-foreground mb-4">

@@ -73,7 +73,7 @@ export function UnitCard({ unit }: UnitCardProps) {
                 <span className="text-muted-foreground">/mo</span>
               </div>
               <div>
-                <span className="font-medium text-foreground">${Math.round((unit.monthlyPrice / 30) * 1.25 * 7).toLocaleString()}</span>
+                <span className="font-medium text-foreground">${Math.round(unit.monthlyPrice / 3.75).toLocaleString()}</span>
                 <span className="text-muted-foreground">/wk</span>
               </div>
               <div>

@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { SEO, getUnitSEO } from "@/components/SEO";
 import { units } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
@@ -43,8 +44,11 @@ const UnitDetail = () => {
     );
   }
 
+  const unitSEO = getUnitSEO(unit);
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...unitSEO} />
       <Header />
       
       <main className="pt-24 md:pt-28 pb-16 md:pb-24">

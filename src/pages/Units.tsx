@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { UnitCard } from "@/components/UnitCard";
 import { units } from "@/data/units";
 import { Button } from "@/components/ui/button";
+import { SEO, pageSEO } from "@/components/SEO";
 
 const Units = () => {
   const apartments = units.filter(u => u.type === 'apartment');
@@ -11,6 +12,7 @@ const Units = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...pageSEO.units} />
       <Header />
       
       <main className="pt-24 md:pt-28 pb-16 md:pb-24">

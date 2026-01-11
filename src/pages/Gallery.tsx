@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SEO, pageSEO } from "@/components/SEO";
 import { Home, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { getAllGalleryImages, type UnitImage } from "@/data/unitImages";
 
@@ -37,6 +38,7 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...pageSEO.gallery} />
       <Header />
       
       <main className="pt-24 md:pt-28 pb-16 md:pb-24">

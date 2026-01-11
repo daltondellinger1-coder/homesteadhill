@@ -2,11 +2,13 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { SEO, pageSEO } from "@/components/SEO";
 import { MapPin, GraduationCap, UtensilsCrossed, ShoppingBag } from "lucide-react";
 
 const Location = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...pageSEO.location} />
       <Header />
       
       <main className="pt-24 md:pt-28 pb-16 md:pb-24">

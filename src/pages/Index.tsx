@@ -5,6 +5,7 @@ import { Hero } from "@/components/Hero";
 import { PerfectFor } from "@/components/PerfectFor";
 import { UnitCard } from "@/components/UnitCard";
 import { Button } from "@/components/ui/button";
+import { SEO, pageSEO } from "@/components/SEO";
 import { units } from "@/data/units";
 import { ArrowRight, Shield, DollarSign, Clock } from "lucide-react";
 
@@ -13,6 +14,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...pageSEO.home} />
       <Header />
       
       <main className="pt-16 md:pt-20">

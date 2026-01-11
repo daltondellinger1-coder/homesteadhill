@@ -43,12 +43,11 @@ export function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-2">
-              {[
+{[
                 { href: "/units", label: "View Units" },
                 { href: "/amenities", label: "Amenities" },
                 { href: "/gallery", label: "Gallery" },
                 { href: "/location", label: "Location" },
-                { href: "/corporate", label: "Corporate Stays" },
                 { href: "/faq", label: "FAQ" },
               ].map((link) => (
                 <li key={link.href}>

@@ -10,7 +10,6 @@ const navLinks = [
   { href: "/amenities", label: "Amenities" },
   { href: "/gallery", label: "Gallery" },
   { href: "/location", label: "Location" },
-  { href: "/corporate", label: "Corporate Stays" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];

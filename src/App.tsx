@@ -10,7 +10,7 @@ import UnitDetail from "./pages/UnitDetail";
 import Amenities from "./pages/Amenities";
 import Gallery from "./pages/Gallery";
 import Location from "./pages/Location";
-import Corporate from "./pages/Corporate";
+
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
@@ -32,7 +32,7 @@ const App = () => (
           <Route path="/amenities" element={<Amenities />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/location" element={<Location />} />
-          <Route path="/corporate" element={<Corporate />} />
+          
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />

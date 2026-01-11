@@ -90,6 +90,22 @@ export function BookingForm() {
     return new Set(blockedDates.map(d => d.toDateString()));
   }, [blockedDates]);
 
+  // Find the next available date (first date not blocked and not in the past)
+  const nextAvailableDate = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let date = new Date(today);
+    // Look up to 365 days ahead for an available date
+    for (let i = 0; i < 365; i++) {
+      if (!blockedDateStrings.has(date.toDateString())) {
+        return date;
+      }
+      date = new Date(date);
+      date.setDate(date.getDate() + 1);
+    }
+    return today; // Fallback to today if nothing found
+  }, [blockedDateStrings]);
+
   // Disable dates that are blocked or in the past
   const isDateDisabled = useCallback((date: Date): boolean => {
     const today = new Date();
@@ -292,6 +308,7 @@ export function BookingForm() {
                 selected={checkInDate}
                 onSelect={handleCheckInSelect}
                 disabled={isDateDisabled}
+                defaultMonth={nextAvailableDate}
                 initialFocus
                 className="p-3 pointer-events-auto"
               />

@@ -19,7 +19,8 @@ const CLEANING_FEE = 100;
 
 function calculatePricing(monthlyPrice: number, nights: number) {
   const dailyMonthlyRate = monthlyPrice / 30;
-  const dailyWeeklyRate = dailyMonthlyRate * 1.25;
+  const weeklyPrice = Math.round(monthlyPrice / 3.75); // Weekly = monthly ÷ 3.75
+  const dailyWeeklyRate = weeklyPrice / 7;
   const nightlyRate = 95; // Fixed nightly rate for short stays
   const minimumNights = 3;
   

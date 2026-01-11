@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 
 // Helper to calculate pricing based on stay duration
+const CLEANING_FEE = 100;
+
 function calculatePricing(monthlyPrice: number, nights: number) {
   const dailyMonthlyRate = monthlyPrice / 30;
   const dailyWeeklyRate = dailyMonthlyRate * 1.25;
@@ -27,29 +29,41 @@ function calculatePricing(monthlyPrice: number, nights: number) {
     const remainingDays = nights % 30;
     const monthlyTotal = months * monthlyPrice;
     const remainingTotal = remainingDays * dailyMonthlyRate;
+    const subtotal = Math.round(monthlyTotal + remainingTotal);
     return {
-      total: Math.round(monthlyTotal + remainingTotal),
+      subtotal,
+      cleaningFee: CLEANING_FEE,
+      total: subtotal + CLEANING_FEE,
       rateType: "monthly" as const,
       perNight: Math.round(dailyMonthlyRate),
     };
   } else if (nights >= 7) {
     // Weekly rate
+    const subtotal = Math.round(nights * dailyWeeklyRate);
     return {
-      total: Math.round(nights * dailyWeeklyRate),
+      subtotal,
+      cleaningFee: CLEANING_FEE,
+      total: subtotal + CLEANING_FEE,
       rateType: "weekly" as const,
       perNight: Math.round(dailyWeeklyRate),
     };
   } else if (nights >= minimumNights) {
     // Nightly rate ($95/night)
+    const subtotal = nights * nightlyRate;
     return {
-      total: nights * nightlyRate,
+      subtotal,
+      cleaningFee: CLEANING_FEE,
+      total: subtotal + CLEANING_FEE,
       rateType: "nightly" as const,
       perNight: nightlyRate,
     };
   } else {
     // Minimum 3 nights required
+    const subtotal = minimumNights * nightlyRate;
     return {
-      total: minimumNights * nightlyRate,
+      subtotal,
+      cleaningFee: CLEANING_FEE,
+      total: subtotal + CLEANING_FEE,
       rateType: "minimum" as const,
       perNight: nightlyRate,
       minimumNights,
@@ -390,9 +404,9 @@ export function BookingForm() {
             </div>
             
             {pricing && selectedUnit && (
-              <div className="border-t border-primary/20 pt-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
+              <div className="border-t border-primary/20 pt-3 space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                     <DollarSign className="w-4 h-4" />
                     <span>
                       {pricing.rateType === "monthly" && "Monthly rate"}
@@ -402,11 +416,20 @@ export function BookingForm() {
                       {" · "}${pricing.perNight}/night
                     </span>
                   </div>
+                  <div className="text-muted-foreground">
+                    ${pricing.subtotal.toLocaleString()}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Cleaning fee</span>
+                  <span className="text-muted-foreground">${pricing.cleaningFee}</span>
+                </div>
+                <div className="flex items-center justify-between pt-2 border-t border-primary/10">
+                  <span className="font-medium">Estimated Total</span>
                   <div className="text-right">
                     <div className="text-xl font-semibold text-primary">
                       ${pricing.total.toLocaleString()}
                     </div>
-                    <div className="text-xs text-muted-foreground">estimated total</div>
                   </div>
                 </div>
                 {nights >= 30 && (

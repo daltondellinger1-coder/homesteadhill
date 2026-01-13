@@ -118,10 +118,10 @@ export function Footer() {
             © {new Date().getFullYear()} Homestead Hill. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm">
-            <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
+            <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
+            <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
               Terms of Service
             </Link>
             <Link to="/admin" className="text-muted-foreground/50 hover:text-muted-foreground transition-colors text-xs">

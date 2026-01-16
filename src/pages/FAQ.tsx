@@ -62,7 +62,7 @@ const FAQ = () => {
                 <Link to="/contact">Contact Us</Link>
               </Button>
               <Button asChild variant="outline">
-                <a href="mailto:admin@homestead-hill.com">Email Us</a>
+                <a href="mailto:booking@homestead-hill.com">Email Us</a>
               </Button>
             </div>
           </div>

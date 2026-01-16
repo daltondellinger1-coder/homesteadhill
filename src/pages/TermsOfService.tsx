@@ -175,7 +175,7 @@ const TermsOfService = () => {
               <div className="mt-3 text-muted-foreground">
                 <p><strong>Homestead Hill</strong></p>
                 <p>Vincennes, Indiana 47591</p>
-                <p>Email: <a href="mailto:admin@homestead-hill.com" className="text-primary hover:underline">admin@homestead-hill.com</a></p>
+                <p>Email: <a href="mailto:booking@homestead-hill.com" className="text-primary hover:underline">booking@homestead-hill.com</a></p>
                 <p>Phone: <a href="tel:+18127683108" className="text-primary hover:underline">(812) 768-3108</a></p>
               </div>
             </section>

@@ -448,7 +448,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Homestead Hill <booking@homestead-hill.com>",
-        to: ["admin@homestead-hill.com"],
+        to: ["booking@homestead-hill.com"],
         subject: `New Booking Request - ${booking.unit}`,
         html: getAdminEmailTemplate(booking),
       }),
@@ -472,7 +472,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Homestead Hill <booking@homestead-hill.com>",
         to: [booking.email],
-        bcc: ["admin@homestead-hill.com"],
+        bcc: ["booking@homestead-hill.com"],
         subject: "We received your booking request - Homestead Hill",
         html: getGuestEmailTemplate(booking),
       }),

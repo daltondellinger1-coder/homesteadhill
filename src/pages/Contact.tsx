@@ -42,10 +42,10 @@ const Contact = () => {
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">Email</p>
                       <a 
-                        href="mailto:admin@homestead-hill.com"
+                        href="mailto:booking@homestead-hill.com"
                         className="text-foreground hover:text-primary transition-colors"
                       >
-                        admin@homestead-hill.com
+                        booking@homestead-hill.com
                       </a>
                     </div>
                   </div>

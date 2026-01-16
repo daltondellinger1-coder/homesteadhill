@@ -213,7 +213,7 @@ const getGuestEmailTemplate = (booking: BookingRequest) => `
                       <a href="tel:8127683108" style="color: ${colors.gold}; font-size: 18px; font-weight: 600; text-decoration: none;">(812) 768-3108</a>
                     </p>
                     <p style="margin: 8px 0 0;">
-                      <a href="mailto:admin@homestead-hill.com" style="color: ${colors.goldLight}; font-size: 14px; text-decoration: none;">admin@homestead-hill.com</a>
+                      <a href="mailto:booking@homestead-hill.com" style="color: ${colors.goldLight}; font-size: 14px; text-decoration: none;">booking@homestead-hill.com</a>
                     </p>
                   </td>
                 </tr>

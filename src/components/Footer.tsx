@@ -70,11 +70,11 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:admin@homestead-hill.com"
+                  href="mailto:booking@homestead-hill.com"
                   className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
                   <Mail className="w-4 h-4" />
-                  admin@homestead-hill.com
+                  booking@homestead-hill.com
                 </a>
               </li>
               <li>

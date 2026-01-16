@@ -47,8 +47,8 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Homestead Hill <admin@homestead-hill.com>",
-        to: ["admin@homestead-hill.com"],
+        from: "Homestead Hill <onboarding@resend.dev>",
+        to: ["homesteadhill@wefliprealestate.com"],
         subject: `New Booking Request - ${booking.unit}`,
         html: `
           <h1>New Booking Request</h1>
@@ -94,9 +94,9 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Homestead Hill <admin@homestead-hill.com>",
+        from: "Homestead Hill <onboarding@resend.dev>",
         to: [booking.email],
-        bcc: ["admin@homestead-hill.com"],
+        bcc: ["homesteadhill@wefliprealestate.com"],
         subject: "We received your booking request - Homestead Hill",
         html: `
           <h1>Thank you for your booking request, ${booking.name}!</h1>

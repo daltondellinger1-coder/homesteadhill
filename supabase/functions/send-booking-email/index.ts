@@ -93,34 +93,26 @@ const getGuestEmailTemplate = (booking: BookingRequest) => `
                       </tr>
                       <tr>
                         <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0;">
-                          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                            <tr>
-                              <td width="50%">
-                                <span style="font-size: 14px; color: ${colors.textMuted};">Check-in</span>
-                                <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.checkIn}</p>
-                              </td>
-                              <td width="50%">
-                                <span style="font-size: 14px; color: ${colors.textMuted};">Check-out</span>
-                                <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.checkOut}</p>
-                              </td>
-                            </tr>
-                          </table>
+                          <span style="font-size: 14px; color: ${colors.textMuted};">Check-in</span>
+                          <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.checkIn}</p>
                         </td>
                       </tr>
                       <tr>
                         <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0;">
-                          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                            <tr>
-                              <td width="50%">
-                                <span style="font-size: 14px; color: ${colors.textMuted};">Duration</span>
-                                <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.nights} nights</p>
-                              </td>
-                              <td width="50%">
-                                <span style="font-size: 14px; color: ${colors.textMuted};">Guests</span>
-                                <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.guests}</p>
-                              </td>
-                            </tr>
-                          </table>
+                          <span style="font-size: 14px; color: ${colors.textMuted};">Check-out</span>
+                          <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.checkOut}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0;">
+                          <span style="font-size: 14px; color: ${colors.textMuted};">Duration</span>
+                          <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.nights} nights</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0;">
+                          <span style="font-size: 14px; color: ${colors.textMuted};">Guests</span>
+                          <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600; color: ${colors.navyDeep};">${booking.guests}</p>
                         </td>
                       </tr>
                       <tr>

@@ -48,7 +48,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Homestead Hill <onboarding@resend.dev>",
-        to: ["homesteadhill@wefliprealestate.com"],
+        to: ["admin@homestead-hill.com"],
         subject: `New Booking Request - ${booking.unit}`,
         html: `
           <h1>New Booking Request</h1>
@@ -96,7 +96,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Homestead Hill <onboarding@resend.dev>",
         to: [booking.email],
-        bcc: ["homesteadhill@wefliprealestate.com"],
+        bcc: ["admin@homestead-hill.com"],
         subject: "We received your booking request - Homestead Hill",
         html: `
           <h1>Thank you for your booking request, ${booking.name}!</h1>

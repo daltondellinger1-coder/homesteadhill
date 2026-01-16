@@ -228,7 +228,7 @@ const getGuestEmailTemplate = (booking: BookingRequest) => `
                 Homestead Hill
               </p>
               <p style="margin: 0 0 16px; font-size: 13px; color: ${colors.textMuted};">
-                Crawfordsville, Indiana
+                Vincennes, Indiana
               </p>
               <p style="margin: 0; font-size: 12px; color: ${colors.textMuted};">
                 © ${new Date().getFullYear()} Homestead Hill. All rights reserved.

@@ -22,13 +22,18 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="relative">
-            <Home className="w-6 h-6 text-primary transition-transform group-hover:scale-110" />
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-primary" />
-          </div>
+        <Link to="/" className="flex items-center gap-3 group">
+          <svg width="40" height="24" viewBox="0 0 80 48" fill="none" className="text-primary transition-transform group-hover:scale-110">
+            <path
+              d="M40 8L72 36H8L40 8Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+            />
+            <rect x="16" y="36" width="48" height="8" stroke="currentColor" strokeWidth="2" fill="none" />
+          </svg>
           <div className="flex flex-col">
-            <span className="font-serif text-lg md:text-xl font-semibold text-foreground leading-tight">
+            <span className="text-lg md:text-xl font-semibold text-foreground leading-tight">
               Homestead Hill
             </span>
             <span className="text-[10px] md:text-xs text-muted-foreground tracking-wider uppercase hidden sm:block">

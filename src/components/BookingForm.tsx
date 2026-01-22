@@ -15,7 +15,6 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 
 // Helper to calculate pricing based on stay duration
-const CLEANING_FEE = 100;
 const COTTAGE_MONTHLY_NIGHTLY_RATE = 50; // $50/night for cottages on monthly stays
 
 function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apartment' | 'cottage' = 'apartment') {
@@ -30,8 +29,7 @@ function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apart
       const subtotal = nights * COTTAGE_MONTHLY_NIGHTLY_RATE;
       return {
         subtotal,
-        cleaningFee: CLEANING_FEE,
-        total: subtotal + CLEANING_FEE,
+        total: subtotal,
         rateType: "monthly" as const,
         perNight: COTTAGE_MONTHLY_NIGHTLY_RATE,
       };
@@ -46,8 +44,7 @@ function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apart
     const subtotal = Math.round(monthlyTotal + remainingTotal);
     return {
       subtotal,
-      cleaningFee: CLEANING_FEE,
-      total: subtotal + CLEANING_FEE,
+      total: subtotal,
       rateType: "monthly" as const,
       perNight: Math.round(dailyMonthlyRate),
     };
@@ -56,8 +53,7 @@ function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apart
     const subtotal = Math.round(nights * dailyWeeklyRate);
     return {
       subtotal,
-      cleaningFee: CLEANING_FEE,
-      total: subtotal + CLEANING_FEE,
+      total: subtotal,
       rateType: "weekly" as const,
       perNight: Math.round(dailyWeeklyRate),
     };
@@ -66,8 +62,7 @@ function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apart
     const subtotal = nights * nightlyRate;
     return {
       subtotal,
-      cleaningFee: CLEANING_FEE,
-      total: subtotal + CLEANING_FEE,
+      total: subtotal,
       rateType: "nightly" as const,
       perNight: nightlyRate,
     };
@@ -76,8 +71,7 @@ function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apart
     const subtotal = minimumNights * nightlyRate;
     return {
       subtotal,
-      cleaningFee: CLEANING_FEE,
-      total: subtotal + CLEANING_FEE,
+      total: subtotal,
       rateType: "minimum" as const,
       perNight: nightlyRate,
       minimumNights,
@@ -433,10 +427,6 @@ export function BookingForm() {
                   <div className="text-muted-foreground">
                     ${pricing.subtotal.toLocaleString()}
                   </div>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Cleaning fee</span>
-                  <span className="text-muted-foreground">${pricing.cleaningFee}</span>
                 </div>
                 <div className="flex items-center justify-between pt-2 border-t border-primary/10">
                   <span className="font-medium">Estimated Total</span>

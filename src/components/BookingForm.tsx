@@ -16,16 +16,29 @@ import { supabase } from "@/integrations/supabase/client";
 
 // Helper to calculate pricing based on stay duration
 const CLEANING_FEE = 100;
+const COTTAGE_MONTHLY_NIGHTLY_RATE = 50; // $50/night for cottages on monthly stays
 
-function calculatePricing(monthlyPrice: number, nights: number) {
-  const dailyMonthlyRate = monthlyPrice / 30;
+function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apartment' | 'cottage' = 'apartment') {
   const weeklyPrice = Math.round(monthlyPrice / 3.75); // Weekly = monthly ÷ 3.75
   const dailyWeeklyRate = weeklyPrice / 7;
   const nightlyRate = 95; // Fixed nightly rate for short stays
   const minimumNights = 3;
   
   if (nights >= 30) {
-    // Monthly rate
+    // Monthly rate - cottages get $50/night flat rate
+    if (unitType === 'cottage') {
+      const subtotal = nights * COTTAGE_MONTHLY_NIGHTLY_RATE;
+      return {
+        subtotal,
+        cleaningFee: CLEANING_FEE,
+        total: subtotal + CLEANING_FEE,
+        rateType: "monthly" as const,
+        perNight: COTTAGE_MONTHLY_NIGHTLY_RATE,
+      };
+    }
+    
+    // Apartments use standard monthly rate
+    const dailyMonthlyRate = monthlyPrice / 30;
     const months = Math.floor(nights / 30);
     const remainingDays = nights % 30;
     const monthlyTotal = months * monthlyPrice;
@@ -180,7 +193,7 @@ export function BookingForm() {
     try {
       const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
       const selectedUnit = units.find(u => u.id === formData.unit);
-      const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights) : { total: 0, rateType: "unknown" };
+      const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights, selectedUnit.type) : { total: 0, rateType: "unknown" };
       
       const { data, error } = await supabase.functions.invoke('send-booking-email', {
         body: {
@@ -392,7 +405,7 @@ export function BookingForm() {
       {checkInDate && checkOutDate && (() => {
         const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
         const selectedUnit = units.find(u => u.id === formData.unit);
-        const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights) : null;
+        const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights, selectedUnit.type) : null;
         
         return (
           <div className="bg-primary/5 p-4 rounded-lg space-y-3">

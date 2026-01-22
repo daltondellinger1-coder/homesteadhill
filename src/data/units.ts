@@ -106,7 +106,7 @@ export const units: Unit[] = [
     description: "Standalone cottage with dedicated workspace, compact kitchen, modern bath, and private feel. Perfect for those seeking extra privacy.",
     amenities: ["Standalone Cottage", "Dedicated Workspace", "Compact Kitchen", "Modern Bath", "Private Setting", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
     featured: true,
-    monthlyPrice: 1750,
+    monthlyPrice: 1500,
   },
   {
     id: "unit-13",
@@ -120,7 +120,7 @@ export const units: Unit[] = [
     description: "Premium cottage with king-size bed, stylish living area, kitchenette, modern bath. Our most luxurious standalone option.",
     amenities: ["Premium Cottage", "King Bed", "Stylish Living Area", "Kitchenette", "Modern Bath", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
     featured: true,
-    monthlyPrice: 1750,
+    monthlyPrice: 1500,
   },
 ];
 

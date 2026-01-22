@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 
 // Helper to calculate pricing based on stay duration
-const COTTAGE_MONTHLY_NIGHTLY_RATE = 50; // $50/night for cottages on monthly stays
+const COTTAGE_MONTHLY_NIGHTLY_RATE = 45; // $45/night for cottages on monthly stays
 
 function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apartment' | 'cottage' = 'apartment') {
   const weeklyPrice = Math.round(monthlyPrice / 3.75); // Weekly = monthly ÷ 3.75

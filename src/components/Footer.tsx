@@ -111,7 +111,7 @@ export function Footer() {
                 Book Your Stay
               </Link>
               <a
-                href="https://search.google.com/local/writereview?placeid=ChIJYWQqYL8JdYgRNxz0lJ7yb2I"
+                href="https://www.google.com/maps/place/Homestead+Hill/@38.6765,-87.5289,17z/data=!4m8!3m7!1s0x886dff00672346a9:0xd1caf26aee22df3b!8m2!3d38.6765!4d-87.5289!9m1!1b1!16s%2Fg%2F11wn712stc?entry=ttu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors text-sm"

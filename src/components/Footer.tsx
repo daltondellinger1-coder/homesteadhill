@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Home, Phone, Mail, MapPin } from "lucide-react";
+import { Home, Phone, Mail, MapPin, Star } from "lucide-react";
 
 export function Footer() {
   return (
@@ -103,12 +103,23 @@ export function Footer() {
             <p className="text-muted-foreground text-sm mb-4">
               Skip the platform fees and book directly with us for the best rates.
             </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors text-sm"
-            >
-              Book Your Stay
-            </Link>
+            <div className="flex flex-col gap-3">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors text-sm"
+              >
+                Book Your Stay
+              </Link>
+              <a
+                href="https://search.google.com/local/writereview?placeid=ChIJYWQqYL8JdYgRNxz0lJ7yb2I"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors text-sm"
+              >
+                <Star className="w-4 h-4" />
+                Leave a Review
+              </a>
+            </div>
           </div>
         </div>
 

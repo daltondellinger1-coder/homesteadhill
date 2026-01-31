@@ -2,12 +2,32 @@ import { Link } from "react-router-dom";
 import { Home, Phone, Mail, MapPin, Star } from "lucide-react";
 
 export function Footer() {
-  const isMobile =
-    typeof navigator !== "undefined" &&
-    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const reviewUrl =
-    "https://search.google.com/local/writereview?placeid=ChIJQCcGCLq_dYgROx_iaupa8so";
+  const handleReviewClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    
+    const placeId = "ChIJQCcGCLq_dYgROx_iaupa8so";
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    
+    if (isAndroid) {
+      // Try Google Maps app intent first, falls back to web
+      window.location.href = `intent://maps.google.com/maps/place/?q=place_id:${placeId}#Intent;scheme=https;package=com.google.android.apps.maps;end`;
+      // Fallback after short delay if intent doesn't work
+      setTimeout(() => {
+        window.location.href = `https://www.google.com/maps/search/?api=1&query=Homestead+Hill+Vincennes+IN&query_place_id=${placeId}`;
+      }, 500);
+    } else if (isIOS) {
+      // iOS: Open Google Maps in browser (will prompt to open app if installed)
+      window.location.href = `https://www.google.com/maps/search/?api=1&query=Homestead+Hill+Vincennes+IN&query_place_id=${placeId}`;
+    } else {
+      // Desktop: Open review form in new tab
+      window.open(
+        `https://search.google.com/local/writereview?placeid=${placeId}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }
+  };
 
   return (
     <footer className="bg-secondary border-t border-border">
@@ -118,9 +138,8 @@ export function Footer() {
                 Book Your Stay
               </Link>
               <a
-                href={reviewUrl}
-                target={isMobile ? "_self" : "_blank"}
-                rel={isMobile ? undefined : "noopener noreferrer"}
+                href="#"
+                onClick={handleReviewClick}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors text-sm"
               >
                 <Star className="w-4 h-4" />

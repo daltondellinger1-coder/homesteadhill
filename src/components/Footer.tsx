@@ -1,28 +1,18 @@
 import { Link } from "react-router-dom";
 import { Home, Phone, Mail, MapPin, Star } from "lucide-react";
+import type React from "react";
 
 export function Footer() {
+  const placeId = "ChIJQCcGCLq_dYgROx_iaupa8so";
+  const reviewUrl = `https://search.google.com/local/writereview?placeid=${placeId}`;
+
   const handleReviewClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Keep the default href as a safety net, but prefer opening in a new tab.
+    // If the browser blocks popups, fall back to same-tab navigation.
     e.preventDefault();
-    
-    const placeId = "ChIJQCcGCLq_dYgROx_iaupa8so";
-    const isAndroid = /Android/i.test(navigator.userAgent);
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    
-    if (isAndroid) {
-      // Android: Direct Google Maps URL that opens the place details
-      window.location.href = `https://maps.google.com/?cid=14981107418402790331&action=review`;
-    } else if (isIOS) {
-      // iOS: Open Google Maps place page
-      window.location.href = `https://maps.google.com/?cid=14981107418402790331`;
-    } else {
-      // Desktop: Open review form in new tab
-      window.open(
-        `https://search.google.com/local/writereview?placeid=${placeId}`,
-        "_blank",
-        "noopener,noreferrer"
-      );
-    }
+
+    const opened = window.open(reviewUrl, "_blank", "noopener,noreferrer");
+    if (!opened) window.location.assign(reviewUrl);
   };
 
   return (
@@ -134,7 +124,7 @@ export function Footer() {
                 Book Your Stay
               </Link>
               <a
-                href="#"
+                href={reviewUrl}
                 onClick={handleReviewClick}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors text-sm"
               >

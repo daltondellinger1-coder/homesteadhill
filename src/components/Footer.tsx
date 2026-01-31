@@ -10,15 +10,11 @@ export function Footer() {
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     
     if (isAndroid) {
-      // Try Google Maps app intent first, falls back to web
-      window.location.href = `intent://maps.google.com/maps/place/?q=place_id:${placeId}#Intent;scheme=https;package=com.google.android.apps.maps;end`;
-      // Fallback after short delay if intent doesn't work
-      setTimeout(() => {
-        window.location.href = `https://www.google.com/maps/search/?api=1&query=Homestead+Hill+Vincennes+IN&query_place_id=${placeId}`;
-      }, 500);
+      // Android: Direct Google Maps URL that opens the place details
+      window.location.href = `https://maps.google.com/?cid=14981107418402790331&action=review`;
     } else if (isIOS) {
-      // iOS: Open Google Maps in browser (will prompt to open app if installed)
-      window.location.href = `https://www.google.com/maps/search/?api=1&query=Homestead+Hill+Vincennes+IN&query_place_id=${placeId}`;
+      // iOS: Open Google Maps place page
+      window.location.href = `https://maps.google.com/?cid=14981107418402790331`;
     } else {
       // Desktop: Open review form in new tab
       window.open(

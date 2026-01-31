@@ -2,6 +2,13 @@ import { Link } from "react-router-dom";
 import { Home, Phone, Mail, MapPin, Star } from "lucide-react";
 
 export function Footer() {
+  const isMobile =
+    typeof navigator !== "undefined" &&
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  const reviewUrl =
+    "https://search.google.com/local/writereview?placeid=ChIJQCcGCLq_dYgROx_iaupa8so";
+
   return (
     <footer className="bg-secondary border-t border-border">
       {/* House Roof Decorative Element */}
@@ -111,9 +118,9 @@ export function Footer() {
                 Book Your Stay
               </Link>
               <a
-                href="https://search.google.com/local/writereview?placeid=ChIJQCcGCLq_dYgROx_iaupa8so"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={reviewUrl}
+                target={isMobile ? "_self" : "_blank"}
+                rel={isMobile ? undefined : "noopener noreferrer"}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors text-sm"
               >
                 <Star className="w-4 h-4" />

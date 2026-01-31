@@ -111,7 +111,7 @@ export function Footer() {
                 Book Your Stay
               </Link>
               <a
-                href="https://g.page/r/Cds-Iu5q8sofEBM/review"
+                href="https://search.google.com/local/writereview?placeid=ChIJQCcGCLq_dYgROx_iaupa8so"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors text-sm"

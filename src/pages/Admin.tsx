@@ -6,11 +6,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Webhook, Calendar, Shield, Copy } from "lucide-react";
+import { Webhook, Calendar, Shield, Copy, RefreshCw, CheckCircle, XCircle } from "lucide-react";
 
 const Admin = () => {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState<{ success: boolean; message: string } | null>(null);
   const { toast } = useToast();
 
   const handleTestWebhook = async (e: React.FormEvent) => {
@@ -58,6 +60,55 @@ const Admin = () => {
     }
   };
 
+  const handleManualSync = async () => {
+    setIsSyncing(true);
+    setSyncResult(null);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sync-calendar`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY || ""}`,
+        },
+        body: JSON.stringify({ action: "sync-all" }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Sync failed");
+      }
+
+      const successCount = data.synced?.filter((r: { success: boolean }) => r.success).length || 0;
+      const failCount = data.synced?.filter((r: { success: boolean }) => !r.success).length || 0;
+
+      setSyncResult({
+        success: true,
+        message: `Synced ${successCount} calendar(s)${failCount > 0 ? `, ${failCount} failed` : ""}`,
+      });
+
+      toast({
+        title: "Sync Complete",
+        description: `Successfully synced ${successCount} calendar(s)`,
+      });
+    } catch (error) {
+      console.error("Sync error:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      setSyncResult({
+        success: false,
+        message: errorMessage,
+      });
+      toast({
+        title: "Sync Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
     toast({
@@ -92,6 +143,55 @@ const Admin = () => {
             </CardContent>
           </Card>
 
+          {/* Manual Sync */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <RefreshCw className="h-5 w-5" />
+                Manual Calendar Sync
+              </CardTitle>
+              <CardDescription>
+                Manually trigger a sync of all unit calendars from their iCal sources.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center gap-4">
+                <Button 
+                  onClick={handleManualSync} 
+                  disabled={isSyncing}
+                  size="lg"
+                >
+                  {isSyncing ? (
+                    <>
+                      <RefreshCw className="h-4 w-4 animate-spin" />
+                      Syncing...
+                    </>
+                  ) : (
+                    <>
+                      <RefreshCw className="h-4 w-4" />
+                      Sync All Calendars
+                    </>
+                  )}
+                </Button>
+                
+                {syncResult && (
+                  <div className={`flex items-center gap-2 text-sm ${syncResult.success ? 'text-green-600' : 'text-red-600'}`}>
+                    {syncResult.success ? (
+                      <CheckCircle className="h-4 w-4" />
+                    ) : (
+                      <XCircle className="h-4 w-4" />
+                    )}
+                    {syncResult.message}
+                  </div>
+                )}
+              </div>
+              
+              <p className="text-xs text-muted-foreground">
+                This will fetch the latest availability from Airbnb and other connected calendars for all units.
+              </p>
+            </CardContent>
+          </Card>
+
           {/* Calendar Sync Instructions */}
           <Card>
             <CardHeader>
@@ -100,7 +200,7 @@ const Admin = () => {
                 Calendar Sync Endpoint
               </CardTitle>
               <CardDescription>
-                Use this endpoint with your service role key to sync unit calendars.
+                Use this endpoint with your service role key to sync unit calendars via automation.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

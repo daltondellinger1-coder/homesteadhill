@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { RentalApplicationsAdmin } from "@/components/RentalApplicationsAdmin";
 import { Webhook, Calendar, Shield, Copy, RefreshCw, CheckCircle, XCircle } from "lucide-react";
 
 const Admin = () => {
@@ -122,10 +123,13 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-12 max-w-2xl">
+      <main className="container mx-auto px-4 py-12 max-w-4xl">
         <h1 className="text-3xl font-bold text-foreground mb-8">Admin Dashboard</h1>
 
         <div className="space-y-6">
+          {/* Rental Applications Management */}
+          <RentalApplicationsAdmin />
+
           {/* Security Notice */}
           <Card className="border-amber-200 bg-amber-50">
             <CardHeader>

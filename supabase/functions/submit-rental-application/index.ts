@@ -96,6 +96,121 @@ function getAdminNotificationEmail(app: any) {
 </html>`;
 }
 
+function getApplicantConfirmationEmail(app: any) {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:${colors.cream};font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:${colors.cream};">
+    <tr><td style="padding:40px 20px;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin:0 auto;max-width:600px;">
+        <tr>
+          <td style="background:linear-gradient(180deg,${colors.navyDeep} 0%,${colors.navyMedium} 100%);padding:40px 40px 30px;border-radius:16px 16px 0 0;text-align:center;">
+            <h1 style="margin:0 0 8px;font-size:28px;font-weight:700;color:${colors.gold};letter-spacing:-0.5px;">Homestead Hill</h1>
+            <p style="margin:0;font-size:14px;color:${colors.textMuted};letter-spacing:2px;text-transform:uppercase;">Furnished Rentals</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:${colors.white};padding:40px;">
+            <h2 style="margin:0 0 20px;font-size:24px;font-weight:600;color:${colors.navyDeep};">
+              Thank you, ${app.first_name}!
+            </h2>
+            <p style="margin:0 0 30px;font-size:16px;line-height:1.6;color:#4A5568;">
+              We've received your rental application and appreciate you taking the time to complete it. Our team will carefully review your information and get back to you within 48 hours.
+            </p>
+
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:${colors.cream};border-radius:12px;margin-bottom:30px;">
+              <tr><td style="padding:24px;">
+                <h3 style="margin:0 0 20px;font-size:14px;font-weight:600;color:${colors.gold};text-transform:uppercase;letter-spacing:1px;">Application Summary</h3>
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr><td style="padding:10px 0;border-bottom:1px solid #E2E8F0;">
+                    <span style="font-size:14px;color:${colors.textMuted};">Applicant</span>
+                    <p style="margin:4px 0 0;font-size:16px;font-weight:600;color:${colors.navyDeep};">${app.first_name} ${app.middle_initial ? app.middle_initial + ' ' : ''}${app.last_name}</p>
+                  </td></tr>
+                  <tr><td style="padding:10px 0;border-bottom:1px solid #E2E8F0;">
+                    <span style="font-size:14px;color:${colors.textMuted};">Property</span>
+                    <p style="margin:4px 0 0;font-size:16px;font-weight:600;color:${colors.navyDeep};">${app.unit_id}</p>
+                  </td></tr>
+                  <tr><td style="padding:10px 0;border-bottom:1px solid #E2E8F0;">
+                    <span style="font-size:14px;color:${colors.textMuted};">Check-in</span>
+                    <p style="margin:4px 0 0;font-size:16px;font-weight:600;color:${colors.navyDeep};">${app.check_in}</p>
+                  </td></tr>
+                  <tr><td style="padding:10px 0;border-bottom:1px solid #E2E8F0;">
+                    <span style="font-size:14px;color:${colors.textMuted};">Check-out</span>
+                    <p style="margin:4px 0 0;font-size:16px;font-weight:600;color:${colors.navyDeep};">${app.check_out}</p>
+                  </td></tr>
+                  <tr><td style="padding:10px 0;">
+                    <span style="font-size:14px;color:${colors.textMuted};">Duration</span>
+                    <p style="margin:4px 0 0;font-size:16px;font-weight:600;color:${colors.navyDeep};">${app.nights} nights</p>
+                  </td></tr>
+                </table>
+              </td></tr>
+            </table>
+
+            <h3 style="margin:0 0 16px;font-size:18px;font-weight:600;color:${colors.navyDeep};">What happens next?</h3>
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom:30px;">
+              <tr><td style="padding:12px 0;">
+                <table role="presentation"><tr>
+                  <td style="width:32px;height:32px;background-color:${colors.gold};border-radius:50%;text-align:center;vertical-align:middle;">
+                    <span style="color:${colors.navyDeep};font-weight:700;font-size:14px;">1</span>
+                  </td>
+                  <td style="padding-left:16px;">
+                    <p style="margin:0;font-size:15px;color:#4A5568;line-height:1.5;">
+                      <strong style="color:${colors.navyDeep};">Review</strong> – We'll verify your application details and references
+                    </p>
+                  </td>
+                </tr></table>
+              </td></tr>
+              <tr><td style="padding:12px 0;">
+                <table role="presentation"><tr>
+                  <td style="width:32px;height:32px;background-color:${colors.gold};border-radius:50%;text-align:center;vertical-align:middle;">
+                    <span style="color:${colors.navyDeep};font-weight:700;font-size:14px;">2</span>
+                  </td>
+                  <td style="padding-left:16px;">
+                    <p style="margin:0;font-size:15px;color:#4A5568;line-height:1.5;">
+                      <strong style="color:${colors.navyDeep};">Decision</strong> – We'll notify you within 48 hours of our decision
+                    </p>
+                  </td>
+                </tr></table>
+              </td></tr>
+              <tr><td style="padding:12px 0;">
+                <table role="presentation"><tr>
+                  <td style="width:32px;height:32px;background-color:${colors.gold};border-radius:50%;text-align:center;vertical-align:middle;">
+                    <span style="color:${colors.navyDeep};font-weight:700;font-size:14px;">3</span>
+                  </td>
+                  <td style="padding-left:16px;">
+                    <p style="margin:0;font-size:15px;color:#4A5568;line-height:1.5;">
+                      <strong style="color:${colors.navyDeep};">Move-in</strong> – Once approved, we'll finalize your lease and move-in details
+                    </p>
+                  </td>
+                </tr></table>
+              </td></tr>
+            </table>
+
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:linear-gradient(135deg,${colors.navyDeep} 0%,${colors.navyMedium} 100%);border-radius:12px;">
+              <tr><td style="padding:24px;text-align:center;">
+                <p style="margin:0 0 12px;font-size:14px;color:${colors.textMuted};">Questions? We're here to help.</p>
+                <p style="margin:0;"><a href="tel:8127683108" style="color:${colors.gold};font-size:18px;font-weight:600;text-decoration:none;">(812) 768-3108</a></p>
+                <p style="margin:8px 0 0;"><a href="mailto:booking@homestead-hill.com" style="color:${colors.goldLight};font-size:14px;text-decoration:none;">booking@homestead-hill.com</a></p>
+              </td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:${colors.navyDeep};padding:30px 40px;border-radius:0 0 16px 16px;text-align:center;">
+            <p style="margin:0 0 8px;font-size:14px;color:${colors.gold};font-weight:600;">Homestead Hill</p>
+            <p style="margin:0 0 16px;font-size:13px;color:${colors.textMuted};">Vincennes, Indiana</p>
+            <p style="margin:0;font-size:12px;color:${colors.textMuted};">© ${new Date().getFullYear()} Homestead Hill. All rights reserved.</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -219,6 +334,29 @@ const handler = async (req: Request): Promise<Response> => {
         // Don't throw - DB save succeeded
       } else {
         console.log("Admin notification email sent");
+      }
+
+      // Send confirmation email to applicant
+      const applicantEmailRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "Homestead Hill <booking@homestead-hill.com>",
+          to: [body.email],
+          bcc: ["booking@homestead-hill.com"],
+          subject: "We received your rental application - Homestead Hill",
+          html: getApplicantConfirmationEmail(body),
+        }),
+      });
+
+      if (!applicantEmailRes.ok) {
+        const err = await applicantEmailRes.text();
+        console.error("Failed to send applicant confirmation email:", err);
+      } else {
+        console.log("Applicant confirmation email sent");
       }
     }
 

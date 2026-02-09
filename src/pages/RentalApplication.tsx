@@ -362,6 +362,9 @@ const RentalApplication = () => {
                   <h2 className="font-serif text-xl font-semibold text-foreground flex items-center gap-2">
                     <Briefcase className="w-5 h-5 text-primary" /> Employment & Income
                   </h2>
+                  <p className="text-sm text-muted-foreground bg-secondary/50 rounded-lg p-3">
+                    Please include all sources of income. Use additional information section if needed. <strong>Self-employed:</strong> Please supply tax returns for previous two years and two most recent bank statements.
+                  </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {renderField("Current Employer", "current_employer")}
                     {renderField("Position", "employer_position")}
@@ -462,34 +465,57 @@ const RentalApplication = () => {
                     <FileText className="w-5 h-5 text-primary" /> Authorization & Signature
                   </h2>
 
-                  <div className="bg-secondary/50 rounded-xl p-6 text-sm text-muted-foreground space-y-4 max-h-64 overflow-y-auto">
-                    <p className="font-semibold text-foreground">AUTHORIZATION:</p>
-                    <p>
-                      I hereby authorize the verification of the information provided in this application, including but not limited to 
-                      credit history, criminal background, rental history, and employment verification. I understand that incomplete 
-                      or false information may result in denial of this application or termination of any resulting lease agreement.
+                  <div className="bg-secondary/50 rounded-xl p-6 text-sm text-muted-foreground space-y-5 max-h-80 overflow-y-auto">
+                    <p className="text-foreground">
+                      Please read carefully and sign and date below if you agree. Applicant certifies that the information contained in this application is true and correct. Applicant understands that false or misleading information is grounds for immediate disqualification.
                     </p>
-                    <p className="font-semibold text-foreground">QUALIFICATION STANDARDS:</p>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>A valid government-issued photo ID is required</li>
-                      <li>Monthly income must be at least 3x the monthly rent</li>
-                      <li>No prior evictions within the last 5 years</li>
-                      <li>Satisfactory rental history from previous landlords</li>
-                      <li>No outstanding balances owed to previous landlords</li>
-                      <li>Criminal background check will be conducted</li>
-                      <li>Credit check may be performed</li>
-                    </ul>
-                    <p className="font-semibold text-foreground">NOTICE:</p>
-                    <p>
-                      The information provided in this application is confidential and will only be used for the purpose of evaluating 
-                      this rental application. All personal information, including Social Security numbers, will be securely handled and 
-                      will not be shared with unauthorized parties.
-                    </p>
-                    <p>
-                      By signing below, I certify that all information provided in this application is true and complete to the best of 
-                      my knowledge. I understand that providing false information is grounds for denial of this application or termination 
-                      of any lease agreement.
-                    </p>
+
+                    <div>
+                      <p className="font-semibold text-foreground mb-2">AUTHORIZATION</p>
+                      <p>
+                        Applicant authorizes the Landlord or Landlord's representatives to make any inquiries deemed necessary to verify Applicant is the most qualified based on the below stated qualification standards. This verification includes, but is not limited to, direct contact with Applicant's employers, current landlord, previous landlords, friends, personal and professional references, law enforcement agencies, government agencies, consumer reporting agencies, public records eviction records, and any other sources of information which the Landlord or Landlord's representative may deem necessary.
+                      </p>
+                      <p className="mt-2">
+                        Applicant verifies that the Landlord and Landlord's representatives shall not be held liable for damages of any kind that result from the verification of the information provided. This authorization shall extend through Applicant's tenancy to ensure continued compliance to the terms of tenancy or to recover any financial obligations relating to Applicant's tenancy, and beyond the expiration of Applicant's tenancy for recovery of any financial obligations, or for any other acceptable purpose.
+                      </p>
+                      <p className="mt-2">
+                        Should the Applicant be denied or face other adverse action based on information received in a consumer report, the Applicant has a right to obtain a free copy of the consumer report, and to dispute the accuracy of the information it contains by contacting the Consumer Reporting Agency.
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold text-foreground mb-2">HOLDING FEE</p>
+                      <p>
+                        Upon the verbal or written approval of the Applicant's tenancy, if tenant will not be taking occupancy immediately, a Deposit to Hold Agreement will be executed and signed by all parties and a non-refundable holding fee shall be required within 24 hours, hereinafter referred to as "Deposit to Hold" in the amount equal to one month's rent to hold the property until a mutually agreed upon move-in date. Applicant understands that no rental will be held for more than 14 days.
+                      </p>
+                      <p className="mt-2">
+                        The Deposit to Hold removes the property from public offering and holds the home exclusively for the Applicant until all other requirements have been met. After all requirements have been met and a lease for the property completed, the Deposit to Hold will transfer to the security deposit to be held throughout the tenant's entire tenancy.
+                      </p>
+                      <p className="mt-2">
+                        If the Applicant fails to provide the Deposit to Hold within 24 hours of approval, the Applicant may be disqualified and the home will be offered to the next qualified applicant. After approval and before occupancy will be granted, Applicant must supply all the required move-in funds, including the security deposit, first month's rent, and any other additional deposits and fees, all tenant paid utilities must be transferred into Applicant's name, and a lease must be executed and signed by all parties.
+                      </p>
+                      <p className="mt-2">
+                        If for any reason, the Applicant fails to complete all move-in requirements the landlord will return the property to public offering and the entire Deposit to Hold will be forfeited to the Landlord for expenses including, but not limited to, lost rent, holding costs, advertising costs, and marketing costs.
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold text-foreground mb-2">QUALIFICATION STANDARDS</p>
+                      <p className="mb-2">Your Application will be denied if you do not meet the below standards for qualification.</p>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Applicant must have current photo identification and a valid social security number.</li>
+                        <li>Applicant's monthly household income must exceed three times the rent. All income must be from a verifiable source. Unverifiable income will not be considered.</li>
+                        <li>Applicants must receive positive references from all previous landlords for the previous 5 years.</li>
+                        <li>Applicant may not have any evictions or unpaid judgments from previous landlords.</li>
+                        <li>Applicant must exhibit a responsible financial life. Credit score must be a minimum of 600.</li>
+                        <li>A background check will be conducted on all applicants over 18. Applicant's background must exhibit a pattern of responsibility.</li>
+                        <li>Applicant must be a non-smoker.</li>
+                        <li>Occupancy is limited to 2 people per bedroom.</li>
+                      </ul>
+                      <p className="mt-2">
+                        At landlord's discretion, compensating factors such as an additional security deposit or co-signer (guarantor) may be required for qualification if Applicant fails to meet any one of the above requirements. In the event of multiple applicants, tenancy will be granted to the most qualified, based on the above criteria.
+                      </p>
+                    </div>
                   </div>
 
                   <div className="flex items-start gap-3">

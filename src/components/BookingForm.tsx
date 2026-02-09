@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -68,6 +68,7 @@ function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apart
 
 export function BookingForm() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const preselectedUnit = searchParams.get("unit") || "";
   
   const [formData, setFormData] = useState({
@@ -202,6 +203,22 @@ export function BookingForm() {
       setIsSubmitting(false);
       setIsSubmitted(true);
       toast.success("Booking request submitted! We'll be in touch soon.");
+      
+      // For 30+ night stays, redirect to rental application
+      if (nights >= 30) {
+        const params = new URLSearchParams({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          unit: formData.unit,
+          checkIn: format(checkInDate, "PPP"),
+          checkOut: format(checkOutDate, "PPP"),
+          nights: nights.toString(),
+        });
+        setTimeout(() => {
+          navigate(`/rental-application?${params.toString()}`);
+        }, 2000);
+      }
     } catch (error) {
       console.error("Error submitting booking:", error);
       toast.error("Failed to submit booking. Please try again or contact us directly.");
@@ -220,6 +237,11 @@ export function BookingForm() {
         </h3>
         <p className="text-muted-foreground max-w-md mx-auto mb-6">
           Thank you for your booking request. We'll review your dates and get back to you within 24 hours with confirmation and payment details.
+          {checkInDate && checkOutDate && Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24)) >= 30 && (
+            <span className="block mt-3 text-primary font-medium">
+              Redirecting you to the rental application form...
+            </span>
+          )}
         </p>
         <Button onClick={() => setIsSubmitted(false)} variant="outline">
           Submit Another Request

@@ -1,1 +1,4 @@
 project_id = "qihhgwslsjicjtrqvzsv"
+
+[functions.submit-rental-application]
+verify_jwt = false

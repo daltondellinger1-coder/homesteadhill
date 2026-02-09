@@ -1,0 +1,238 @@
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+};
+
+const colors = {
+  navyDeep: '#0C1D37',
+  navyMedium: '#152844',
+  gold: '#C4935A',
+  goldLight: '#D4A870',
+  cream: '#F7F5F2',
+  white: '#FFFFFF',
+  textMuted: '#8B9BB4',
+};
+
+function getAdminNotificationEmail(app: any) {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:${colors.cream};font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:${colors.cream};">
+    <tr><td style="padding:40px 20px;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin:0 auto;max-width:600px;">
+        <tr>
+          <td style="background:linear-gradient(180deg,${colors.navyDeep} 0%,${colors.navyMedium} 100%);padding:30px 40px;border-radius:16px 16px 0 0;">
+            <table role="presentation" width="100%"><tr>
+              <td><h1 style="margin:0;font-size:20px;font-weight:700;color:${colors.gold};">Homestead Hill</h1></td>
+              <td style="text-align:right;">
+                <span style="display:inline-block;background-color:${colors.gold};color:${colors.navyDeep};font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;text-transform:uppercase;">New Application</span>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:${colors.white};padding:40px;">
+            <h2 style="margin:0 0 24px;font-size:22px;font-weight:600;color:${colors.navyDeep};">New Rental Application</h2>
+            
+            <table role="presentation" width="100%" style="background-color:${colors.cream};border-radius:12px;margin-bottom:24px;">
+              <tr><td style="padding:20px;">
+                <h3 style="margin:0 0 16px;font-size:12px;font-weight:600;color:${colors.gold};text-transform:uppercase;letter-spacing:1px;">Applicant</h3>
+                <p style="margin:4px 0;font-size:15px;color:${colors.navyDeep};"><strong>${app.first_name} ${app.middle_initial ? app.middle_initial + ' ' : ''}${app.last_name}</strong></p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">${app.email} · ${app.phone_number}</p>
+              </td></tr>
+            </table>
+
+            <table role="presentation" width="100%" style="background-color:${colors.cream};border-radius:12px;margin-bottom:24px;">
+              <tr><td style="padding:20px;">
+                <h3 style="margin:0 0 16px;font-size:12px;font-weight:600;color:${colors.gold};text-transform:uppercase;letter-spacing:1px;">Booking Details</h3>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Unit: <strong style="color:${colors.navyDeep};">${app.unit_id}</strong></p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Check-in: <strong style="color:${colors.navyDeep};">${app.check_in}</strong></p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Check-out: <strong style="color:${colors.navyDeep};">${app.check_out}</strong></p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Duration: <strong style="color:${colors.navyDeep};">${app.nights} nights</strong></p>
+              </td></tr>
+            </table>
+
+            <table role="presentation" width="100%" style="background-color:${colors.cream};border-radius:12px;margin-bottom:24px;">
+              <tr><td style="padding:20px;">
+                <h3 style="margin:0 0 16px;font-size:12px;font-weight:600;color:${colors.gold};text-transform:uppercase;letter-spacing:1px;">Employment</h3>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Employer: <strong style="color:${colors.navyDeep};">${app.current_employer || 'Not provided'}</strong></p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Position: <strong style="color:${colors.navyDeep};">${app.employer_position || 'Not provided'}</strong></p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Gross Wages: <strong style="color:${colors.navyDeep};">${app.gross_wages || 'Not provided'}</strong></p>
+              </td></tr>
+            </table>
+
+            <table role="presentation" width="100%" style="background-color:${colors.cream};border-radius:12px;">
+              <tr><td style="padding:20px;">
+                <h3 style="margin:0 0 16px;font-size:12px;font-weight:600;color:${colors.gold};text-transform:uppercase;letter-spacing:1px;">Key Info</h3>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Pets: ${app.pets || 'None'}</p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Evictions: ${app.evictions_count || '0'}</p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Felonies: ${app.felonies_count || '0'}</p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Smoke: ${app.smoke || 'Not specified'}</p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Why rent to them: ${app.why_rent_to_you || 'Not provided'}</p>
+                <p style="margin:4px 0;font-size:14px;color:#4A5568;">Signed: <strong style="color:${colors.navyDeep};">${app.applicant_signature}</strong> on ${app.signature_date}</p>
+              </td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:${colors.navyDeep};padding:20px 40px;border-radius:0 0 16px 16px;text-align:center;">
+            <p style="margin:0;font-size:12px;color:${colors.textMuted};">Full application details are saved in the database.</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+const handler = async (req: Request): Promise<Response> => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  try {
+    const body = await req.json();
+
+    // Validate required fields
+    if (!body.first_name || !body.last_name || !body.email || !body.phone_number || !body.applicant_signature || !body.signature_date || !body.unit_id) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Save to database
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    const { error: dbError } = await supabase.from("rental_applications").insert({
+      first_name: body.first_name,
+      middle_initial: body.middle_initial || null,
+      last_name: body.last_name,
+      ssn: body.ssn || null,
+      date_of_birth: body.date_of_birth || null,
+      drivers_license: body.drivers_license || null,
+      phone_number: body.phone_number,
+      alternate_phone: body.alternate_phone || null,
+      email: body.email,
+      who_else_living: body.who_else_living || null,
+      current_address: body.current_address || null,
+      current_city_state_zip: body.current_city_state_zip || null,
+      current_move_in: body.current_move_in || null,
+      current_landlord_name: body.current_landlord_name || null,
+      current_landlord_phone: body.current_landlord_phone || null,
+      current_monthly_rent: body.current_monthly_rent || null,
+      current_reason_moving: body.current_reason_moving || null,
+      prev1_address: body.prev1_address || null,
+      prev1_city_state_zip: body.prev1_city_state_zip || null,
+      prev1_move_in: body.prev1_move_in || null,
+      prev1_move_out: body.prev1_move_out || null,
+      prev1_landlord_name: body.prev1_landlord_name || null,
+      prev1_landlord_phone: body.prev1_landlord_phone || null,
+      prev1_monthly_rent: body.prev1_monthly_rent || null,
+      prev1_reason_moving: body.prev1_reason_moving || null,
+      prev2_address: body.prev2_address || null,
+      prev2_city_state_zip: body.prev2_city_state_zip || null,
+      prev2_move_in: body.prev2_move_in || null,
+      prev2_move_out: body.prev2_move_out || null,
+      prev2_landlord_name: body.prev2_landlord_name || null,
+      prev2_landlord_phone: body.prev2_landlord_phone || null,
+      prev2_monthly_rent: body.prev2_monthly_rent || null,
+      prev2_reason_moving: body.prev2_reason_moving || null,
+      current_employer: body.current_employer || null,
+      employer_position: body.employer_position || null,
+      employer_phone: body.employer_phone || null,
+      supervisor_name: body.supervisor_name || null,
+      gross_wages: body.gross_wages || null,
+      hire_date: body.hire_date || null,
+      other_income_sources: body.other_income_sources || null,
+      other_income_amount: body.other_income_amount || null,
+      other_income_explain: body.other_income_explain || null,
+      how_long_live_here: body.how_long_live_here || null,
+      pets: body.pets || null,
+      evictions_count: body.evictions_count || null,
+      felonies_count: body.felonies_count || null,
+      broken_lease: body.broken_lease || null,
+      smoke: body.smoke || null,
+      vehicles_count: body.vehicles_count || null,
+      total_move_in_available: body.total_move_in_available || null,
+      desired_move_in: body.desired_move_in || null,
+      how_heard: body.how_heard || null,
+      reasons_not_pay_rent: body.reasons_not_pay_rent || null,
+      has_checking_account: body.has_checking_account || null,
+      checking_balance: body.checking_balance || null,
+      has_savings_account: body.has_savings_account || null,
+      savings_balance: body.savings_balance || null,
+      emergency_name: body.emergency_name || null,
+      emergency_phone: body.emergency_phone || null,
+      emergency_relationship: body.emergency_relationship || null,
+      why_rent_to_you: body.why_rent_to_you || null,
+      additional_info: body.additional_info || null,
+      applicant_signature: body.applicant_signature,
+      signature_date: body.signature_date,
+      unit_id: body.unit_id,
+      booking_name: body.booking_name,
+      booking_email: body.booking_email,
+      booking_phone: body.booking_phone,
+      check_in: body.check_in,
+      check_out: body.check_out,
+      nights: body.nights,
+      status: "pending",
+    });
+
+    if (dbError) {
+      console.error("Database error:", dbError);
+      throw new Error(`Database error: ${dbError.message}`);
+    }
+
+    console.log("Application saved to database");
+
+    // Send admin notification email
+    if (RESEND_API_KEY) {
+      const emailRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "Homestead Hill <booking@homestead-hill.com>",
+          to: ["booking@homestead-hill.com"],
+          subject: `New Rental Application - ${body.first_name} ${body.last_name} (${body.unit_id})`,
+          html: getAdminNotificationEmail(body),
+        }),
+      });
+
+      if (!emailRes.ok) {
+        const err = await emailRes.text();
+        console.error("Failed to send admin email:", err);
+        // Don't throw - DB save succeeded
+      } else {
+        console.log("Admin notification email sent");
+      }
+    }
+
+    return new Response(
+      JSON.stringify({ success: true }),
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  } catch (error: any) {
+    console.error("Error:", error);
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+};
+
+serve(handler);

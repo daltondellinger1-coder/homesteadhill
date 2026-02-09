@@ -44,6 +44,237 @@ export type Database = {
         }
         Relationships: []
       }
+      rental_applications: {
+        Row: {
+          additional_info: string | null
+          alternate_phone: string | null
+          applicant_signature: string
+          booking_email: string
+          booking_name: string
+          booking_phone: string
+          broken_lease: string | null
+          check_in: string
+          check_out: string
+          checking_balance: string | null
+          created_at: string
+          current_address: string | null
+          current_city_state_zip: string | null
+          current_employer: string | null
+          current_landlord_name: string | null
+          current_landlord_phone: string | null
+          current_monthly_rent: string | null
+          current_move_in: string | null
+          current_reason_moving: string | null
+          date_of_birth: string | null
+          desired_move_in: string | null
+          drivers_license: string | null
+          email: string
+          emergency_name: string | null
+          emergency_phone: string | null
+          emergency_relationship: string | null
+          employer_phone: string | null
+          employer_position: string | null
+          evictions_count: string | null
+          felonies_count: string | null
+          first_name: string
+          gross_wages: string | null
+          has_checking_account: string | null
+          has_savings_account: string | null
+          hire_date: string | null
+          how_heard: string | null
+          how_long_live_here: string | null
+          id: string
+          last_name: string
+          middle_initial: string | null
+          nights: number
+          other_income_amount: string | null
+          other_income_explain: string | null
+          other_income_sources: string | null
+          pets: string | null
+          phone_number: string
+          prev1_address: string | null
+          prev1_city_state_zip: string | null
+          prev1_landlord_name: string | null
+          prev1_landlord_phone: string | null
+          prev1_monthly_rent: string | null
+          prev1_move_in: string | null
+          prev1_move_out: string | null
+          prev1_reason_moving: string | null
+          prev2_address: string | null
+          prev2_city_state_zip: string | null
+          prev2_landlord_name: string | null
+          prev2_landlord_phone: string | null
+          prev2_monthly_rent: string | null
+          prev2_move_in: string | null
+          prev2_move_out: string | null
+          prev2_reason_moving: string | null
+          reasons_not_pay_rent: string | null
+          savings_balance: string | null
+          signature_date: string
+          smoke: string | null
+          ssn: string | null
+          status: string
+          supervisor_name: string | null
+          total_move_in_available: string | null
+          unit_id: string
+          vehicles_count: string | null
+          who_else_living: string | null
+          why_rent_to_you: string | null
+        }
+        Insert: {
+          additional_info?: string | null
+          alternate_phone?: string | null
+          applicant_signature: string
+          booking_email: string
+          booking_name: string
+          booking_phone: string
+          broken_lease?: string | null
+          check_in: string
+          check_out: string
+          checking_balance?: string | null
+          created_at?: string
+          current_address?: string | null
+          current_city_state_zip?: string | null
+          current_employer?: string | null
+          current_landlord_name?: string | null
+          current_landlord_phone?: string | null
+          current_monthly_rent?: string | null
+          current_move_in?: string | null
+          current_reason_moving?: string | null
+          date_of_birth?: string | null
+          desired_move_in?: string | null
+          drivers_license?: string | null
+          email: string
+          emergency_name?: string | null
+          emergency_phone?: string | null
+          emergency_relationship?: string | null
+          employer_phone?: string | null
+          employer_position?: string | null
+          evictions_count?: string | null
+          felonies_count?: string | null
+          first_name: string
+          gross_wages?: string | null
+          has_checking_account?: string | null
+          has_savings_account?: string | null
+          hire_date?: string | null
+          how_heard?: string | null
+          how_long_live_here?: string | null
+          id?: string
+          last_name: string
+          middle_initial?: string | null
+          nights: number
+          other_income_amount?: string | null
+          other_income_explain?: string | null
+          other_income_sources?: string | null
+          pets?: string | null
+          phone_number: string
+          prev1_address?: string | null
+          prev1_city_state_zip?: string | null
+          prev1_landlord_name?: string | null
+          prev1_landlord_phone?: string | null
+          prev1_monthly_rent?: string | null
+          prev1_move_in?: string | null
+          prev1_move_out?: string | null
+          prev1_reason_moving?: string | null
+          prev2_address?: string | null
+          prev2_city_state_zip?: string | null
+          prev2_landlord_name?: string | null
+          prev2_landlord_phone?: string | null
+          prev2_monthly_rent?: string | null
+          prev2_move_in?: string | null
+          prev2_move_out?: string | null
+          prev2_reason_moving?: string | null
+          reasons_not_pay_rent?: string | null
+          savings_balance?: string | null
+          signature_date: string
+          smoke?: string | null
+          ssn?: string | null
+          status?: string
+          supervisor_name?: string | null
+          total_move_in_available?: string | null
+          unit_id: string
+          vehicles_count?: string | null
+          who_else_living?: string | null
+          why_rent_to_you?: string | null
+        }
+        Update: {
+          additional_info?: string | null
+          alternate_phone?: string | null
+          applicant_signature?: string
+          booking_email?: string
+          booking_name?: string
+          booking_phone?: string
+          broken_lease?: string | null
+          check_in?: string
+          check_out?: string
+          checking_balance?: string | null
+          created_at?: string
+          current_address?: string | null
+          current_city_state_zip?: string | null
+          current_employer?: string | null
+          current_landlord_name?: string | null
+          current_landlord_phone?: string | null
+          current_monthly_rent?: string | null
+          current_move_in?: string | null
+          current_reason_moving?: string | null
+          date_of_birth?: string | null
+          desired_move_in?: string | null
+          drivers_license?: string | null
+          email?: string
+          emergency_name?: string | null
+          emergency_phone?: string | null
+          emergency_relationship?: string | null
+          employer_phone?: string | null
+          employer_position?: string | null
+          evictions_count?: string | null
+          felonies_count?: string | null
+          first_name?: string
+          gross_wages?: string | null
+          has_checking_account?: string | null
+          has_savings_account?: string | null
+          hire_date?: string | null
+          how_heard?: string | null
+          how_long_live_here?: string | null
+          id?: string
+          last_name?: string
+          middle_initial?: string | null
+          nights?: number
+          other_income_amount?: string | null
+          other_income_explain?: string | null
+          other_income_sources?: string | null
+          pets?: string | null
+          phone_number?: string
+          prev1_address?: string | null
+          prev1_city_state_zip?: string | null
+          prev1_landlord_name?: string | null
+          prev1_landlord_phone?: string | null
+          prev1_monthly_rent?: string | null
+          prev1_move_in?: string | null
+          prev1_move_out?: string | null
+          prev1_reason_moving?: string | null
+          prev2_address?: string | null
+          prev2_city_state_zip?: string | null
+          prev2_landlord_name?: string | null
+          prev2_landlord_phone?: string | null
+          prev2_monthly_rent?: string | null
+          prev2_move_in?: string | null
+          prev2_move_out?: string | null
+          prev2_reason_moving?: string | null
+          reasons_not_pay_rent?: string | null
+          savings_balance?: string | null
+          signature_date?: string
+          smoke?: string | null
+          ssn?: string | null
+          status?: string
+          supervisor_name?: string | null
+          total_move_in_available?: string | null
+          unit_id?: string
+          vehicles_count?: string | null
+          who_else_living?: string | null
+          why_rent_to_you?: string | null
+        }
+        Relationships: []
+      }
       unit_calendars: {
         Row: {
           created_at: string

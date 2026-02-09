@@ -446,9 +446,14 @@ export function BookingForm() {
                   </div>
                 </div>
                 {nights >= 30 && (
-                  <p className="text-xs text-primary mt-2">
-                    🎉 You qualify for our best monthly rate!
-                  </p>
+                  <div className="mt-2 space-y-1">
+                    <p className="text-xs text-primary">
+                      🎉 You qualify for our best monthly rate!
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      📋 A rental application will be required for stays of 30+ nights. You'll be redirected to complete it after submitting your booking request.
+                    </p>
+                  </div>
                 )}
                 {nights >= 7 && nights < 30 && (
                   <p className="text-xs text-primary mt-2">

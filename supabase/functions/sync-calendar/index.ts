@@ -195,6 +195,13 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
     if (action === 'add') {
+      // Only service role can add calendars
+      if (!isServiceRole) {
+        return new Response(
+          JSON.stringify({ error: 'Unauthorized - admin access required for this action' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
       // Validate iCal URL against allowed hosts (SSRF protection)
       const urlValidation = validateIcalUrl(ical_url!)
       if (!urlValidation.valid) {

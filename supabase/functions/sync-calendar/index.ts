@@ -155,7 +155,8 @@ Deno.serve(async (req) => {
     }
     
     const token = authHeader.replace('Bearer ', '')
-    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') || ''
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') || Deno.env.get('SUPABASE_PUBLISHABLE_KEY') || ''
+    console.log('Anon key available:', !!Deno.env.get('SUPABASE_ANON_KEY'), 'Publishable key available:', !!Deno.env.get('SUPABASE_PUBLISHABLE_KEY'))
     
     // Accept service role key for all operations, or anon key for sync-all (used by cron)
     const isServiceRole = token === supabaseServiceKey

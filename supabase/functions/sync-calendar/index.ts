@@ -155,9 +155,13 @@ Deno.serve(async (req) => {
     }
     
     const token = authHeader.replace('Bearer ', '')
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') || ''
     
-    // Only accept service role key for admin operations (not anon key)
-    if (token !== supabaseServiceKey) {
+    // Accept service role key for all operations, or anon key for sync-all (used by cron)
+    const isServiceRole = token === supabaseServiceKey
+    const isAnonKey = token === supabaseAnonKey
+    
+    if (!isServiceRole && !isAnonKey) {
       return new Response(
         JSON.stringify({ error: 'Unauthorized - admin access required' }),
         { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -191,6 +195,13 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
     if (action === 'add') {
+      // Only service role can add calendars
+      if (!isServiceRole) {
+        return new Response(
+          JSON.stringify({ error: 'Unauthorized - admin access required for this action' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
       // Validate iCal URL against allowed hosts (SSRF protection)
       const urlValidation = validateIcalUrl(ical_url!)
       if (!urlValidation.valid) {

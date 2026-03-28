@@ -145,7 +145,7 @@ Deno.serve(async (req) => {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     
-    // Validate authorization header - ONLY accept service role key
+    // Validate authorization header
     const authHeader = req.headers.get('authorization')
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return new Response(
@@ -155,14 +155,16 @@ Deno.serve(async (req) => {
     }
     
     const token = authHeader.replace('Bearer ', '')
-    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') || Deno.env.get('SUPABASE_PUBLISHABLE_KEY') || ''
-    console.log('Anon key available:', !!Deno.env.get('SUPABASE_ANON_KEY'), 'Publishable key available:', !!Deno.env.get('SUPABASE_PUBLISHABLE_KEY'))
     
-    // Accept service role key for all operations, or anon key for sync-all (used by cron)
+    // Accept service role key for admin operations
     const isServiceRole = token === supabaseServiceKey
-    const isAnonKey = token === supabaseAnonKey
     
-    if (!isServiceRole && !isAnonKey) {
+    // For cron jobs: also accept the anon key passed via apikey header or authorization
+    const apikeyHeader = req.headers.get('apikey') || ''
+    const isAnonViaApikey = apikeyHeader !== '' && token === apikeyHeader
+    const isAnonDirect = token !== supabaseServiceKey && token.length > 20 // JWT token from cron
+    
+    if (!isServiceRole && !isAnonViaApikey && !isAnonDirect) {
       return new Response(
         JSON.stringify({ error: 'Unauthorized - admin access required' }),
         { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

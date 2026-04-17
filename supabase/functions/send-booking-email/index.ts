@@ -190,7 +190,12 @@ const getGuestEmailTemplate = (booking: BookingRequest) => `
                             </tr>
                             <tr>
                               <td colspan="2" style="padding-top: 4px;">
-                                <span style="font-size: 12px; color: ${colors.textMuted};">${booking.rateType}</span>
+                                <span style="font-size: 12px; color: ${colors.textMuted};">${
+                                  booking.rateType === "monthly" ? "Monthly rate" :
+                                  booking.rateType === "weekly" ? "Weekly rate" :
+                                  booking.rateType === "minimum" ? "3-night minimum" :
+                                  "Nightly rate"
+                                } · ${booking.nights} night${booking.nights !== 1 ? "s" : ""}</span>
                               </td>
                             </tr>
                           </table>

@@ -122,6 +122,18 @@ Deno.serve(async (req) => {
       })
     }
 
+    // Airbnb (and several other iCal importers) reject feeds with zero events
+    // during the initial import. Add a far-future placeholder so the feed is
+    // never empty — it blocks one harmless day in 2099.
+    if (ranges.length === 0) {
+      ranges.push({
+        uid: `placeholder-${unitId}@homestead-hill.com`,
+        start: '2099-01-01',
+        end: '2099-01-02',
+        summary: 'Homestead Hill placeholder (ignore)',
+      })
+    }
+
     // Build iCal feed
     const now = formatIcalDateTime(new Date())
     const lines: string[] = [

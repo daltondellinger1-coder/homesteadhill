@@ -538,6 +538,13 @@ const handler = async (req: Request): Promise<Response> => {
       // Don't throw - admin email was sent successfully
     }
 
+    // Mirror the request into the Homestead Host Hub project (best-effort, do not fail the user submission)
+    try {
+      await createHostHubBookingRequest(booking);
+    } catch (mirrorErr) {
+      console.error("Host Hub mirror failed (non-fatal):", mirrorErr);
+    }
+
     console.log("Guest confirmation email sent successfully");
 
     return new Response(

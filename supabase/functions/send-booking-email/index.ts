@@ -2,6 +2,68 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
+// Homestead Host Hub project (separate Supabase project) — public anon key + RLS allows public insert.
+const HOST_HUB_URL = "https://fiunauckxdnaqvlircob.supabase.co";
+const HOST_HUB_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdW5hdWNreGRuYXF2bGlyY29iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MjcwMjUsImV4cCI6MjA4NjAwMzAyNX0.Ro1WWf4RPIJJZkQw0HBhK8DaAWgApZJ35Ci4Izp1J6Q";
+
+// Map our unit names → host-hub unit_type enum ('1br' | '2br' | 'cottage')
+function mapUnitType(unitName: string): "1br" | "2br" | "cottage" {
+  const n = unitName.toLowerCase();
+  if (n.includes("cottage")) return "cottage";
+  if (n.includes("unit 5") || n.includes("unit 6")) return "2br";
+  return "1br";
+}
+
+// Convert "MMMM d, yyyy" (date-fns "PPP") or any parseable date to YYYY-MM-DD
+function toIsoDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+async function createHostHubBookingRequest(booking: BookingRequest) {
+  const payload = {
+    name: booking.name,
+    email: booking.email,
+    phone: booking.phone || null,
+    check_in: toIsoDate(booking.checkIn),
+    check_out: toIsoDate(booking.checkOut),
+    num_guests: booking.guests || 1,
+    preferred_unit_type: mapUnitType(booking.unit),
+    source: "direct",
+    notes: [
+      `Requested unit: ${booking.unit}`,
+      `Nights: ${booking.nights}`,
+      `Rate: ${booking.rateType}`,
+      `Estimated total: $${booking.totalPrice}`,
+      booking.message ? `Message: ${booking.message}` : null,
+    ].filter(Boolean).join("\n"),
+  };
+
+  const res = await fetch(`${HOST_HUB_URL}/rest/v1/booking_requests`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: HOST_HUB_ANON_KEY,
+      Authorization: `Bearer ${HOST_HUB_ANON_KEY}`,
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    console.error("Failed to insert into host-hub booking_requests:", res.status, err);
+    return { ok: false, error: err };
+  }
+  const data = await res.json();
+  console.log("Inserted booking_request into host-hub:", data?.[0]?.id);
+  return { ok: true, data };
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -474,6 +536,13 @@ const handler = async (req: Request): Promise<Response> => {
       const error = await guestEmailRes.text();
       console.error("Failed to send guest email:", error);
       // Don't throw - admin email was sent successfully
+    }
+
+    // Mirror the request into the Homestead Host Hub project (best-effort, do not fail the user submission)
+    try {
+      await createHostHubBookingRequest(booking);
+    } catch (mirrorErr) {
+      console.error("Host Hub mirror failed (non-fatal):", mirrorErr);
     }
 
     console.log("Guest confirmation email sent successfully");

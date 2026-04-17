@@ -47,7 +47,18 @@ Deno.serve(async (req) => {
 
   try {
     const url = new URL(req.url)
-    const unitId = url.searchParams.get('unit_id')
+
+    // Accept unit_id from either:
+    //   1. Path segment ending in .ics  (e.g. /export-calendar/unit-11.ics)  ← Airbnb requires this
+    //   2. Query param  (e.g. ?unit_id=unit-11)  ← legacy
+    let unitId: string | null = null
+    const pathParts = url.pathname.split('/').filter(Boolean)
+    const lastSegment = pathParts[pathParts.length - 1] || ''
+    if (lastSegment.endsWith('.ics')) {
+      unitId = lastSegment.slice(0, -4)
+    } else {
+      unitId = url.searchParams.get('unit_id')
+    }
 
     if (!unitId || !/^[a-zA-Z0-9_-]+$/.test(unitId) || unitId.length > 50) {
       return new Response(

@@ -6,6 +6,26 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
 }
 
+// Host Hub (the guest-management app) is a separate Supabase project.
+// We read its public tables via the anon key + RLS so we can include
+// app-side bookings in the Airbnb-facing iCal feed. Values can be
+// overridden via env vars; the anon key is already public in the
+// send-booking-email function used by the booking form.
+const HOST_HUB_URL =
+  Deno.env.get('HOST_HUB_URL') || 'https://fiunauckxdnaqvlircob.supabase.co'
+const HOST_HUB_ANON_KEY =
+  Deno.env.get('HOST_HUB_ANON_KEY') ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdW5hdWNreGRuYXF2bGlyY29iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MjcwMjUsImV4cCI6MjA4NjAwMzAyNX0.Ro1WWf4RPIJJZkQw0HBhK8DaAWgApZJ35Ci4Izp1J6Q'
+
+// Slugify an app unit name ("Unit 1") to the website's unit_id convention ("unit-1").
+function slugifyUnitName(name: string): string {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 // Format a Date as YYYYMMDD for iCal DATE values
 function formatIcalDate(input: string | Date): string {
   const d = typeof input === 'string' ? new Date(input) : input
@@ -38,6 +58,29 @@ interface BlockedRange {
   start: string // YYYY-MM-DD
   end: string   // YYYY-MM-DD (exclusive, iCal style)
   summary: string
+}
+
+// Best-effort fetch of a table from the Host Hub Supabase project.
+// Returns [] on any error — we never want to fail the iCal feed because
+// the cross-project call had a hiccup.
+async function hostHubSelect(path: string): Promise<any[]> {
+  try {
+    const res = await fetch(`${HOST_HUB_URL}/rest/v1/${path}`, {
+      headers: {
+        apikey: HOST_HUB_ANON_KEY,
+        Authorization: `Bearer ${HOST_HUB_ANON_KEY}`,
+        Accept: 'application/json',
+      },
+    })
+    if (!res.ok) {
+      console.error(`Host Hub select failed (${path}):`, res.status, await res.text())
+      return []
+    }
+    return await res.json()
+  } catch (err) {
+    console.error(`Host Hub select threw (${path}):`, err)
+    return []
+  }
 }
 
 Deno.serve(async (req) => {
@@ -121,6 +164,34 @@ Deno.serve(async (req) => {
         summary: `Blocked - Rental Application (${a.status})`,
       })
     }
+
+    // 3) Host Hub guests — any confirmed booking in the app (approved booking requests
+    //    plus manually-added guests) needs to block Airbnb. We skip source='airbnb'
+    //    so Airbnb's own blocks don't loop back to it via this feed.
+    //    Unit matching: app's units.name ("Unit 1") is slugified to the website's
+    //    unit_id convention ("unit-1").
+    const guestsRows = await hostHubSelect(
+      'guests?select=id,name,source,check_in,check_out,unit:unit_id(name)' +
+        `&check_out=gte.${todayStr}`
+    )
+
+    for (const g of guestsRows) {
+      if (!g?.unit?.name) continue
+      if (slugifyUnitName(g.unit.name) !== unitId) continue
+      if (g.source === 'airbnb') continue // prevent loopback
+      const checkOut = g.check_out || '9999-12-31' // open-ended leases: block far out
+      ranges.push({
+        uid: `hh-guest-${g.id}@homestead-hill.com`,
+        start: g.check_in,
+        end: checkOut,
+        summary: `Blocked - ${g.name || 'Guest'} (${g.source || 'direct'})`,
+      })
+    }
+
+    // Note: we intentionally don't pull from Host Hub's `booking_requests` table
+    // here. Approved requests already create a row in `guests` (which section 3
+    // covers), and pending requests don't carry an assigned unit so there's
+    // nothing specific to block until the admin approves them.
 
     // Airbnb (and several other iCal importers) reject feeds with zero events
     // during the initial import. Add a far-future placeholder so the feed is

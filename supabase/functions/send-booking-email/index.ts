@@ -16,8 +16,33 @@ function mapUnitType(unitName: string): "1br" | "2br" | "cottage" {
 
 // Convert "MMMM d, yyyy" (date-fns "PPP") or any parseable date to YYYY-MM-DD
 function toIsoDate(dateStr: string): string {
+  if (!dateStr) return dateStr;
+
+  // Already ISO (YYYY-MM-DD)
+  const iso = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (iso) return `${iso[1]}-${iso[2]}-${iso[3]}`;
+
+  // date-fns "PPP" format: "November 4th, 2025" or "November 4, 2025"
+  const months: Record<string, string> = {
+    january: "01", february: "02", march: "03", april: "04",
+    may: "05", june: "06", july: "07", august: "08",
+    september: "09", october: "10", november: "11", december: "12",
+  };
+  const ppp = dateStr.match(/^([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?,\s*(\d{4})$/);
+  if (ppp) {
+    const mm = months[ppp[1].toLowerCase()];
+    if (mm) {
+      const dd = ppp[2].padStart(2, "0");
+      return `${ppp[3]}-${mm}-${dd}`;
+    }
+  }
+
+  // Fallback: native Date parser
   const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr;
+  if (isNaN(d.getTime())) {
+    console.error("toIsoDate: could not parse date string:", dateStr);
+    return dateStr;
+  }
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
   const dd = String(d.getDate()).padStart(2, "0");
@@ -545,7 +570,19 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Mirror the request into the Homestead Host Hub project (best-effort, do not fail the user submission)
     try {
-      await createHostHubBookingRequest(booking);
+      console.log("Mirroring booking to Host Hub:", {
+        unit: booking.unit,
+        checkIn: booking.checkIn,
+        checkOut: booking.checkOut,
+        isoCheckIn: toIsoDate(booking.checkIn),
+        isoCheckOut: toIsoDate(booking.checkOut),
+      });
+      const mirrorResult = await createHostHubBookingRequest(booking);
+      if (!mirrorResult.ok) {
+        console.error("Host Hub mirror returned error:", mirrorResult.error);
+      } else {
+        console.log("Host Hub mirror succeeded");
+      }
     } catch (mirrorErr) {
       console.error("Host Hub mirror failed (non-fatal):", mirrorErr);
     }

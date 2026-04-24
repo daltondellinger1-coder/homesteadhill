@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.export-calendar]
 verify_jwt = false
+
+[functions.send-booking-approval-email]
+verify_jwt = false

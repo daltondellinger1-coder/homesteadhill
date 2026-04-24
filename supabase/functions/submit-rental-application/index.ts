@@ -5,6 +5,110 @@ const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
+// Homestead Host Hub (guest-management app) is a separate Supabase project.
+// We mirror long-stay rental applications into its booking_requests inbox so
+// Dalton has a single "to review" list across short + long stays.
+// Anon key is already public in send-booking-email for the same purpose; RLS
+// on booking_requests allows public insert.
+const HOST_HUB_URL =
+  Deno.env.get("HOST_HUB_URL") || "https://fiunauckxdnaqvlircob.supabase.co";
+const HOST_HUB_ANON_KEY =
+  Deno.env.get("HOST_HUB_ANON_KEY") ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdW5hdWNreGRuYXF2bGlyY29iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MjcwMjUsImV4cCI6MjA4NjAwMzAyNX0.Ro1WWf4RPIJJZkQw0HBhK8DaAWgApZJ35Ci4Izp1J6Q";
+
+// Map a website slug ("unit-5") to the app's unit_type enum.
+// Matches what send-booking-email does, but operates on unit slugs rather
+// than user-facing unit names since the rental application stores unit_id.
+function mapSlugToUnitType(unitSlug: string): "1br" | "2br" | "cottage" {
+  const s = (unitSlug || "").toLowerCase();
+  // unit-11 and unit-13 are the cottages today
+  if (s === "unit-11" || s === "unit-13" || s.includes("cottage")) return "cottage";
+  // unit-5 and unit-6 are 2br today
+  if (s === "unit-5" || s === "unit-6") return "2br";
+  return "1br";
+}
+
+// "unit-1" → "Unit 1" for human-readable notes
+function prettifyUnitSlug(unitSlug: string): string {
+  const m = (unitSlug || "").match(/^unit-(\d+)$/i);
+  if (m) return `Unit ${m[1]}`;
+  return unitSlug || "Unknown unit";
+}
+
+// Best-effort mirror of a rental application into Host Hub booking_requests.
+// Returns { ok, error? } — never throws, never fails the outer submission.
+async function mirrorToHostHub(app: any, rentalApplicationId: string | null) {
+  try {
+    const fullName = [app.first_name, app.middle_initial, app.last_name]
+      .filter(Boolean)
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const requestedUnit = prettifyUnitSlug(app.unit_id);
+
+    // Pack useful triage context into notes (shown on the RequestCard with
+    // whitespace-pre-wrap). Keep it concise — full application stays in the
+    // website's rental_applications table for deep review.
+    const noteLines: (string | null)[] = [
+      `Long-stay rental application`,
+      `Requested: ${requestedUnit} · ${app.nights ?? "?"} nights`,
+      app.applicant_signature
+        ? `Signed by ${app.applicant_signature} on ${app.signature_date}`
+        : null,
+      app.current_employer
+        ? `Employer: ${app.current_employer}${app.employer_position ? ` (${app.employer_position})` : ""}`
+        : null,
+      app.gross_wages ? `Gross wages: ${app.gross_wages}` : null,
+      app.pets && app.pets !== "None" ? `Pets: ${app.pets}` : null,
+      (app.evictions_count && app.evictions_count !== "0") ||
+      (app.felonies_count && app.felonies_count !== "0")
+        ? `Evictions: ${app.evictions_count || "0"} · Felonies: ${app.felonies_count || "0"}`
+        : null,
+      app.desired_move_in ? `Desired move-in: ${app.desired_move_in}` : null,
+      app.why_rent_to_you ? `Why rent: ${app.why_rent_to_you}` : null,
+      rentalApplicationId ? `Website application id: ${rentalApplicationId}` : null,
+    ];
+    const notes = noteLines.filter(Boolean).join("\n");
+
+    const payload = {
+      name: fullName || app.booking_name || "Applicant",
+      email: app.email,
+      phone: app.phone_number || app.booking_phone || null,
+      check_in: app.check_in,
+      check_out: app.check_out,
+      num_guests: 1,
+      preferred_unit_type: mapSlugToUnitType(app.unit_id),
+      source: "long_term",
+      notes,
+    };
+
+    const res = await fetch(`${HOST_HUB_URL}/rest/v1/booking_requests`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: HOST_HUB_ANON_KEY,
+        Authorization: `Bearer ${HOST_HUB_ANON_KEY}`,
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("Host Hub mirror (rental-app) failed:", res.status, err);
+      return { ok: false, error: err };
+    }
+    const data = await res.json();
+    console.log("Host Hub mirror (rental-app) inserted booking_request:", data?.[0]?.id);
+    return { ok: true, data };
+  } catch (err) {
+    console.error("Host Hub mirror (rental-app) threw:", err);
+    return { ok: false, error: String(err) };
+  }
+}
+
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -230,7 +334,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Save to database
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    const { error: dbError } = await supabase.from("rental_applications").insert({
+    const { data: insertedApp, error: dbError } = await supabase.from("rental_applications").insert({
       first_name: body.first_name,
       middle_initial: body.middle_initial || null,
       last_name: body.last_name,
@@ -303,14 +407,31 @@ const handler = async (req: Request): Promise<Response> => {
       check_out: body.check_out,
       nights: body.nights,
       status: "pending",
-    });
+    }).select().single();
 
     if (dbError) {
       console.error("Database error:", dbError);
       throw new Error(`Database error: ${dbError.message}`);
     }
 
-    console.log("Application saved to database");
+    console.log("Application saved to database, id:", insertedApp?.id);
+
+    // Mirror into Host Hub booking_requests inbox — best-effort, non-blocking.
+    try {
+      console.log("Mirroring rental application to Host Hub:", {
+        unit_id: body.unit_id,
+        check_in: body.check_in,
+        check_out: body.check_out,
+      });
+      const mirror = await mirrorToHostHub(body, insertedApp?.id ?? null);
+      if (!mirror.ok) {
+        console.error("Host Hub mirror (rental-app) returned error:", mirror.error);
+      } else {
+        console.log("Host Hub mirror (rental-app) succeeded");
+      }
+    } catch (mirrorErr) {
+      console.error("Host Hub mirror (rental-app) unexpected throw:", mirrorErr);
+    }
 
     // Send admin notification email
     if (RESEND_API_KEY) {

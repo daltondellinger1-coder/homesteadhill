@@ -14,7 +14,50 @@ serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+
+    // ---- Admin auth gate ----
+    // Verify the caller is a signed-in user on admin_allowlist before
+    // doing anything. This function uses the service role for DB ops,
+    // so without this check anyone with the anon key could list,
+    // approve, deny, or delete rental applications (which contain SSN,
+    // DOB, driver's license, and financial data).
+    const authHeader = req.headers.get("Authorization") ?? "";
+    if (!authHeader.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const userClient = createClient(supabaseUrl, anonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const token = authHeader.replace("Bearer ", "");
+    const { data: claimsData, error: claimsError } =
+      await userClient.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims?.sub) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const callerUserId = claimsData.claims.sub;
+
     const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+    const { data: allowRow, error: allowError } = await supabase
+      .from("admin_allowlist")
+      .select("user_id")
+      .eq("user_id", callerUserId)
+      .maybeSingle();
+    if (allowError || !allowRow) {
+      return new Response(JSON.stringify({ error: "Forbidden" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    // ---- End admin auth gate ----
 
     const body = await req.json();
     const { action } = body;

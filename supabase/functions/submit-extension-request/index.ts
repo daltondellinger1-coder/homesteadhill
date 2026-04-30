@@ -379,6 +379,7 @@ const handler = async (req: Request): Promise<Response> => {
         currentCheckOut,
         newCheckOut,
         chosenUnitId,
+        notes,
       } = body;
 
       if (
@@ -442,6 +443,7 @@ const handler = async (req: Request): Promise<Response> => {
           scenario,
           chosenUnitId,
           alternatives: availableSiblings,
+          notes,
         });
       } catch (e) {
         console.error("Host Hub mirror threw:", e);

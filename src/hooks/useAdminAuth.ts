@@ -33,7 +33,7 @@ export function useAdminAuth(): AdminAuthState {
       }
       const { data, error } = await supabase
         .from("admin_allowlist")
-        .select("email")
+        .select("user_id")
         .limit(1);
       if (!active) return;
       if (error) {

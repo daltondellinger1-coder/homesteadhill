@@ -2,35 +2,28 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 interface CalendarEvent {
-  id: string;
   unit_id: string;
   start_date: string;
   end_date: string;
-  summary: string | null;
-  source: string;
 }
 
 export function useAvailability(unitId?: string) {
   return useQuery({
     queryKey: ["availability", unitId],
     queryFn: async () => {
-      let query = supabase
-        .from("calendar_events")
-        .select("*")
-        .gte("end_date", new Date().toISOString().split("T")[0]);
-      
-      if (unitId) {
-        query = query.eq("unit_id", unitId);
-      }
-      
-      const { data, error } = await query;
-      
+      // Public site uses the sanitized SECURITY DEFINER RPCs that only
+      // return date ranges — no guest names, no source data. Direct
+      // SELECT on calendar_events is now restricted to admins.
+      const { data, error } = unitId
+        ? await supabase.rpc("get_blocked_ranges", { p_unit_id: unitId })
+        : await supabase.rpc("get_all_blocked_ranges");
+
       if (error) {
         console.error("Error fetching availability:", error);
         throw error;
       }
-      
-      return data as CalendarEvent[];
+
+      return (data ?? []) as CalendarEvent[];
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
   });

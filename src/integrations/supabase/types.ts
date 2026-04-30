@@ -325,7 +325,23 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_all_blocked_ranges: {
+        Args: never
+        Returns: {
+          end_date: string
+          start_date: string
+          unit_id: string
+        }[]
+      }
+      get_blocked_ranges: {
+        Args: { p_unit_id: string }
+        Returns: {
+          end_date: string
+          start_date: string
+          unit_id: string
+        }[]
+      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never

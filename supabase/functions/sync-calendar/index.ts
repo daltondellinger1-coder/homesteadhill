@@ -224,7 +224,8 @@ Deno.serve(async (req) => {
         }, { onConflict: 'unit_id' })
 
       if (upsertError) {
-        throw new Error(`Failed to save calendar URL: ${upsertError.message}`)
+        console.error('[CALENDAR_SAVE] upsert failed:', upsertError)
+        throw new Error('CALENDAR_SAVE_FAILED')
       }
 
       // Immediately sync the calendar
@@ -249,7 +250,8 @@ Deno.serve(async (req) => {
         })
 
       if (fetchError) {
-        throw new Error(`Failed to fetch calendars: ${fetchError.message}`)
+        console.error('[CALENDAR_FETCH] failed:', fetchError)
+        throw new Error('CALENDAR_FETCH_FAILED')
       }
 
       const results = []
@@ -327,7 +329,8 @@ async function syncUnitCalendar(supabase: any, unitId: string, icalUrl: string) 
       .insert(futureEvents)
     
     if (insertError) {
-      throw new Error(`Failed to insert events: ${insertError.message}`)
+      console.error('[EVENTS_INSERT] failed:', insertError)
+      throw new Error('EVENTS_INSERT_FAILED')
     }
   }
   

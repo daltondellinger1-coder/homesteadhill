@@ -225,6 +225,7 @@ const ExtendStay = () => {
         title="Extend Your Stay | Homestead Hill"
         description="Already staying with us? Extend your stay at Homestead Hill in Vincennes, Indiana."
         canonical={`https://homestead-hill.com/extend/${unitId}`}
+        noindex
       />
       <Header />
 

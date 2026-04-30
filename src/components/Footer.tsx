@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Home, Phone, Mail, MapPin, Star } from "lucide-react";
 import type React from "react";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 
 export function Footer() {
   const placeId = "ChIJQCcGCLq_dYgROx_iaupa8so";
   const reviewUrl = `https://search.google.com/local/writereview?placeid=${placeId}`;
+  const { isAllowed } = useAdminAuth();
 
   const handleReviewClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Keep the default href as a safety net, but prefer opening in a new tab.
@@ -147,9 +149,11 @@ export function Footer() {
             <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
               Terms of Service
             </Link>
-            <Link to="/admin" className="text-muted-foreground/50 hover:text-muted-foreground transition-colors text-xs">
-              Admin
-            </Link>
+            {isAllowed && (
+              <Link to="/admin" className="text-muted-foreground/50 hover:text-muted-foreground transition-colors text-xs">
+                Admin
+              </Link>
+            )}
           </div>
         </div>
       </div>

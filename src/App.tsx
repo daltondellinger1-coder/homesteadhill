@@ -14,6 +14,7 @@ import Location from "./pages/Location";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
+import { AdminAuthGate } from "@/components/AdminAuthGate";
 import RentalApplication from "./pages/RentalApplication";
 import ExtendStay from "./pages/ExtendStay";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -39,7 +40,14 @@ const App = () => (
           
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminAuthGate>
+                <Admin />
+              </AdminAuthGate>
+            }
+          />
           <Route path="/rental-application" element={<RentalApplication />} />
           <Route path="/extend/:unitId" element={<ExtendStay />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

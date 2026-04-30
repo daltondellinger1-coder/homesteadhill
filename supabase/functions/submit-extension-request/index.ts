@@ -7,8 +7,8 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 // Homestead Host Hub project (separate Supabase project)
 const HOST_HUB_URL = "https://fiunauckxdnaqvlircob.supabase.co";
-const HOST_HUB_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdW5hdWNreGRuYXF2bGlyY29iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MjcwMjUsImV4cCI6MjA4NjAwMzAyNX0.Ro1WWf4RPIJJZkQw0HBhK8DaAWgApZJ35Ci4Izp1J6Q";
+// Anon key is stored as a secret so it can be rotated without redeploying code.
+const HOST_HUB_ANON_KEY = Deno.env.get("HOST_HUB_ANON_KEY")!;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -161,32 +161,43 @@ async function createHostHubExtensionRequest(payload: {
   scenario: string;
   chosenUnitId: string;
   alternatives: string[];
+  notes?: string;
 }) {
-  const body = {
+  // The chosen unit (where the extension actually lands) is what we want to
+  // mirror — that's the slug & assigned unit on the Host Hub side.
+  const targetUnit = getUnit(payload.chosenUnitId) ?? payload.currentUnit;
+  const assignedUnitId = await lookupHostHubUnitId(targetUnit.id);
+
+  const composedNotes = [
+    `EXTENSION REQUEST`,
+    `Currently in: ${payload.currentUnit.name}`,
+    `Current stay: ${payload.currentCheckIn} → ${payload.currentCheckOut}`,
+    `Requested new checkout: ${payload.newCheckOut}`,
+    `Scenario: ${payload.scenario}`,
+    `Guest's choice: ${payload.chosenUnitId === payload.currentUnit.id
+      ? `Stay in ${payload.currentUnit.name}`
+      : `Switch to ${getUnit(payload.chosenUnitId)?.name ?? payload.chosenUnitId}`}`,
+    payload.alternatives.length
+      ? `Available alternatives offered: ${payload.alternatives.join(", ")}`
+      : `No alternatives available`,
+    payload.notes ? `Guest notes: ${payload.notes}` : null,
+  ].filter(Boolean).join("\n");
+
+  const body: Record<string, unknown> = {
+    source: "extension",
+    unit_slug: targetUnit.id,
     name: payload.guestName,
     email: payload.email,
     phone: payload.phone || null,
     check_in: payload.currentCheckOut, // extension starts at current checkout
     check_out: payload.newCheckOut,
-    num_guests: 1,
-    preferred_unit_type: payload.currentUnit.group,
-    source: "extension",
-    notes: [
-      `EXTENSION REQUEST`,
-      `Currently in: ${payload.currentUnit.name}`,
-      `Current stay: ${payload.currentCheckIn} → ${payload.currentCheckOut}`,
-      `Requested new checkout: ${payload.newCheckOut}`,
-      `Scenario: ${payload.scenario}`,
-      `Guest's choice: ${payload.chosenUnitId === payload.currentUnit.id
-        ? `Stay in ${payload.currentUnit.name}`
-        : `Switch to ${getUnit(payload.chosenUnitId)?.name ?? payload.chosenUnitId}`}`,
-      payload.alternatives.length
-        ? `Available alternatives offered: ${payload.alternatives.join(", ")}`
-        : `No alternatives available`,
-    ].join("\n"),
+    notes: composedNotes,
   };
+  if (assignedUnitId) {
+    body.assigned_unit_id = assignedUnitId;
+  }
 
-  console.log("Mirroring extension to Host Hub:", body);
+  console.log("Mirroring extension to Host Hub booking_requests:", body);
 
   const res = await fetch(`${HOST_HUB_URL}/rest/v1/booking_requests`, {
     method: "POST",
@@ -207,6 +218,29 @@ async function createHostHubExtensionRequest(payload: {
   const data = await res.json();
   console.log("Host Hub extension inserted:", data?.[0]?.id);
   return { ok: true, data };
+}
+
+// Look up the matching unit UUID on the Host Hub project by slug.
+// Best-effort: tries `units` first, falls back to `unit_settings` (which
+// is what the Host Hub booking flow uses). Returns null if not found.
+async function lookupHostHubUnitId(slug: string): Promise<string | null> {
+  const headers = {
+    apikey: HOST_HUB_ANON_KEY,
+    Authorization: `Bearer ${HOST_HUB_ANON_KEY}`,
+  };
+  for (const table of ["units", "unit_settings"]) {
+    try {
+      const url = `${HOST_HUB_URL}/rest/v1/${table}?select=id,unit_slug&unit_slug=eq.${encodeURIComponent(slug)}&limit=1`;
+      const res = await fetch(url, { headers });
+      if (!res.ok) continue;
+      const rows = (await res.json()) as Array<{ id?: string }>;
+      if (rows.length && rows[0].id) return rows[0].id;
+    } catch (e) {
+      console.log(`Host Hub unit lookup (${table}) failed:`, e);
+    }
+  }
+  console.log(`No Host Hub unit found for slug=${slug}`);
+  return null;
 }
 
 // ---- Email templates ----

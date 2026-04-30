@@ -11,3 +11,15 @@ verify_jwt = false
 
 [functions.submit-extension-request]
 verify_jwt = false
+
+[functions.mirror-extension-block]
+verify_jwt = false
+
+[functions.send-extension-approval-email]
+verify_jwt = false
+
+[functions.send-extension-decline-email]
+verify_jwt = false
+
+[functions.unit-ical]
+verify_jwt = false

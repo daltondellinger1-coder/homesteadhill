@@ -15,6 +15,7 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import RentalApplication from "./pages/RentalApplication";
+import ExtendStay from "./pages/ExtendStay";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/rental-application" element={<RentalApplication />} />
+          <Route path="/extend/:unitId" element={<ExtendStay />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

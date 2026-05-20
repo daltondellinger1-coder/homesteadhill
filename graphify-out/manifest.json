@@ -1,0 +1,932 @@
+{
+  "/home/dalton/projects/homesteadhill/tsconfig.json": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "bb72695c901d34a52a46196ba258371d",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/vite.config.ts": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "eea8e578ebca550761c5c0e19be01385",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/package.json": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "e7b26ad34f3c5d0206c0845ef22941c6",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/components.json": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "a547944ace00dc5d5373aaca70a40bc4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/eslint.config.js": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "31c0881fdd8500aa4d0aa963079713ae",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/tsconfig.app.json": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "8712c60b1f86eac1daa91619eb776efd",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/tailwind.config.ts": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "9a9a7b0e1b00e681b62c8a6080c8bb7f",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/postcss.config.js": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "c735540bb63936a123bc867d950c9f69",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/tsconfig.node.json": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "1417fb05378a1d1102f085e60b20db0e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/migrations/20260430144552_4296dca9-c6a3-4605-9a5e-0d3d0b7a36b2.sql": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "949b1b6a7c3a17b99ca943aad1bc6e08",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/migrations/20260430150300_af4553db-f6c7-40bb-85f8-0d6dc496958f.sql": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "c89053f070b4edb2318b9e7771993d03",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/migrations/20260110190706_6b100893-4ed3-473e-b07e-8238c32ef79e.sql": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "42de5840ef152a3d11c754650cfeddb0",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/migrations/20260430144454_24cc7c98-be2e-4864-88b1-6ddacf6c5c36.sql": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "de61d17919c9c26a6d41ad8974f35abe",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/migrations/20260110132809_f4642b0b-1103-4edb-b444-5b9d5beff08c.sql": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "8d6d18cf39e70d078091748ade4bf0ea",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/migrations/20260430145119_9cf1e2bd-395d-4776-bedf-7aa258b75d6a.sql": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "813d11754c725c37cca7da7bd567f07d",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/migrations/20260328094547_ee4fec64-1d36-4ebc-8efd-ad96d2f87051.sql": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "6fb669dd4c256995e8fee8cee4b296ee",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/sync-calendar/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "c401af560072420e6cc6b6b3aa236b38",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/mirror-extension-block/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "9f4bc9401688adfb3372e71e1eb3f7a8",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/export-calendar/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "e7647f008d20e5b4dd55b92340b1ade9",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/send-booking-email/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "eb525caaf4bfec9b2ab389803c071e18",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/send-booking-approval-email/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "b75a438645f8550cef4908b378f83cb1",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/submit-extension-request/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "1c80b1cb90d2e08a38860aa427045850",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/send-extension-approval-email/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "2ed23f0b5f28575f6514d6b7c852bc58",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/manage-rental-applications/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "c8b03438cd7c82a73bb1c39f587e3b87",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/unit-ical/index.ts": {
+    "mtime": 1779208662.6714497,
+    "ast_hash": "1957ea9d7bda0e35a3a5d65f971a1a2a",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/submit-rental-application/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "b9ae5d688ca1929776ed8e211dc72bcf",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/send-extension-decline-email/index.ts": {
+    "mtime": 1779208662.6642497,
+    "ast_hash": "bffc4ff639cd2a5dfa31dcadebdb4907",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/.codex/hooks.json": {
+    "mtime": 1779298586.5254157,
+    "ast_hash": "64f20859725922c2a625402a84444ef8",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/.claude/settings.json": {
+    "mtime": 1779298586.4718604,
+    "ast_hash": "9276b535256dc065bd7b8b84e15abd95",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/main.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "092c6937f28c1dff19a7d561f5f98360",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/vite-env.d.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "0352474ba2918efe13895edbc3780d94",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/App.tsx": {
+    "mtime": 1779208662.5346496,
+    "ast_hash": "82d5b1212dd440355ca6e94f895eea0a",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/RentalApplicationsAdmin.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "529ff0d50839a7ed23a7e41854134da5",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/SEO.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "6f55c427f3beeb535c11189e281c1928",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/PerfectFor.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "d64493264bd2d4654ec9e159118c54e4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/BookingForm.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "f5b37e8964af79e8502cc6c599c4d564",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/Footer.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "d40b719dc15fa6839f5a1a762b3bec19",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/AdminAuthGate.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "87882cd7ec5a75b4b3722d466e56291e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/Header.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "2cbb3b724a8ddb2e070a148eee158ac4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ScrollToTop.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "405d50087a578511a2050cb10d398380",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/UnitCard.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "c2039747a42946df47e32fcc1bc02aea",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/Hero.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "f1ac1dc2dd6ac5839fbbc1ee2b2cc746",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/NavLink.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "8f7c178b4776787e58e1011855ca28f6",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ImageLightbox.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "58686456fcf722bf880d70e52ca3ee6a",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/card.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "202402023747c80d975f48b906e6eb1b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/skeleton.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "c55f76f4faa1d6e888dbc51d41eaa586",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/chart.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "29cfd7470f3197deccd58b2b4f00fbae",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/alert-dialog.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "2ee6c5e5e070315114319bc060d17a52",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/toaster.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "1903846ab268620de6356ef667e3fa21",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/collapsible.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "934b00582dae08af749fb55469081de6",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/sidebar.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "9eab1256b1ffe3f1336eebfd07b319c9",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/drawer.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "05e2b536fe11649e9b4c6e73678e32a6",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/toast.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "7c08b5cb6026058514672a4ebc53847e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/alert.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "354d0206f924d48bcebbb023c3940a6b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/pagination.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "a3ced9f9b19826b467d788b1bf01746f",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/button.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "e12abd37646f4c0a5895448b5c09bb17",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/toggle-group.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "e82bf234e3877ad708ea3d1dba614def",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/checkbox.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "cb12d2f3410761f7a678add95c90ac5d",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/sheet.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "3660be09e2e40467a22fd46b354c1b50",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/progress.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "9a8b05beca19e008a562a10e489f5968",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/calendar.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "1da7a387f28cdb11722da319c0295a6c",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/sonner.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "88644703cc00886c56e0e3b7df0e21d8",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/dropdown-menu.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "f308eb98a2e21bf8bd1e30dbcb741dc0",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/menubar.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "163c3fa58a2b4ea2caa00166f4d862c7",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/tooltip.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "d7e923341b9e91d77db45ba5f2fa0cf9",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/use-toast.ts": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "4f094014a1315ca1081cbdc7f78d55cc",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/dialog.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "fc3a9626ba52435552c93ac3a74374ec",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/accordion.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "f9ebb6ee913b44e5f3e06fe1d9679784",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/command.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "e911f182b4136a63c601c3fc48b2e9c7",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/avatar.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "53921dca0903c74cd72fada89388d9f8",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/popover.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "c056d22288a642b756b77c7691ad4532",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/input-otp.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "3fb5994635434d5168bee869689fc2aa",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/navigation-menu.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "77e94b0c299d10c3763d2755bf556916",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/slider.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "e3bf7b6116ddbdbe8c7b3597d07daee0",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/tabs.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "26b15e1ffce0f831be4da95b8f8a43df",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/hover-card.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "f77f80ed64ff8f3549e5d7e9d837e08e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/textarea.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "29ab470ee59e9da5070d4fba251bce81",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/resizable.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "ec681e92cbe705b5571ded11b5227a2a",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/separator.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "ed1101f185e9dc801712593e3330a75d",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/switch.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "eccd8c41c46e782eaaa1f8be0111e089",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/toggle.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "ff7a7deebff23c3488e79ad72ee47e4b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/scroll-area.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "cfbc224001af0e6daba676de225a2a47",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/table.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "d0ff87c4734c23839337811378ad07df",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/breadcrumb.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "c200fc41e9b214ebb6ccd19a300c42c5",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/aspect-ratio.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "c5c364545e1b25a94e9e752cd67ad048",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/context-menu.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "9b8e8efdf0456cd542e32d341b071cac",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/carousel.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "63a7442a3088b58113c8a8cfc1defe26",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/radio-group.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "3773798b5b2f334a5db0dc9c8d06f1b8",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/badge.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "8db4e6d330f88f4041f81e7cde43782b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/select.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "25de64d0126624cbd8efa50cfb64bd21",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/form.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "4bb820d59aad3ee5bc78097596298ace",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/label.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "cd2b2255bbe519cb0865dfeaa6615797",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/components/ui/input.tsx": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "b8279d768c2a1ce78a05a369a0502877",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/integrations/supabase/types.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "8cd67ac2046839ce16ce9bf758a21f97",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/integrations/supabase/client.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "f699d6047d16b2838b95d1a496861f53",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/ExtendStay.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "b82d403394eb09188d37ae72f165983a",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/FAQ.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "76e3e3256d65a3c66beb93c568fe4c7b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/Contact.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "57a1852d1a325ccb19dd9f3a832468a9",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/Units.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "d28e2719c9f9113c8c02ed4645ad412b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/NotFound.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "233617e24ded7876ea905f003f0f2889",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/PrivacyPolicy.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "8b78bd645a7fed7f12cd6cd21a0a8a7e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/Admin.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "b164084ef8ba7dcdef15319b2aabcee8",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/RentalApplication.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "ae63e2a68543033190895f0fed1490b4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/UnitDetail.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "1f0e42e9e0b6a22d0b8e4ffbdd59d0b2",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/Amenities.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "51426813fbcc80e0966b473c3d904a16",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/Gallery.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "ff170408fb0dd13e5bd44a22ed07a702",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/Index.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "3b82aedc986a2c85d2261e244378ceac",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/TermsOfService.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "ea98757f3da5c0b218c37940090a6f38",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/Location.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "caee2307a5537fc77ccbcad83bd67d70",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/data/unitImages.ts": {
+    "mtime": 1779208662.6570497,
+    "ast_hash": "64db9677c83ba5ea55d67196f12dfaae",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/data/units.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "17668322567a2319ab4b4f0bd8a34aed",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/hooks/useAvailability.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "03f0f13cae67f15b6efd4fd41dd0990f",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/hooks/useAdminAuth.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "a1d9dc4b3c49b02d8e6bfa6e5ff7c61f",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/hooks/use-toast.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "e706bc004c87e17db559a113637eddea",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/hooks/use-mobile.tsx": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "c0a0bdd4638c391a1dd06ac82074e60b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/lib/utils.ts": {
+    "mtime": 1779208662.6606495,
+    "ast_hash": "d9837f38cc05303254571985e3164050",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/AGENTS.md": {
+    "mtime": 1779298586.5254157,
+    "ast_hash": "a993bd9a8466b705f520b2a269a544bc",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/CLAUDE.md": {
+    "mtime": 1779298586.4718604,
+    "ast_hash": "da79aa9343cd2b362206f03762160abc",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/README.md": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "f4883400a888785b401ba15288cda0f7",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/index.html": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "3b055ab33ebb2e66ed2cdf3d84bed844",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/.lovable/plan.md": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "4c1d356b52e1148041e8802eac46bd41",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/public/robots.txt": {
+    "mtime": 1779208662.5346496,
+    "ast_hash": "a883bb8830d0bfcbc29e003e2cd598c4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-6/bedroom-1.jpg": {
+    "mtime": 1779208662.6498497,
+    "ast_hash": "b56a6118b27465213dc779652418d14d",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-6/kitchen-dining.jpg": {
+    "mtime": 1779208662.6498497,
+    "ast_hash": "01f1447153b9fd5ddcd6b2758372e0be",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-6/bedroom-2.jpg": {
+    "mtime": 1779208662.6498497,
+    "ast_hash": "d5764a10694e6012d02f9f5bb7ea170d",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-6/kitchen.jpg": {
+    "mtime": 1779208662.6534495,
+    "ast_hash": "c920b6a3a8f8d8caaa1295a3c9dd7f80",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-6/living-room.jpg": {
+    "mtime": 1779208662.6534495,
+    "ast_hash": "9618e4ec3401c01944a20fc7759c10fa",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-6/bathroom.jpg": {
+    "mtime": 1779208662.6462495,
+    "ast_hash": "ad392d0296c84f3f649c6c6d887c5221",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/kitchen-2.jpg": {
+    "mtime": 1779208662.5454497,
+    "ast_hash": "615217ae4023b4aa0e0e42c1bcf9b06a",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/bedroom-1.jpg": {
+    "mtime": 1779208662.5382497,
+    "ast_hash": "04f60e79178f1fc21d6325cf6ac0c3a4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/kitchen-1.jpg": {
+    "mtime": 1779208662.5418496,
+    "ast_hash": "005056920b4544a94afe6129aeb8b931",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/bedroom-2.jpg": {
+    "mtime": 1779208662.5382497,
+    "ast_hash": "9e8f028bece2acf54bf47842f1eef845",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/dining.jpg": {
+    "mtime": 1779208662.5418496,
+    "ast_hash": "da7103e65e3957904432857b05e1aef5",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/entry.jpg": {
+    "mtime": 1779208662.5418496,
+    "ast_hash": "7d2ffecf64a8bfa6e4519e1763227cc4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/living-room.jpg": {
+    "mtime": 1779208662.5454497,
+    "ast_hash": "838dd087d2b84439b417be3517246bfd",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/bathroom.jpg": {
+    "mtime": 1779208662.5382497,
+    "ast_hash": "2557223d191a325de75dd2ed8b5b2d69",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/tv-corner.jpg": {
+    "mtime": 1779208662.6030498,
+    "ast_hash": "d69d4a8d9e88b93d7b7db1e6e55a83bf",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/bedroom-1.jpg": {
+    "mtime": 1779208662.5850496,
+    "ast_hash": "7a78d97fec68b8dae64385aae47b94d4",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/kitchen-dining.jpg": {
+    "mtime": 1779208662.5886497,
+    "ast_hash": "58168abe8aca53744051d6a2d6235340",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/bedroom-2.jpg": {
+    "mtime": 1779208662.5886497,
+    "ast_hash": "760bf9df0f397b8480beadfc37b47b42",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/bedroom-3.jpg": {
+    "mtime": 1779208662.5886497,
+    "ast_hash": "071c513a674f86e0166d713dc6ffca31",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/living-room-2.jpg": {
+    "mtime": 1779208662.5994496,
+    "ast_hash": "e02d58116759742b9568b0fa8919bbda",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/kitchen.jpg": {
+    "mtime": 1779208662.5922496,
+    "ast_hash": "c0118beb861d639519f425f749fc183b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/living-room-1.jpg": {
+    "mtime": 1779208662.5994496,
+    "ast_hash": "d757dbbbd3080db7a3810a81ec1dca01",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-2/bathroom.jpg": {
+    "mtime": 1779208662.5850496,
+    "ast_hash": "fa3b3373a91ca6a90092f97d1e7628d9",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-3/bedroom-1.jpg": {
+    "mtime": 1779208662.6066496,
+    "ast_hash": "54dd750dfaf074c8ad425637bff7dced",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-3/kitchen-dining.jpg": {
+    "mtime": 1779208662.6102498,
+    "ast_hash": "0890fdc3e4f72e99bdfe5330a2c8e80c",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-3/bedroom-2.jpg": {
+    "mtime": 1779208662.6102498,
+    "ast_hash": "3298eb859e66f534a8ab3b1b59f0a12b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-3/shower.jpg": {
+    "mtime": 1779208662.6174498,
+    "ast_hash": "7b84f2788f1ee4164d11ce3dc3beb619",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-3/kitchen.jpg": {
+    "mtime": 1779208662.6138496,
+    "ast_hash": "2257d9947070c5accb8d7216f701d163",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-3/living-room.jpg": {
+    "mtime": 1779208662.6138496,
+    "ast_hash": "aa7baeba21695474c47167147f5c0712",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-3/bathroom.jpg": {
+    "mtime": 1779208662.6066496,
+    "ast_hash": "c426581d9e6d415248bf15188501473e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-5/bedroom-1.jpg": {
+    "mtime": 1779208662.6354496,
+    "ast_hash": "9cb9d1d8c0d1de83f1eb3e92fae1a35b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-5/bedroom-2.jpg": {
+    "mtime": 1779208662.6390495,
+    "ast_hash": "8f0f7be0733c07cb9b3e47af3d8384f0",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-5/kitchen.jpg": {
+    "mtime": 1779208662.6426497,
+    "ast_hash": "0c11cc9d8932705b36a8dd978c69f301",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-5/kitchen-living.jpg": {
+    "mtime": 1779208662.6390495,
+    "ast_hash": "79bf84a262614aa6f5b16466d4571988",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-5/living-room.jpg": {
+    "mtime": 1779208662.6426497,
+    "ast_hash": "90eea55e4bdef1cb75ff11a061b22b60",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-5/bathroom.jpg": {
+    "mtime": 1779208662.6354496,
+    "ast_hash": "1f53d63947a335f00d0b3d36da443906",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/kitchen-2.jpg": {
+    "mtime": 1779208662.6246495,
+    "ast_hash": "bdbafe0f947d5b5fc0ab86e96953aeaf",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/bedroom-1.jpg": {
+    "mtime": 1779208662.6210496,
+    "ast_hash": "e9410c5dc96e7fb75ab278555fcde4fd",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/bedroom-2.jpg": {
+    "mtime": 1779208662.6210496,
+    "ast_hash": "7b822742badb1a710817ef61153cad75",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/dining.jpg": {
+    "mtime": 1779208662.6210496,
+    "ast_hash": "d0be3880eaffcbcee078b71b868099c7",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/entry.jpg": {
+    "mtime": 1779208662.6246495,
+    "ast_hash": "53aa8071320acaeec2d2d746adb665ec",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/kitchen.jpg": {
+    "mtime": 1779208662.6282496,
+    "ast_hash": "f8c3b7d92c0363bcd1099390fcd012de",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/living-room.jpg": {
+    "mtime": 1779208662.6282496,
+    "ast_hash": "8e811a34812f31ade3123e73ea2e8ec9",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-4/bathroom.jpg": {
+    "mtime": 1779208662.6174498,
+    "ast_hash": "c656f4598ce61cdbe20c6d15607794d3",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/exterior.jpg": {
+    "mtime": 1779208662.5706496,
+    "ast_hash": "25d4b50ec21417b167c0df8f09c7fbaa",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/dining.jpg": {
+    "mtime": 1779208662.5670497,
+    "ast_hash": "26be8934761297fb62a058172c982616",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/bedroom.jpg": {
+    "mtime": 1779208662.5670497,
+    "ast_hash": "9f52ca1112ea18786e7a24ffa48af166",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/shower.jpg": {
+    "mtime": 1779208662.5814497,
+    "ast_hash": "c922284d575edddd9117efe95b57ac2b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/living-room-2.jpg": {
+    "mtime": 1779208662.5778496,
+    "ast_hash": "59a989629574c39b7fd8338a7595a90d",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/kitchen.jpg": {
+    "mtime": 1779208662.5742497,
+    "ast_hash": "f69741bbeaf26545dc56a0d7748b25b8",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/living-room-1.jpg": {
+    "mtime": 1779208662.5778496,
+    "ast_hash": "e55c0cc3c9b7b7dea8d4e56fccd8ba4a",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/office.jpg": {
+    "mtime": 1779208662.5814497,
+    "ast_hash": "95286977f1a5fc09211719aa089fb48f",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/bathroom.jpg": {
+    "mtime": 1779208662.5634496,
+    "ast_hash": "26c2595c0530a3a4f118297a29b33e4e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-13/hallway.jpg": {
+    "mtime": 1779208662.5706496,
+    "ast_hash": "0f2616269ee7b7e8dc278d51e9241194",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-11/exterior.jpg": {
+    "mtime": 1779208662.5526497,
+    "ast_hash": "748a983bc3a1066eb336107c02db1e8c",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-11/bedroom.jpg": {
+    "mtime": 1779208662.5490496,
+    "ast_hash": "7f476c275ebc4c1008e00397c875d4b0",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-11/kitchen.jpg": {
+    "mtime": 1779208662.5562496,
+    "ast_hash": "4955f612a1c7945d30c8a90853bb667c",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-11/office.jpg": {
+    "mtime": 1779208662.5634496,
+    "ast_hash": "d68e74e7961af0fa566dd315e0ee1845",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-11/living-room.jpg": {
+    "mtime": 1779208662.5562496,
+    "ast_hash": "620653c8b065ee909e7e0a600d3b3691",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-11/bathroom.jpg": {
+    "mtime": 1779208662.5490496,
+    "ast_hash": "30d2b652e2cdae4169c51d0f7cb14441",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/public/favicon.svg": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "247e64af87dff26ad41166772a8ffa61",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/public/favicon.png": {
+    "mtime": 1779208662.5310497,
+    "ast_hash": "5b8129b344368008bf02ebfd94fd0afe",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/public/placeholder.svg": {
+    "mtime": 1779208662.5346496,
+    "ast_hash": "35707bd9960ba5281c72af927b79291f",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/public/og-image.jpg": {
+    "mtime": 1779208662.5346496,
+    "ast_hash": "9737321af5d05ee52934614c62c94bac",
+    "semantic_hash": ""
+  }
+}

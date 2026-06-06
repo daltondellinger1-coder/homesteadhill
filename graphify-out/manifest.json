@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/App.tsx": {
-    "mtime": 1779208662.5346496,
-    "ast_hash": "82d5b1212dd440355ca6e94f895eea0a",
+    "mtime": 1780761712.1918383,
+    "ast_hash": "f29e032dc9478e74a702456644ead4b4",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/components/RentalApplicationsAdmin.tsx": {
@@ -482,6 +482,11 @@
   "/home/dalton/projects/homesteadhill/src/pages/FAQ.tsx": {
     "mtime": 1779208662.6606495,
     "ast_hash": "76e3e3256d65a3c66beb93c568fe4c7b",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/pages/ContractorOfficeLaundry.tsx": {
+    "mtime": 1780761925.4743717,
+    "ast_hash": "79354cb63210438656c3dc4e715923b7",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/pages/Contact.tsx": {

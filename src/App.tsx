@@ -51,6 +51,7 @@ const App = () => (
           />
           <Route path="/rental-application" element={<RentalApplication />} />
           <Route path="/extend/:unitId" element={<ExtendStay />} />
+          <Route path="/contractors/office-laundry" element={<ContractorOfficeLaundry />} />
           <Route path="/contractor/office-laundry-bid-a7k29" element={<ContractorOfficeLaundry />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />

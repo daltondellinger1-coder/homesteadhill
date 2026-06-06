@@ -17,6 +17,7 @@ import Admin from "./pages/Admin";
 import { AdminAuthGate } from "@/components/AdminAuthGate";
 import RentalApplication from "./pages/RentalApplication";
 import ExtendStay from "./pages/ExtendStay";
+import ContractorOfficeLaundry from "./pages/ContractorOfficeLaundry";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
@@ -50,6 +51,7 @@ const App = () => (
           />
           <Route path="/rental-application" element={<RentalApplication />} />
           <Route path="/extend/:unitId" element={<ExtendStay />} />
+          <Route path="/contractor/office-laundry-bid-a7k29" element={<ContractorOfficeLaundry />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

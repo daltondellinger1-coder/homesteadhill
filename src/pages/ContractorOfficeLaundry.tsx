@@ -112,7 +112,7 @@ const scopeSections = [
         </ProductLink>
         .
       </>,
-      "Patch, prep, and paint disturbed half-bath surfaces. Owner provides paint.",
+      "Patch, prep, and paint half-bath walls and trim so the old cream/off-white trim is covered. Owner provides paint.",
     ],
   },
   {
@@ -127,7 +127,7 @@ const scopeSections = [
     number: "36",
     title: "Painting / Finish / Patch",
     items: [
-      "Patch and prep surfaces disturbed by door work, bath rough-in, laundry plumbing, exhaust/dryer venting, mini-split install, lighting/mirror coordination, and penetrations.",
+      "Patch, prep, and paint walls and all affected/existing trim in the Office Laundry / back-room scope so the old cream/off-white trim is covered. Owner provides paint.",
       "Paint disturbed areas as assigned. Owner provides paint.",
       "Include normal finish consumables tied to contractor work.",
     ],
@@ -163,7 +163,7 @@ const ownerProvided = [
   "Speed Queen washer and dryer equipment",
   "Half-bath toilet, pedestal sink, faucet, mirror, vanity light, and exhaust fan",
   "Mini-split equipment if approved in final scope",
-  "Paint for assigned disturbed-area touch-up",
+  "Paint for assigned wall and trim painting / touch-up",
   "Tankless water heater equipment already purchased",
 ];
 

@@ -5,7 +5,7 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/vite.config.ts": {
-    "mtime": 1779208662.6714497,
+    "mtime": 1780764008.0751445,
     "ast_hash": "eea8e578ebca550761c5c0e19be01385",
     "semantic_hash": ""
   },
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/App.tsx": {
-    "mtime": 1780761712.1918383,
-    "ast_hash": "f29e032dc9478e74a702456644ead4b4",
+    "mtime": 1780775837.5384798,
+    "ast_hash": "785cdd2403ea0a15dc3dee0e8fab4667",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/components/RentalApplicationsAdmin.tsx": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/pages/ContractorOfficeLaundry.tsx": {
-    "mtime": 1780761925.4743717,
-    "ast_hash": "79354cb63210438656c3dc4e715923b7",
+    "mtime": 1780791448.5479734,
+    "ast_hash": "49a6cefbf148b8d2a97e2bf875bf2ce5",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/pages/Contact.tsx": {
@@ -915,13 +915,13 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/public/favicon.svg": {
-    "mtime": 1779208662.5310497,
-    "ast_hash": "247e64af87dff26ad41166772a8ffa61",
+    "mtime": 1780762106.6164114,
+    "ast_hash": "4425db988338fd2fb03ca368ab2aecd5",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/public/favicon.png": {
-    "mtime": 1779208662.5310497,
-    "ast_hash": "5b8129b344368008bf02ebfd94fd0afe",
+    "mtime": 1780762106.6164114,
+    "ast_hash": "eb003acf27001187b1df6180c8eb5214",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/public/placeholder.svg": {

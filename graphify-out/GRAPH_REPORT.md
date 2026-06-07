@@ -1,16 +1,16 @@
 # Graph Report - homesteadhill  (2026-06-06)
 
 ## Corpus Check
-- 121 files · ~1,901,332 words
+- 121 files · ~1,953,337 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 724 nodes · 1108 edges · 59 communities (54 shown, 5 thin omitted)
+- 727 nodes · 1154 edges · 57 communities (52 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f7dd9ed1`
+- Built from commit: `1eef602b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -72,10 +72,10 @@
 3. `devDependencies` - 18 edges
 4. `compilerOptions` - 18 edges
 5. `Button` - 18 edges
-6. `Footer()` - 16 edges
-7. `Header()` - 15 edges
-8. `compilerOptions` - 14 edges
-9. `SEO()` - 14 edges
+6. `SEO()` - 16 edges
+7. `Footer()` - 16 edges
+8. `Header()` - 15 edges
+9. `compilerOptions` - 14 edges
 10. `useToast()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -90,43 +90,43 @@
 - `DrawerFooter()` --calls--> `cn()`  [EXTRACTED]
   src/components/ui/drawer.tsx → src/lib/utils.ts
 
-## Communities (59 total, 5 thin omitted)
+## Communities (57 total, 5 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.09
-Nodes (33): Footer(), Header(), navLinks, Hero(), trustPoints, ImageLightbox(), ImageLightboxProps, audiences (+25 more)
+Cohesion: 0.06
+Nodes (44): Footer(), Header(), navLinks, Hero(), trustPoints, ImageLightbox(), ImageLightboxProps, audiences (+36 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
 Nodes (51): dependencies, class-variance-authority, clsx, cmdk, date-fns, embla-carousel-react, @hookform/resolvers, input-otp (+43 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.08
-Nodes (34): AdminAuthGate(), AdminAuthGateProps, BookingForm(), RentalApplication, RentalApplicationsAdmin(), statusConfig, StatusFilter, ScrollToTop() (+26 more)
+Cohesion: 0.09
+Nodes (32): AdminAuthGate(), AdminAuthGateProps, RentalApplication, RentalApplicationsAdmin(), statusConfig, StatusFilter, useToast(), AdminAuthState (+24 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.05
-Nodes (36): useIsMobile(), Separator, SheetContent, SheetContentProps, SheetDescription, SheetFooter(), SheetHeader(), SheetOverlay (+28 more)
+Nodes (37): useIsMobile(), Separator, SheetContent, SheetContentProps, SheetDescription, SheetFooter(), SheetHeader(), SheetOverlay (+29 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.07
-Nodes (28): devDependencies, autoprefixer, eslint, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, lovable-tagger (+20 more)
+Cohesion: 0.11
+Nodes (18): devDependencies, autoprefixer, eslint, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, lovable-tagger (+10 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.12
 Nodes (22): Action, ActionType, actionTypes, addToRemoveQueue(), dispatch(), genId(), listeners, memoryState (+14 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.11
-Nodes (10): NavLink, NavLinkCompatProps, Avatar, AvatarFallback, AvatarImage, Checkbox, HoverCardContent, Progress (+2 more)
+Cohesion: 0.12
+Nodes (11): HoverCardContent, Progress, ScrollArea, ScrollBar, Slider, Switch, ToggleGroup, ToggleGroupContext (+3 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.1
 Nodes (20): compilerOptions, allowImportingTsExtensions, isolatedModules, jsx, lib, module, moduleDetection, moduleResolution (+12 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.16
-Nodes (12): ButtonProps, buttonVariants, Calendar(), CalendarProps, Pagination(), PaginationContent, PaginationEllipsis(), PaginationItem (+4 more)
+Cohesion: 0.18
+Nodes (15): cn(), ButtonProps, buttonVariants, Calendar(), CalendarProps, Pagination(), PaginationContent, PaginationEllipsis() (+7 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.22
@@ -185,8 +185,8 @@ Cohesion: 0.18
 Nodes (7): ChartConfig, ChartContainer, ChartContext, ChartContextProps, ChartLegendContent, ChartTooltipContent, THEMES
 
 ### Community 23 - "Community 23"
-Cohesion: 0.18
-Nodes (10): CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables (+2 more)
+Cohesion: 0.25
+Nodes (7): NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuViewport
 
 ### Community 24 - "Community 24"
 Cohesion: 0.27
@@ -217,8 +217,8 @@ Cohesion: 0.22
 Nodes (8): AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter(), AlertDialogHeader(), AlertDialogOverlay, AlertDialogTitle
 
 ### Community 31 - "Community 31"
-Cohesion: 0.11
-Nodes (15): NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuViewport, Table (+7 more)
+Cohesion: 0.22
+Nodes (8): Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow
 
 ### Community 32 - "Community 32"
 Cohesion: 0.25
@@ -233,8 +233,8 @@ Cohesion: 0.25
 Nodes (6): DrawerContent, DrawerDescription, DrawerFooter(), DrawerHeader(), DrawerOverlay, DrawerTitle
 
 ### Community 35 - "Community 35"
-Cohesion: 0.31
-Nodes (4): Input, PopoverContent, Textarea, TextareaProps
+Cohesion: 0.17
+Nodes (10): BookingForm(), CalendarEvent, getBlockedDatesForUnit(), isDateBlocked(), useAvailability(), ExtendStay(), Input, PopoverContent (+2 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.25
@@ -245,8 +245,8 @@ Cohesion: 0.29
 Nodes (6): corsHeaders, query, RESEND_API_KEY, supabase, token, userClient
 
 ### Community 38 - "Community 38"
-Cohesion: 0.33
-Nodes (5): ToggleGroup, ToggleGroupContext, ToggleGroupItem, Toggle, toggleVariants
+Cohesion: 0.18
+Nodes (10): name, private, scripts, build, build:dev, dev, lint, preview (+2 more)
 
 ### Community 39 - "Community 39"
 Cohesion: 0.33
@@ -257,12 +257,12 @@ Cohesion: 0.4
 Nodes (4): Alert, AlertDescription, AlertTitle, alertVariants
 
 ### Community 41 - "Community 41"
-Cohesion: 0.22
-Nodes (5): contractorSupplied, exclusions, ownerProvided, pricingNotes, scopeSections
+Cohesion: 0.44
+Nodes (8): ContractorOfficeLaundry(), contractorSupplied, exclusions, InfoCard(), ownerProvided, pricingNotes, ProductLink(), scopeSections
 
 ### Community 42 - "Community 42"
-Cohesion: 0.31
-Nodes (7): cn(), Badge(), BadgeProps, badgeVariants, ResizableHandle(), ResizablePanelGroup(), Skeleton()
+Cohesion: 0.5
+Nodes (3): Avatar, AvatarFallback, AvatarImage
 
 ### Community 54 - "Community 54"
 Cohesion: 0.4
@@ -273,24 +273,24 @@ Cohesion: 0.5
 Nodes (3): TabsContent, TabsList, TabsTrigger
 
 ## Knowledge Gaps
-- **415 isolated node(s):** `queryClient`, `pricingNotes`, `scopeSections`, `ownerProvided`, `contractorSupplied` (+410 more)
+- **409 isolated node(s):** `allowJs`, `noImplicitAny`, `noUnusedLocals`, `noUnusedParameters`, `@/*` (+404 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `Community 42` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 8`, `Community 11`, `Community 15`, `Community 19`, `Community 20`, `Community 22`, `Community 25`, `Community 26`, `Community 30`, `Community 31`, `Community 33`, `Community 34`, `Community 35`, `Community 36`, `Community 38`, `Community 40`, `Community 54`, `Community 55`, `Community 56`?**
-  _High betweenness centrality (0.257) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `Community 1` to `Community 4`?**
+- **Why does `cn()` connect `Community 8` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 11`, `Community 15`, `Community 19`, `Community 20`, `Community 22`, `Community 23`, `Community 25`, `Community 26`, `Community 30`, `Community 31`, `Community 33`, `Community 34`, `Community 35`, `Community 36`, `Community 40`, `Community 42`, `Community 54`, `Community 55`, `Community 56`?**
+  _High betweenness centrality (0.259) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `Community 1` to `Community 38`?**
   _High betweenness centrality (0.134) - this node is a cross-community bridge._
-- **Why does `clsx` connect `Community 1` to `Community 42`?**
-  _High betweenness centrality (0.125) - this node is a cross-community bridge._
-- **What connects `queryClient`, `pricingNotes`, `scopeSections` to the rest of the system?**
-  _415 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `clsx` connect `Community 1` to `Community 8`?**
+  _High betweenness centrality (0.126) - this node is a cross-community bridge._
+- **What connects `allowJs`, `noImplicitAny`, `noUnusedLocals` to the rest of the system?**
+  _409 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.09 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.04 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09 - nodes in this community are weakly interconnected._

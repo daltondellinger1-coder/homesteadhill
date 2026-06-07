@@ -128,7 +128,7 @@ const scopeSections = [
     title: "Painting / Finish / Patch",
     items: [
       "Patch, prep, and paint walls and all affected/existing trim in the Office Laundry / back-room scope so the old cream/off-white trim is covered. Owner provides paint.",
-      "Paint disturbed areas as assigned. Owner provides paint.",
+      "Paint walls/trim as assigned, including trim currently old cream/off-white. Owner provides paint.",
       "Include normal finish consumables tied to contractor work.",
     ],
   },

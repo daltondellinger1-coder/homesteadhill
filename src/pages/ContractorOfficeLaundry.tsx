@@ -41,6 +41,7 @@ const scopeSections = [
         .
       </>,
       "Field-verify opening, swing/handing, hinge prep, latch prep, bathroom clearance, and trim/jamb condition.",
+      "Keep and preserve the existing jamb and trim if possible; avoid replacing the jamb/trim unless field conditions require it.",
       "Include trimming/planing, hinge/latch fitting, fastening, minor patching, and finish prep.",
     ],
   },

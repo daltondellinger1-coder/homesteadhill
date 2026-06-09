@@ -5695,7 +5695,7 @@
       "label": "ownerProvided",
       "file_type": "code",
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
-      "source_location": "L161",
+      "source_location": "L173",
       "id": "pages_contractorofficelaundry_ownerprovided",
       "community": 41,
       "norm_label": "ownerprovided"
@@ -5704,7 +5704,7 @@
       "label": "contractorSupplied",
       "file_type": "code",
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
-      "source_location": "L170",
+      "source_location": "L183",
       "id": "pages_contractorofficelaundry_contractorsupplied",
       "community": 41,
       "norm_label": "contractorsupplied"
@@ -5713,7 +5713,7 @@
       "label": "exclusions",
       "file_type": "code",
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
-      "source_location": "L178",
+      "source_location": "L191",
       "id": "pages_contractorofficelaundry_exclusions",
       "community": 41,
       "norm_label": "exclusions"
@@ -5722,7 +5722,7 @@
       "label": "ProductLink()",
       "file_type": "code",
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
-      "source_location": "L188",
+      "source_location": "L201",
       "id": "pages_contractorofficelaundry_productlink",
       "community": 41,
       "norm_label": "productlink()"
@@ -5731,7 +5731,7 @@
       "label": "InfoCard()",
       "file_type": "code",
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
-      "source_location": "L202",
+      "source_location": "L215",
       "id": "pages_contractorofficelaundry_infocard",
       "community": 41,
       "norm_label": "infocard()"
@@ -5740,7 +5740,7 @@
       "label": "ContractorOfficeLaundry()",
       "file_type": "code",
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
-      "source_location": "L216",
+      "source_location": "L229",
       "id": "pages_contractorofficelaundry_contractorofficelaundry",
       "community": 41,
       "norm_label": "contractorofficelaundry()"
@@ -9692,9 +9692,9 @@
       "source_file": "src/main.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_main_tsx",
-      "target": "src_app_tsx",
-      "confidence_score": 1.0
+      "target": "src_app_tsx"
     },
     {
       "relation": "imports_from",
@@ -9703,9 +9703,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_components_ui_toaster_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_ui_toaster_tsx"
     },
     {
       "relation": "imports",
@@ -9714,9 +9714,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "ui_toaster_toaster",
-      "confidence_score": 1.0
+      "target": "ui_toaster_toaster"
     },
     {
       "relation": "imports_from",
@@ -9725,9 +9725,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_components_ui_sonner_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_ui_sonner_tsx"
     },
     {
       "relation": "imports",
@@ -9736,9 +9736,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "ui_sonner_toaster",
-      "confidence_score": 1.0
+      "target": "ui_sonner_toaster"
     },
     {
       "relation": "imports_from",
@@ -9747,9 +9747,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_components_ui_tooltip_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_ui_tooltip_tsx"
     },
     {
       "relation": "imports_from",
@@ -9758,9 +9758,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_components_scrolltotop_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_scrolltotop_tsx"
     },
     {
       "relation": "imports",
@@ -9769,9 +9769,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "components_scrolltotop_scrolltotop",
-      "confidence_score": 1.0
+      "target": "components_scrolltotop_scrolltotop"
     },
     {
       "relation": "imports_from",
@@ -9780,9 +9780,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_index_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_index_tsx"
     },
     {
       "relation": "imports_from",
@@ -9791,9 +9791,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_units_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_units_tsx"
     },
     {
       "relation": "imports_from",
@@ -9802,9 +9802,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_unitdetail_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_unitdetail_tsx"
     },
     {
       "relation": "imports_from",
@@ -9813,9 +9813,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_amenities_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_amenities_tsx"
     },
     {
       "relation": "imports_from",
@@ -9824,9 +9824,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_gallery_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_gallery_tsx"
     },
     {
       "relation": "imports_from",
@@ -9835,9 +9835,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_location_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_location_tsx"
     },
     {
       "relation": "imports_from",
@@ -9846,9 +9846,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_faq_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_faq_tsx"
     },
     {
       "relation": "imports_from",
@@ -9857,9 +9857,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_contact_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_contact_tsx"
     },
     {
       "relation": "imports_from",
@@ -9868,9 +9868,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_admin_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_admin_tsx"
     },
     {
       "relation": "imports_from",
@@ -9879,9 +9879,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_components_adminauthgate_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_adminauthgate_tsx"
     },
     {
       "relation": "imports",
@@ -9890,9 +9890,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "components_adminauthgate_adminauthgate",
-      "confidence_score": 1.0
+      "target": "components_adminauthgate_adminauthgate"
     },
     {
       "relation": "imports_from",
@@ -9901,9 +9901,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_rentalapplication_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_rentalapplication_tsx"
     },
     {
       "relation": "imports_from",
@@ -9912,9 +9912,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_extendstay_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_extendstay_tsx"
     },
     {
       "relation": "imports_from",
@@ -9923,9 +9923,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_contractorofficelaundry_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_contractorofficelaundry_tsx"
     },
     {
       "relation": "imports_from",
@@ -9934,9 +9934,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_privacypolicy_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_privacypolicy_tsx"
     },
     {
       "relation": "imports_from",
@@ -9945,9 +9945,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_termsofservice_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_termsofservice_tsx"
     },
     {
       "relation": "imports_from",
@@ -9956,9 +9956,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_pages_notfound_tsx",
-      "confidence_score": 1.0
+      "target": "src_pages_notfound_tsx"
     },
     {
       "relation": "contains",
@@ -9966,9 +9966,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_app_queryclient",
-      "confidence_score": 1.0
+      "target": "src_app_queryclient"
     },
     {
       "relation": "contains",
@@ -9976,9 +9976,9 @@
       "source_file": "src/App.tsx",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "src_app_app",
-      "confidence_score": 1.0
+      "target": "src_app_app"
     },
     {
       "relation": "contains",
@@ -10296,9 +10296,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "src_components_seo_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_seo_tsx"
     },
     {
       "relation": "imports_from",
@@ -10439,9 +10439,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "components_seo_seo",
-      "confidence_score": 1.0
+      "target": "components_seo_seo"
     },
     {
       "relation": "imports",
@@ -17453,9 +17453,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_pricingnotes",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_pricingnotes"
     },
     {
       "relation": "contains",
@@ -17463,9 +17463,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_scopesections",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_scopesections"
     },
     {
       "relation": "contains",
@@ -17473,9 +17473,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_ownerprovided",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_ownerprovided"
     },
     {
       "relation": "contains",
@@ -17483,9 +17483,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L170",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_contractorsupplied",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_contractorsupplied"
     },
     {
       "relation": "contains",
@@ -17493,9 +17493,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L178",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_exclusions",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_exclusions"
     },
     {
       "relation": "contains",
@@ -17503,9 +17503,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L188",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_productlink",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_productlink"
     },
     {
       "relation": "contains",
@@ -17513,9 +17513,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L202",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_infocard",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_infocard"
     },
     {
       "relation": "contains",
@@ -17523,9 +17523,9 @@
       "source_file": "src/pages/ContractorOfficeLaundry.tsx",
       "source_location": "L216",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_pages_contractorofficelaundry_tsx",
-      "target": "pages_contractorofficelaundry_contractorofficelaundry",
-      "confidence_score": 1.0
+      "target": "pages_contractorofficelaundry_contractorofficelaundry"
     },
     {
       "relation": "contains",
@@ -18616,5 +18616,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1eef602b0ab4cdb59c5d7d63c491c0f6ef219934"
+  "built_at_commit": "03c016e09a3eb148ace2aa153730cd95f47bd5d5"
 }

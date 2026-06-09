@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Units from "./pages/Units";
@@ -52,7 +52,8 @@ const App = () => (
           <Route path="/rental-application" element={<RentalApplication />} />
           <Route path="/extend/:unitId" element={<ExtendStay />} />
           <Route path="/contractors/office-laundry" element={<ContractorOfficeLaundry />} />
-          <Route path="/contractor/office-laundry-bid-a7k29" element={<ContractorOfficeLaundry />} />
+          <Route path="/contractor/office-laundry" element={<Navigate to="/contractors/office-laundry" replace />} />
+          <Route path="/contractor/office-laundry-bid-a7k29" element={<Navigate to="/contractors/office-laundry" replace />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

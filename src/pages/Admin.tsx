@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -127,6 +128,24 @@ const Admin = () => {
         <h1 className="text-3xl font-bold text-foreground mb-8">Admin Dashboard</h1>
 
         <div className="space-y-6">
+          {/* Homestead Hill P&L */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                Homestead Hill P&amp;L Dashboard
+              </CardTitle>
+              <CardDescription>
+                Review income, expenses, unit performance, repairs, and QBO transaction drilldowns.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild>
+                <Link to="/admin/pl">Open P&amp;L Dashboard</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
           {/* Rental Applications Management */}
           <RentalApplicationsAdmin />
 

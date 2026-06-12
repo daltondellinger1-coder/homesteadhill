@@ -51,17 +51,17 @@ const scopeSections = [
     items: [
       <>
         Coordinate final{" "}
-        <ProductLink href="https://www.ajmadison.com/cgi-bin/ajmadison/TV2000WN.html">
-          Speed Queen TV2000WN washer
+        <ProductLink href="https://www.rcssuperstoreappliances.com/appliances/laundry/washers/traditional-top-load-washer/speed-queen/TC5003WN">
+          Speed Queen TC5003WN washer
         </ProductLink>{" "}
         and{" "}
-        <ProductLink href="https://www.ajmadison.com/cgi-bin/ajmadison/DV2000WE.html">
-          Speed Queen DV2000WE dryer
+        <ProductLink href="https://www.rcssuperstoreappliances.com/appliances/laundry/dryers/top-load-matching-electric-dryer/speed-queen/DR5004WE">
+          Speed Queen DR5004WE electric dryer
         </ProductLink>{" "}
-        placement with plumbing, dryer vent path, clearances, and service access.
+        placement with plumbing, dryer vent path, clearances, and service access. Local supplier target: RCS Superstore Appliances in Vincennes.
       </>,
-      "Run/complete washer rough-in: hot/cold supply, washer box or shutoffs, drain/standpipe, trap/venting, supports, penetrations, sealing/fireblocking.",
-      "Install dryer vent exhaust system to exterior per code, including ducting, termination, clamps/tape, sealant, and normal venting materials.",
+      "Run/complete washer rough-in: hot/cold supply, washer box or shutoffs, drain/standpipe, trap/venting, supports, penetrations, sealing/fireblocking. Washer model is 120V/15A.",
+      "Install dryer vent exhaust system to exterior per code, including ducting, termination, clamps/tape, sealant, and normal venting materials. Dryer model is 240V/30A electric vented dryer; do not rough in or connect dryer steam water hookup.",
     ],
   },
   {

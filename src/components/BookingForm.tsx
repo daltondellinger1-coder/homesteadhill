@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarIcon, Send, CheckCircle, DollarSign } from "lucide-react";
-import { units } from "@/data/units";
+import { units, type Unit } from "@/data/units";
 import { toast } from "sonner";
 import { useAvailability, getBlockedDatesForUnit } from "@/hooks/useAvailability";
 import { format } from "date-fns";
@@ -15,10 +15,11 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 
 // Helper to calculate pricing based on stay duration
-function calculatePricing(monthlyPrice: number, nights: number, unitType: 'apartment' | 'cottage' = 'apartment') {
+function calculatePricing(unit: Unit, nights: number) {
+  const monthlyPrice = unit.monthlyPrice;
   const dailyMonthlyRate = monthlyPrice / 30; // Monthly per-night rate
-  const dailyWeeklyRate = dailyMonthlyRate * 1.25; // Weekly rate is 25% higher per night than monthly
-  const nightlyRate = 95; // Fixed nightly rate for short stays
+  const dailyWeeklyRate = (unit.weeklyPrice ?? (monthlyPrice / 4) * 1.25) / 7;
+  const nightlyRate = unit.nightlyPrice ?? 95;
   const minimumNights = 3;
   
   if (nights >= 30) {
@@ -175,7 +176,7 @@ export function BookingForm() {
     try {
       const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
       const selectedUnit = units.find(u => u.id === formData.unit);
-      const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights, selectedUnit.type) : { total: 0, rateType: "unknown" };
+      const pricing = selectedUnit ? calculatePricing(selectedUnit, nights) : { total: 0, rateType: "unknown" };
       
       const { data, error } = await supabase.functions.invoke('send-booking-email', {
         body: {
@@ -408,7 +409,7 @@ export function BookingForm() {
       {checkInDate && checkOutDate && (() => {
         const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
         const selectedUnit = units.find(u => u.id === formData.unit);
-        const pricing = selectedUnit ? calculatePricing(selectedUnit.monthlyPrice, nights, selectedUnit.type) : null;
+        const pricing = selectedUnit ? calculatePricing(selectedUnit, nights) : null;
         
         return (
           <div className="bg-primary/5 p-4 rounded-lg space-y-3">

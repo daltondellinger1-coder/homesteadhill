@@ -14,6 +14,8 @@ export function UnitCard({ unit }: UnitCardProps) {
   const primaryImage = getUnitPrimaryImage(unit.id);
   const galleryImages = getUnitGalleryImages(unit.id);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
+  const nightlyPrice = unit.nightlyPrice ?? 95;
 
   return (
     <>
@@ -73,11 +75,11 @@ export function UnitCard({ unit }: UnitCardProps) {
                 <span className="text-muted-foreground">/mo</span>
               </div>
               <div>
-                <span className="font-medium text-foreground">${Math.round(unit.monthlyPrice / 3.75).toLocaleString()}</span>
+                <span className="font-medium text-foreground">${weeklyPrice.toLocaleString()}</span>
                 <span className="text-muted-foreground">/wk</span>
               </div>
               <div>
-                <span className="font-medium text-foreground">$95</span>
+                <span className="font-medium text-foreground">${nightlyPrice.toLocaleString()}</span>
                 <span className="text-muted-foreground">/night</span>
               </div>
             </div>

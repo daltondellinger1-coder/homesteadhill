@@ -45,6 +45,8 @@ const UnitDetail = () => {
   }
 
   const unitSEO = getUnitSEO(unit);
+  const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
+  const nightlyPrice = unit.nightlyPrice ?? 95;
 
   return (
     <div className="min-h-screen bg-background">
@@ -235,13 +237,13 @@ const UnitDetail = () => {
                     </div>
                     <div className="border-l border-r border-border px-4">
                       <div className="text-xl font-semibold text-foreground">
-                        ${Math.round(unit.monthlyPrice / 3.75).toLocaleString()}
+                        ${weeklyPrice.toLocaleString()}
                       </div>
                       <div className="text-muted-foreground text-xs">per week</div>
                     </div>
                     <div>
                       <div className="text-xl font-semibold text-foreground">
-                        $95
+                        ${nightlyPrice.toLocaleString()}
                       </div>
                       <div className="text-muted-foreground text-xs">per night</div>
                     </div>

@@ -12,6 +12,8 @@ export interface Unit {
   featured?: boolean;
   priceNote?: string;
   monthlyPrice: number;
+  weeklyPrice?: number;
+  nightlyPrice?: number;
 }
 
 export const units: Unit[] = [
@@ -135,6 +137,8 @@ export const units: Unit[] = [
     amenities: ["Premium Cottage", "Private Entry", "Full Kitchen", "In-Unit Laundry", "Dedicated Workspace", "Comfortable Living Space", "Smart TV", "Wi-Fi", "A/C & Heat", "Smart Lock", "Free Parking"],
     featured: true,
     monthlyPrice: 1850,
+    weeklyPrice: 625,
+    nightlyPrice: 130,
   },
 ];
 

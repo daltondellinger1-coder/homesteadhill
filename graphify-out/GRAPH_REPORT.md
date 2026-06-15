@@ -1,16 +1,16 @@
-# Graph Report - homesteadhill  (2026-06-09)
+# Graph Report - homesteadhill  (2026-06-15)
 
 ## Corpus Check
-- 121 files · ~1,953,528 words
+- 124 files · ~1,978,232 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 727 nodes · 1154 edges · 57 communities (52 shown, 5 thin omitted)
+- 750 nodes · 1175 edges · 60 communities (56 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `03c016e0`
+- Built from commit: `e65e9162`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -65,6 +65,9 @@
 - [[_COMMUNITY_Community 54|Community 54]]
 - [[_COMMUNITY_Community 55|Community 55]]
 - [[_COMMUNITY_Community 56|Community 56]]
+- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 74 edges
@@ -90,23 +93,23 @@
 - `DrawerFooter()` --calls--> `cn()`  [EXTRACTED]
   src/components/ui/drawer.tsx → src/lib/utils.ts
 
-## Communities (57 total, 5 thin omitted)
+## Communities (60 total, 4 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.06
-Nodes (44): Footer(), Header(), navLinks, Hero(), trustPoints, ImageLightbox(), ImageLightboxProps, audiences (+36 more)
+Nodes (57): AdminAuthGate(), AdminAuthGateProps, BookingForm(), Footer(), Header(), navLinks, Hero(), trustPoints (+49 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
 Nodes (51): dependencies, class-variance-authority, clsx, cmdk, date-fns, embla-carousel-react, @hookform/resolvers, input-otp (+43 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.09
-Nodes (32): AdminAuthGate(), AdminAuthGateProps, RentalApplication, RentalApplicationsAdmin(), statusConfig, StatusFilter, useToast(), AdminAuthState (+24 more)
+Cohesion: 0.18
+Nodes (10): CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables (+2 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.05
-Nodes (37): useIsMobile(), Separator, SheetContent, SheetContentProps, SheetDescription, SheetFooter(), SheetHeader(), SheetOverlay (+29 more)
+Nodes (36): useIsMobile(), Separator, SheetContent, SheetContentProps, SheetDescription, SheetFooter(), SheetHeader(), SheetOverlay (+28 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.11
@@ -117,16 +120,16 @@ Cohesion: 0.12
 Nodes (22): Action, ActionType, actionTypes, addToRemoveQueue(), dispatch(), genId(), listeners, memoryState (+14 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.12
-Nodes (11): HoverCardContent, Progress, ScrollArea, ScrollBar, Slider, Switch, ToggleGroup, ToggleGroupContext (+3 more)
+Cohesion: 0.09
+Nodes (12): NavLink, NavLinkCompatProps, Checkbox, HoverCardContent, PopoverContent, Progress, RadioGroup, RadioGroupItem (+4 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.1
 Nodes (20): compilerOptions, allowImportingTsExtensions, isolatedModules, jsx, lib, module, moduleDetection, moduleResolution (+12 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.18
-Nodes (15): cn(), ButtonProps, buttonVariants, Calendar(), CalendarProps, Pagination(), PaginationContent, PaginationEllipsis() (+7 more)
+Cohesion: 0.16
+Nodes (16): cn(), ButtonProps, buttonVariants, Calendar(), CalendarProps, Pagination(), PaginationContent, PaginationEllipsis() (+8 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.22
@@ -233,8 +236,8 @@ Cohesion: 0.25
 Nodes (6): DrawerContent, DrawerDescription, DrawerFooter(), DrawerHeader(), DrawerOverlay, DrawerTitle
 
 ### Community 35 - "Community 35"
-Cohesion: 0.17
-Nodes (10): BookingForm(), CalendarEvent, getBlockedDatesForUnit(), isDateBlocked(), useAvailability(), ExtendStay(), Input, PopoverContent (+2 more)
+Cohesion: 0.12
+Nodes (12): corsHeaders, baselineMonthlyExpenses, dateRange, months, review, summary, expenses, income (+4 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.25
@@ -272,25 +275,41 @@ Nodes (4): InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot
 Cohesion: 0.5
 Nodes (3): TabsContent, TabsList, TabsTrigger
 
+### Community 56 - "Community 56"
+Cohesion: 0.21
+Nodes (12): ImageLightbox(), ImageLightboxProps, UnitCard(), UnitCardProps, getAllGalleryImages(), getUnitGalleryImages(), getUnitPrimaryImage(), UnitImage (+4 more)
+
+### Community 57 - "Community 57"
+Cohesion: 0.33
+Nodes (5): ToggleGroup, ToggleGroupContext, ToggleGroupItem, Toggle, toggleVariants
+
+### Community 58 - "Community 58"
+Cohesion: 0.33
+Nodes (5): code:bash (supabase secrets set HOMESTEAD_HILL_PL_LIVE_JSON_URL="https:), Current behavior, Homestead Hill P&L live-data endpoint, Live refresh hook, Security
+
+### Community 59 - "Community 59"
+Cohesion: 0.67
+Nodes (3): Badge(), BadgeProps, badgeVariants
+
 ## Knowledge Gaps
-- **409 isolated node(s):** `allowJs`, `noImplicitAny`, `noUnusedLocals`, `noUnusedParameters`, `@/*` (+404 more)
+- **423 isolated node(s):** `allowJs`, `noImplicitAny`, `noUnusedLocals`, `noUnusedParameters`, `@/*` (+418 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `Community 8` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 11`, `Community 15`, `Community 19`, `Community 20`, `Community 22`, `Community 23`, `Community 25`, `Community 26`, `Community 30`, `Community 31`, `Community 33`, `Community 34`, `Community 35`, `Community 36`, `Community 40`, `Community 42`, `Community 54`, `Community 55`, `Community 56`?**
-  _High betweenness centrality (0.259) - this node is a cross-community bridge._
+- **Why does `cn()` connect `Community 8` to `Community 0`, `Community 1`, `Community 3`, `Community 5`, `Community 6`, `Community 11`, `Community 15`, `Community 19`, `Community 20`, `Community 22`, `Community 23`, `Community 25`, `Community 26`, `Community 30`, `Community 31`, `Community 33`, `Community 34`, `Community 36`, `Community 40`, `Community 42`, `Community 54`, `Community 55`, `Community 57`, `Community 59`?**
+  _High betweenness centrality (0.243) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Community 1` to `Community 38`?**
-  _High betweenness centrality (0.134) - this node is a cross-community bridge._
-- **Why does `clsx` connect `Community 1` to `Community 8`?**
   _High betweenness centrality (0.126) - this node is a cross-community bridge._
+- **Why does `clsx` connect `Community 1` to `Community 8`?**
+  _High betweenness centrality (0.118) - this node is a cross-community bridge._
 - **What connects `allowJs`, `noImplicitAny`, `noUnusedLocals` to the rest of the system?**
-  _409 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _423 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.06 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.04 - nodes in this community are weakly interconnected._
-- **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.09 - nodes in this community are weakly interconnected._
+- **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._

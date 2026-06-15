@@ -122,6 +122,19 @@ export const units: Unit[] = [
     featured: true,
     monthlyPrice: 1650,
   },
+  {
+    id: "unit-14",
+    name: "Unit 14 - Cottage",
+    type: "cottage",
+    sleeps: 2,
+    bedrooms: 1,
+    beds: 1,
+    bedType: "Queen",
+    baths: 1,
+    description: "Freshly renovated standalone cottage with private entry, full kitchen, comfortable living space, Wi-Fi, TV, A/C & heat, smart-lock self check-in, and free parking.",
+    amenities: ["Standalone Cottage", "Private Entry", "Full Kitchen", "Comfortable Living Space", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
+    monthlyPrice: 1650,
+  },
 ];
 
 export const amenitiesData = [

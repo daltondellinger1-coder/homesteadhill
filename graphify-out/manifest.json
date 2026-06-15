@@ -84,6 +84,16 @@
     "ast_hash": "c401af560072420e6cc6b6b3aa236b38",
     "semantic_hash": ""
   },
+  "/home/dalton/projects/homesteadhill/supabase/functions/homestead-hill-pl/index.ts": {
+    "mtime": 1781300311.6517696,
+    "ast_hash": "821341c7954da99bed5beb6a44e7df25",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/homestead-hill-pl/snapshot.json": {
+    "mtime": 1781300286.9163454,
+    "ast_hash": "f60cdf94c77b2ebb4d78bd336a677a7f",
+    "semantic_hash": ""
+  },
   "/home/dalton/projects/homesteadhill/supabase/functions/mirror-extension-block/index.ts": {
     "mtime": 1779208662.6642497,
     "ast_hash": "9f4bc9401688adfb3372e71e1eb3f7a8",
@@ -155,7 +165,7 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/App.tsx": {
-    "mtime": 1781036336.18239,
+    "mtime": 1781515885.4234471,
     "ast_hash": "cec0c5d1d0d2f185b47da0a8f183e9db",
     "semantic_hash": ""
   },
@@ -485,8 +495,8 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/pages/ContractorOfficeLaundry.tsx": {
-    "mtime": 1781036342.4958134,
-    "ast_hash": "d950b924aed2f53570d6490612204d5f",
+    "mtime": 1781278486.2652812,
+    "ast_hash": "706c0b7074bc828b3d8a3350778ccc84",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/pages/Contact.tsx": {
@@ -510,7 +520,7 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/pages/Admin.tsx": {
-    "mtime": 1779208662.6606495,
+    "mtime": 1781515914.2575111,
     "ast_hash": "b164084ef8ba7dcdef15319b2aabcee8",
     "semantic_hash": ""
   },
@@ -555,8 +565,8 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/data/units.ts": {
-    "mtime": 1779208662.6606495,
-    "ast_hash": "17668322567a2319ab4b4f0bd8a34aed",
+    "mtime": 1781536827.907964,
+    "ast_hash": "b8d49bc013b99aa6b2008dcc6ceeb632",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/hooks/useAvailability.ts": {
@@ -602,6 +612,11 @@
   "/home/dalton/projects/homesteadhill/index.html": {
     "mtime": 1779208662.5310497,
     "ast_hash": "3b055ab33ebb2e66ed2cdf3d84bed844",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/supabase/functions/homestead-hill-pl/README.md": {
+    "mtime": 1781300329.93389,
+    "ast_hash": "514098ab15b1db22cab6d7a3de79170f",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/.lovable/plan.md": {

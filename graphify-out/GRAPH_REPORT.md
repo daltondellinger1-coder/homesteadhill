@@ -1,16 +1,16 @@
 # Graph Report - homesteadhill  (2026-06-15)
 
 ## Corpus Check
-- 124 files · ~1,978,232 words
+- 124 files · ~2,118,976 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 750 nodes · 1175 edges · 60 communities (56 shown, 4 thin omitted)
+- 751 nodes · 1180 edges · 59 communities (55 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e65e9162`
+- Built from commit: `9a40349a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -64,7 +64,6 @@
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 54|Community 54]]
 - [[_COMMUNITY_Community 55|Community 55]]
-- [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_Community 57|Community 57]]
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
@@ -93,11 +92,11 @@
 - `DrawerFooter()` --calls--> `cn()`  [EXTRACTED]
   src/components/ui/drawer.tsx → src/lib/utils.ts
 
-## Communities (60 total, 4 thin omitted)
+## Communities (59 total, 4 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (57): AdminAuthGate(), AdminAuthGateProps, BookingForm(), Footer(), Header(), navLinks, Hero(), trustPoints (+49 more)
+Cohesion: 0.09
+Nodes (33): AdminAuthGate(), AdminAuthGateProps, BookingForm(), RentalApplication, RentalApplicationsAdmin(), statusConfig, StatusFilter, useToast() (+25 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
@@ -120,8 +119,8 @@ Cohesion: 0.12
 Nodes (22): Action, ActionType, actionTypes, addToRemoveQueue(), dispatch(), genId(), listeners, memoryState (+14 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.09
-Nodes (12): NavLink, NavLinkCompatProps, Checkbox, HoverCardContent, PopoverContent, Progress, RadioGroup, RadioGroupItem (+4 more)
+Cohesion: 0.12
+Nodes (9): NavLink, NavLinkCompatProps, Checkbox, HoverCardContent, Progress, ScrollArea, ScrollBar, Slider (+1 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.1
@@ -140,8 +139,8 @@ Cohesion: 0.12
 Nodes (16): aliases, components, hooks, lib, ui, utils, rsc, $schema (+8 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.12
-Nodes (15): Command, CommandDialogProps, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator (+7 more)
+Cohesion: 0.09
+Nodes (33): Footer(), Header(), navLinks, Hero(), trustPoints, ImageLightbox(), ImageLightboxProps, audiences (+25 more)
 
 ### Community 12 - "Community 12"
 Cohesion: 0.12
@@ -156,8 +155,8 @@ Cohesion: 0.15
 Nodes (13): ALLOWED_ICAL_HOSTS, authHeader, CalendarEvent, corsHeaders, parseIcal(), parseIcalDate(), parseResult, RequestSchema (+5 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.14
-Nodes (12): Carousel, CarouselApi, CarouselContent, CarouselContext, CarouselContextProps, CarouselItem, CarouselNext, CarouselOptions (+4 more)
+Cohesion: 0.07
+Nodes (21): Carousel, CarouselApi, CarouselContent, CarouselContext, CarouselContextProps, CarouselItem, CarouselNext, CarouselOptions (+13 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.15
@@ -172,8 +171,8 @@ Cohesion: 0.29
 Nodes (11): BookingRequest, colors, corsHeaders, createHostHubBookingRequest(), getAdminEmailTemplate(), getEmailStyles(), getGuestEmailTemplate(), handler() (+3 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.17
-Nodes (9): FormControl, FormDescription, FormFieldContext, FormFieldContextValue, FormItem, FormItemContext, FormItemContextValue, FormLabel (+1 more)
+Cohesion: 0.12
+Nodes (15): Command, CommandDialogProps, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator (+7 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.17
@@ -260,8 +259,8 @@ Cohesion: 0.4
 Nodes (4): Alert, AlertDescription, AlertTitle, alertVariants
 
 ### Community 41 - "Community 41"
-Cohesion: 0.44
-Nodes (8): ContractorOfficeLaundry(), contractorSupplied, exclusions, InfoCard(), ownerProvided, pricingNotes, ProductLink(), scopeSections
+Cohesion: 0.16
+Nodes (14): ScrollToTop(), ContractorOfficeLaundry(), contractorSupplied, exclusions, InfoCard(), ownerProvided, pricingNotes, ProductLink() (+6 more)
 
 ### Community 42 - "Community 42"
 Cohesion: 0.5
@@ -274,10 +273,6 @@ Nodes (4): InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot
 ### Community 55 - "Community 55"
 Cohesion: 0.5
 Nodes (3): TabsContent, TabsList, TabsTrigger
-
-### Community 56 - "Community 56"
-Cohesion: 0.21
-Nodes (12): ImageLightbox(), ImageLightboxProps, UnitCard(), UnitCardProps, getAllGalleryImages(), getUnitGalleryImages(), getUnitPrimaryImage(), UnitImage (+4 more)
 
 ### Community 57 - "Community 57"
 Cohesion: 0.33
@@ -292,7 +287,7 @@ Cohesion: 0.67
 Nodes (3): Badge(), BadgeProps, badgeVariants
 
 ## Knowledge Gaps
-- **423 isolated node(s):** `allowJs`, `noImplicitAny`, `noUnusedLocals`, `noUnusedParameters`, `@/*` (+418 more)
+- **422 isolated node(s):** `allowJs`, `noImplicitAny`, `noUnusedLocals`, `noUnusedParameters`, `@/*` (+417 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -306,9 +301,9 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `clsx` connect `Community 1` to `Community 8`?**
   _High betweenness centrality (0.118) - this node is a cross-community bridge._
 - **What connects `allowJs`, `noImplicitAny`, `noUnusedLocals` to the rest of the system?**
-  _423 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _422 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.06 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.04 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**

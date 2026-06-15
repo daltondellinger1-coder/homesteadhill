@@ -74,6 +74,15 @@ import unit13Shower from "@/assets/units/unit-13/shower.jpg";
 import unit13Exterior from "@/assets/units/unit-13/exterior.jpg";
 import unit13Hallway from "@/assets/units/unit-13/hallway.jpg";
 
+// Unit 14 Images (Cottage)
+import unit14LivingRoom from "@/assets/units/unit-14/living-room.jpg";
+import unit14Bedroom from "@/assets/units/unit-14/bedroom.jpg";
+import unit14KitchenLiving from "@/assets/units/unit-14/kitchen-living.jpg";
+import unit14Bathroom from "@/assets/units/unit-14/bathroom.jpg";
+import unit14BathroomShower from "@/assets/units/unit-14/bathroom-shower.jpg";
+import unit14Laundry from "@/assets/units/unit-14/laundry.jpg";
+import unit14BedroomDetail from "@/assets/units/unit-14/bedroom-detail.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;
@@ -185,6 +194,18 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit13Bathroom, alt: "Cottage 13 - Stylish bathroom with towel storage and modern fixtures", category: "Bath" },
       { src: unit13Shower, alt: "Cottage 13 - Rainfall shower with modern black fixtures", category: "Bath" },
       { src: unit13Hallway, alt: "Cottage 13 - Hallway with floating shelves and decor", category: "Living" },
+    ],
+  },
+  "unit-14": {
+    primary: unit14LivingRoom,
+    gallery: [
+      { src: unit14LivingRoom, alt: "Unit 14 - Living room with sofa, smart TV, workspace, and mini split", category: "Living" },
+      { src: unit14KitchenLiving, alt: "Unit 14 - Open kitchen and living area with stainless appliances", category: "Kitchen" },
+      { src: unit14Bedroom, alt: "Unit 14 - Bedroom with queen bed, desk, TV, and natural light", category: "Bedroom" },
+      { src: unit14BedroomDetail, alt: "Unit 14 - Bedroom detail with mirror, soft curtains, and neutral decor", category: "Bedroom" },
+      { src: unit14Bathroom, alt: "Unit 14 - Bathroom with vanity, stocked towel shelf, and shower", category: "Bath" },
+      { src: unit14BathroomShower, alt: "Unit 14 - Bathroom shower and towel storage", category: "Bath" },
+      { src: unit14Laundry, alt: "Unit 14 - In-unit laundry area with washer, dryer, and storage", category: "Living" },
     ],
   },
 };

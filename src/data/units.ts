@@ -131,8 +131,8 @@ export const units: Unit[] = [
     beds: 1,
     bedType: "Queen",
     baths: 1,
-    description: "Freshly renovated standalone cottage with private entry, full kitchen, comfortable living space, Wi-Fi, TV, A/C & heat, smart-lock self check-in, and free parking.",
-    amenities: ["Standalone Cottage", "Private Entry", "Full Kitchen", "Comfortable Living Space", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking"],
+    description: "Freshly renovated standalone cottage with private entry, full kitchen, in-unit laundry, dedicated workspace, comfortable living space, Wi-Fi, smart TV, A/C & heat, smart-lock self check-in, and free parking.",
+    amenities: ["Standalone Cottage", "Private Entry", "Full Kitchen", "In-Unit Laundry", "Dedicated Workspace", "Comfortable Living Space", "Smart TV", "Wi-Fi", "A/C & Heat", "Smart Lock", "Free Parking"],
     monthlyPrice: 1650,
   },
 ];

@@ -560,13 +560,13 @@
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/data/unitImages.ts": {
-    "mtime": 1779208662.6570497,
-    "ast_hash": "64db9677c83ba5ea55d67196f12dfaae",
+    "mtime": 1781537189.2757483,
+    "ast_hash": "ad367bcf95643e0f79da9c1abac49400",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/data/units.ts": {
-    "mtime": 1781536827.907964,
-    "ast_hash": "b8d49bc013b99aa6b2008dcc6ceeb632",
+    "mtime": 1781537216.9468598,
+    "ast_hash": "62602ce26d9b210d9cdbbe7bcb471941",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/hooks/useAvailability.ts": {
@@ -657,6 +657,41 @@
   "/home/dalton/projects/homesteadhill/src/assets/units/unit-6/bathroom.jpg": {
     "mtime": 1779208662.6462495,
     "ast_hash": "ad392d0296c84f3f649c6c6d887c5221",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-14/bedroom-detail.jpg": {
+    "mtime": 1781537107.6304514,
+    "ast_hash": "c88c971c88c1c110b8c604684403caa7",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-14/bedroom.jpg": {
+    "mtime": 1781537106.2323737,
+    "ast_hash": "6ae9f866cb506841d47d61e6ef58466e",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-14/laundry.jpg": {
+    "mtime": 1781537107.2611153,
+    "ast_hash": "1b7a2573a1f201de9d3cae57f2ac96c6",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-14/kitchen-living.jpg": {
+    "mtime": 1781537106.522343,
+    "ast_hash": "848ae68ceac391d24fde3cc60378c662",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-14/living-room.jpg": {
+    "mtime": 1781537105.9026587,
+    "ast_hash": "68bf35b5b803d69edebb47c3e37b6cd9",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-14/bathroom.jpg": {
+    "mtime": 1781537106.8599782,
+    "ast_hash": "10082c904e42cfad8b2812b74232b2f2",
+    "semantic_hash": ""
+  },
+  "/home/dalton/projects/homesteadhill/src/assets/units/unit-14/bathroom-shower.jpg": {
+    "mtime": 1781537107.193602,
+    "ast_hash": "1e2e8b943acc2ca06c348f289866b8e7",
     "semantic_hash": ""
   },
   "/home/dalton/projects/homesteadhill/src/assets/units/unit-1/kitchen-2.jpg": {

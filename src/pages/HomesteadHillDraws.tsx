@@ -26,13 +26,10 @@ type DrawRow = {
   unit: string;
   category: string;
   scope: string;
-  budget?: number;
   actualCostToDate: number;
   paidFromDraws: number;
   paidFromOwnerCash: number;
   openCommitted: number;
-  variance?: number;
-  fundingPosition?: number;
   vendor: string;
   sourceLink?: string;
   drawNumber?: string;
@@ -174,13 +171,10 @@ const buildDashboardDataFromParsedRows = (rows: string[][]): DrawDashboardData =
       unit: getCell(row, 0),
       category: getCell(row, 1),
       scope: getCell(row, 2),
-      budget: parseNumber(getCell(row, 3)),
       actualCostToDate: parseNumber(getCell(row, 4)),
       paidFromDraws: parseNumber(getCell(row, 5)),
       paidFromOwnerCash: parseNumber(getCell(row, 6)),
       openCommitted: parseNumber(getCell(row, 7)),
-      variance: parseNumber(getCell(row, 8)),
-      fundingPosition: parseNumber(getCell(row, 9)),
       vendor: getCell(row, 10),
       sourceLink: getCell(row, 11),
       drawNumber: getCell(row, 12),
@@ -278,49 +272,6 @@ function MetricCard({
   );
 }
 
-
-function UnitRowsTable({ rows, emptyText }: { rows: DrawRow[]; emptyText: string }) {
-  if (!rows.length) return <div className="rounded-xl bg-slate-100 p-3 text-sm text-slate-500">{emptyText}</div>;
-
-  return (
-    <div className="overflow-x-auto rounded-xl border border-slate-200">
-      <table className="min-w-full divide-y divide-slate-200 text-sm">
-        <thead className="bg-slate-100 text-left text-xs uppercase tracking-wide text-slate-500">
-          <tr>
-            <th className="px-3 py-2">Category</th>
-            <th className="px-3 py-2">Line item / scope</th>
-            <th className="px-3 py-2 text-right">Budget</th>
-            <th className="px-3 py-2 text-right">Paid actual</th>
-            <th className="px-3 py-2 text-right">Known unpaid</th>
-            <th className="px-3 py-2">Vendor</th>
-            <th className="px-3 py-2">Status / source</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-slate-100 bg-white">
-          {rows.map((row) => (
-            <tr key={`${row.row}-${row.unit}-${row.scope}`}>
-              <td className="px-3 py-2 align-top font-medium text-slate-700">{row.category}</td>
-              <td className="max-w-md px-3 py-2 align-top text-slate-700">
-                <div className="font-medium text-slate-950">{row.scope}</div>
-                {row.notes && <div className="mt-1 text-xs leading-5 text-slate-500">{row.notes}</div>}
-              </td>
-              <td className="px-3 py-2 text-right align-top text-slate-700">{exactMoney(row.budget || 0)}</td>
-              <td className="px-3 py-2 text-right align-top text-slate-700">{exactMoney(row.actualCostToDate || 0)}</td>
-              <td className="px-3 py-2 text-right align-top text-slate-700">{exactMoney(row.openCommitted || 0)}</td>
-              <td className="px-3 py-2 align-top text-slate-700">{row.vendor || "—"}</td>
-              <td className="px-3 py-2 align-top text-slate-700">
-                <div>{row.status || "—"}</div>
-                <div className="mt-1 text-xs text-slate-500">{row.sourceAccount || "—"}</div>
-                {row.sourceLink && <div className="mt-1 text-xs text-blue-600">{row.sourceLink}</div>}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 const HomesteadHillDraws = () => {
   const [showAllUnits, setShowAllUnits] = useState(false);
 
@@ -335,38 +286,6 @@ const HomesteadHillDraws = () => {
   const usingFallback = !query.data;
   const s = data.summary;
   const visibleUnits = showAllUnits ? data.unitSummary : data.unitSummary.filter((unit) => unit.actual || unit.drawsApplied || unit.openCommitted || unit.fundingPosition);
-  const ledgerRows = useMemo(() => data.ledger ?? [], [data.ledger]);
-
-  const rowsByUnit = useMemo(() => {
-    return ledgerRows.reduce<Record<string, DrawRow[]>>((acc, row) => {
-      if (!acc[row.unit]) acc[row.unit] = [];
-      acc[row.unit].push(row);
-      return acc;
-    }, {});
-  }, [ledgerRows]);
-
-  const attentionUnits = useMemo(() => {
-    return data.unitSummary
-      .filter((unit) => unit.openCommitted > 0 || unit.fundingPosition < 0 || unit.variance < 0 || unit.notes)
-      .sort((a, b) => Math.abs(b.fundingPosition) + b.openCommitted - (Math.abs(a.fundingPosition) + a.openCommitted));
-  }, [data.unitSummary]);
-
-  const categoryPattern = useMemo(() => {
-    const totals = ledgerRows.reduce<Record<string, { category: string; budget: number; actual: number; open: number; rows: number }>>((acc, row) => {
-      const category = row.category || "Uncategorized";
-      if (!acc[category]) acc[category] = { category, budget: 0, actual: 0, open: 0, rows: 0 };
-      acc[category].budget += row.budget || 0;
-      acc[category].actual += row.actualCostToDate || 0;
-      acc[category].open += row.openCommitted || 0;
-      acc[category].rows += 1;
-      return acc;
-    }, {});
-
-    return Object.values(totals)
-      .filter((row) => row.budget || row.actual || row.open)
-      .sort((a, b) => b.actual + b.open - (a.actual + a.open))
-      .slice(0, 12);
-  }, [ledgerRows]);
 
   const drawTotals = useMemo(() => {
     return data.draws.reduce(
@@ -485,104 +404,29 @@ const HomesteadHillDraws = () => {
         <section className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-4 sm:p-5">
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-white">What needs attention</h2>
-              <p className="text-sm text-slate-400">The same watchlist concept from the Drive HTML: units with open commitments, negative funding, over-budget status, or notes.</p>
-            </div>
-          </div>
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {attentionUnits.map((unit) => (
-              <Card key={unit.unit} className="border-amber-300 bg-amber-50">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-amber-950">{unit.unit}</CardTitle>
-                  <CardDescription className="text-amber-800">
-                    {unit.variance < 0 ? `Projected over budget by ${exactMoney(Math.abs(unit.variance))}` : `Known upcoming / committed: ${exactMoney(unit.openCommitted)}`}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="text-xs leading-5 text-amber-900">{unit.notes || `Funding position: ${exactMoney(unit.fundingPosition)}`}</CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-4 sm:p-5">
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-xl font-bold text-white">Unit command center</h2>
-              <p className="text-sm text-slate-400">Budget rows, paid actual rows, and known committed/bid rows pulled from the same tracker rows used by the old HTML.</p>
+              <h2 className="text-xl font-bold text-white">Unit funding exposure</h2>
+              <p className="text-sm text-slate-400">Shows actuals, draw coverage, commitments, and current funding position by unit/area.</p>
             </div>
             <Button variant="outline" onClick={() => setShowAllUnits((v) => !v)} className="w-fit border-slate-700 bg-slate-950 text-slate-100 hover:bg-slate-800">
               {showAllUnits ? "Show active only" : "Show all units"}
             </Button>
           </div>
-          <div className="space-y-4">
-            {visibleUnits.map((unit) => {
-              const unitRows = rowsByUnit[unit.unit] ?? [];
-              const budgetRows = unitRows.filter((row) => (row.budget || 0) > 0);
-              const paidRows = unitRows.filter((row) => (row.actualCostToDate || 0) > 0 || (row.paidFromDraws || 0) > 0 || (row.paidFromOwnerCash || 0) > 0);
-              const committedRows = unitRows.filter((row) => (row.openCommitted || 0) > 0);
-              const badge = unit.openCommitted > 0 ? "Committed" : unit.actual > 0 ? "In progress" : "Budget room";
-
-              return (
-                <details key={unit.unit} className="rounded-2xl border border-slate-700 bg-slate-950 p-4 text-slate-100" open={unit.actual > 0 || unit.openCommitted > 0}>
-                  <summary className="cursor-pointer list-none">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h3 className="text-lg font-bold">{unit.unit}</h3>
-                          <Badge variant="outline" className="border-slate-600 text-slate-200">{badge}</Badge>
-                        </div>
-                        <p className="mt-1 text-sm text-slate-400">Funding position: {exactMoney(unit.fundingPosition)}</p>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-                        <div><div className="text-slate-500">Budget</div><div className="font-semibold">{money(unit.budget)}</div></div>
-                        <div><div className="text-slate-500">Paid actual</div><div className="font-semibold">{money(unit.actual)}</div></div>
-                        <div><div className="text-slate-500">Draws</div><div className="font-semibold text-emerald-300">{money(unit.drawsApplied)}</div></div>
-                        <div><div className="text-slate-500">Known unpaid</div><div className="font-semibold text-amber-300">{money(unit.openCommitted)}</div></div>
-                      </div>
-                    </div>
-                    {unit.notes && <p className="mt-3 text-xs leading-5 text-slate-400">{unit.notes}</p>}
-                  </summary>
-
-                  <div className="mt-4 space-y-4 rounded-2xl bg-white p-3 text-slate-950 sm:p-4">
-                    <details open>
-                      <summary className="cursor-pointer font-semibold">Budget source rows</summary>
-                      <div className="mt-3"><UnitRowsTable rows={budgetRows} emptyText="No budget rows found for this unit yet." /></div>
-                    </details>
-                    <details>
-                      <summary className="cursor-pointer font-semibold">Paid actual cost rows</summary>
-                      <div className="mt-3"><UnitRowsTable rows={paidRows} emptyText="No receipt/invoice-backed paid rows found for this unit yet." /></div>
-                    </details>
-                    <details>
-                      <summary className="cursor-pointer font-semibold">Known unpaid / committed / bid rows</summary>
-                      <div className="mt-3"><UnitRowsTable rows={committedRows} emptyText="No known unpaid/committed rows found for this unit yet." /></div>
-                    </details>
-                  </div>
-                </details>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-4 sm:p-5">
-          <h2 className="text-xl font-bold text-white">Cost pattern by category</h2>
-          <p className="text-sm text-slate-400">Top categories by paid actual + known unpaid exposure.</p>
-          <div className="mt-4 overflow-x-auto rounded-xl border border-slate-700">
-            <table className="min-w-full divide-y divide-slate-700 text-sm">
-              <thead className="bg-slate-950 text-left text-xs uppercase tracking-wide text-slate-400">
-                <tr><th className="px-3 py-2">Category</th><th className="px-3 py-2 text-right">Budget</th><th className="px-3 py-2 text-right">Paid actual</th><th className="px-3 py-2 text-right">Known unpaid</th><th className="px-3 py-2 text-right">Rows</th></tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800 bg-slate-950 text-slate-100">
-                {categoryPattern.map((row) => (
-                  <tr key={row.category}>
-                    <td className="px-3 py-2 font-medium">{row.category}</td>
-                    <td className="px-3 py-2 text-right">{exactMoney(row.budget)}</td>
-                    <td className="px-3 py-2 text-right">{exactMoney(row.actual)}</td>
-                    <td className="px-3 py-2 text-right">{exactMoney(row.open)}</td>
-                    <td className="px-3 py-2 text-right">{row.rows}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {visibleUnits.map((unit) => (
+              <Card key={unit.unit} className="border-slate-700 bg-slate-950 text-slate-100">
+                <CardHeader className="pb-3">
+                  <CardTitle>{unit.unit}</CardTitle>
+                  <CardDescription className="text-slate-400">Funding position: {exactMoney(unit.fundingPosition)}</CardDescription>
+                </CardHeader>
+                <CardContent className="grid grid-cols-2 gap-3 text-sm">
+                  <div><div className="text-slate-500">Budget</div><div className="font-semibold">{money(unit.budget)}</div></div>
+                  <div><div className="text-slate-500">Actual</div><div className="font-semibold">{money(unit.actual)}</div></div>
+                  <div><div className="text-slate-500">Draws</div><div className="font-semibold text-emerald-300">{money(unit.drawsApplied)}</div></div>
+                  <div><div className="text-slate-500">Open</div><div className="font-semibold text-amber-300">{money(unit.openCommitted)}</div></div>
+                  {unit.notes && <p className="col-span-2 mt-2 text-xs leading-5 text-slate-400">{unit.notes}</p>}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
 

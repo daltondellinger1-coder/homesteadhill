@@ -18,7 +18,6 @@ import { AdminAuthGate } from "@/components/AdminAuthGate";
 import RentalApplication from "./pages/RentalApplication";
 import ExtendStay from "./pages/ExtendStay";
 import ContractorOfficeLaundry from "./pages/ContractorOfficeLaundry";
-import HomesteadHillDraws from "./pages/HomesteadHillDraws";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
@@ -47,14 +46,6 @@ const App = () => (
             element={
               <AdminAuthGate>
                 <Admin />
-              </AdminAuthGate>
-            }
-          />
-          <Route
-            path="/admin/draws"
-            element={
-              <AdminAuthGate>
-                <HomesteadHillDraws />
               </AdminAuthGate>
             }
           />

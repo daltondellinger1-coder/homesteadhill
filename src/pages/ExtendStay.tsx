@@ -104,13 +104,32 @@ const ExtendStay = () => {
   if (!unit) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO
+          title="Extend Your Stay | Homestead Hill"
+          description="Start an extension request for your Homestead Hill stay. Select your unit to continue."
+          canonical="https://homestead-hill.com/extend-stay"
+        />
         <Header />
         <main className="pt-24 md:pt-28 pb-16 container">
-          <h1 className="font-serif text-3xl text-foreground mb-4">Unknown unit</h1>
-          <p className="text-muted-foreground">
-            The QR code you scanned doesn't match a unit we recognize. Please contact us at booking@homestead-hill.com.
+          <h1 className="font-serif text-3xl text-foreground mb-4">Extend Your Stay</h1>
+          <p className="text-muted-foreground mb-8 max-w-2xl">
+            Select the unit you are staying in to begin your extension request.
           </p>
-          <Link to="/" className="text-primary mt-4 inline-block">Return home</Link>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {units.map((u) => (
+              <Card key={u.id} className="border-border/50">
+                <CardContent className="p-5 space-y-3">
+                  <div>
+                    <h2 className="font-semibold text-lg">{u.name}</h2>
+                    <p className="text-sm text-muted-foreground">{u.type === 'cottage' ? 'Cottage' : `${u.bedrooms}-bedroom apartment`}</p>
+                  </div>
+                  <Link to={`/extend/${u.id}`} className="inline-flex">
+                    <Button>Start Request</Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </main>
         <Footer />
       </div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RentalApplicationsAdmin } from "@/components/RentalApplicationsAdmin";
-import { Webhook, Calendar, Shield, Copy, RefreshCw, CheckCircle, XCircle } from "lucide-react";
+import { Webhook, Calendar, Shield, Copy, RefreshCw, CheckCircle, XCircle, Banknote } from "lucide-react";
 
 const Admin = () => {
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -129,6 +130,24 @@ const Admin = () => {
         <div className="space-y-6">
           {/* Rental Applications Management */}
           <RentalApplicationsAdmin />
+
+          {/* Homestead Hill Draw Funding */}
+          <Card className="border-emerald-200 bg-emerald-50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-emerald-900">
+                <Banknote className="h-5 w-5" />
+                Homestead Hill Draw Funding
+              </CardTitle>
+              <CardDescription className="text-emerald-800">
+                Bookmarkable live dashboard for paid-out costs, bank draws received, holdbacks, and next draw gap.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild>
+                <Link to="/admin/draws">Open Draw Dashboard</Link>
+              </Button>
+            </CardContent>
+          </Card>
 
           {/* Security Notice */}
           <Card className="border-amber-200 bg-amber-50">

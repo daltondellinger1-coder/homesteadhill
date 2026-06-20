@@ -18,6 +18,7 @@ import { AdminAuthGate } from "@/components/AdminAuthGate";
 import RentalApplication from "./pages/RentalApplication";
 import ExtendStay from "./pages/ExtendStay";
 import ContractorOfficeLaundry from "./pages/ContractorOfficeLaundry";
+import HomesteadHillDraws from "./pages/HomesteadHillDraws";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
@@ -49,7 +50,16 @@ const App = () => (
               </AdminAuthGate>
             }
           />
+          <Route
+            path="/admin/draws"
+            element={
+              <AdminAuthGate>
+                <HomesteadHillDraws />
+              </AdminAuthGate>
+            }
+          />
           <Route path="/rental-application" element={<RentalApplication />} />
+          <Route path="/extend-stay" element={<ExtendStay />} />
           <Route path="/extend/:unitId" element={<ExtendStay />} />
           <Route path="/contractors/office-laundry" element={<ContractorOfficeLaundry />} />
           <Route path="/contractor/office-laundry" element={<Navigate to="/contractors/office-laundry" replace />} />

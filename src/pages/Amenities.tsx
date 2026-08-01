@@ -21,6 +21,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Shield: <Shield className="w-8 h-8" />,
   Camera: <Camera className="w-8 h-8" />,
   Sparkles: <Sparkles className="w-8 h-8" />,
+  WashingMachine: <WashingMachine className="w-8 h-8" />,
 };
 
 const Amenities = () => {
@@ -62,20 +63,18 @@ const Amenities = () => {
             ))}
           </div>
 
-          {/* Not Included Note */}
           <div className="bg-secondary rounded-2xl border border-border p-6 mb-12">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 bg-muted rounded-xl flex items-center justify-center flex-shrink-0">
-                <WashingMachine className="w-6 h-6 text-muted-foreground" />
+                <WashingMachine className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
-                  Laundry Facilities
+                  Free On-Site Laundry
                 </h3>
                 <p className="text-muted-foreground text-sm">
-                  Washer/dryer is not included in units, but there's a convenient 
-                  laundromat located just 5 minutes away. We're happy to provide 
-                  directions and recommendations.
+                  Complimentary on-site laundry — washers and dryers available to all 
+                  guests at no additional cost.
                 </p>
               </div>
             </div>

@@ -6,6 +6,7 @@ const trustPoints = [
   "Furnished Turnkey Units",
   "Self Check-in (Smart Locks)",
   "Free Parking",
+  "Free On-Site Laundry",
   "Dedicated Workspaces + Fast Wi-Fi",
   "Full Kitchens",
   "Flexible Short/Mid-Term Stays",

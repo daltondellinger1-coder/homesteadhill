@@ -154,6 +154,7 @@ export const amenitiesData = [
   { icon: "Shield", label: "Safety Features", description: "Smoke & CO alarms, fire extinguisher" },
   { icon: "Camera", label: "Security Cameras", description: "Exterior cameras for safety" },
   { icon: "Sparkles", label: "Cleaning Available", description: "Optional mid-stay cleaning" },
+  { icon: "WashingMachine", label: "Free On-Site Laundry", description: "Complimentary on-site laundry — washers and dryers available to all guests at no additional cost" },
 ];
 
 export const faqData = [
@@ -183,7 +184,7 @@ export const faqData = [
   },
   {
     question: "Is there laundry on-site?",
-    answer: "Laundry is being expanded on-site. Unit 14 includes in-unit laundry, and additional on-site laundry access is being added for guests.",
+    answer: "Yes! We offer complimentary on-site laundry — washers and dryers are available to all guests at no additional cost. Unit 14 also includes its own in-unit laundry.",
   },
   {
     question: "Can I book directly instead of through Airbnb?",

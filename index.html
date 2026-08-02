@@ -132,7 +132,7 @@
       "@context": "https://schema.org",
       "@type": "ItemList",
       "name": "Available Units at Homestead Hill",
-      "numberOfItems": 8,
+      "numberOfItems": 9,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -140,15 +140,16 @@
           "item": {
             "@type": "Apartment",
             "name": "Unit 1 - 1 Bedroom Apartment",
-            "description": "Cozy 1-bedroom with dedicated workspace, full kitchen, Wi-Fi, TV, A/C & heat, smart-lock entry, free parking.",
+            "description": "Cozy 1-bedroom with dedicated workspace, full kitchen (refrigerator, microwave, stove, Keurig), Wi-Fi, TV, A/C & heat, smart-lock entry, free parking.",
             "url": "https://homestead-hill.com/units/unit-1",
             "numberOfBedrooms": 1,
             "numberOfBathroomsTotal": 1,
             "occupancy": {"@type": "QuantitativeValue", "value": 2},
             "amenityFeature": [
-              {"@type": "LocationFeatureSpecification", "name": "Full Kitchen"},
-              {"@type": "LocationFeatureSpecification", "name": "Dedicated Workspace"},
-              {"@type": "LocationFeatureSpecification", "name": "Free Wi-Fi"}
+              {"@type": "LocationFeatureSpecification", "name": "Full Kitchen", "value": true},
+              {"@type": "LocationFeatureSpecification", "name": "Dedicated Workspace", "value": true},
+              {"@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": true},
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
             ]
           }
         },
@@ -157,38 +158,128 @@
           "position": 2,
           "item": {
             "@type": "Apartment",
-            "name": "Unit 3 - Guest Favorite",
-            "description": "Highly rated 1-bedroom with queen bed, stylish living area, full kitchen, Wi-Fi, and free parking.",
-            "url": "https://homestead-hill.com/units/unit-3",
+            "name": "Unit 2 - 1 Bedroom Apartment",
+            "description": "Comfortable 1-bedroom with full kitchen, Wi-Fi, TV, smart-lock self check-in, and free parking. Perfect for solo travelers or couples.",
+            "url": "https://homestead-hill.com/units/unit-2",
             "numberOfBedrooms": 1,
             "numberOfBathroomsTotal": 1,
-            "occupancy": {"@type": "QuantitativeValue", "value": 2}
+            "occupancy": {"@type": "QuantitativeValue", "value": 2},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
           }
         },
         {
           "@type": "ListItem",
           "position": 3,
           "item": {
-            "@type": "House",
-            "name": "Unit 11 - Standalone Cottage",
-            "description": "Standalone cottage with dedicated workspace, compact kitchen, modern bath, and private feel.",
-            "url": "https://homestead-hill.com/units/unit-11",
+            "@type": "Apartment",
+            "name": "Unit 3 - Guest Favorite",
+            "description": "Highly rated 1-bedroom with queen bed, stylish living area, full kitchen, Wi-Fi, and free parking.",
+            "url": "https://homestead-hill.com/units/unit-3",
             "numberOfBedrooms": 1,
             "numberOfBathroomsTotal": 1,
-            "occupancy": {"@type": "QuantitativeValue", "value": 2}
+            "occupancy": {"@type": "QuantitativeValue", "value": 2},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
           }
         },
         {
           "@type": "ListItem",
           "position": 4,
           "item": {
+            "@type": "Apartment",
+            "name": "Unit 4 - 1 Bedroom Apartment",
+            "description": "Queen bed, smart-lock entry, fast Wi-Fi, kitchen with stove/oven & microwave, dedicated workspace. Ideal for business travelers.",
+            "url": "https://homestead-hill.com/units/unit-4",
+            "numberOfBedrooms": 1,
+            "numberOfBathroomsTotal": 1,
+            "occupancy": {"@type": "QuantitativeValue", "value": 2},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "Apartment",
+            "name": "Unit 5 - 2 Bedroom Apartment",
+            "description": "Spacious 2-bedroom for professionals; large living area, full kitchen (electric stove/oven, refrigerator, cooking basics), private entrance, long-term stays welcome.",
+            "url": "https://homestead-hill.com/units/unit-5",
+            "numberOfBedrooms": 2,
+            "numberOfBathroomsTotal": 1,
+            "occupancy": {"@type": "QuantitativeValue", "value": 4},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "Apartment",
+            "name": "Unit 6 - 2 Bedroom Apartment",
+            "description": "Bright 2-bedroom with large living area, full kitchen, modern bath, free parking, and exterior security cameras for peace of mind.",
+            "url": "https://homestead-hill.com/units/unit-6",
+            "numberOfBedrooms": 2,
+            "numberOfBathroomsTotal": 1,
+            "occupancy": {"@type": "QuantitativeValue", "value": 4},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
             "@type": "House",
-            "name": "Unit 13 - Premium Cottage",
-            "description": "Premium cottage with king-size bed, stylish living area, kitchenette, modern bath. Our most luxurious standalone option.",
+            "name": "Unit 11 - Standalone Cottage",
+            "description": "Standalone cottage with dedicated workspace, compact kitchen, modern bath, and private feel. Perfect for those seeking extra privacy.",
+            "url": "https://homestead-hill.com/units/unit-11",
+            "numberOfBedrooms": 1,
+            "numberOfBathroomsTotal": 1,
+            "occupancy": {"@type": "QuantitativeValue", "value": 2},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "House",
+            "name": "Unit 13 - Cottage",
+            "description": "Standalone cottage with a comfortable queen bedroom, stylish living area, kitchenette, modern bath, Wi-Fi, TV, A/C & heat, smart-lock self check-in, and free parking.",
             "url": "https://homestead-hill.com/units/unit-13",
             "numberOfBedrooms": 1,
             "numberOfBathroomsTotal": 1,
-            "occupancy": {"@type": "QuantitativeValue", "value": 2}
+            "occupancy": {"@type": "QuantitativeValue", "value": 2},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "House",
+            "name": "Unit 14 - Premium Cottage",
+            "description": "Our most premium standalone cottage, freshly renovated with private entry, full kitchen, in-unit laundry, dedicated workspace, Wi-Fi, smart TV, A/C & heat, smart-lock self check-in, and free parking.",
+            "url": "https://homestead-hill.com/units/unit-14",
+            "numberOfBedrooms": 1,
+            "numberOfBathroomsTotal": 1,
+            "occupancy": {"@type": "QuantitativeValue", "value": 2},
+            "amenityFeature": [
+              {"@type": "LocationFeatureSpecification", "name": "In-Unit Laundry", "value": true},
+              {"@type": "LocationFeatureSpecification", "name": "Shared Complimentary On-Site Laundry", "value": true}
+            ]
           }
         }
       ]

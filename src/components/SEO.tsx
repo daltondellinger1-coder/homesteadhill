@@ -7,6 +7,7 @@ interface SEOProps {
   type?: "website" | "article" | "product";
   image?: string;
   noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
 }
 
 const BASE_URL = "https://homestead-hill.com";
@@ -21,6 +22,7 @@ export function SEO({
   type = "website",
   image = DEFAULT_IMAGE,
   noindex = false,
+  jsonLd,
 }: SEOProps) {
   useEffect(() => {
     // Update document title
@@ -65,7 +67,22 @@ export function SEO({
     }
     canonicalLink.href = canonical || `${BASE_URL}${window.location.pathname}`;
 
-  }, [title, description, canonical, type, image, noindex]);
+    // Page-specific JSON-LD
+    const SCRIPT_ID = "page-jsonld";
+    const existing = document.getElementById(SCRIPT_ID);
+    if (existing) existing.remove();
+    if (jsonLd) {
+      const script = document.createElement("script");
+      script.id = SCRIPT_ID;
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(jsonLd);
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      document.getElementById(SCRIPT_ID)?.remove();
+    };
+  }, [title, description, canonical, type, image, noindex, jsonLd]);
 
   return null;
 }

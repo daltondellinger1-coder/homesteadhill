@@ -44,7 +44,7 @@ const UnitDetail = () => {
     );
   }
 
-  const unitSEO = getUnitSEO(unit);
+  const unitSEO = getUnitSEO(unit, primaryImage ?? galleryImages[0]?.src);
   const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
   const nightlyPrice = unit.nightlyPrice ?? 95;
 

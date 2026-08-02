@@ -119,10 +119,64 @@ export const pageSEO = {
   },
 };
 
-// Generate unit-specific SEO
-export function getUnitSEO(unit: { name: string; type: string; bedrooms: number; description: string }) {
-  return {
-    title: `${unit.name} - ${unit.bedrooms} Bed ${unit.type === 'cottage' ? 'Cottage' : 'Apartment'} | Homestead Hill`,
-    description: `${unit.description} Book direct for the best rates on this furnished ${unit.type} in Vincennes, IN.`,
+// Generate unit-specific SEO (title, description, canonical, JSON-LD)
+interface UnitSEOInput {
+  id: string;
+  name: string;
+  type: string;
+  bedrooms: number;
+  baths: number;
+  sleeps: number;
+  bedType: string;
+  description: string;
+  amenities: string[];
+  monthlyPrice: number;
+}
+
+function clamp(text: string, max = 155) {
+  if (text.length <= max) return text;
+  return `${text.slice(0, max - 1).replace(/[\s,.;—-]+$/, "")}…`;
+}
+
+export function getUnitSEO(unit: UnitSEOInput, image?: string) {
+  const kind = unit.type === "cottage" ? "Cottage" : "Apartment";
+  const title = `${unit.name} — ${unit.bedrooms} Bed Furnished ${kind}, Vincennes IN`;
+  const description = clamp(
+    `${unit.description} Sleeps ${unit.sleeps}. Book direct from $${unit.monthlyPrice.toLocaleString()}/month.`,
+  );
+  const canonical = `${BASE_URL}/units/${unit.id}`;
+  const absoluteImage = image
+    ? image.startsWith("http")
+      ? image
+      : `${BASE_URL}${image}`
+    : DEFAULT_IMAGE;
+
+  const jsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": unit.type === "cottage" ? "House" : "Apartment",
+    "@id": `${canonical}#accommodation`,
+    name: unit.name,
+    description: unit.description,
+    url: canonical,
+    image: absoluteImage,
+    numberOfBedrooms: unit.bedrooms,
+    numberOfBathroomsTotal: unit.baths,
+    bed: { "@type": "BedDetails", typeOfBed: unit.bedType },
+    occupancy: { "@type": "QuantitativeValue", value: unit.sleeps, unitText: "guests" },
+    amenityFeature: unit.amenities.map((name) => ({
+      "@type": "LocationFeatureSpecification",
+      name,
+      value: true,
+    })),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Vincennes",
+      addressRegion: "IN",
+      postalCode: "47591",
+      addressCountry: "US",
+    },
+    containedInPlace: { "@id": `${BASE_URL}/#organization` },
   };
+
+  return { title, description, canonical, image: absoluteImage, jsonLd };
 }

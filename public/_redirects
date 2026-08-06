@@ -1,0 +1,19 @@
+# Serve static, route-specific crawlable HTML for existing sitemap URLs.
+# Keep the requested clean URL while preserving SPA navigation and non-sitemap fallback behavior.
+/units /units.html 200
+/units/unit-1 /units/unit-1.html 200
+/units/unit-2 /units/unit-2.html 200
+/units/unit-3 /units/unit-3.html 200
+/units/unit-4 /units/unit-4.html 200
+/units/unit-5 /units/unit-5.html 200
+/units/unit-6 /units/unit-6.html 200
+/units/unit-11 /units/unit-11.html 200
+/units/unit-13 /units/unit-13.html 200
+/units/unit-14 /units/unit-14.html 200
+/amenities /amenities.html 200
+/gallery /gallery.html 200
+/location /location.html 200
+/faq /faq.html 200
+/contact /contact.html 200
+/privacy-policy /privacy-policy.html 200
+/terms-of-service /terms-of-service.html 200

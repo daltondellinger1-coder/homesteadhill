@@ -11,8 +11,8 @@ interface SEOProps {
 }
 
 const BASE_URL = "https://homestead-hill.com";
-const DEFAULT_TITLE = "Homestead Hill | Furnished Apartments & Cottages in Vincennes, IN";
-const DEFAULT_DESCRIPTION = "Book direct and save! Fully furnished apartments and cottages in Vincennes, Indiana. Perfect for traveling nurses, contractors, and business travelers. Self check-in, free parking, fast Wi-Fi.";
+const DEFAULT_TITLE = "Homestead Hill | Furnished Rentals in Vincennes, IN";
+const DEFAULT_DESCRIPTION = "Furnished apartments and cottages in Vincennes, IN for traveling nurses, contractors, and business travelers. Self check-in, free parking, fast Wi-Fi.";
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.jpg`;
 
 export function SEO({
@@ -92,12 +92,12 @@ export function SEO({
 // Page-specific SEO configurations
 export const pageSEO = {
   home: {
-    title: "Homestead Hill | Furnished Apartments & Cottages in Vincennes, IN",
-    description: "Book direct and save! Fully furnished apartments and cottages in Vincennes, Indiana. Perfect for traveling nurses, contractors, and business travelers. Self check-in, free parking, fast Wi-Fi.",
+    title: "Homestead Hill | Furnished Rentals in Vincennes, IN",
+    description: "Furnished apartments and cottages in Vincennes, IN for traveling nurses, contractors, and business travelers. Self check-in, free parking, fast Wi-Fi.",
   },
   units: {
     title: "Browse All Units | Homestead Hill Furnished Rentals",
-    description: "View all available furnished apartments and cottages in Vincennes, IN. 1-2 bedroom options with full kitchens, Wi-Fi, and free parking. Monthly rates from $1,450.",
+    description: "View all furnished apartments and cottages in Vincennes, IN. 1-2 bedroom options with full kitchens, Wi-Fi, and free parking. From $1,450/month.",
   },
   amenities: {
     title: "Amenities | Homestead Hill Furnished Apartments",

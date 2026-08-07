@@ -358,7 +358,7 @@ export function BookingForm() {
                   "w-full justify-start text-left font-normal",
                   !checkInDate && "text-muted-foreground"
                 )}
-                disabled={!formData.unit}
+                disabled={!formData.unit || calendarUnavailable}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {checkInDate ? format(checkInDate, "PPP") : "Select date"}
@@ -393,7 +393,7 @@ export function BookingForm() {
                   "w-full justify-start text-left font-normal",
                   !checkOutDate && "text-muted-foreground"
                 )}
-                disabled={!checkInDate}
+                disabled={!checkInDate || calendarUnavailable}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {checkOutDate ? format(checkOutDate, "PPP") : "Select date"}
@@ -502,6 +502,15 @@ export function BookingForm() {
         );
       })()}
 
+      {calendarUnavailable && (
+        <div
+          role="status"
+          className="rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm text-foreground"
+        >
+          {CALENDAR_UNAVAILABLE_MESSAGE}
+        </div>
+      )}
+
       {/* Message */}
       <div className="space-y-2">
         <Label htmlFor="message">Additional Message</Label>
@@ -520,7 +529,7 @@ export function BookingForm() {
         type="submit" 
         size="lg" 
         className="w-full" 
-        disabled={isSubmitting || !checkInDate || !checkOutDate}
+        disabled={isSubmitting || !checkInDate || !checkOutDate || calendarUnavailable}
       >
         {isSubmitting ? (
           <>

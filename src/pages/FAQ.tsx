@@ -51,9 +51,9 @@ const FAQ = () => {
 
           {/* Still Have Questions */}
           <div className="text-center bg-secondary rounded-2xl border border-border p-8 max-w-2xl mx-auto">
-            <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">
+            <h2 className="font-serif text-2xl font-semibold text-foreground mb-4">
               Still Have Questions?
-            </h3>
+            </h2>
             <p className="text-muted-foreground mb-6">
               We're here to help! Reach out and we'll get back to you as soon as possible.
             </p>

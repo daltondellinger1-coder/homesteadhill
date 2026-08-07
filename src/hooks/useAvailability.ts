@@ -7,6 +7,27 @@ interface CalendarEvent {
   end_date: string;
 }
 
+/**
+ * Format a user-selected local Date as YYYY-MM-DD using its local calendar
+ * fields. toISOString() would convert to UTC and shift the day for negative
+ * offsets (e.g. America/New_York), blocking/unblocking the wrong night.
+ */
+function toLocalDateString(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+/**
+ * Parse a YYYY-MM-DD calendar date into a local midnight Date.
+ * new Date("2026-09-05") parses as UTC midnight and renders as Sep 4 locally.
+ */
+function parseLocalDate(dateString: string): Date {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
 export function useAvailability(unitId?: string) {
   return useQuery({
     queryKey: ["availability", unitId],
@@ -36,10 +57,11 @@ export function isDateBlocked(
 ): boolean {
   if (!events) return false;
 
-  const dateStr = date.toISOString().split("T")[0];
+  const dateStr = toLocalDateString(date);
 
   return events.some((event) => {
     if (unitId && event.unit_id !== unitId) return false;
+    // Exclusive end date: the checkout day itself stays selectable.
     return dateStr >= event.start_date && dateStr < event.end_date;
   });
 }
@@ -85,10 +107,11 @@ export function getBlockedDatesForUnit(
   const unitEvents = events.filter((e) => e.unit_id === unitId);
   
   for (const event of unitEvents) {
-    const start = new Date(event.start_date);
-    const end = new Date(event.end_date);
+    const start = parseLocalDate(event.start_date);
+    const end = parseLocalDate(event.end_date);
     
     const current = new Date(start);
+    // Exclusive end date: stop before the checkout day.
     while (current < end) {
       blockedDates.push(new Date(current));
       current.setDate(current.getDate() + 1);

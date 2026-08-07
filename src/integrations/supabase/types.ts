@@ -341,6 +341,15 @@ export type Database = {
           unit_id: string
         }[]
       }
+      get_calendar_freshness: {
+        Args: { p_unit_id: string }
+        Returns: {
+          configured: boolean
+          is_fresh: boolean
+          last_synced_at: string
+          unit_id: string
+        }[]
+      }
       is_admin: { Args: never; Returns: boolean }
     }
     Enums: {

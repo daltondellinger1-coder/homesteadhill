@@ -50,6 +50,20 @@ interface CalendarEvent {
   source: string
 }
 
+// Authoritative list of live public units. sync-all must account for every one
+// of these; a missing unit_calendars mapping is a hard failure, not a silent skip.
+const EXPECTED_UNIT_IDS = [
+  'unit-1',
+  'unit-2',
+  'unit-3',
+  'unit-4',
+  'unit-5',
+  'unit-6',
+  'unit-11',
+  'unit-13',
+  'unit-14',
+]
+
 // Validate iCal URL against allowed hosts (SSRF protection)
 function validateIcalUrl(icalUrl: string): { valid: boolean; error?: string } {
   try {
@@ -265,9 +279,27 @@ Deno.serve(async (req) => {
         }
       }
 
+      // For sync-all, every expected unit must have a configured mapping.
+      const configuredIds = new Set((calendars || []).map(c => c.unit_id))
+      const missingUnitIds =
+        action === 'sync-all'
+          ? EXPECTED_UNIT_IDS.filter(id => !configuredIds.has(id))
+          : []
+      const failed = results.filter(r => !r.success)
+      const ok = missingUnitIds.length === 0 && failed.length === 0
+
       return new Response(
-        JSON.stringify({ success: true, synced: results }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({
+          success: ok,
+          synced: results,
+          failed,
+          missing_unit_ids: missingUnitIds,
+          expected_unit_ids: action === 'sync-all' ? EXPECTED_UNIT_IDS : undefined,
+        }),
+        {
+          status: ok ? 200 : 503,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        }
       )
     }
 

@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarIcon, Send, CheckCircle, DollarSign } from "lucide-react";
 import { units, type Unit } from "@/data/units";
 import { toast } from "sonner";
-import { useAvailability, getBlockedDatesForUnit } from "@/hooks/useAvailability";
+import { useAvailability, useCalendarFreshness, getBlockedDatesForUnit } from "@/hooks/useAvailability";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -67,6 +67,9 @@ function calculatePricing(unit: Unit, nights: number) {
   }
 }
 
+const CALENDAR_UNAVAILABLE_MESSAGE =
+  "Online availability is temporarily unavailable. Call (812) 768-3108 or email booking@homestead-hill.com to confirm dates.";
+
 export function BookingForm() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -88,7 +91,29 @@ export function BookingForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Fetch availability data
-  const { data: events } = useAvailability(formData.unit || undefined);
+  const {
+    data: events,
+    isLoading: availabilityLoading,
+    isError: availabilityError,
+  } = useAvailability(formData.unit || undefined);
+
+  // Fail-closed guard: the unit's imported feed must exist and be fresh (<12h)
+  const {
+    data: freshness,
+    isLoading: freshnessLoading,
+    isError: freshnessError,
+  } = useCalendarFreshness(formData.unit || undefined);
+
+  const calendarUnavailable = Boolean(
+    formData.unit &&
+      (availabilityLoading ||
+        availabilityError ||
+        freshnessLoading ||
+        freshnessError ||
+        !freshness ||
+        !freshness.configured ||
+        !freshness.is_fresh)
+  );
 
   // Get blocked dates for the selected unit
   const blockedDates = useMemo(() => {
@@ -166,6 +191,11 @@ export function BookingForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (calendarUnavailable) {
+      toast.error(CALENDAR_UNAVAILABLE_MESSAGE);
+      return;
+    }
+
     if (!checkInDate || !checkOutDate) {
       toast.error("Please select check-in and check-out dates.");
       return;
@@ -328,7 +358,7 @@ export function BookingForm() {
                   "w-full justify-start text-left font-normal",
                   !checkInDate && "text-muted-foreground"
                 )}
-                disabled={!formData.unit}
+                disabled={!formData.unit || calendarUnavailable}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {checkInDate ? format(checkInDate, "PPP") : "Select date"}
@@ -363,7 +393,7 @@ export function BookingForm() {
                   "w-full justify-start text-left font-normal",
                   !checkOutDate && "text-muted-foreground"
                 )}
-                disabled={!checkInDate}
+                disabled={!checkInDate || calendarUnavailable}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {checkOutDate ? format(checkOutDate, "PPP") : "Select date"}
@@ -472,6 +502,15 @@ export function BookingForm() {
         );
       })()}
 
+      {calendarUnavailable && (
+        <div
+          role="status"
+          className="rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm text-foreground"
+        >
+          {CALENDAR_UNAVAILABLE_MESSAGE}
+        </div>
+      )}
+
       {/* Message */}
       <div className="space-y-2">
         <Label htmlFor="message">Additional Message</Label>
@@ -490,7 +529,7 @@ export function BookingForm() {
         type="submit" 
         size="lg" 
         className="w-full" 
-        disabled={isSubmitting || !checkInDate || !checkOutDate}
+        disabled={isSubmitting || !checkInDate || !checkOutDate || calendarUnavailable}
       >
         {isSubmitting ? (
           <>

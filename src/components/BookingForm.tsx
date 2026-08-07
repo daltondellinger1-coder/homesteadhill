@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -75,14 +75,23 @@ export function BookingForm() {
   const navigate = useNavigate();
   const preselectedUnit = searchParams.get("unit") || "";
   
+  // Keep the first client render identical to the static, query-free HTML.
+  // Apply a `?unit=` deep link after hydration to avoid SSR/client mismatch.
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    unit: preselectedUnit,
+    unit: "",
     guests: "1",
     message: "",
   });
+
+  useEffect(() => {
+    if (!preselectedUnit) return;
+    setFormData((current) =>
+      current.unit === preselectedUnit ? current : { ...current, unit: preselectedUnit }
+    );
+  }, [preselectedUnit]);
   const [checkInDate, setCheckInDate] = useState<Date | undefined>();
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>();
   const [checkInOpen, setCheckInOpen] = useState(false);

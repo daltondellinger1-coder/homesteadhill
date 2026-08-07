@@ -35,6 +35,52 @@ export function isDateBlocked(
   unitId?: string
 ): boolean {
   if (!events) return false;
+
+  const dateStr = date.toISOString().split("T")[0];
+
+  return events.some((event) => {
+    if (unitId && event.unit_id !== unitId) return false;
+    return dateStr >= event.start_date && dateStr < event.end_date;
+  });
+}
+
+export interface CalendarFreshness {
+  unit_id: string;
+  configured: boolean;
+  last_synced_at: string | null;
+  is_fresh: boolean;
+}
+
+/**
+ * Freshness of a unit's imported availability feed. Never exposes the feed URL —
+ * the SECURITY DEFINER RPC returns only booleans and a timestamp.
+ */
+export function useCalendarFreshness(unitId?: string) {
+  return useQuery({
+    queryKey: ["calendar-freshness", unitId],
+    enabled: !!unitId,
+    queryFn: async (): Promise<CalendarFreshness | null> => {
+      if (!unitId) return null;
+      const { data, error } = await supabase.rpc("get_calendar_freshness", {
+        p_unit_id: unitId,
+      });
+      if (error) {
+        console.error("Error fetching calendar freshness");
+        throw error;
+      }
+      const row = (data ?? [])[0] as CalendarFreshness | undefined;
+      return row ?? null;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+function _isDateBlockedUnused(
+  events: CalendarEvent[] | undefined,
+  date: Date,
+  unitId?: string
+): boolean {
+  if (!events) return false;
   
   const dateStr = date.toISOString().split("T")[0];
   

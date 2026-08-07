@@ -25,6 +25,8 @@ export function SEO({
   jsonLd,
 }: SEOProps) {
   useEffect(() => {
+    const resolvedCanonical = canonical || `${BASE_URL}${window.location.pathname}`;
+
     // Update document title
     document.title = title;
 
@@ -49,7 +51,7 @@ export function SEO({
     setMeta("og:title", title, true);
     setMeta("og:description", description, true);
     setMeta("og:image", image, true);
-    setMeta("og:url", canonical || window.location.href, true);
+    setMeta("og:url", resolvedCanonical, true);
     setMeta("og:site_name", "Homestead Hill", true);
 
     // Twitter
@@ -65,7 +67,7 @@ export function SEO({
       canonicalLink.rel = "canonical";
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.href = canonical || `${BASE_URL}${window.location.pathname}`;
+    canonicalLink.href = resolvedCanonical;
 
     // Page-specific JSON-LD
     const SCRIPT_ID = "page-jsonld";

@@ -53,9 +53,9 @@ const Amenities = () => {
                 <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary">
                   {iconMap[amenity.icon] || <Sparkles className="w-8 h-8" />}
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                <h2 className="font-serif text-lg font-semibold text-foreground mb-2">
                   {amenity.label}
-                </h3>
+                </h2>
                 <p className="text-muted-foreground text-sm">
                   {amenity.description}
                 </p>

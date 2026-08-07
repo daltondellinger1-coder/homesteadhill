@@ -75,21 +75,6 @@ export function useCalendarFreshness(unitId?: string) {
   });
 }
 
-function _isDateBlockedUnused(
-  events: CalendarEvent[] | undefined,
-  date: Date,
-  unitId?: string
-): boolean {
-  if (!events) return false;
-  
-  const dateStr = date.toISOString().split("T")[0];
-  
-  return events.some((event) => {
-    if (unitId && event.unit_id !== unitId) return false;
-    return dateStr >= event.start_date && dateStr < event.end_date;
-  });
-}
-
 export function getBlockedDatesForUnit(
   events: CalendarEvent[] | undefined,
   unitId: string

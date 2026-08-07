@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { createRoot, hydrateRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
@@ -13,8 +13,7 @@ const app = (
   </StrictMode>
 );
 
-if (root.hasChildNodes()) {
-  hydrateRoot(root, app);
-} else {
-  createRoot(root).render(app);
-}
+// Lovable serves index.html for every SPA route in production. Its static HTML can
+// therefore describe a different route than the browser URL; mounting fresh avoids
+// React hydrating that mismatched document.
+createRoot(root).render(app);

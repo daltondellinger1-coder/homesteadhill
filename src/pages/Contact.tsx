@@ -30,9 +30,9 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="lg:col-span-1 space-y-6">
               <div className="bg-gradient-card rounded-2xl border border-border p-6">
-                <h3 className="font-serif text-xl font-semibold text-foreground mb-6">
+                <h2 className="font-serif text-xl font-semibold text-foreground mb-6">
                   Contact Information
-                </h3>
+                </h2>
                 
                 <div className="space-y-5">
                   <div className="flex items-start gap-4">
@@ -95,9 +95,9 @@ const Contact = () => {
 
               {/* Why Book Direct */}
               <div className="bg-secondary rounded-2xl border border-border p-6">
-                <h4 className="font-serif text-lg font-semibold text-foreground mb-4">
+                <h2 className="font-serif text-lg font-semibold text-foreground mb-4">
                   Why Book Direct?
-                </h4>
+                </h2>
                 <ul className="space-y-3 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">✓</span>
@@ -126,9 +126,9 @@ const Contact = () => {
             {/* Booking Form */}
             <div className="lg:col-span-2">
               <div className="bg-gradient-card rounded-2xl border border-border p-6 md:p-8">
-                <h3 className="font-serif text-xl font-semibold text-foreground mb-6">
+                <h2 className="font-serif text-xl font-semibold text-foreground mb-6">
                   Booking Request Form
-                </h3>
+                </h2>
                 <BookingForm />
               </div>
             </div>

@@ -69,9 +69,9 @@ const Amenities = () => {
                 <WashingMachine className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
+                <h2 className="font-serif text-lg font-semibold text-foreground mb-2">
                   Free On-Site Laundry
-                </h3>
+                </h2>
                 <p className="text-muted-foreground text-sm">
                   Complimentary on-site laundry — washers and dryers available to all 
                   guests at no additional cost.
@@ -82,9 +82,9 @@ const Amenities = () => {
 
           {/* CTA */}
           <div className="text-center">
-            <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">
+            <h2 className="font-serif text-2xl font-semibold text-foreground mb-4">
               Ready to Experience Homestead Hill?
-            </h3>
+            </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               Book directly with us and enjoy all these amenities without platform fees.
             </p>

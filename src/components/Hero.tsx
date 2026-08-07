@@ -41,6 +41,9 @@ export function Hero() {
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground mb-6 animate-slide-up">
             Welcome to{" "}
             <span className="text-gradient-gold">Homestead Hill</span>
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-3 font-medium text-foreground/90">
+              — Furnished Rentals in Vincennes
+            </span>
           </h1>
 
           {/* Subheading */}

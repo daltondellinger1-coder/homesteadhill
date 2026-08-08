@@ -65,6 +65,36 @@ export type Database = {
         }
         Relationships: []
       }
+      booking_requests_ops: {
+        Row: {
+          first_response_at: string | null
+          id: string
+          notes: string | null
+          status: string
+          submitted_at: string
+          unit_id: string
+          updated_at: string
+        }
+        Insert: {
+          first_response_at?: string | null
+          id?: string
+          notes?: string | null
+          status?: string
+          submitted_at?: string
+          unit_id: string
+          updated_at?: string
+        }
+        Update: {
+          first_response_at?: string | null
+          id?: string
+          notes?: string | null
+          status?: string
+          submitted_at?: string
+          unit_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       calendar_events: {
         Row: {
           created_at: string
@@ -388,6 +418,14 @@ export type Database = {
           configured: boolean
           is_fresh: boolean
           last_synced_at: string
+          unit_id: string
+        }[]
+      }
+      get_funnel_unit_stats: {
+        Args: { p_end?: string; p_start?: string }
+        Returns: {
+          event_count: number
+          event_type: string
           unit_id: string
         }[]
       }

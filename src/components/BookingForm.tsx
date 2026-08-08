@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import { useAvailability, useCalendarFreshness, getBlockedDatesForUnit } from "@
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
+import { trackFunnelEvent } from "@/lib/analytics";
 
 // Helper to calculate pricing based on stay duration
 function calculatePricing(unit: Unit, nights: number) {
@@ -89,6 +90,17 @@ export function BookingForm() {
   const [checkOutOpen, setCheckOutOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const startedTracked = useRef(false);
+
+  // booking_request_started fires exactly once, on the guest's first
+  // meaningful interaction with the form (any field change or date pick).
+  const trackStartedOnce = () => {
+    if (startedTracked.current) return;
+    startedTracked.current = true;
+    trackFunnelEvent("booking_request_started", {
+      unitId: formData.unit || undefined,
+    });
+  };
 
   // Fetch availability data
   const {
@@ -165,18 +177,35 @@ export function BookingForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    trackStartedOnce();
     setFormData({ ...formData, [name]: value });
     
     // Reset dates when unit changes
     if (name === 'unit') {
       setCheckInDate(undefined);
       setCheckOutDate(undefined);
+      if (value) {
+        trackFunnelEvent("unit_selected", { unitId: value });
+      }
+    }
+
+    if (name === 'guests' && value) {
+      trackFunnelEvent("guest_count_selected", {
+        unitId: formData.unit || undefined,
+        metadata: { guests: parseInt(value, 10) },
+      });
     }
   };
 
   const handleCheckInSelect = (date: Date | undefined) => {
+    trackStartedOnce();
     setCheckInDate(date);
     setCheckInOpen(false);
+    if (date) {
+      trackFunnelEvent("checkin_date_selected", {
+        unitId: formData.unit || undefined,
+      });
+    }
     // Reset checkout if it's before the new checkin
     if (checkOutDate && date && checkOutDate <= date) {
       setCheckOutDate(undefined);
@@ -184,19 +213,34 @@ export function BookingForm() {
   };
 
   const handleCheckOutSelect = (date: Date | undefined) => {
+    trackStartedOnce();
     setCheckOutDate(date);
     setCheckOutOpen(false);
+    if (date) {
+      trackFunnelEvent("checkout_date_selected", {
+        unitId: formData.unit || undefined,
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    trackFunnelEvent("booking_request_submit_attempted", {
+      unitId: formData.unit || undefined,
+    });
     
     if (calendarUnavailable) {
+      trackFunnelEvent("booking_request_submit_failed", {
+        unitId: formData.unit || undefined,
+      });
       toast.error(CALENDAR_UNAVAILABLE_MESSAGE);
       return;
     }
 
     if (!checkInDate || !checkOutDate) {
+      trackFunnelEvent("booking_request_submit_failed", {
+        unitId: formData.unit || undefined,
+      });
       toast.error("Please select check-in and check-out dates.");
       return;
     }
@@ -226,10 +270,22 @@ export function BookingForm() {
 
       if (error) {
         console.error("Error sending booking email:", error);
+        trackFunnelEvent("booking_request_submit_failed", {
+          unitId: formData.unit || undefined,
+        });
         toast.error("Failed to submit booking. Please try again or contact us directly.");
         setIsSubmitting(false);
         return;
       }
+
+      trackFunnelEvent("booking_request_submitted", {
+        unitId: formData.unit || undefined,
+        metadata: {
+          nights,
+          guests: parseInt(formData.guests, 10),
+          rate_type: pricing.rateType,
+        },
+      });
 
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -252,6 +308,9 @@ export function BookingForm() {
       }
     } catch (error) {
       console.error("Error submitting booking:", error);
+      trackFunnelEvent("booking_request_submit_failed", {
+        unitId: formData.unit || undefined,
+      });
       toast.error("Failed to submit booking. Please try again or contact us directly.");
       setIsSubmitting(false);
     }

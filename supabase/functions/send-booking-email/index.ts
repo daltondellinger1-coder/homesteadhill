@@ -1,6 +1,9 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "npm:@supabase/supabase-js@2";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
 // Homestead Host Hub project (separate Supabase project) — public anon key + RLS allows public insert.
 const HOST_HUB_URL = "https://fiunauckxdnaqvlircob.supabase.co";
@@ -87,6 +90,33 @@ async function createHostHubBookingRequest(booking: BookingRequest) {
   const data = await res.json();
   console.log("Inserted booking_request into host-hub:", data?.[0]?.id);
   return { ok: true, data };
+}
+
+// Create a non-PII operations record for this submission. Best-effort: never
+// fails the guest-facing flow. The returned id is a server-generated opaque
+// request ID; no guest name/email/phone/message is stored here.
+async function createOpsRecord(booking: BookingRequest) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+    console.error("Ops record skipped: missing SUPABASE_URL or service role key");
+    return { ok: false };
+  }
+  try {
+    const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const { data, error } = await admin
+      .from("booking_requests_ops")
+      .insert({ unit_id: booking.unit, status: "received" })
+      .select("id")
+      .single();
+    if (error) {
+      console.error("Failed to insert ops record:", error.message);
+      return { ok: false };
+    }
+    console.log("Ops record created:", data.id);
+    return { ok: true, id: data.id };
+  } catch (err) {
+    console.error("Ops record insert failed (non-fatal):", err);
+    return { ok: false };
+  }
 }
 
 const corsHeaders = {
@@ -545,6 +575,13 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log("Admin email sent successfully");
+
+    // Record the operational outcome row (non-PII) once the submission succeeded
+    try {
+      await createOpsRecord(booking);
+    } catch (opsErr) {
+      console.error("Ops record creation failed (non-fatal):", opsErr);
+    }
 
     // Send confirmation email to guest
     const guestEmailRes = await fetch("https://api.resend.com/emails", {

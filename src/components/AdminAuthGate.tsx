@@ -24,6 +24,7 @@ export function AdminAuthGate({ children }: AdminAuthGateProps) {
   const [signingIn, setSigningIn] = useState(false);
   const [formEmail, setFormEmail] = useState("");
   const [formPassword, setFormPassword] = useState("");
+  const [magicSent, setMagicSent] = useState(false);
   const { toast } = useToast();
 
   const handleSignIn = async (e: React.FormEvent) => {
@@ -43,6 +44,39 @@ export function AdminAuthGate({ children }: AdminAuthGateProps) {
       return;
     }
     setFormPassword("");
+  };
+
+  const handleMagicLink = async () => {
+    const target = formEmail.trim();
+    if (!target) {
+      toast({
+        title: "Email required",
+        description: "Enter your email to receive a sign-in link.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setSigningIn(true);
+    const { error } = await supabase.auth.signInWithOtp({
+      email: target,
+      options: {
+        emailRedirectTo: `${window.location.origin}${window.location.pathname}`,
+      },
+    });
+    setSigningIn(false);
+    if (error) {
+      toast({
+        title: "Could not send link",
+        description: "Please try again or use your password.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setMagicSent(true);
+    toast({
+      title: "Check your email",
+      description: `A sign-in link was sent to ${target}.`,
+    });
   };
 
   const handleSignOut = async () => {
@@ -132,6 +166,23 @@ export function AdminAuthGate({ children }: AdminAuthGateProps) {
                 </div>
                 <Button type="submit" disabled={signingIn} className="w-full">
                   {signingIn ? "Signing in…" : "Sign in"}
+                </Button>
+                <div className="relative py-2">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t border-border" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-card px-2 text-muted-foreground">or</span>
+                  </div>
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={signingIn || magicSent}
+                  className="w-full"
+                  onClick={handleMagicLink}
+                >
+                  {magicSent ? "Sign-in link sent" : "Email me a sign-in link"}
                 </Button>
               </form>
             </CardContent>

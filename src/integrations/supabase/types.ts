@@ -32,6 +32,39 @@ export type Database = {
         }
         Relationships: []
       }
+      analytics_events: {
+        Row: {
+          anonymous_session_id: string
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json
+          occurred_at: string
+          page_path: string
+          unit_id: string | null
+        }
+        Insert: {
+          anonymous_session_id: string
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json
+          occurred_at?: string
+          page_path: string
+          unit_id?: string | null
+        }
+        Update: {
+          anonymous_session_id?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json
+          occurred_at?: string
+          page_path?: string
+          unit_id?: string | null
+        }
+        Relationships: []
+      }
       calendar_events: {
         Row: {
           created_at: string
@@ -339,6 +372,14 @@ export type Database = {
           end_date: string
           start_date: string
           unit_id: string
+        }[]
+      }
+      get_booking_funnel_stats: {
+        Args: { p_end?: string; p_start?: string }
+        Returns: {
+          event_count: number
+          event_date: string
+          event_type: string
         }[]
       }
       get_calendar_freshness: {

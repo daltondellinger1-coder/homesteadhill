@@ -14,6 +14,7 @@ import Location from "./pages/Location";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
+import OpsFunnel from "./pages/OpsFunnel";
 import { AdminAuthGate } from "@/components/AdminAuthGate";
 import RentalApplication from "./pages/RentalApplication";
 import ExtendStay from "./pages/ExtendStay";
@@ -54,6 +55,14 @@ const App = () => (
             element={
               <AdminAuthGate>
                 <HomesteadHillDraws />
+              </AdminAuthGate>
+            }
+          />
+          <Route
+            path="/ops/funnel"
+            element={
+              <AdminAuthGate>
+                <OpsFunnel />
               </AdminAuthGate>
             }
           />

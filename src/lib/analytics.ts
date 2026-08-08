@@ -50,13 +50,15 @@ export function trackFunnelEvent(
   // Fire-and-forget: never block or alter the guest flow on tracking.
   void (async () => {
     try {
-      await supabase.from("analytics_events").insert({
-        event_type: eventType,
-        anonymous_session_id: getAnonymousSessionId(),
-        page_path: window.location.pathname,
-        unit_id: options.unitId ?? null,
-        metadata: options.metadata ?? {},
-      });
+      await supabase.from("analytics_events").insert([
+        {
+          event_type: eventType,
+          anonymous_session_id: getAnonymousSessionId(),
+          page_path: window.location.pathname,
+          unit_id: options.unitId ?? null,
+          metadata: options.metadata ?? {},
+        },
+      ]);
     } catch {
       // Swallow tracking errors silently — analytics must never affect UX.
     }

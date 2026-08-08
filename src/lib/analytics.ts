@@ -56,7 +56,7 @@ export function trackFunnelEvent(
           anonymous_session_id: getAnonymousSessionId(),
           page_path: window.location.pathname,
           unit_id: options.unitId ?? null,
-          metadata: options.metadata ?? {},
+          metadata: { ...(options.metadata ?? {}) },
         },
       ]);
     } catch {

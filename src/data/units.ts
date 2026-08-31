@@ -136,7 +136,7 @@ export const units: Unit[] = [
     description: "Our most premium standalone cottage, freshly renovated with private entry, full kitchen, in-unit laundry, dedicated workspace, comfortable living space, Wi-Fi, smart TV, A/C & heat, smart-lock self check-in, and free parking.",
     amenities: ["Premium Cottage", "Private Entry", "Full Kitchen", "In-Unit Laundry", "Dedicated Workspace", "Comfortable Living Space", "Smart TV", "Wi-Fi", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     featured: true,
-    monthlyPrice: 1900,
+    monthlyPrice: 1850,
     weeklyPrice: 638,
     nightlyPrice: 130,
   },

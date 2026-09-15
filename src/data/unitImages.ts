@@ -54,6 +54,15 @@ import unit6Bedroom1 from "@/assets/units/unit-6/bedroom-1.jpg";
 import unit6Bedroom2 from "@/assets/units/unit-6/bedroom-2.jpg";
 import unit6Bathroom from "@/assets/units/unit-6/bathroom.jpg";
 
+// Unit 9 Images
+import unit9KitchenLiving from "@/assets/units/unit-9/kitchen-living.jpg";
+import unit9LivingRoom from "@/assets/units/unit-9/living-room.jpg";
+import unit9Bedroom1 from "@/assets/units/unit-9/bedroom-1.jpg";
+import unit9Bedroom2 from "@/assets/units/unit-9/bedroom-2.jpg";
+import unit9Bathroom from "@/assets/units/unit-9/bathroom.jpg";
+import unit9Shower from "@/assets/units/unit-9/shower.jpg";
+import unit9Entry from "@/assets/units/unit-9/entry.jpg";
+
 // Unit 11 Images (Cottage)
 import unit11LivingRoom from "@/assets/units/unit-11/living-room.jpg";
 import unit11Kitchen from "@/assets/units/unit-11/kitchen.jpg";
@@ -155,7 +164,7 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit5KitchenLiving, alt: "Unit 5 - Open kitchen and living area", category: "Kitchen" },
       { src: unit5Kitchen, alt: "Unit 5 - Full kitchen with marble countertops and stainless appliances", category: "Kitchen" },
       { src: unit5Bedroom1, alt: "Unit 5 - Queen bedroom with TV and natural light", category: "Bedroom" },
-      { src: unit5Bedroom2, alt: "Unit 5 - Second queen bedroom with ceiling fan", category: "Bedroom" },
+      { src: unit5Bedroom2, alt: "Unit 5 - Spacious bedroom with ceiling fan", category: "Bedroom" },
       { src: unit5Bathroom, alt: "Unit 5 - Modern bathroom with shower", category: "Bath" },
     ],
   },
@@ -170,6 +179,19 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit6Bathroom, alt: "Unit 6 - Modern bathroom with stocked towels and essentials", category: "Bath" },
     ],
   },
+  "unit-9": {
+    primary: unit9KitchenLiving,
+    gallery: [
+      { src: unit9KitchenLiving, alt: "Unit 9 - Open living and kitchen area with dining table and mini split", category: "Kitchen" },
+      { src: unit9LivingRoom, alt: "Unit 9 - Living room with sofa, smart TV, and ceiling fan", category: "Living" },
+      { src: unit9Bedroom1, alt: "Unit 9 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
+      { src: unit9Bedroom2, alt: "Unit 9 - Bedroom with dresser, TV, and full-length mirror", category: "Bedroom" },
+      { src: unit9Bathroom, alt: "Unit 9 - Bathroom with vanity and stocked towel shelf", category: "Bath" },
+      { src: unit9Shower, alt: "Unit 9 - Walk-in shower with toiletries", category: "Bath" },
+      { src: unit9Entry, alt: "Unit 9 - Private entrance with smart lock and keypad", category: "Exterior" },
+    ],
+  },
+
   "unit-11": {
     primary: unit11LivingRoom,
     gallery: [
@@ -189,7 +211,7 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit13LivingRoom2, alt: "Cottage 13 - Entertainment area with smart TV and rustic console", category: "Living" },
       { src: unit13Dining, alt: "Cottage 13 - Expandable dining table with seating", category: "Dining" },
       { src: unit13Kitchen, alt: "Cottage 13 - Modern kitchen with marble countertops and Keurig", category: "Kitchen" },
-      { src: unit13Bedroom, alt: "Cottage 13 - Queen bedroom with 'Be Our Guest' decor", category: "Bedroom" },
+      { src: unit13Bedroom, alt: "Cottage 13 - King bedroom with 'Be Our Guest' decor", category: "Bedroom" },
       { src: unit13Office, alt: "Cottage 13 - Workspace with desk and wall clock", category: "Living" },
       { src: unit13Bathroom, alt: "Cottage 13 - Stylish bathroom with towel storage and modern fixtures", category: "Bath" },
       { src: unit13Shower, alt: "Cottage 13 - Rainfall shower with modern black fixtures", category: "Bath" },
@@ -205,7 +227,7 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit14BedroomDetail, alt: "Unit 14 - Bedroom detail with mirror, soft curtains, and neutral decor", category: "Bedroom" },
       { src: unit14Bathroom, alt: "Unit 14 - Bathroom with vanity, stocked towel shelf, and shower", category: "Bath" },
       { src: unit14BathroomShower, alt: "Unit 14 - Bathroom shower and towel storage", category: "Bath" },
-      { src: unit14Laundry, alt: "Unit 14 - In-unit washer/dryer combo with storage", category: "Living" },
+      { src: unit14Laundry, alt: "Unit 14 - In-unit laundry area with washer, dryer, and storage", category: "Living" },
     ],
   },
 };

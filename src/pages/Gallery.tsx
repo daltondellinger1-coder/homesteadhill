@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SEO, pageSEO } from "@/components/SEO";
 import { Home, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { getAllGalleryImages, type UnitImage } from "@/data/unitImages";
+import { getAllGalleryImages, getUnitImagePresentation, type UnitImage } from "@/data/unitImages";
 
 const categories = ["All", "Living", "Bedroom", "Kitchen", "Bath", "Dining", "Exterior"];
 
@@ -76,7 +76,9 @@ const Gallery = () => {
           {/* Gallery Grid */}
           {filteredItems.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredItems.map((item, index) => (
+              {filteredItems.map((item, index) => {
+                const presentation = getUnitImagePresentation(item.unitId, item);
+                return (
                 <button
                   key={`${item.unitId}-${index}`}
                   onClick={() => setSelectedIndex(index)}
@@ -85,11 +87,10 @@ const Gallery = () => {
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                      item.unitId === "unit-9"
-                        ? item.category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
-                        : ""
+                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 ${
+                      item.unitId === "unit-9" ? presentation.className : "group-hover:scale-105"
                     }`}
+                    style={presentation.style}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -97,7 +98,8 @@ const Gallery = () => {
                     <span className="block text-xs text-primary mt-1">{item.category}</span>
                   </div>
                 </button>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-16">
@@ -126,11 +128,14 @@ const Gallery = () => {
                   <img
                     src={filteredItems[selectedIndex].src}
                     alt={filteredItems[selectedIndex].alt}
-                    className={`w-full h-full object-contain ${
-                      filteredItems[selectedIndex].unitId === "unit-9"
-                        ? filteredItems[selectedIndex].category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
-                        : ""
-                    }`}
+                    className={`w-full h-full object-contain ${getUnitImagePresentation(
+                      filteredItems[selectedIndex].unitId,
+                      filteredItems[selectedIndex],
+                    ).className}`}
+                    style={getUnitImagePresentation(
+                      filteredItems[selectedIndex].unitId,
+                      filteredItems[selectedIndex],
+                    ).style}
                   />
                 </div>
 

@@ -179,6 +179,12 @@
 @layer utilities {
   .unit-9-image {
     filter: brightness(1.12) saturate(1.02);
+    transform: rotate(var(--unit-9-rotation, 0deg)) scale(var(--unit-9-scale, 1));
+    transform-origin: center;
+  }
+
+  .group:hover .unit-9-image {
+    transform: rotate(var(--unit-9-rotation, 0deg)) scale(calc(var(--unit-9-scale, 1) * 1.05));
   }
 
   .unit-9-image-exterior {

@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 // Unit 1 Images
 import unit1LivingRoom from "@/assets/units/unit-1/living-room.jpg";
 import unit1Kitchen1 from "@/assets/units/unit-1/kitchen-1.jpg";
@@ -96,7 +98,33 @@ export interface UnitImage {
   src: string;
   alt: string;
   category: "Living" | "Bedroom" | "Kitchen" | "Bath" | "Exterior" | "Dining";
+  presentation?: {
+    rotation: number;
+    scale: number;
+  };
 }
+
+type UnitImageStyle = CSSProperties & {
+  "--unit-9-rotation"?: string;
+  "--unit-9-scale"?: number;
+};
+
+export const getUnitImagePresentation = (unitId: string | undefined, image: UnitImage | undefined) => {
+  if (unitId !== "unit-9" || !image) {
+    return { className: "", style: undefined };
+  }
+
+  const { rotation = 0, scale = 1 } = image.presentation ?? {};
+  const style: UnitImageStyle = {
+    "--unit-9-rotation": `${rotation}deg`,
+    "--unit-9-scale": scale,
+  };
+
+  return {
+    className: image.category === "Exterior" ? "unit-9-image unit-9-image-exterior" : "unit-9-image",
+    style,
+  };
+};
 
 export interface UnitImages {
   primary: string;
@@ -182,13 +210,13 @@ export const unitImages: Record<string, UnitImages> = {
   "unit-9": {
     primary: unit9KitchenLiving,
     gallery: [
-      { src: unit9KitchenLiving, alt: "Unit 9 - Open living and kitchen area with dining table and mini split", category: "Kitchen" },
-      { src: unit9LivingRoom, alt: "Unit 9 - Living room with sofa, smart TV, and ceiling fan", category: "Living" },
-      { src: unit9Bedroom1, alt: "Unit 9 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
-      { src: unit9Bedroom2, alt: "Unit 9 - Bedroom with dresser, TV, and full-length mirror", category: "Bedroom" },
-      { src: unit9Bathroom, alt: "Unit 9 - Bathroom with vanity and stocked towel shelf", category: "Bath" },
-      { src: unit9Shower, alt: "Unit 9 - Walk-in shower with toiletries", category: "Bath" },
-      { src: unit9Entry, alt: "Unit 9 - Private entrance with smart lock and keypad", category: "Exterior" },
+      { src: unit9KitchenLiving, alt: "Unit 9 - Open living and kitchen area with dining table and mini split", category: "Kitchen", presentation: { rotation: 0.8, scale: 1.035 } },
+      { src: unit9LivingRoom, alt: "Unit 9 - Living room with sofa, smart TV, and ceiling fan", category: "Living", presentation: { rotation: 0, scale: 1 } },
+      { src: unit9Bedroom1, alt: "Unit 9 - Queen bedroom with ceiling fan and natural light", category: "Bedroom", presentation: { rotation: 0.4, scale: 1.02 } },
+      { src: unit9Bedroom2, alt: "Unit 9 - Bedroom with dresser, TV, and full-length mirror", category: "Bedroom", presentation: { rotation: 0, scale: 1 } },
+      { src: unit9Bathroom, alt: "Unit 9 - Bathroom with vanity and stocked towel shelf", category: "Bath", presentation: { rotation: 0, scale: 1 } },
+      { src: unit9Shower, alt: "Unit 9 - Walk-in shower with toiletries", category: "Bath", presentation: { rotation: 0.7, scale: 1.03 } },
+      { src: unit9Entry, alt: "Unit 9 - Private entrance with smart lock and keypad", category: "Exterior", presentation: { rotation: -1.1, scale: 1.04 } },
     ],
   },
 

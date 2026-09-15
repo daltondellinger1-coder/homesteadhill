@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import type { UnitImage } from "@/data/unitImages";
+import { getUnitImagePresentation, type UnitImage } from "@/data/unitImages";
 
 interface ImageLightboxProps {
   images: UnitImage[];
@@ -78,9 +78,7 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose, unitId }:
   if (images.length === 0) return null;
 
   const currentImage = images[currentIndex];
-  const currentImageAdjustment = unitId === "unit-9"
-    ? currentImage.category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
-    : "";
+  const currentImagePresentation = getUnitImagePresentation(unitId, currentImage);
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -109,7 +107,8 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose, unitId }:
           <img
             src={currentImage.src}
             alt={currentImage.alt}
-            className={`max-w-full max-h-[85vh] object-contain select-none ${currentImageAdjustment}`}
+            className={`max-w-full max-h-[85vh] object-contain select-none ${currentImagePresentation.className}`}
+            style={currentImagePresentation.style}
             draggable={false}
           />
         </div>
@@ -142,7 +141,9 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose, unitId }:
         {/* Thumbnail strip */}
         {images.length > 1 && (
           <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-50 flex gap-2 max-w-[90vw] overflow-x-auto pb-2 px-2">
-            {images.map((img, index) => (
+            {images.map((img, index) => {
+              const presentation = getUnitImagePresentation(unitId, img);
+              return (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
@@ -155,14 +156,12 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose, unitId }:
                 <img
                   src={img.src}
                   alt={img.alt}
-                  className={`w-full h-full object-cover ${
-                    unitId === "unit-9"
-                      ? img.category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
-                      : ""
-                  }`}
+                  className={`w-full h-full object-cover ${presentation.className}`}
+                  style={presentation.style}
                 />
               </button>
-            ))}
+              );
+            })}
           </div>
         )}
       </DialogContent>

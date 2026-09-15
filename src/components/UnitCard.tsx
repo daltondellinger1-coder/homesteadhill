@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Bed, Bath, Users, Home, Star, DollarSign } from "lucide-react";
 import type { Unit } from "@/data/units";
-import { getUnitPrimaryImage, getUnitGalleryImages } from "@/data/unitImages";
+import { getUnitPrimaryImage, getUnitGalleryImages, getUnitImagePresentation } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
 
 interface UnitCardProps {
@@ -14,6 +14,7 @@ export function UnitCard({ unit }: UnitCardProps) {
   const primaryImage = getUnitPrimaryImage(unit.id);
   const galleryImages = getUnitGalleryImages(unit.id);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const primaryPresentation = getUnitImagePresentation(unit.id, galleryImages[0]);
   const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
   const nightlyPrice = unit.nightlyPrice ?? 95;
 
@@ -38,9 +39,10 @@ export function UnitCard({ unit }: UnitCardProps) {
             <img
               src={primaryImage}
               alt={unit.name}
-              className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                unit.id === "unit-9" ? "unit-9-image" : ""
+              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 ${
+                unit.id === "unit-9" ? primaryPresentation.className : "group-hover:scale-105"
               }`}
+              style={primaryPresentation.style}
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">

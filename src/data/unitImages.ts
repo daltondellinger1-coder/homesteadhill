@@ -54,6 +54,15 @@ import unit6Bedroom1 from "@/assets/units/unit-6/bedroom-1.jpg";
 import unit6Bedroom2 from "@/assets/units/unit-6/bedroom-2.jpg";
 import unit6Bathroom from "@/assets/units/unit-6/bathroom.jpg";
 
+// Unit 9 Images
+import unit9KitchenLiving from "@/assets/units/unit-9/kitchen-living.jpg";
+import unit9LivingRoom from "@/assets/units/unit-9/living-room.jpg";
+import unit9Bedroom1 from "@/assets/units/unit-9/bedroom-1.jpg";
+import unit9Bedroom2 from "@/assets/units/unit-9/bedroom-2.jpg";
+import unit9Bathroom from "@/assets/units/unit-9/bathroom.jpg";
+import unit9Shower from "@/assets/units/unit-9/shower.jpg";
+import unit9Entry from "@/assets/units/unit-9/entry.jpg";
+
 // Unit 11 Images (Cottage)
 import unit11LivingRoom from "@/assets/units/unit-11/living-room.jpg";
 import unit11Kitchen from "@/assets/units/unit-11/kitchen.jpg";

@@ -90,7 +90,7 @@ export const units: Unit[] = [
     sleeps: 4,
     bedrooms: 2,
     beds: 2,
-    bedType: "Queen + Queen",
+    bedType: "Queen + Full",
     baths: 1,
     description: "Bright 2-bedroom with large living area, full kitchen, modern bath, free parking, and exterior security cameras for peace of mind.",
     amenities: ["2 Bedrooms", "Bright Living Area", "Full Kitchen", "Modern Bath", "Security Cameras", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],

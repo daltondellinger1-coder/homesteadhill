@@ -77,7 +77,11 @@ const UnitDetail = () => {
                   <img
                     src={galleryImages[activeImageIndex].src}
                     alt={galleryImages[activeImageIndex].alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                      id === "unit-9"
+                        ? galleryImages[activeImageIndex].category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
+                        : ""
+                    }`}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -149,7 +153,11 @@ const UnitDetail = () => {
                       <img
                         src={img.src}
                         alt={img.alt}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full object-cover ${
+                          id === "unit-9"
+                            ? img.category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
+                            : ""
+                        }`}
                       />
                     </button>
                   ))}
@@ -302,6 +310,7 @@ const UnitDetail = () => {
         initialIndex={activeImageIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
+        unitId={unit.id}
       />
     </div>
   );

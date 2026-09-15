@@ -38,7 +38,9 @@ export function UnitCard({ unit }: UnitCardProps) {
             <img
               src={primaryImage}
               alt={unit.name}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                unit.id === "unit-9" ? "unit-9-image" : ""
+              }`}
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -132,6 +134,7 @@ export function UnitCard({ unit }: UnitCardProps) {
         initialIndex={0}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
+        unitId={unit.id}
       />
     </>
   );

@@ -56,6 +56,12 @@ import unit6Bedroom1 from "@/assets/units/unit-6/bedroom-1.jpg";
 import unit6Bedroom2 from "@/assets/units/unit-6/bedroom-2.jpg";
 import unit6Bathroom from "@/assets/units/unit-6/bathroom.jpg";
 
+// Unit 7 Images
+// HANDOFF NOTE: Only the real bedroom photo has been supplied so far.
+// Four originals (kitchenette, sitting area, bathroom, shower) are pending transfer.
+// Do NOT publish Unit 7 until those four real photos are added here.
+import unit7Bedroom from "@/assets/units/unit-7/bedroom.jpg";
+
 // Unit 9 Images
 import unit9KitchenLiving from "@/assets/units/unit-9/kitchen-living.jpg";
 import unit9LivingRoom from "@/assets/units/unit-9/living-room.jpg";

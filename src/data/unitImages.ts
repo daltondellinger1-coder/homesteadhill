@@ -59,11 +59,11 @@ import unit6Bathroom from "@/assets/units/unit-6/bathroom.jpg";
 // Unit 7 Images
 // Kitchenette, sitting area, bathroom, and shower are 405x720 displayed-image exports.
 // Bedroom is the original 2268x4032 file. Keep every image at its supplied resolution.
-import unit7Kitchenette from "@/assets/units/unit-7/kitchenette.jpg.asset.json";
-import unit7SittingArea from "@/assets/units/unit-7/sitting-area.jpg.asset.json";
+import unit7Kitchenette from "@/assets/units/unit-7/kitchenette.jpg";
+import unit7SittingArea from "@/assets/units/unit-7/sitting-area.jpg";
 import unit7Bedroom from "@/assets/units/unit-7/bedroom.jpg";
-import unit7Bathroom from "@/assets/units/unit-7/bathroom.jpg.asset.json";
-import unit7Shower from "@/assets/units/unit-7/shower.jpg.asset.json";
+import unit7Bathroom from "@/assets/units/unit-7/bathroom.jpg";
+import unit7Shower from "@/assets/units/unit-7/shower.jpg";
 
 // Unit 9 Images
 import unit9KitchenLiving from "@/assets/units/unit-9/kitchen-living.jpg";
@@ -217,13 +217,13 @@ export const unitImages: Record<string, UnitImages> = {
     ],
   },
   "unit-7": {
-    primary: unit7Kitchenette.url,
+    primary: unit7Kitchenette,
     gallery: [
-      { src: unit7Kitchenette.url, alt: "Unit 7 - Kitchenette with sink, microwave, Keurig, and stocked cabinets", category: "Kitchen" },
-      { src: unit7SittingArea.url, alt: "Unit 7 - Sitting area with sofa, smart TV, and ceiling fan", category: "Living" },
+      { src: unit7Kitchenette, alt: "Unit 7 - Kitchenette with sink, microwave, Keurig, and stocked cabinets", category: "Kitchen" },
+      { src: unit7SittingArea, alt: "Unit 7 - Sitting area with sofa, smart TV, and ceiling fan", category: "Living" },
       { src: unit7Bedroom, alt: "Unit 7 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
-      { src: unit7Bathroom.url, alt: "Unit 7 - Bathroom with vanity and stocked towel shelf", category: "Bath" },
-      { src: unit7Shower.url, alt: "Unit 7 - Shower with handheld showerhead and toiletries", category: "Bath" },
+      { src: unit7Bathroom, alt: "Unit 7 - Bathroom with vanity and stocked towel shelf", category: "Bath" },
+      { src: unit7Shower, alt: "Unit 7 - Shower with handheld showerhead and toiletries", category: "Bath" },
     ],
   },
   "unit-9": {

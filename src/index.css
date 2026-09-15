@@ -177,6 +177,14 @@
 }
 
 @layer utilities {
+  .unit-9-image {
+    filter: brightness(1.12) saturate(1.02);
+  }
+
+  .unit-9-image-exterior {
+    filter: brightness(1.06) saturate(1.01);
+  }
+
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
   }

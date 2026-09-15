@@ -8,9 +8,10 @@ interface ImageLightboxProps {
   initialIndex: number;
   isOpen: boolean;
   onClose: () => void;
+  unitId?: string;
 }
 
-export function ImageLightbox({ images, initialIndex, isOpen, onClose }: ImageLightboxProps) {
+export function ImageLightbox({ images, initialIndex, isOpen, onClose, unitId }: ImageLightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -77,6 +78,9 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose }: ImageLi
   if (images.length === 0) return null;
 
   const currentImage = images[currentIndex];
+  const currentImageAdjustment = unitId === "unit-9"
+    ? currentImage.category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
+    : "";
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -105,7 +109,7 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose }: ImageLi
           <img
             src={currentImage.src}
             alt={currentImage.alt}
-            className="max-w-full max-h-[85vh] object-contain select-none"
+            className={`max-w-full max-h-[85vh] object-contain select-none ${currentImageAdjustment}`}
             draggable={false}
           />
         </div>
@@ -151,7 +155,11 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose }: ImageLi
                 <img
                   src={img.src}
                   alt={img.alt}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover ${
+                    unitId === "unit-9"
+                      ? img.category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
+                      : ""
+                  }`}
                 />
               </button>
             ))}

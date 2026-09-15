@@ -179,6 +179,19 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit6Bathroom, alt: "Unit 6 - Modern bathroom with stocked towels and essentials", category: "Bath" },
     ],
   },
+  "unit-9": {
+    primary: unit9KitchenLiving,
+    gallery: [
+      { src: unit9KitchenLiving, alt: "Unit 9 - Open living and kitchen area with dining table and mini split", category: "Kitchen" },
+      { src: unit9LivingRoom, alt: "Unit 9 - Living room with sofa, smart TV, and ceiling fan", category: "Living" },
+      { src: unit9Bedroom1, alt: "Unit 9 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
+      { src: unit9Bedroom2, alt: "Unit 9 - Bedroom with dresser, TV, and full-length mirror", category: "Bedroom" },
+      { src: unit9Bathroom, alt: "Unit 9 - Bathroom with vanity and stocked towel shelf", category: "Bath" },
+      { src: unit9Shower, alt: "Unit 9 - Walk-in shower with toiletries", category: "Bath" },
+      { src: unit9Entry, alt: "Unit 9 - Private entrance with smart lock and keypad", category: "Exterior" },
+    ],
+  },
+
   "unit-11": {
     primary: unit11LivingRoom,
     gallery: [

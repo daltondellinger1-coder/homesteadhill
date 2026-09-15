@@ -213,7 +213,17 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit6Bathroom, alt: "Unit 6 - Modern bathroom with stocked towels and essentials", category: "Bath" },
     ],
   },
+  // HANDOFF: Unit 7 gallery is intentionally incomplete — bedroom is the only
+  // real photo supplied. Add kitchenette, sitting area, bathroom and shower
+  // originals before publishing; do not substitute photos from other units.
+  "unit-7": {
+    primary: unit7Bedroom,
+    gallery: [
+      { src: unit7Bedroom, alt: "Unit 7 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
+    ],
+  },
   "unit-9": {
+
     primary: unit9KitchenLiving,
     gallery: [
       { src: unit9KitchenLiving, alt: "Unit 9 - Open living and kitchen area with dining table and mini split", category: "Kitchen", presentation: { rotation: 0.8, scale: 1.035 } },

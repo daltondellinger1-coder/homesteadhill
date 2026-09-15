@@ -56,6 +56,12 @@ import unit6Bedroom1 from "@/assets/units/unit-6/bedroom-1.jpg";
 import unit6Bedroom2 from "@/assets/units/unit-6/bedroom-2.jpg";
 import unit6Bathroom from "@/assets/units/unit-6/bathroom.jpg";
 
+// Unit 7 Images
+// HANDOFF NOTE: Only the real bedroom photo has been supplied so far.
+// Four originals (kitchenette, sitting area, bathroom, shower) are pending transfer.
+// Do NOT publish Unit 7 until those four real photos are added here.
+import unit7Bedroom from "@/assets/units/unit-7/bedroom.jpg";
+
 // Unit 9 Images
 import unit9KitchenLiving from "@/assets/units/unit-9/kitchen-living.jpg";
 import unit9LivingRoom from "@/assets/units/unit-9/living-room.jpg";
@@ -207,7 +213,17 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit6Bathroom, alt: "Unit 6 - Modern bathroom with stocked towels and essentials", category: "Bath" },
     ],
   },
+  // HANDOFF: Unit 7 gallery is intentionally incomplete — bedroom is the only
+  // real photo supplied. Add kitchenette, sitting area, bathroom and shower
+  // originals before publishing; do not substitute photos from other units.
+  "unit-7": {
+    primary: unit7Bedroom,
+    gallery: [
+      { src: unit7Bedroom, alt: "Unit 7 - Queen bedroom with ceiling fan and natural light", category: "Bedroom" },
+    ],
+  },
   "unit-9": {
+
     primary: unit9KitchenLiving,
     gallery: [
       { src: unit9KitchenLiving, alt: "Unit 9 - Open living and kitchen area with dining table and mini split", category: "Kitchen", presentation: { rotation: 0.8, scale: 1.035 } },

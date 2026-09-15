@@ -97,6 +97,20 @@ export const units: Unit[] = [
     monthlyPrice: 1850,
   },
   {
+    id: "unit-7",
+    name: "Unit 7",
+    type: "apartment",
+    sleeps: 2,
+    bedrooms: 1,
+    beds: 1,
+    bedType: "Queen",
+    baths: 1,
+    description: "Comfortable 1-bedroom apartment with a queen bedroom, a cozy sitting area with TV, a kitchen with microwave and Keurig, and a full bathroom with walk-in shower. Includes Wi-Fi, A/C & heat, smart-lock self check-in, free parking, and complimentary shared on-site laundry.",
+    amenities: ["Dedicated Workspace", "Full Kitchen", "Refrigerator", "Microwave", "Stove", "Keurig", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
+    monthlyPrice: 1650,
+  },
+  {
+
     id: "unit-9",
     name: "Unit 9",
     type: "apartment",

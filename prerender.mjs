@@ -16,6 +16,8 @@ const pages = [
   ["/units/unit-4", "Unit 4 — 1 Bed Furnished Apartment, Vincennes IN", "Queen bed, smart-lock entry, fast Wi-Fi, kitchen with stove and microwave, and dedicated workspace. Sleeps 2. Book direct from $1,600/month."],
   ["/units/unit-5", "Unit 5 — 2 Bed Furnished Apartment, Vincennes IN", "Spacious 2-bedroom for professionals with a large living area, full kitchen, private entrance, and long-term stays welcome. Sleeps 4. From $1,800/month."],
   ["/units/unit-6", "Unit 6 — 2 Bed Furnished Apartment, Vincennes IN", "Bright 2-bedroom with a large living area, full kitchen, modern bath, free parking, and exterior security cameras. Sleeps 4. Book direct from $1,800/month."],
+  ["/units/unit-9", "Unit 9 — 1 Bed Furnished Apartment, Vincennes IN", "Updated 1-bedroom with private entry, open living and kitchen, walk-in shower, Wi-Fi, TV, and free parking. Sleeps 2. Book direct from $1,650/month."],
+
   ["/units/unit-11", "Unit 11 Cottage — 1 Bed Furnished Rental, Vincennes IN", "Standalone cottage with dedicated workspace, compact kitchen, modern bath, and a private feel. Sleeps 2. Book direct from $1,700/month."],
   ["/units/unit-13", "Unit 13 Cottage — 1 Bed Furnished Rental, Vincennes IN", "Standalone cottage with a comfortable bedroom, stylish living area, kitchenette, modern bath, Wi-Fi, and free parking. Sleeps 2. Book direct from $1,700/month."],
   ["/units/unit-14", "Unit 14 Premium Cottage — Furnished Rental, Vincennes IN", "Premium standalone cottage with private entry, full kitchen, in-unit laundry, workspace, Wi-Fi, and smart-lock self check-in. Sleeps 2. From $1,850/month."],

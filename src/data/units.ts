@@ -97,6 +97,20 @@ export const units: Unit[] = [
     monthlyPrice: 1850,
   },
   {
+    id: "unit-9",
+    name: "Unit 9",
+    type: "apartment",
+    sleeps: 2,
+    bedrooms: 1,
+    beds: 1,
+    bedType: "Queen",
+    baths: 1,
+    description: "Freshly updated 1-bedroom with private entry, open living and kitchen area, dining space for two, queen bedroom, full bath with walk-in shower, Wi-Fi, TV, mini-split A/C & heat, smart-lock self check-in, and free parking.",
+    amenities: ["Private Entry", "Full Kitchen", "Refrigerator", "Microwave", "Dining Space", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
+    monthlyPrice: 1650,
+  },
+  {
+
     id: "unit-11",
     name: "Unit 11 - Cottage",
     type: "cottage",

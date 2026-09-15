@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { SEO, getUnitSEO } from "@/components/SEO";
 import { units } from "@/data/units";
-import { getUnitPrimaryImage, getUnitGalleryImages } from "@/data/unitImages";
+import { getUnitPrimaryImage, getUnitGalleryImages, getUnitImagePresentation } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { 
   Bed, Bath, Users, Home, ArrowLeft, Check, 
@@ -47,6 +47,7 @@ const UnitDetail = () => {
   const unitSEO = getUnitSEO(unit, primaryImage ?? galleryImages[0]?.src);
   const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
   const nightlyPrice = unit.nightlyPrice ?? 95;
+  const activeImagePresentation = getUnitImagePresentation(id, galleryImages[activeImageIndex]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,11 +78,10 @@ const UnitDetail = () => {
                   <img
                     src={galleryImages[activeImageIndex].src}
                     alt={galleryImages[activeImageIndex].alt}
-                    className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                      id === "unit-9"
-                        ? galleryImages[activeImageIndex].category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
-                        : ""
+                    className={`w-full h-full object-cover transition-transform duration-500 ${
+                      id === "unit-9" ? activeImagePresentation.className : "group-hover:scale-105"
                     }`}
+                    style={activeImagePresentation.style}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -140,7 +140,9 @@ const UnitDetail = () => {
               {/* Image Thumbnails */}
               {hasImages && galleryImages.length > 1 && (
                 <div className="flex gap-2 overflow-x-auto pb-4 mb-8 scrollbar-hide">
-                  {galleryImages.map((img, index) => (
+                  {galleryImages.map((img, index) => {
+                    const presentation = getUnitImagePresentation(id, img);
+                    return (
                     <button
                       key={index}
                       onClick={() => setActiveImageIndex(index)}
@@ -153,14 +155,12 @@ const UnitDetail = () => {
                       <img
                         src={img.src}
                         alt={img.alt}
-                        className={`w-full h-full object-cover ${
-                          id === "unit-9"
-                            ? img.category === "Exterior" ? "unit-9-image-exterior" : "unit-9-image"
-                            : ""
-                        }`}
+                        className={`w-full h-full object-cover ${presentation.className}`}
+                        style={presentation.style}
                       />
                     </button>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
 

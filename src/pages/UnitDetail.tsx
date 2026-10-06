@@ -49,6 +49,7 @@ const UnitDetail = () => {
   const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
   const nightlyPrice = unit.nightlyPrice ?? 95;
   const activeImagePresentation = getUnitImagePresentation(id, galleryImages[activeImageIndex]);
+  const showFullEntrance = id === "unit-13" && galleryImages[activeImageIndex]?.category === "Exterior";
 
   return (
     <div className="min-h-screen bg-background">
@@ -79,8 +80,8 @@ const UnitDetail = () => {
                   <img
                     src={galleryImages[activeImageIndex].src}
                     alt={galleryImages[activeImageIndex].alt}
-                    className={`w-full h-full object-cover transition-transform duration-500 ${
-                      id === "unit-9" ? activeImagePresentation.className : "group-hover:scale-105"
+                    className={`w-full h-full transition-transform duration-500 ${showFullEntrance ? "object-contain" : "object-cover"} ${
+                      id === "unit-9" ? activeImagePresentation.className : showFullEntrance ? "" : "group-hover:scale-105"
                     }`}
                     style={activeImagePresentation.style}
                   />

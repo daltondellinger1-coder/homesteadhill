@@ -14,6 +14,8 @@ export interface Unit {
   monthlyPrice: number;
   weeklyPrice?: number;
   nightlyPrice?: number;
+  /** Keep cents in weekly/total display and quotes. */
+  exactPricing?: boolean;
 }
 
 export const units: Unit[] = [
@@ -29,6 +31,9 @@ export const units: Unit[] = [
     description: "Cozy 1-bedroom with dedicated workspace, full kitchen (refrigerator, microwave, stove, Keurig), Wi-Fi, TV, A/C & heat, smart-lock entry, free parking.",
     amenities: ["Dedicated Workspace", "Full Kitchen", "Refrigerator", "Microwave", "Stove", "Keurig", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     monthlyPrice: 1650,
+    weeklyPrice: 585.20,
+    nightlyPrice: 95,
+    exactPricing: true,
   },
   {
     id: "unit-2",
@@ -42,6 +47,9 @@ export const units: Unit[] = [
     description: "Comfortable 1-bedroom with full kitchen, Wi-Fi, TV, smart-lock self check-in, and free parking. Perfect for solo travelers or couples.",
     amenities: ["Full Kitchen", "Refrigerator", "Microwave", "Stove", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     monthlyPrice: 1650,
+    weeklyPrice: 585.20,
+    nightlyPrice: 95,
+    exactPricing: true,
   },
   {
     id: "unit-3",
@@ -56,6 +64,9 @@ export const units: Unit[] = [
     amenities: ["Full Kitchen", "Stylish Living Area", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     featured: true,
     monthlyPrice: 1650,
+    weeklyPrice: 585.20,
+    nightlyPrice: 95,
+    exactPricing: true,
   },
   {
     id: "unit-4",
@@ -69,6 +80,9 @@ export const units: Unit[] = [
     description: "Queen bed, smart-lock entry, fast Wi-Fi, kitchen with stove/oven & microwave, dedicated workspace. Ideal for business travelers.",
     amenities: ["Dedicated Workspace", "Full Kitchen", "Stove/Oven", "Microwave", "Fast Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     monthlyPrice: 1650,
+    weeklyPrice: 585.20,
+    nightlyPrice: 95,
+    exactPricing: true,
   },
   {
     id: "unit-5",
@@ -108,6 +122,9 @@ export const units: Unit[] = [
     description: "Comfortable 1-bedroom apartment with a queen bedroom, a cozy sitting area with TV, a kitchen with microwave and Keurig, and a full bathroom with walk-in shower. Includes Wi-Fi, A/C & heat, smart-lock self check-in, free parking, and complimentary shared on-site laundry.",
     amenities: ["Dedicated Workspace", "Full Kitchen", "Refrigerator", "Microwave", "Stove", "Keurig", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     monthlyPrice: 1650,
+    weeklyPrice: 585.20,
+    nightlyPrice: 95,
+    exactPricing: true,
   },
   {
 
@@ -122,6 +139,9 @@ export const units: Unit[] = [
     description: "Freshly updated 1-bedroom with private entry, open living and kitchen area, dining space for two, queen bedroom, full bath with walk-in shower, Wi-Fi, TV, mini-split A/C & heat, smart-lock self check-in, and free parking.",
     amenities: ["Dedicated Workspace", "Full Kitchen", "Refrigerator", "Microwave", "Stove", "Keurig", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     monthlyPrice: 1650,
+    weeklyPrice: 585.20,
+    nightlyPrice: 95,
+    exactPricing: true,
   },
   {
 

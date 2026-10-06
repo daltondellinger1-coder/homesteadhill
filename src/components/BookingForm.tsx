@@ -14,59 +14,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { trackFunnelEvent } from "@/lib/analytics";
-
-// Helper to calculate pricing based on stay duration
-function calculatePricing(unit: Unit, nights: number) {
-  const monthlyPrice = unit.monthlyPrice;
-  const dailyMonthlyRate = monthlyPrice / 30; // Monthly per-night rate
-  const dailyWeeklyRate = (unit.weeklyPrice ?? (monthlyPrice / 4) * 1.25) / 7;
-  const nightlyRate = unit.nightlyPrice ?? 95;
-  const minimumNights = 3;
-  
-  if (nights >= 30) {
-    // Monthly rate - calculate per-night rate from monthly price
-    const dailyMonthlyRate = monthlyPrice / 30;
-    const months = Math.floor(nights / 30);
-    const remainingDays = nights % 30;
-    const monthlyTotal = months * monthlyPrice;
-    const remainingTotal = remainingDays * dailyMonthlyRate;
-    const subtotal = Math.round(monthlyTotal + remainingTotal);
-    return {
-      subtotal,
-      total: subtotal,
-      rateType: "monthly" as const,
-      perNight: Math.round(dailyMonthlyRate),
-    };
-  } else if (nights >= 7) {
-    // Weekly rate
-    const subtotal = Math.round(nights * dailyWeeklyRate);
-    return {
-      subtotal,
-      total: subtotal,
-      rateType: "weekly" as const,
-      perNight: Math.round(dailyWeeklyRate),
-    };
-  } else if (nights >= minimumNights) {
-    // Nightly rate ($95/night)
-    const subtotal = nights * nightlyRate;
-    return {
-      subtotal,
-      total: subtotal,
-      rateType: "nightly" as const,
-      perNight: nightlyRate,
-    };
-  } else {
-    // Minimum 3 nights required
-    const subtotal = minimumNights * nightlyRate;
-    return {
-      subtotal,
-      total: subtotal,
-      rateType: "minimum" as const,
-      perNight: nightlyRate,
-      minimumNights,
-    };
-  }
-}
+import { calculatePricing, formatUSD } from "@/lib/pricing";
 
 const CALENDAR_UNAVAILABLE_MESSAGE =
   "Online availability is temporarily unavailable. Call (812) 768-3108 or email booking@homestead-hill.com to confirm dates.";
@@ -520,18 +468,18 @@ export function BookingForm() {
                       {pricing.rateType === "weekly" && "Weekly rate"}
                       {pricing.rateType === "nightly" && "Nightly rate"}
                       {pricing.rateType === "minimum" && `Minimum stay (3 nights)`}
-                      {" · "}${pricing.perNight}/night
+                      {" · "}${formatUSD(pricing.perNight, selectedUnit.exactPricing)}/night
                     </span>
                   </div>
                   <div className="text-muted-foreground">
-                    ${pricing.subtotal.toLocaleString()}
+                    ${formatUSD(pricing.subtotal, selectedUnit.exactPricing)}
                   </div>
                 </div>
                 <div className="flex items-center justify-between pt-2 border-t border-primary/10">
                   <span className="font-medium">Estimated Total</span>
                   <div className="text-right">
                     <div className="text-xl font-semibold text-primary">
-                      ${pricing.total.toLocaleString()}
+                      ${formatUSD(pricing.total, selectedUnit.exactPricing)}
                     </div>
                   </div>
                 </div>

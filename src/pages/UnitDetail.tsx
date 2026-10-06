@@ -165,6 +165,9 @@ const UnitDetail = () => {
                 </div>
               )}
 
+              {/* Unit 13 Video Tour */}
+              {id === "unit-13" && <Unit13Video />}
+
               {/* Unit Title */}
               <h1 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">
                 {unit.name}

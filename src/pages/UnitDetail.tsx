@@ -7,8 +7,9 @@ import { SEO, getUnitSEO } from "@/components/SEO";
 import { units } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages, getUnitImagePresentation } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
-import { 
-  Bed, Bath, Users, Home, ArrowLeft, Check, 
+import { Unit13Video } from "@/components/Unit13Video";
+import {
+  Bed, Bath, Users, Home, ArrowLeft, Check,
   Star, Wifi, Car, KeyRound, Thermometer, ChevronLeft, ChevronRight
 } from "lucide-react";
 
@@ -163,6 +164,9 @@ const UnitDetail = () => {
                   })}
                 </div>
               )}
+
+              {/* Unit 13 Video Tour */}
+              {id === "unit-13" && <Unit13Video />}
 
               {/* Unit Title */}
               <h1 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">

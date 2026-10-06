@@ -7,8 +7,9 @@ import { SEO, getUnitSEO } from "@/components/SEO";
 import { units } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages, getUnitImagePresentation } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
-import { 
-  Bed, Bath, Users, Home, ArrowLeft, Check, 
+import { Unit13Video } from "@/components/Unit13Video";
+import {
+  Bed, Bath, Users, Home, ArrowLeft, Check,
   Star, Wifi, Car, KeyRound, Thermometer, ChevronLeft, ChevronRight
 } from "lucide-react";
 

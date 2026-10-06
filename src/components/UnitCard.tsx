@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Bed, Bath, Users, Home, Star, DollarSign } from "lucide-react";
+import { getWeeklyPrice, formatUSD } from "@/lib/pricing";
 import type { Unit } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages, getUnitImagePresentation } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
@@ -15,7 +16,7 @@ export function UnitCard({ unit }: UnitCardProps) {
   const galleryImages = getUnitGalleryImages(unit.id);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const primaryPresentation = getUnitImagePresentation(unit.id, galleryImages[0]);
-  const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
+  const weeklyPrice = getWeeklyPrice(unit);
   const nightlyPrice = unit.nightlyPrice ?? 95;
 
   return (
@@ -79,7 +80,7 @@ export function UnitCard({ unit }: UnitCardProps) {
                 <span className="text-muted-foreground">/mo</span>
               </div>
               <div>
-                <span className="font-medium text-foreground">${weeklyPrice.toLocaleString()}</span>
+                <span className="font-medium text-foreground">${formatUSD(weeklyPrice, unit.exactPricing)}</span>
                 <span className="text-muted-foreground">/wk</span>
               </div>
               <div>

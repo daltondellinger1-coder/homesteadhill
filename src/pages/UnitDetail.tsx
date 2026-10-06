@@ -1,3 +1,4 @@
+import { getWeeklyPrice, formatUSD } from "@/lib/pricing";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
@@ -46,7 +47,7 @@ const UnitDetail = () => {
   }
 
   const unitSEO = getUnitSEO(unit, primaryImage ?? galleryImages[0]?.src);
-  const weeklyPrice = unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
+  const weeklyPrice = getWeeklyPrice(unit);
   const nightlyPrice = unit.nightlyPrice ?? 95;
   const activeImagePresentation = getUnitImagePresentation(id, galleryImages[activeImageIndex]);
   const showFullEntrance = id === "unit-13" && galleryImages[activeImageIndex]?.category === "Exterior";
@@ -250,7 +251,7 @@ const UnitDetail = () => {
                     </div>
                     <div className="border-l border-r border-border px-4">
                       <div className="text-xl font-semibold text-foreground">
-                        ${weeklyPrice.toLocaleString()}
+                        ${formatUSD(weeklyPrice, unit.exactPricing)}
                       </div>
                       <div className="text-muted-foreground text-xs">per week</div>
                     </div>

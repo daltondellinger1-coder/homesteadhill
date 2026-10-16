@@ -103,6 +103,13 @@ import unit14BathroomShower from "@/assets/units/unit-14/bathroom-shower.jpg";
 import unit14Laundry from "@/assets/units/unit-14/laundry.jpg";
 import unit14BedroomDetail from "@/assets/units/unit-14/bedroom-detail.jpg";
 
+// Shared Laundry Building Images
+import laundryWasherDryerTv from "@/assets/laundry/laundry-washer-dryer-tv.jpg";
+import laundryLounge1 from "@/assets/laundry/laundry-lounge-1.jpg";
+import laundryLounge2 from "@/assets/laundry/laundry-lounge-2.jpg";
+import laundryBathroom1 from "@/assets/laundry/laundry-bathroom-1.jpg";
+import laundryBathroom2 from "@/assets/laundry/laundry-bathroom-2.jpg";
+
 export interface UnitImage {
   src: string;
   alt: string;

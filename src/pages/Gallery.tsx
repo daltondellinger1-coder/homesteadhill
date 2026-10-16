@@ -5,7 +5,7 @@ import { SEO, pageSEO } from "@/components/SEO";
 import { Home, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { getAllGalleryImages, getUnitImagePresentation, type UnitImage } from "@/data/unitImages";
 
-const categories = ["All", "Living", "Bedroom", "Kitchen", "Bath", "Dining", "Exterior"];
+const categories = ["All", "Living", "Bedroom", "Kitchen", "Bath", "Dining", "Exterior", "Laundry"];
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");

@@ -113,7 +113,7 @@ import laundryBathroom2 from "@/assets/laundry/laundry-bathroom-2.jpg";
 export interface UnitImage {
   src: string;
   alt: string;
-  category: "Living" | "Bedroom" | "Kitchen" | "Bath" | "Exterior" | "Dining";
+  category: "Living" | "Bedroom" | "Kitchen" | "Bath" | "Exterior" | "Dining" | "Laundry";
   presentation?: {
     rotation: number;
     scale: number;
@@ -285,6 +285,19 @@ export const unitImages: Record<string, UnitImages> = {
       { src: unit14Laundry, alt: "Unit 14 - In-unit washer/dryer combo with storage", category: "Living" },
     ],
   },
+};
+
+// Shared laundry building (not a rentable unit — gallery-only entry so the photos
+// flow through getAllGalleryImages() like the unit photos do)
+unitImages["laundry"] = {
+  primary: laundryWasherDryerTv,
+  gallery: [
+    { src: laundryWasherDryerTv, alt: "Shared Laundry - Washer, dryer, and TV", category: "Laundry" },
+    { src: laundryLounge1, alt: "Shared Laundry - Lounge seating and AC", category: "Laundry" },
+    { src: laundryLounge2, alt: "Shared Laundry - Lounge", category: "Laundry" },
+    { src: laundryBathroom1, alt: "Shared Laundry - Bathroom", category: "Laundry" },
+    { src: laundryBathroom2, alt: "Shared Laundry - Bathroom with tankless water heater", category: "Laundry" },
+  ],
 };
 
 // Get all gallery images across all units

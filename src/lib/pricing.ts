@@ -14,6 +14,8 @@ export interface Pricing {
 
 /** Units with exactPricing keep cents; others keep the legacy whole-dollar rounding. */
 export function getWeeklyPrice(unit: Unit): number {
+  // Unit 13 advertises its existing seven-night quote without changing charges.
+  if (unit.id === "unit-13") return calculatePricing(unit, 7).total;
   return unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
 }
 

@@ -44,7 +44,7 @@ export const Unit13Video = () => {
         </div>
 
         <div className="mt-6 text-center">
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="h-auto min-h-12 min-w-0 max-w-full whitespace-normal px-5 py-3 text-center">
             <Link to="/contact?unit=unit-13">Ask about monthly availability</Link>
           </Button>
         </div>

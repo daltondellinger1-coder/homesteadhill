@@ -1,7 +1,9 @@
 ## Open tasks
 - [ ] Publish homestead-hill.com — ON HOLD pending Dalton's review; current project also includes the preexisting unpublished Unit 7/Unit 9 changes, so publication ships those too
 - [x] Weekly rate mismatch RESOLVED for units 1, 2, 3, 4, 7, 9 only (Dalton approved $585.20/wk = $83.60/night, exact cents); preview only, not published
-- [ ] Weekly rate mismatch still open for Units 5, 6, 11, 13 (card monthly/3.75 vs form monthly/3.2) — awaiting Dalton's choice
+- [ ] Weekly rate mismatch still open for Units 5, 6, 11 (card monthly/3.75 vs form monthly/3.2) — awaiting Dalton's choice
+- [x] Unit 13 weekly display mismatch resolved in preview: advertise the existing seven-night calculator total $547; monthly $1,750, nightly $95 and all booking calculations unchanged. Publication remains ON HOLD.
+- [x] Unit 13 video availability CTA wraps within its card, centered with comfortable padding and automatic touch height; checked at 320/360/390/412px and desktop with 100%/125%/150% text. Video assets and crop unchanged; preview only.
 - [ ] Add Unit 9 (7 real photos, config matched to Units 1–4), no publish until Dalton reviews diff
 - [x] Add Unit 13 video + poster to /units/unit-13 — assets arrived and wired (MP4 on Lovable CDN, poster in public/media); section live in preview
 - [x] Apply and verify a display-only brightness adjustment scoped to every Unit 9 photo surface; do not publish
@@ -18,7 +20,7 @@ Blocking:
 - Dalton's review sign-off on the current preview (Unit 13 crop fix is confirmed satisfied at commit 07be6909d7c8aa8a08aa58d909359ac17d5f4dd6).
 - Unit 7 and Unit 9 have no calendar feed configured, so their dates stay unavailable to visitors until real feeds are supplied — publishing ships those two listings without bookable dates.
 Optional follow-ups (not blocking):
-- Units 5, 6, 11, 13 weekly rate mismatch (card monthly/3.75 vs form monthly/3.2) still awaits Dalton's choice.
+- Units 5, 6, 11 weekly rate mismatch (card monthly/3.75 vs form monthly/3.2) still awaits Dalton's choice. Unit 13's advertised weekly price now matches its unchanged $547 seven-night quote in preview (2026-10-19).
 - Booking emails come from the currently deployed email code and print the weekly total as "$585.2" rather than "$585.20" until that email code is updated and redeployed.
 - Unit 13 video playback could not be verified in the test browser (common H.264 decode unavailable there); duration and framing were confirmed from the file itself, so one live check on a phone is still worthwhile.
 - Nine units (1, 2, 3, 4, 5, 6, 11, 13, 14) have feeds configured and sync every six hours; no action needed there.

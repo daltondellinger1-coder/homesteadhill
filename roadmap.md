@@ -20,7 +20,8 @@ Blocking:
 - Dalton's review sign-off on the current preview (Unit 13 crop fix is confirmed satisfied at commit 07be6909d7c8aa8a08aa58d909359ac17d5f4dd6).
 - Unit 7 and Unit 9 have no calendar feed configured, so their dates stay unavailable to visitors until real feeds are supplied — publishing ships those two listings without bookable dates.
 Optional follow-ups (not blocking):
-- Units 5, 6, 11 weekly rate mismatch (card monthly/3.75 vs form monthly/3.2) still awaits Dalton's choice. Unit 13's advertised weekly price now matches its unchanged $547 seven-night quote in preview (2026-10-19).
+- Units 5, 6 weekly rate mismatch (card monthly/3.75 vs form monthly/3.2) still awaits Dalton's choice.
+- [x] Unit 11 weekly set to $546 per Dalton (monthly $1,750 unchanged); card, detail and 7-night quote all $546 (preview only, 2026-10-28). Unit 13's advertised weekly price now matches its unchanged $547 seven-night quote in preview (2026-10-19).
 - Booking emails come from the currently deployed email code and print the weekly total as "$585.2" rather than "$585.20" until that email code is updated and redeployed.
 - Unit 13 video playback could not be verified in the test browser (common H.264 decode unavailable there); duration and framing were confirmed from the file itself, so one live check on a phone is still worthwhile.
 - Nine units (1, 2, 3, 4, 5, 6, 11, 13, 14) have feeds configured and sync every six hours; no action needed there.

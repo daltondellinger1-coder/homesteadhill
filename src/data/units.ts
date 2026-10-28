@@ -157,6 +157,7 @@ export const units: Unit[] = [
     amenities: ["Standalone Cottage", "Dedicated Workspace", "Compact Kitchen", "Modern Bath", "Private Setting", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     featured: true,
     monthlyPrice: 1750,
+    weeklyPrice: 546,
   },
   {
     id: "unit-13",

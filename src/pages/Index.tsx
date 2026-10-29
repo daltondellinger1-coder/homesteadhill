@@ -10,7 +10,9 @@ import { units } from "@/data/units";
 import { ArrowRight, Shield, DollarSign, Clock } from "lucide-react";
 
 const Index = () => {
-  const featuredUnits = units.filter(u => u.featured).slice(0, 3);
+  // Remove occupied units from the existing selection without promoting replacements.
+  const featuredUnits = units.filter(u => u.featured).slice(0, 3)
+    .filter(u => u.id !== "unit-3" && u.id !== "unit-13");
 
   return (
     <div className="min-h-screen bg-background">

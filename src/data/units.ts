@@ -118,7 +118,7 @@ export const units: Unit[] = [
   },
   {
     id: "unit-7",
-    name: "Unit 7",
+    name: "Unit 7 - 1 Bedroom Queen Apartment",
     type: "apartment",
     sleeps: 2,
     bedrooms: 1,
@@ -135,7 +135,7 @@ export const units: Unit[] = [
   {
 
     id: "unit-9",
-    name: "Unit 9",
+    name: "Unit 9 - 1 Bedroom Queen Apartment",
     type: "apartment",
     sleeps: 2,
     bedrooms: 1,

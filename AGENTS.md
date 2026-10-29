@@ -9,3 +9,7 @@ Rules:
 - IF graphify-out/wiki/index.md EXISTS, navigate it instead of reading raw files
 - For cross-module "how does X relate to Y" questions, prefer `graphify query "<question>"`, `graphify path "<A>" "<B>"`, or `graphify explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+
+## Public routing and unit presentation
+- Unknown routes and nonexistent unit IDs render the shared NotFound page with noindex metadata so invalid addresses never masquerade as accommodations.
+- Unit display names come from src/data/units.ts for cards, details, featured units and selectors; prerender metadata for Units 3/7/9 reads the same names through the server entry to prevent naming drift.

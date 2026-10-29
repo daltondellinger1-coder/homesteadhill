@@ -1,22 +1,23 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
+import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen bg-background">
+      <SEO title="Page not found | Homestead Hill" description="The page you requested could not be found." noindex />
+      <Header />
+      <main className="container pt-32 pb-24 text-center">
+        <p className="mb-4 text-lg text-primary">404</p>
+        <h1 className="mb-6 font-serif text-3xl font-semibold text-foreground">Page not found</h1>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button asChild><Link to="/">Home</Link></Button>
+          <Button asChild variant="outline"><Link to="/units">Units</Link></Button>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };

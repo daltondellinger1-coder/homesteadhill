@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getUnitOffers, PROPERTY_ADDRESS } from "@/lib/accommodationSchema";
+import { getUnitOffers, PROPERTY_ADDRESS, PETS_ALLOWED } from "@/lib/accommodationSchema";
 
 interface SEOProps {
   title?: string;
@@ -161,6 +161,7 @@ export function getUnitSEO(unit: UnitSEOInput, image?: string) {
     "@type": unit.type === "cottage" ? "House" : "Apartment",
     "@id": `${canonical}#accommodation`,
     name: unit.name,
+    petsAllowed: PETS_ALLOWED,
     description: unit.description,
     url: canonical,
     image: absoluteImage,

@@ -31,7 +31,7 @@ const FAQ = () => {
 
           {/* FAQ Accordion */}
           <div className="max-w-3xl mx-auto mb-12">
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-4 [&_[role=region][data-state=closed]]:hidden">
               {faqData.map((faq, index) => (
                 <AccordionItem 
                   key={index} 
@@ -41,7 +41,7 @@ const FAQ = () => {
                   <AccordionTrigger className="text-left font-serif text-lg font-medium text-foreground hover:text-primary py-5">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5">
+                  <AccordionContent forceMount className="text-muted-foreground pb-5">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

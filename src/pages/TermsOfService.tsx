@@ -105,7 +105,7 @@ const TermsOfService = () => {
                 Pet Policy
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Pets may be allowed in select units with prior approval. A pet deposit or additional cleaning fee may apply. Service animals are welcome in accordance with applicable laws. Please contact us before booking if you plan to bring a pet.
+                No pets allowed.
               </p>
             </section>
 

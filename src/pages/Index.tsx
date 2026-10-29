@@ -76,7 +76,7 @@ const Index = () => {
                   No Platform Fees
                 </h3>
                 <p className="text-muted-foreground text-sm">
-                  Save money by avoiding booking platform service fees that can add 15%+ to your stay.
+                  No platform fees.
                 </p>
               </div>
 

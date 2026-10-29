@@ -233,7 +233,7 @@ export const faqData = [
   },
   {
     question: "Do you offer long-term stays?",
-    answer: "Absolutely! We specialize in extended stays for traveling professionals. Contact us for discounted rates on 30+ day bookings.",
+    answer: "Absolutely! We specialize in extended stays for traveling professionals. Stays of 30 days or more get the monthly rate.",
   },
   {
     question: "Is cleaning included?",

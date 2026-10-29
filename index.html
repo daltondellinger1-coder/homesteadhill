@@ -44,55 +44,832 @@
     
     <!-- JSON-LD Schema - Organization -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "@id": "https://homestead-hill.com/#organization",
+  "name": "Homestead Hill",
+  "description": "Fully furnished apartments and cottages in Vincennes, Indiana. Perfect for traveling nurses, contractors, and business travelers seeking extended stays.",
+  "url": "https://homestead-hill.com",
+  "telephone": "+1-812-768-3108",
+  "email": "booking@homestead-hill.com",
+  "image": "https://homestead-hill.com/og-image.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2818 Washington Ave",
+    "addressLocality": "Vincennes",
+    "addressRegion": "IN",
+    "postalCode": "47591",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 38.6773,
+    "longitude": -87.5286
+  },
+  "amenityFeature": [
     {
-      "@context": "https://schema.org",
-      "@type": "LodgingBusiness",
-      "@id": "https://homestead-hill.com/#organization",
-      "name": "Homestead Hill",
-      "description": "Fully furnished apartments and cottages in Vincennes, Indiana. Perfect for traveling nurses, contractors, and business travelers seeking extended stays.",
-      "url": "https://homestead-hill.com",
-      "telephone": "+1-812-768-3108",
-      "email": "booking@homestead-hill.com",
-      "image": "https://homestead-hill.com/og-image.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Vincennes",
-        "addressRegion": "IN",
-        "postalCode": "47591",
-        "addressCountry": "US"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 38.6773,
-        "longitude": -87.5286
-      },
-      "amenityFeature": [
-        {"@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true},
-        {"@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": true},
-        {"@type": "LocationFeatureSpecification", "name": "Full Kitchen", "value": true},
-        {"@type": "LocationFeatureSpecification", "name": "Air Conditioning", "value": true},
-        {"@type": "LocationFeatureSpecification", "name": "Self Check-in", "value": true},
-        {"@type": "LocationFeatureSpecification", "name": "Smart Lock Entry", "value": true},
-        {"@type": "LocationFeatureSpecification", "name": "Dedicated Workspace", "value": true}
-        ,{"@type": "LocationFeatureSpecification", "name": "Free On-Site Laundry", "value": true}
-      ],
-      "priceRange": "$$",
-      "paymentAccepted": "Credit Card",
-      "currenciesAccepted": "USD",
-      "checkinTime": "14:00",
-      "checkoutTime": "11:00",
-      "petsAllowed": false,
-      "numberOfRooms": 9,
-      "areaServed": [
-        "Vincennes",
-        "Knox County",
-        "Indiana"
-      ],
-      "audience": {
-        "@type": "Audience",
-        "audienceType": ["Travel Nurses", "Contractors", "Business Travelers", "Relocating Professionals"]
-      }
+      "@type": "LocationFeatureSpecification",
+      "name": "Free Parking",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Free Wi-Fi",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Full Kitchen",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Air Conditioning",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Self Check-in",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Smart Lock Entry",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Dedicated Workspace",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Free On-Site Laundry",
+      "value": true
     }
+  ],
+  "priceRange": "$$",
+  "paymentAccepted": "Credit Card",
+  "currenciesAccepted": "USD",
+  "checkinTime": "14:00",
+  "checkoutTime": "11:00",
+  "petsAllowed": false,
+  "numberOfRooms": 11,
+  "areaServed": [
+    "Vincennes",
+    "Knox County",
+    "Indiana"
+  ],
+  "audience": {
+    "@type": "Audience",
+    "audienceType": [
+      "Travel Nurses",
+      "Contractors",
+      "Business Travelers",
+      "Relocating Professionals"
+    ]
+  },
+  "containsPlace": [
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-1#accommodation",
+      "name": "Unit 1",
+      "url": "https://homestead-hill.com/units/unit-1",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 1 — per night",
+          "url": "https://homestead-hill.com/units/unit-1",
+          "price": 95,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 95,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 1 — per week",
+          "url": "https://homestead-hill.com/units/unit-1",
+          "price": 520,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 520,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 1 — per month",
+          "url": "https://homestead-hill.com/units/unit-1",
+          "price": 1650,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1650,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-2#accommodation",
+      "name": "Unit 2",
+      "url": "https://homestead-hill.com/units/unit-2",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 2 — per night",
+          "url": "https://homestead-hill.com/units/unit-2",
+          "price": 95,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 95,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 2 — per week",
+          "url": "https://homestead-hill.com/units/unit-2",
+          "price": 520,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 520,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 2 — per month",
+          "url": "https://homestead-hill.com/units/unit-2",
+          "price": 1650,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1650,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-3#accommodation",
+      "name": "Unit 3",
+      "url": "https://homestead-hill.com/units/unit-3",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 3 — per night",
+          "url": "https://homestead-hill.com/units/unit-3",
+          "price": 95,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 95,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 3 — per week",
+          "url": "https://homestead-hill.com/units/unit-3",
+          "price": 520,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 520,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 3 — per month",
+          "url": "https://homestead-hill.com/units/unit-3",
+          "price": 1650,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1650,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-4#accommodation",
+      "name": "Unit 4",
+      "url": "https://homestead-hill.com/units/unit-4",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 4 — per night",
+          "url": "https://homestead-hill.com/units/unit-4",
+          "price": 95,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 95,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 4 — per week",
+          "url": "https://homestead-hill.com/units/unit-4",
+          "price": 520,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 520,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 4 — per month",
+          "url": "https://homestead-hill.com/units/unit-4",
+          "price": 1650,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1650,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-5#accommodation",
+      "name": "Unit 5",
+      "url": "https://homestead-hill.com/units/unit-5",
+      "numberOfBedrooms": 2,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 5 — per night",
+          "url": "https://homestead-hill.com/units/unit-5",
+          "price": 105,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 105,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 5 — per week",
+          "url": "https://homestead-hill.com/units/unit-5",
+          "price": 580,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 580,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 5 — per month",
+          "url": "https://homestead-hill.com/units/unit-5",
+          "price": 1850,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1850,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-6#accommodation",
+      "name": "Unit 6",
+      "url": "https://homestead-hill.com/units/unit-6",
+      "numberOfBedrooms": 2,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 6 — per night",
+          "url": "https://homestead-hill.com/units/unit-6",
+          "price": 105,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 105,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 6 — per week",
+          "url": "https://homestead-hill.com/units/unit-6",
+          "price": 580,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 580,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 6 — per month",
+          "url": "https://homestead-hill.com/units/unit-6",
+          "price": 1850,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1850,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-7#accommodation",
+      "name": "Unit 7 - 1 Bedroom Queen Apartment",
+      "url": "https://homestead-hill.com/units/unit-7",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 7 - 1 Bedroom Queen Apartment — per night",
+          "url": "https://homestead-hill.com/units/unit-7",
+          "price": 95,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 95,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 7 - 1 Bedroom Queen Apartment — per week",
+          "url": "https://homestead-hill.com/units/unit-7",
+          "price": 520,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 520,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 7 - 1 Bedroom Queen Apartment — per month",
+          "url": "https://homestead-hill.com/units/unit-7",
+          "price": 1650,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1650,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-9#accommodation",
+      "name": "Unit 9 - 1 Bedroom Queen Apartment",
+      "url": "https://homestead-hill.com/units/unit-9",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 9 - 1 Bedroom Queen Apartment — per night",
+          "url": "https://homestead-hill.com/units/unit-9",
+          "price": 95,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 95,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 9 - 1 Bedroom Queen Apartment — per week",
+          "url": "https://homestead-hill.com/units/unit-9",
+          "price": 520,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 520,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 9 - 1 Bedroom Queen Apartment — per month",
+          "url": "https://homestead-hill.com/units/unit-9",
+          "price": 1650,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1650,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-11#accommodation",
+      "name": "Unit 11 - Cottage",
+      "url": "https://homestead-hill.com/units/unit-11",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 11 - Cottage — per night",
+          "url": "https://homestead-hill.com/units/unit-11",
+          "price": 100,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 100,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 11 - Cottage — per week",
+          "url": "https://homestead-hill.com/units/unit-11",
+          "price": 550,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 550,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 11 - Cottage — per month",
+          "url": "https://homestead-hill.com/units/unit-11",
+          "price": 1750,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1750,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-13#accommodation",
+      "name": "Unit 13 - Cottage",
+      "url": "https://homestead-hill.com/units/unit-13",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 13 - Cottage — per night",
+          "url": "https://homestead-hill.com/units/unit-13",
+          "price": 100,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 100,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 13 - Cottage — per week",
+          "url": "https://homestead-hill.com/units/unit-13",
+          "price": 550,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 550,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 13 - Cottage — per month",
+          "url": "https://homestead-hill.com/units/unit-13",
+          "price": 1750,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1750,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Accommodation",
+      "@id": "https://homestead-hill.com/units/unit-14#accommodation",
+      "name": "Unit 14 - Premium Cottage",
+      "url": "https://homestead-hill.com/units/unit-14",
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Unit 14 - Premium Cottage — per night",
+          "url": "https://homestead-hill.com/units/unit-14",
+          "price": 130,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 130,
+            "priceCurrency": "USD",
+            "unitText": "Night",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Night"
+            },
+            "billingDuration": "P1D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 14 - Premium Cottage — per week",
+          "url": "https://homestead-hill.com/units/unit-14",
+          "price": 640,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 640,
+            "priceCurrency": "USD",
+            "unitText": "Week",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Week"
+            },
+            "billingDuration": "P7D"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Unit 14 - Premium Cottage — per month",
+          "url": "https://homestead-hill.com/units/unit-14",
+          "price": 1850,
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1850,
+            "priceCurrency": "USD",
+            "unitText": "Month",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitText": "Month"
+            },
+            "billingDuration": "P1M"
+          }
+        }
+      ]
+    }
+  ]
+}
     </script>
     
     <!-- JSON-LD Schema - FAQ -->

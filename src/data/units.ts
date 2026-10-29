@@ -98,7 +98,8 @@ export const units: Unit[] = [
     monthlyPrice: 1850,
     weeklyPrice: 580,
     nightlyPrice: 105,
-    exactPricing: true,  },
+    exactPricing: true,
+  },
   {
     id: "unit-6",
     name: "Unit 6",
@@ -113,7 +114,8 @@ export const units: Unit[] = [
     monthlyPrice: 1850,
     weeklyPrice: 580,
     nightlyPrice: 105,
-    exactPricing: true,  },
+    exactPricing: true,
+  },
   {
     id: "unit-7",
     name: "Unit 7",
@@ -126,6 +128,9 @@ export const units: Unit[] = [
     description: "Comfortable 1-bedroom apartment with a queen bedroom, a cozy sitting area with TV, a kitchen with microwave and Keurig, and a full bathroom with walk-in shower. Includes Wi-Fi, A/C & heat, smart-lock self check-in, free parking, and complimentary shared on-site laundry.",
     amenities: ["Dedicated Workspace", "Full Kitchen", "Refrigerator", "Microwave", "Stove", "Keurig", "Wi-Fi", "TV", "A/C & Heat", "Smart Lock", "Free Parking", "Shared complimentary on-site laundry — washers and dryers available to all guests at no additional cost."],
     monthlyPrice: 1650,
+    weeklyPrice: 520,
+    nightlyPrice: 95,
+    exactPricing: true,
   },
   {
 
@@ -177,7 +182,8 @@ export const units: Unit[] = [
     monthlyPrice: 1750,
     weeklyPrice: 550,
     nightlyPrice: 100,
-    exactPricing: true,  },
+    exactPricing: true,
+  },
   {
     id: "unit-14",
     name: "Unit 14 - Premium Cottage",
@@ -193,7 +199,8 @@ export const units: Unit[] = [
     monthlyPrice: 1850,
     weeklyPrice: 640,
     nightlyPrice: 130,
-    exactPricing: true,  },
+    exactPricing: true,
+  },
 ];
 
 export const amenitiesData = [

@@ -1,8 +1,8 @@
 ## Open tasks
-- [ ] Publish homestead-hill.com — pricing publish AUTHORIZED by Dalton (2026-10-29); prepared and verified, waiting for the publish to be triggered. Also ships: Unit 13 CTA wrap fix, laundry gallery photos. Units 7/9 are ALREADY LIVE (verified 2026-10-28) as inquiry-only — no calendar feeds.
-- [x] Final rate table (Dalton approved 2026-10-29), all units exact cents, 7 nights = weekly, 30 nights = monthly: Units 1–4, 7, 9 $1,650/$520/$95; Units 11, 13 $1,750/$550/$100; Units 5, 6 $1,850/$580/$105; Unit 14 $1,850/$640/$130. Extra weekly/monthly nights prorated at full-precision weekly/7 or monthly/30, final total rounded to cents. Supersedes the $585.20, $546, $547 and legacy monthly/3.75 vs /3.2 entries below.
+- [x] Published homestead-hill.com with the final rate table — deployment 57f8acc3-8800-452d-b7cc-5d752d417954; live-verified 2026-10-28 ~8:05 PM America/New_York: all 11 unit detail pages show the approved monthly/weekly/nightly rates; live booking form for Unit 1, Mar 1→Mar 8, 2027 (7 nights) quoted $520.00 (not submitted). Also ships: Unit 13 CTA wrap fix, laundry gallery photos. Units 7/9 are ALREADY LIVE (verified 2026-10-28) as inquiry-only — no calendar feeds.
+- [x] Final rate table (Dalton approved 2026-10-28 ET), all units exact cents, 7 nights = weekly, 30 nights = monthly: Units 1–4, 7, 9 $1,650/$520/$95; Units 11, 13 $1,750/$550/$100; Units 5, 6 $1,850/$580/$105; Unit 14 $1,850/$640/$130. Extra weekly/monthly nights prorated at full-precision weekly/7 or monthly/30, final total rounded to cents. Supersedes the $585.20, $546, $547 and legacy monthly/3.75 vs /3.2 entries below.
 - [x] Weekly rate mismatch RESOLVED for units 1, 2, 3, 4, 7, 9 only (Dalton approved $585.20/wk = $83.60/night, exact cents); preview only, not published
-- [x] Weekly rate mismatch resolved for all units by the 2026-10-29 rate table
+- [x] Weekly rate mismatch resolved for all units by the 2026-10-28 ET rate table
 - [x] Unit 13 weekly display mismatch resolved in preview: advertise the existing seven-night calculator total $547; monthly $1,750, nightly $95 and all booking calculations unchanged. Publication remains ON HOLD.
 - [x] Unit 13 video availability CTA wraps within its card, centered with comfortable padding and automatic touch height; checked at 320/360/390/412px and desktop with 100%/125%/150% text. Video assets and crop unchanged; preview only.
 - [x] Add Unit 9 (7 real photos, config matched to Units 1–4) — already live (verified 2026-10-28)
@@ -21,7 +21,7 @@ Blocking:
 - Dalton's review sign-off on the current preview (Unit 13 crop fix is confirmed satisfied at commit 07be6909d7c8aa8a08aa58d909359ac17d5f4dd6).
 - (Superseded 2026-10-28) Units 7 and 9 are already live as inquiry-only; their calendar feeds are still missing, so the booking form shows "availability temporarily unavailable" until real feeds are supplied.
 Optional follow-ups (not blocking):
-- (Resolved 2026-10-29) Units 5, 6 weekly mismatch fixed by the final rate table.
+- (Resolved 2026-10-28 ET) Units 5, 6 weekly mismatch fixed by the final rate table.
 - [x] Unit 11 weekly set to $546 per Dalton (monthly $1,750 unchanged); card, detail and 7-night quote all $546 (preview only, 2026-10-28). Unit 13's advertised weekly price now matches its unchanged $547 seven-night quote in preview (2026-10-19).
 - Booking emails come from the currently deployed email code and print the weekly total as "$585.2" rather than "$585.20" until that email code is updated and redeployed.
 - Unit 13 video playback could not be verified in the test browser (common H.264 decode unavailable there); duration and framing were confirmed from the file itself, so one live check on a phone is still worthwhile.

@@ -1,6 +1,8 @@
 import type { Unit } from "@/data/units";
 
 export const MINIMUM_NIGHTS = 3;
+export const WEEKLY_MIN_NIGHTS = 7;
+export const MONTHLY_MIN_NIGHTS = 30;
 
 export type RateType = "monthly" | "weekly" | "nightly" | "minimum";
 
@@ -12,57 +14,44 @@ export interface Pricing {
   minimumNights?: number;
 }
 
-/** Units with exactPricing keep cents; others keep the legacy whole-dollar rounding. */
+/** Round once, at the end, to whole cents. */
+const toCents = (amount: number) => Math.round(amount * 100) / 100;
+
+/** Advertised weekly price — the same number a 7-night quote returns. */
 export function getWeeklyPrice(unit: Unit): number {
-  // Unit 13 advertises its existing seven-night quote without changing charges.
-  if (unit.id === "unit-13") return calculatePricing(unit, 7).total;
-  return unit.weeklyPrice ?? Math.round(unit.monthlyPrice / 3.75);
+  return unit.weeklyPrice ?? toCents((unit.monthlyPrice / 4) * 1.25);
 }
 
 export function formatUSD(amount: number, exact?: boolean): string {
   return exact
     ? amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : amount.toLocaleString();
+    : amount.toLocaleString("en-US");
 }
 
+/**
+ * Tiers: 30+ nights monthly, 7–29 weekly, 3–6 nightly, under 3 billed as the 3-night minimum.
+ * Per-night rates are kept at full precision (weekly/7, monthly/30); only the final total is rounded to cents,
+ * so 7 nights equals the weekly price and 30 nights equals the monthly price exactly.
+ */
 export function calculatePricing(unit: Unit, nights: number): Pricing {
-  const monthlyPrice = unit.monthlyPrice;
-  const nightlyRate = unit.nightlyPrice ?? 95;
+  const monthly = unit.monthlyPrice;
+  const weekly = getWeeklyPrice(unit);
+  const nightly = unit.nightlyPrice ?? 95;
 
-  if (unit.exactPricing) {
-    // Integer-cent math so totals are exact to the cent.
-    const monthlyCents = Math.round(monthlyPrice * 100);
-    const weeklyNightCents = Math.round(((unit.weeklyPrice ?? monthlyPrice / 3.75) * 100) / 7);
-    const nightlyCents = Math.round(nightlyRate * 100);
-    if (nights >= 30) {
-      const dailyMonthlyCents = Math.round(monthlyCents / 30);
-      const cents = Math.floor(nights / 30) * monthlyCents + (nights % 30) * dailyMonthlyCents;
-      return { subtotal: cents / 100, total: cents / 100, rateType: "monthly", perNight: dailyMonthlyCents / 100 };
-    }
-    if (nights >= 7) {
-      const cents = nights * weeklyNightCents;
-      return { subtotal: cents / 100, total: cents / 100, rateType: "weekly", perNight: weeklyNightCents / 100 };
-    }
-    const billed = Math.max(nights, MINIMUM_NIGHTS);
-    const cents = billed * nightlyCents;
-    return nights >= MINIMUM_NIGHTS
-      ? { subtotal: cents / 100, total: cents / 100, rateType: "nightly", perNight: nightlyRate }
-      : { subtotal: cents / 100, total: cents / 100, rateType: "minimum", perNight: nightlyRate, minimumNights: MINIMUM_NIGHTS };
+  if (nights >= MONTHLY_MIN_NIGHTS) {
+    const daily = monthly / 30;
+    const total = toCents(Math.floor(nights / 30) * monthly + (nights % 30) * daily);
+    return { subtotal: total, total, rateType: "monthly", perNight: toCents(daily) };
   }
-
-  // Legacy logic (unchanged) for all other units.
-  const dailyMonthlyRate = monthlyPrice / 30;
-  const dailyWeeklyRate = (unit.weeklyPrice ?? (monthlyPrice / 4) * 1.25) / 7;
-  if (nights >= 30) {
-    const subtotal = Math.round(Math.floor(nights / 30) * monthlyPrice + (nights % 30) * dailyMonthlyRate);
-    return { subtotal, total: subtotal, rateType: "monthly", perNight: Math.round(dailyMonthlyRate) };
-  } else if (nights >= 7) {
-    const subtotal = Math.round(nights * dailyWeeklyRate);
-    return { subtotal, total: subtotal, rateType: "weekly", perNight: Math.round(dailyWeeklyRate) };
-  } else if (nights >= MINIMUM_NIGHTS) {
-    const subtotal = nights * nightlyRate;
-    return { subtotal, total: subtotal, rateType: "nightly", perNight: nightlyRate };
+  if (nights >= WEEKLY_MIN_NIGHTS) {
+    const daily = weekly / 7;
+    const total = toCents(nights * daily);
+    return { subtotal: total, total, rateType: "weekly", perNight: toCents(daily) };
   }
-  const subtotal = MINIMUM_NIGHTS * nightlyRate;
-  return { subtotal, total: subtotal, rateType: "minimum", perNight: nightlyRate, minimumNights: MINIMUM_NIGHTS };
+  if (nights >= MINIMUM_NIGHTS) {
+    const total = toCents(nights * nightly);
+    return { subtotal: total, total, rateType: "nightly", perNight: nightly };
+  }
+  const total = toCents(MINIMUM_NIGHTS * nightly);
+  return { subtotal: total, total, rateType: "minimum", perNight: nightly, minimumNights: MINIMUM_NIGHTS };
 }

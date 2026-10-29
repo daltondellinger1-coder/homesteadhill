@@ -242,26 +242,20 @@ const UnitDetail = () => {
               <div className="sticky top-28 bg-gradient-card rounded-2xl border border-border p-6">
               {/* Price Display */}
                 <div className="text-center mb-6 pb-6 border-b border-border">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <div className="text-xl font-semibold text-primary">
-                        ${unit.monthlyPrice.toLocaleString()}
+                  <dl className="space-y-3 text-left" aria-label="Unit prices">
+                    {[
+                      { label: "per month", amount: unit.monthlyPrice, primary: true },
+                      { label: "per week", amount: weeklyPrice, primary: false },
+                      { label: "per night", amount: nightlyPrice, primary: false },
+                    ].map(({ label, amount, primary }) => (
+                      <div key={label} className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                        <dt className="text-sm text-muted-foreground whitespace-nowrap">{label}</dt>
+                        <dd className={`text-xl font-semibold tabular-nums whitespace-nowrap ${primary ? "text-primary" : "text-foreground"}`}>
+                          ${formatUSD(amount, !Number.isInteger(amount))}
+                        </dd>
                       </div>
-                      <div className="text-muted-foreground text-xs">per month</div>
-                    </div>
-                    <div className="border-l border-r border-border px-4">
-                      <div className="text-xl font-semibold text-foreground">
-                        ${formatUSD(weeklyPrice, unit.exactPricing)}
-                      </div>
-                      <div className="text-muted-foreground text-xs">per week</div>
-                    </div>
-                    <div>
-                      <div className="text-xl font-semibold text-foreground">
-                        ${nightlyPrice.toLocaleString()}
-                      </div>
-                      <div className="text-muted-foreground text-xs">per night</div>
-                    </div>
-                  </div>
+                    ))}
+                  </dl>
                   <p className="text-xs text-muted-foreground mt-3">3 night minimum</p>
                   <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
                     Direct booking rates include furnishings, utilities, Wi-Fi, and flexible terms.

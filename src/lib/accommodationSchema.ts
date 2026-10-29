@@ -2,6 +2,8 @@ import { units } from "@/data/units";
 import type { Unit } from "@/data/units";
 import { getWeeklyPrice } from "@/lib/pricing";
 
+export const PETS_ALLOWED = false;
+
 export const PROPERTY_ADDRESS = {
   "@type": "PostalAddress",
   streetAddress: "2818 Washington Ave",
@@ -37,11 +39,13 @@ export function getUnitOffers(unit: Pick<Unit, "id" | "name" | "monthlyPrice" | 
 export function getPropertyAccommodationSchema() {
   return {
     numberOfRooms: units.length,
+    petsAllowed: PETS_ALLOWED,
     address: PROPERTY_ADDRESS,
     containsPlace: units.map(unit => ({
       "@type": "Accommodation",
       "@id": `https://homestead-hill.com/units/${unit.id}#accommodation`,
       name: unit.name,
+      petsAllowed: PETS_ALLOWED,
       url: `https://homestead-hill.com/units/${unit.id}`,
       numberOfBedrooms: unit.bedrooms,
       numberOfBathroomsTotal: unit.baths,

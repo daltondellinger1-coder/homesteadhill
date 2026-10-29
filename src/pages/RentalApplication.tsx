@@ -395,7 +395,7 @@ const RentalApplication = () => {
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {renderField("How long do you plan to live here?", "how_long_live_here")}
-                    {renderField("Do you have pets? If so, describe", "pets")}
+                    {renderField("No pets allowed. Do you have pets?", "pets")}
                     {renderField("Number of evictions", "evictions_count", { placeholder: "0" })}
                     {renderField("Number of felonies", "felonies_count", { placeholder: "0" })}
                     {renderField("Have you broken a lease?", "broken_lease", { placeholder: "Yes/No - explain" })}

@@ -8,6 +8,12 @@ test("cleaning fee is $100 per stay", () => {
   strictEqual(CLEANING_FEE, 100);
 });
 
+test("owner's no-pets rule applies to the property and every unit", () => {
+  const schema = getPropertyAccommodationSchema();
+  strictEqual(schema.petsAllowed, false);
+  schema.containsPlace.forEach(unit => strictEqual(unit.petsAllowed, false));
+});
+
 test("schema inventory contains exactly the 11 real units", () => {
   const schema = getPropertyAccommodationSchema();
   strictEqual(schema.numberOfRooms, 11);

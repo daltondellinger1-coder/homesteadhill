@@ -70,7 +70,7 @@ const UnitDetail = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-3">
+            <div className="min-w-0 lg:col-span-3">
               {/* Main Image - Clickable */}
               <button
                 onClick={() => hasImages && setLightboxOpen(true)}
@@ -214,9 +214,9 @@ const UnitDetail = () => {
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {unit.amenities.map((amenity, index) => (
-                    <div key={index} className="flex items-center gap-2 text-muted-foreground">
+                    <div key={index} className="min-w-0 flex items-center gap-2 text-muted-foreground">
                       <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span className="text-sm">{amenity}</span>
+                      <span className="min-w-0 break-words text-sm">{amenity}</span>
                     </div>
                   ))}
                 </div>
@@ -238,7 +238,7 @@ const UnitDetail = () => {
             </div>
 
             {/* Booking Sidebar */}
-            <div className="lg:col-span-2">
+            <div className="min-w-0 lg:col-span-2">
               <div className="sticky top-28 bg-gradient-card rounded-2xl border border-border p-6">
               {/* Price Display */}
                 <div className="text-center mb-6 pb-6 border-b border-border">

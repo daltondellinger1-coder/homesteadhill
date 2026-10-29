@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
-const { render, unitNames } = await import(join(dist, "server", "entry-server.js"));
+const { render, unitNames, getPropertyAccommodationSchema } = await import(join(dist, "server", "entry-server.js"));
 const baseUrl = "https://homestead-hill.com";
 
 const pages = [
@@ -30,6 +30,7 @@ const pages = [
   ["/contact", "Book Your Stay | Homestead Hill Direct Booking", "Book directly with Homestead Hill and save on platform fees. Request a reservation for furnished apartments and cottages in Vincennes, IN."],
   ["/privacy-policy", "Privacy Policy | Homestead Hill", "Read Homestead Hill's privacy policy."],
   ["/terms-of-service", "Terms of Service | Homestead Hill", "Read Homestead Hill's terms of service."],
+  ["/rental-application", "Rental Application | Homestead Hill", "Apply for an extended stay at Homestead Hill in Vincennes, Indiana."],
 ];
 
 const escapeHtml = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -54,7 +55,12 @@ function pageHtml(template, route, title, description) {
   return withMeta.replace('<div id="root"></div>', () => `<div id="root">${render(route)}</div>`);
 }
 
-const template = await readFile(join(dist, "index.html"), "utf8");
+const template = (await readFile(join(dist, "index.html"), "utf8"))
+  .replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (script, body) => {
+    const schema = JSON.parse(body);
+    if (schema["@type"] !== "LodgingBusiness") return script;
+    return `<script type="application/ld+json">${JSON.stringify({ ...schema, ...getPropertyAccommodationSchema() }).replace(/</g, "\\u003c")}</script>`;
+  });
 
 // Remove stale flat .html artifacts so directory index outputs can take over
 for (const [route] of pages) {

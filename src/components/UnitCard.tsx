@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Bed, Bath, Users, Home, Star, DollarSign } from "lucide-react";
 import { getWeeklyPrice, formatUSD } from "@/lib/pricing";
+import { CLEANING_FEE_NOTICE } from "@/lib/fees";
 import type { Unit } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages, getUnitImagePresentation } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
@@ -91,6 +92,7 @@ export function UnitCard({ unit }: UnitCardProps) {
           </div>
 
           {/* Quick Stats */}
+          <p className="mb-4 text-sm text-muted-foreground">{CLEANING_FEE_NOTICE}</p>
           <div className="flex items-center gap-4 text-muted-foreground text-sm mb-4">
             <div className="flex items-center gap-1.5">
               <Users className="w-4 h-4" />

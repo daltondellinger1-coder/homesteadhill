@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { getUnitOffers, PROPERTY_ADDRESS } from "@/lib/accommodationSchema";
 
 interface SEOProps {
   title?: string;
@@ -133,6 +134,8 @@ interface UnitSEOInput {
   description: string;
   amenities: string[];
   monthlyPrice: number;
+  weeklyPrice?: number;
+  nightlyPrice?: number;
 }
 
 function clamp(text: string, max = 155) {
@@ -170,13 +173,8 @@ export function getUnitSEO(unit: UnitSEOInput, image?: string) {
       name,
       value: true,
     })),
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Vincennes",
-      addressRegion: "IN",
-      postalCode: "47591",
-      addressCountry: "US",
-    },
+    address: PROPERTY_ADDRESS,
+    offers: getUnitOffers(unit),
     containedInPlace: { "@id": `${BASE_URL}/#organization` },
   };
 

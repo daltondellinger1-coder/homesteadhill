@@ -23,6 +23,7 @@ import HomesteadHillDraws from "./pages/HomesteadHillDraws";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
+import BookRedirect from "./pages/BookRedirect";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
           
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/book" element={<BookRedirect />} />
           <Route
             path="/admin"
             element={

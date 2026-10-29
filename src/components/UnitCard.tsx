@@ -69,18 +69,18 @@ export function UnitCard({ unit }: UnitCardProps) {
 
         {/* Content */}
         <div className="p-6">
-          <div className="flex items-start justify-between mb-2">
+          <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2 mb-2">
             <h3 className="font-serif text-xl font-semibold text-foreground">
               {unit.name}
             </h3>
             {/* Pricing */}
-            <div className="text-right text-xs space-y-0.5">
+            <div className="ml-auto text-right text-xs space-y-0.5 whitespace-nowrap" aria-label="Unit prices">
               <div>
                 <span className="font-semibold text-primary text-base">${unit.monthlyPrice.toLocaleString()}</span>
                 <span className="text-muted-foreground">/mo</span>
               </div>
               <div>
-                <span className="font-medium text-foreground">${formatUSD(weeklyPrice, unit.exactPricing)}</span>
+                <span className="font-medium text-foreground">${formatUSD(weeklyPrice, !Number.isInteger(weeklyPrice))}</span>
                 <span className="text-muted-foreground">/wk</span>
               </div>
               <div>

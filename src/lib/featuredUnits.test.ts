@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { test } from "node:test";
 import { deepStrictEqual } from "node:assert/strict";
 import { units } from "../data/units";

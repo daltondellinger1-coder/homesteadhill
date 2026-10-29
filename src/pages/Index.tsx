@@ -75,9 +75,6 @@ const Index = () => {
                 <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
                   No Platform Fees
                 </h3>
-                <p className="text-muted-foreground text-sm">
-                  No platform fees.
-                </p>
               </div>
 
               <div className="text-center p-6">

@@ -9,6 +9,7 @@ import { units } from "@/data/units";
 import { getUnitPrimaryImage, getUnitGalleryImages, getUnitImagePresentation } from "@/data/unitImages";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { Unit13Video } from "@/components/Unit13Video";
+import NotFound from "./NotFound";
 import {
   Bed, Bath, Users, Home, ArrowLeft, Check,
   Star, Wifi, Car, KeyRound, Thermometer, ChevronLeft, ChevronRight
@@ -25,25 +26,7 @@ const UnitDetail = () => {
   const hasImages = galleryImages.length > 0;
 
   if (!unit) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 md:pt-28 pb-16 md:pb-24">
-          <div className="container text-center">
-            <h1 className="font-serif text-3xl font-semibold text-foreground mb-4">
-              Unit Not Found
-            </h1>
-            <p className="text-muted-foreground mb-6">
-              The unit you're looking for doesn't exist.
-            </p>
-            <Button asChild>
-              <Link to="/units">View All Units</Link>
-            </Button>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
+    return <NotFound />;
   }
 
   const unitSEO = getUnitSEO(unit, primaryImage ?? galleryImages[0]?.src);

@@ -7,10 +7,11 @@ import { UnitCard } from "@/components/UnitCard";
 import { Button } from "@/components/ui/button";
 import { SEO, pageSEO } from "@/components/SEO";
 import { units } from "@/data/units";
+import { getHomepageFeaturedUnits } from "@/lib/featuredUnits";
 import { ArrowRight, Shield, DollarSign, Clock } from "lucide-react";
 
 const Index = () => {
-  const featuredUnits = units.filter(u => u.featured).slice(0, 3);
+  const featuredUnits = getHomepageFeaturedUnits(units);
 
   return (
     <div className="min-h-screen bg-background">

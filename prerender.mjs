@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
-const { render } = await import(join(dist, "server", "entry-server.js"));
+const { render, unitNames } = await import(join(dist, "server", "entry-server.js"));
 const baseUrl = "https://homestead-hill.com";
 
 const pages = [
@@ -35,6 +35,10 @@ const pages = [
 const escapeHtml = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 function pageHtml(template, route, title, description) {
+  const unitId = route.split("/")[2];
+  if (["unit-3", "unit-7", "unit-9"].includes(unitId)) {
+    title = title.replace(/^.*? —/, `${unitNames[unitId]} —`);
+  }
   const canonical = `${baseUrl}${route === "/" ? "/" : route}`;
   const withMeta = template
     .replace(/<title>[^<]*<\/title>/i, () => `<title>${escapeHtml(title)}</title>`)

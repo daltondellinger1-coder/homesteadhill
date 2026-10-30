@@ -1,4 +1,4 @@
-import type { Unit } from "../data/units";
+import type { Unit } from "@/data/units";
 
 export const MINIMUM_NIGHTS = 3;
 export const WEEKLY_MIN_NIGHTS = 7;

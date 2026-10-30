@@ -1,5 +1,6 @@
 import { getWeeklyPrice, formatUSD } from "@/lib/pricing";
 import { CLEANING_FEE_NOTICE } from "@/lib/fees";
+import { PRORATED_WEEKLY_NOTICE } from "@/lib/pricing";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
@@ -242,6 +243,7 @@ const UnitDetail = () => {
                   </dl>
                   <p className="text-sm text-muted-foreground mt-3">{CLEANING_FEE_NOTICE}</p>
                   <p className="text-xs text-muted-foreground mt-3">3 night minimum</p>
+                  <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{PRORATED_WEEKLY_NOTICE}</p>
                   <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
                     Direct booking rates include furnishings, utilities, Wi-Fi, and flexible terms.
                   </p>

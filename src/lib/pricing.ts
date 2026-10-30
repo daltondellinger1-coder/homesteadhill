@@ -4,6 +4,10 @@ export const MINIMUM_NIGHTS = 3;
 export const WEEKLY_MIN_NIGHTS = 7;
 export const MONTHLY_MIN_NIGHTS = 30;
 
+/** Public explanation of the 7–29 night tier. */
+export const PRORATED_WEEKLY_NOTICE =
+  "Stays of 7–29 nights are charged the weekly rate prorated per night, including partial weeks.";
+
 export type RateType = "monthly" | "weekly" | "nightly" | "minimum";
 
 export interface Pricing {

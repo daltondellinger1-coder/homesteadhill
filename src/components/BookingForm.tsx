@@ -15,7 +15,6 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { trackFunnelEvent } from "@/lib/analytics";
 import { calculatePricing, formatUSD, PRORATED_WEEKLY_NOTICE } from "@/lib/pricing";
-import { CLEANING_FEE } from "@/lib/fees";
 
 const CALENDAR_UNAVAILABLE_MESSAGE =
   "Online availability is temporarily unavailable. Call (812) 768-3108 or email booking@homestead-hill.com to confirm dates.";
@@ -476,15 +475,11 @@ export function BookingForm() {
                     ${formatUSD(pricing.subtotal, selectedUnit.exactPricing)}
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <span>Cleaning fee (one-time)</span>
-                  <span>${formatUSD(CLEANING_FEE, true)}</span>
-                </div>
                 <div className="flex items-center justify-between pt-2 border-t border-primary/10">
-                  <span className="font-medium">Estimated Total (before taxes)</span>
+                  <span className="font-medium">Estimated rent (before cleaning fee and taxes)</span>
                   <div className="text-right">
                     <div className="text-xl font-semibold text-primary">
-                      ${formatUSD(Math.round((pricing.total + CLEANING_FEE) * 100) / 100, true)}
+                      ${formatUSD(pricing.total, selectedUnit.exactPricing)}
                     </div>
                   </div>
                 </div>

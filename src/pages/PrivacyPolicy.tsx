@@ -1,14 +1,11 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, pageSEO } from "@/components/SEO";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-background">
-      <SEO 
-        title="Privacy Policy | Homestead Hill"
-        description="Privacy Policy for Homestead Hill furnished apartments and cottages in Vincennes, Indiana. Learn how we collect, use, and protect your personal information."
-      />
+      <SEO {...pageSEO.privacy} />
       <Header />
       
       <main className="pt-24 md:pt-28 pb-16">

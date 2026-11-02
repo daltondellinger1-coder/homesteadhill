@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import { getUnitOffers, PROPERTY_ADDRESS, PETS_ALLOWED } from "@/lib/accommodationSchema";
+import { getUnitOffers, PROPERTY_ADDRESS, PETS_ALLOWED, LODGING_ID } from "@/lib/accommodationSchema";
+import { pageMeta, getCanonicalUrl, getUnitDisplayName, getUnitMetaTitle, getUnitMetaDescription } from "@/lib/siteMeta";
+import type { Unit } from "@/data/units";
 
 interface SEOProps {
   title?: string;
@@ -26,7 +28,7 @@ export function SEO({
   jsonLd,
 }: SEOProps) {
   useEffect(() => {
-    const resolvedCanonical = canonical || `${BASE_URL}${window.location.pathname}`;
+    const resolvedCanonical = canonical || getCanonicalUrl(window.location.pathname);
 
     // Update document title
     document.title = title;
@@ -45,7 +47,7 @@ export function SEO({
 
     // Primary meta tags
     setMeta("description", description);
-    setMeta("robots", noindex ? "noindex, nofollow" : "index, follow");
+    setMeta("robots", noindex ? "noindex" : "index, follow");
 
     // Open Graph
     setMeta("og:type", type, true);
@@ -90,65 +92,24 @@ export function SEO({
   return null;
 }
 
-// Page-specific SEO configurations
+// Page-specific SEO configurations (shared with build-time prerender)
 export const pageSEO = {
-  home: {
-    title: "Homestead Hill | Furnished Rentals in Vincennes, IN",
-    description: "Furnished apartments and cottages in Vincennes, IN for traveling nurses, contractors, and business travelers. Self check-in, free parking, fast Wi-Fi.",
-  },
-  units: {
-    title: "Browse All Units | Homestead Hill Furnished Rentals",
-    description: "View all furnished apartments and cottages in Vincennes, IN. 1-2 bedroom options with full kitchens, Wi-Fi, and free parking. From $1,650/month.",
-  },
-  amenities: {
-    title: "Amenities | Homestead Hill Furnished Apartments",
-    description: "Every Homestead Hill unit includes full kitchen, fast Wi-Fi, smart TV, A/C & heat, free parking, and smart lock self check-in. See all amenities.",
-  },
-  gallery: {
-    title: "Photo Gallery | Homestead Hill Vincennes Rentals",
-    description: "Browse photos of our fully furnished apartments and cottages in Vincennes, Indiana. See kitchens, bedrooms, living areas, and more.",
-  },
-  location: {
-    title: "Location | Homestead Hill - Vincennes, Indiana",
-    description: "Homestead Hill is conveniently located in Vincennes, Indiana. Near Good Samaritan Hospital, Vincennes University, and local restaurants.",
-  },
-  faq: {
-    title: "FAQ | Homestead Hill Furnished Rentals",
-    description: "Frequently asked questions about staying at Homestead Hill. Check-in times, parking, long-term stays, cleaning, and booking direct.",
-  },
-  contact: {
-    title: "Book Your Stay | Homestead Hill Direct Booking",
-    description: "Book directly with Homestead Hill and save on platform fees. Request a reservation for furnished apartments and cottages in Vincennes, IN.",
-  },
+  home: pageMeta["/"],
+  units: pageMeta["/units"],
+  amenities: pageMeta["/amenities"],
+  gallery: pageMeta["/gallery"],
+  location: pageMeta["/location"],
+  faq: pageMeta["/faq"],
+  contact: pageMeta["/contact"],
+  rentalApplication: pageMeta["/rental-application"],
+  privacy: pageMeta["/privacy-policy"],
+  terms: pageMeta["/terms-of-service"],
 };
 
 // Generate unit-specific SEO (title, description, canonical, JSON-LD)
-interface UnitSEOInput {
-  id: string;
-  name: string;
-  type: string;
-  bedrooms: number;
-  baths: number;
-  sleeps: number;
-  bedType: string;
-  description: string;
-  amenities: string[];
-  monthlyPrice: number;
-  weeklyPrice?: number;
-  nightlyPrice?: number;
-}
-
-function clamp(text: string, max = 155) {
-  if (text.length <= max) return text;
-  return `${text.slice(0, max - 1).replace(/[\s,.;—-]+$/, "")}…`;
-}
-
-export function getUnitSEO(unit: UnitSEOInput, image?: string) {
-  const kind = unit.type === "cottage" ? "Cottage" : "Apartment";
-  const title = `${unit.name} — ${unit.bedrooms} Bed Furnished ${kind}, Vincennes IN`;
-  const description = clamp(
-    `${unit.description} Sleeps ${unit.sleeps}. Book direct from $${unit.monthlyPrice.toLocaleString()}/month.`,
-  );
+export function getUnitSEO(unit: Unit, image?: string) {
+  const title = getUnitMetaTitle(unit);
+  const description = getUnitMetaDescription(unit);
   const canonical = `${BASE_URL}/units/${unit.id}`;
   const absoluteImage = image
     ? image.startsWith("http")
@@ -160,14 +121,13 @@ export function getUnitSEO(unit: UnitSEOInput, image?: string) {
     "@context": "https://schema.org",
     "@type": unit.type === "cottage" ? "House" : "Apartment",
     "@id": `${canonical}#accommodation`,
-    name: unit.name,
+    name: getUnitDisplayName(unit),
     petsAllowed: PETS_ALLOWED,
     description: unit.description,
     url: canonical,
     image: absoluteImage,
     numberOfBedrooms: unit.bedrooms,
     numberOfBathroomsTotal: unit.baths,
-    bed: { "@type": "BedDetails", typeOfBed: unit.bedType },
     occupancy: { "@type": "QuantitativeValue", value: unit.sleeps, unitText: "guests" },
     amenityFeature: unit.amenities.map((name) => ({
       "@type": "LocationFeatureSpecification",
@@ -176,7 +136,7 @@ export function getUnitSEO(unit: UnitSEOInput, image?: string) {
     })),
     address: PROPERTY_ADDRESS,
     offers: getUnitOffers(unit),
-    containedInPlace: { "@id": `${BASE_URL}/#organization` },
+    containedInPlace: { "@id": LODGING_ID },
   };
 
   return { title, description, canonical, image: absoluteImage, jsonLd };

@@ -4,43 +4,15 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
-const { render, unitNames, getPropertyAccommodationSchema } = await import(join(dist, "server", "entry-server.js"));
-const baseUrl = "https://homestead-hill.com";
+const { render, getIndexableRoutes, getCanonicalUrl, buildSitemapXml, getPropertyAccommodationSchema } = await import(join(dist, "server", "entry-server.js"));
 
-const pages = [
-  ["/", "Homestead Hill | Furnished Rentals in Vincennes, IN", "Furnished apartments and cottages in Vincennes, IN for traveling nurses, contractors, and business travelers. Self check-in, free parking, fast Wi-Fi."],
-  ["/units", "Browse All Units | Homestead Hill Furnished Rentals", "View all furnished apartments and cottages in Vincennes, IN. 1-2 bedroom options with full kitchens, Wi-Fi, and free parking. From $1,650/month."],
-  ["/units/unit-1", "Unit 1 — 1 Bed Furnished Apartment, Vincennes IN", "Cozy 1-bedroom with dedicated workspace, full kitchen, Wi-Fi, TV, A/C and heat, smart-lock entry, and free parking. Sleeps 2. Book direct from $1,650/month."],
-  ["/units/unit-2", "Unit 2 — 1 Bed Furnished Apartment, Vincennes IN", "Comfortable 1-bedroom with full kitchen, Wi-Fi, TV, smart-lock self check-in, and free parking. Sleeps 2. Book direct from $1,650/month."],
-  ["/units/unit-3", "Unit 3 — 1 Bed Furnished Apartment, Vincennes IN", "Highly rated 1-bedroom with queen bed, stylish living area, full kitchen, Wi-Fi, and free parking. Sleeps 2. Book direct from $1,650/month."],
-  ["/units/unit-4", "Unit 4 — 1 Bed Furnished Apartment, Vincennes IN", "Queen bed, smart-lock entry, fast Wi-Fi, kitchen with stove and microwave, and dedicated workspace. Sleeps 2. Book direct from $1,650/month."],
-  ["/units/unit-5", "Unit 5 — 2 Bed Furnished Apartment, Vincennes IN", "Spacious 2-bedroom with two queen beds, a large living area, full kitchen, private entrance, and long-term stays welcome. Sleeps 4. From $1,850/month."],
-  ["/units/unit-6", "Unit 6 — 2 Bed Furnished Apartment, Vincennes IN", "Bright 2-bedroom with a large living area, full kitchen, modern bath, free parking, and exterior security cameras. Sleeps 4. Book direct from $1,850/month."],
-  ["/units/unit-7", "Unit 7 — 1 Bed Furnished Apartment, Vincennes IN", "Comfortable 1-bedroom with a queen bedroom, sitting area with TV, kitchen with microwave and Keurig, and walk-in shower. Sleeps 2. From $1,650/month."],
-
-  ["/units/unit-9", "Unit 9 — 1 Bed Furnished Apartment, Vincennes IN", "Updated 1-bedroom with private entry, open living and kitchen, walk-in shower, Wi-Fi, TV, and free parking. Sleeps 2. Book direct from $1,650/month."],
-
-  ["/units/unit-11", "Unit 11 Cottage — 1 Bed Furnished Rental, Vincennes IN", "Standalone cottage with dedicated workspace, compact kitchen, modern bath, and a private feel. Sleeps 2. Book direct from $1,750/month."],
-  ["/units/unit-13", "Unit 13 Cottage — 1 Bed Furnished Rental, Vincennes IN", "Standalone cottage with a queen bed, stylish living area, kitchenette, modern bath, Wi-Fi, and free parking. Sleeps 2. Book direct from $1,750/month."],
-  ["/units/unit-14", "Unit 14 Premium Cottage — Furnished Rental, Vincennes IN", "Premium standalone cottage with private entry, full kitchen, in-unit washer/dryer combo, workspace, Wi-Fi, and smart-lock self check-in. Sleeps 2. From $1,850/month."],
-  ["/amenities", "Amenities | Homestead Hill Furnished Apartments", "Every Homestead Hill unit includes full kitchen, fast Wi-Fi, smart TV, A/C and heat, free parking, and smart-lock self check-in. See all amenities."],
-  ["/gallery", "Photo Gallery | Homestead Hill Vincennes Rentals", "Browse photos of our fully furnished apartments and cottages in Vincennes, Indiana. See kitchens, bedrooms, living areas, and more."],
-  ["/location", "Location | Homestead Hill - Vincennes, Indiana", "Homestead Hill is conveniently located in Vincennes, Indiana near Good Samaritan Hospital, Vincennes University, and local restaurants."],
-  ["/faq", "FAQ | Homestead Hill Furnished Rentals", "Frequently asked questions about staying at Homestead Hill: check-in, parking, long-term stays, cleaning, and booking direct."],
-  ["/contact", "Book Your Stay | Homestead Hill Direct Booking", "Book directly with Homestead Hill and save on platform fees. Request a reservation for furnished apartments and cottages in Vincennes, IN."],
-  ["/privacy-policy", "Privacy Policy | Homestead Hill", "Read Homestead Hill's privacy policy."],
-  ["/terms-of-service", "Terms of Service | Homestead Hill", "Read Homestead Hill's terms of service."],
-  ["/rental-application", "Rental Application | Homestead Hill", "Apply for an extended stay at Homestead Hill in Vincennes, Indiana."],
-];
+// Routes, titles and descriptions are generated from shared site/unit data.
+const pages = getIndexableRoutes().map(({ route, title, description }) => [route, title, description]);
 
 const escapeHtml = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 function pageHtml(template, route, title, description) {
-  const unitId = route.split("/")[2];
-  if (["unit-3", "unit-7", "unit-9"].includes(unitId)) {
-    title = title.replace(/^.*? —/, `${unitNames[unitId]} —`);
-  }
-  const canonical = `${baseUrl}${route === "/" ? "/" : route}`;
+  const canonical = getCanonicalUrl(route);
   const withMeta = template
     .replace(/<title>[^<]*<\/title>/i, () => `<title>${escapeHtml(title)}</title>`)
     .replace(/(<meta\s+name="title"\s+content=")[^"]*("\s*\/?>)/i, (m, p1, p2) => `${p1}${escapeHtml(title)}${p2}`)
@@ -51,7 +23,8 @@ function pageHtml(template, route, title, description) {
     .replace(/(<meta\s+name="twitter:url"\s+content=")[^"]*("\s*\/?>)/i, (m, p1, p2) => `${p1}${canonical}${p2}`)
     .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*("\s*\/?>)/i, (m, p1, p2) => `${p1}${escapeHtml(title)}${p2}`)
     .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*("\s*\/?>)/i, (m, p1, p2) => `${p1}${escapeHtml(description)}${p2}`)
-    .replace(/(<link\s+rel="canonical"\s+href=")[^"]*("\s*\/?>)/i, (m, p1, p2) => `${p1}${canonical}${p2}`);
+    .replace(/<link\s+rel="canonical"[^>]*>\s*/gi, "")
+    .replace("</head>", () => `    <link rel="canonical" href="${canonical}" />\n  </head>`);
   return withMeta.replace('<div id="root"></div>', () => `<div id="root">${render(route)}</div>`);
 }
 
@@ -75,4 +48,5 @@ for (const [route, title, description] of pages) {
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, pageHtml(template, route, title, description));
 }
+await writeFile(join(dist, "sitemap.xml"), buildSitemapXml());
 console.log(`Pre-rendered ${pages.length} sitemap routes to static HTML.`);

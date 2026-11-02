@@ -1,3 +1,4 @@
+import { getUnitDisplayName } from "@/lib/siteMeta";
 import { getWeeklyPrice, formatUSD } from "@/lib/pricing";
 import { CLEANING_FEE_NOTICE } from "@/lib/fees";
 import { PRORATED_WEEKLY_NOTICE } from "@/lib/pricing";
@@ -157,7 +158,7 @@ const UnitDetail = () => {
 
               {/* Unit Title */}
               <h1 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">
-                {unit.name}
+                {getUnitDisplayName(unit)}
               </h1>
 
               {/* Quick Stats */}

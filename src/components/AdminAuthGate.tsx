@@ -1,3 +1,4 @@
+import { SEO } from "@/components/SEO";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
@@ -19,7 +20,16 @@ interface AdminAuthGateProps {
  * Only signed-in users whose email is on the `admin_allowlist`
  * table see the children.
  */
-export function AdminAuthGate({ children }: AdminAuthGateProps) {
+export function AdminAuthGate(props: AdminAuthGateProps) {
+  return (
+    <>
+      <SEO title="Admin | Homestead Hill" description="Private admin area." noindex />
+      <AdminAuthGateInner {...props} />
+    </>
+  );
+}
+
+function AdminAuthGateInner({ children }: AdminAuthGateProps) {
   const { loading, session, isAllowed, email } = useAdminAuth();
   const [signingIn, setSigningIn] = useState(false);
   const [formEmail, setFormEmail] = useState("");

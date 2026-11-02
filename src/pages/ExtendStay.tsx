@@ -108,6 +108,7 @@ const ExtendStay = () => {
           title="Extend Your Stay | Homestead Hill"
           description="Start an extension request for your Homestead Hill stay. Select your unit to continue."
           canonical="https://homestead-hill.com/extend-stay"
+          noindex
         />
         <Header />
         <main className="pt-24 md:pt-28 pb-16 container">

@@ -14,9 +14,9 @@ test("owner's no-pets rule applies to the property and every unit", () => {
   schema.containsPlace.forEach(unit => strictEqual(unit.petsAllowed, false));
 });
 
-test("schema inventory contains exactly the 11 real units", () => {
+test("schema lists the 11 unit pages while property has 15 units", () => {
   const schema = getPropertyAccommodationSchema();
-  strictEqual(schema.numberOfRooms, 11);
+  strictEqual(schema.numberOfRooms, 15);
   deepStrictEqual(schema.containsPlace.map(unit => unit.url.split("/").pop()),
     ["unit-1", "unit-2", "unit-3", "unit-4", "unit-5", "unit-6", "unit-7", "unit-9", "unit-11", "unit-13", "unit-14"]);
 });

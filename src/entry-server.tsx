@@ -1,11 +1,9 @@
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import App from "./App";
-import { units } from "./data/units";
 export { getPropertyAccommodationSchema } from "./lib/accommodationSchema";
-
-// Prerender metadata uses the same names as cards, details and booking selectors.
-export const unitNames = Object.fromEntries(units.map(unit => [unit.id, unit.name]));
+// Prerender titles, descriptions, canonicals and the sitemap come from the same data as the app.
+export { getIndexableRoutes, getCanonicalUrl, buildSitemapXml } from "./lib/siteMeta";
 
 export function render(url: string) {
   return renderToString(

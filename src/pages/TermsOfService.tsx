@@ -1,15 +1,12 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, pageSEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 
 const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-background">
-      <SEO 
-        title="Terms of Service | Homestead Hill"
-        description="Terms of Service for Homestead Hill furnished apartments and cottages in Vincennes, Indiana. Review our rental policies, guest responsibilities, and booking terms."
-      />
+      <SEO {...pageSEO.terms} />
       <Header />
       
       <main className="pt-24 md:pt-28 pb-16">

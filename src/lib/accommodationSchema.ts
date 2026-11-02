@@ -1,8 +1,10 @@
 import { units } from "@/data/units";
 import type { Unit } from "@/data/units";
 import { getWeeklyPrice } from "@/lib/pricing";
+import { BASE_URL, TOTAL_UNITS, getUnitDisplayName, getUnitKind } from "@/lib/siteMeta";
 
 export const PETS_ALLOWED = false;
+export const LODGING_ID = `${BASE_URL}/#lodging`;
 
 export const PROPERTY_ADDRESS = {
   "@type": "PostalAddress",
@@ -13,15 +15,25 @@ export const PROPERTY_ADDRESS = {
   addressCountry: "US",
 };
 
-export function getUnitOffers(unit: Pick<Unit, "id" | "name" | "monthlyPrice" | "weeklyPrice" | "nightlyPrice">) {
-  const url = `https://homestead-hill.com/units/${unit.id}`;
+export const OPENING_HOURS = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "09:00",
+    closes: "17:00",
+  },
+];
+
+export function getUnitOffers(unit: Unit) {
+  const url = `${BASE_URL}/units/${unit.id}`;
+  const name = getUnitDisplayName(unit);
   return [
     { label: "Night", duration: "P1D", price: unit.nightlyPrice ?? 95 },
-    { label: "Week", duration: "P7D", price: getWeeklyPrice(unit as Unit) },
+    { label: "Week", duration: "P7D", price: getWeeklyPrice(unit) },
     { label: "Month", duration: "P1M", price: unit.monthlyPrice },
   ].map(({ label, duration, price }) => ({
     "@type": "Offer",
-    name: `${unit.name} — per ${label.toLowerCase()}`,
+    name: `${name} — per ${label.toLowerCase()}`,
     url,
     price,
     priceCurrency: "USD",
@@ -38,17 +50,20 @@ export function getUnitOffers(unit: Pick<Unit, "id" | "name" | "monthlyPrice" | 
 
 export function getPropertyAccommodationSchema() {
   return {
-    numberOfRooms: units.length,
-    petsAllowed: PETS_ALLOWED,
+    "@id": LODGING_ID,
     address: PROPERTY_ADDRESS,
+    numberOfRooms: TOTAL_UNITS,
+    petsAllowed: PETS_ALLOWED,
+    openingHoursSpecification: OPENING_HOURS,
     containsPlace: units.map(unit => ({
       "@type": "Accommodation",
-      "@id": `https://homestead-hill.com/units/${unit.id}#accommodation`,
-      name: unit.name,
-      petsAllowed: PETS_ALLOWED,
-      url: `https://homestead-hill.com/units/${unit.id}`,
+      "@id": `${BASE_URL}/units/${unit.id}#unit`,
+      name: getUnitDisplayName(unit),
+      url: `${BASE_URL}/units/${unit.id}`,
+      accommodationCategory: getUnitKind(unit),
       numberOfBedrooms: unit.bedrooms,
-      numberOfBathroomsTotal: unit.baths,
+      occupancy: { "@type": "QuantitativeValue", maxValue: unit.sleeps },
+      petsAllowed: PETS_ALLOWED,
       offers: getUnitOffers(unit),
     })),
   };

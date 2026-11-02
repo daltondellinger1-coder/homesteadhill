@@ -46,9 +46,6 @@
     <meta name="geo.position" content="38.6773;-87.5286" />
     <meta name="ICBM" content="38.6773, -87.5286" />
     
-    <!-- Canonical -->
-    <link rel="canonical" href="https://homestead-hill.com/" />
-    
     <!-- Google Search Console verification -->
     <meta name="google-site-verification" content="xEuB7WBeJe1CNoXkOl8exvE1xkUUY3cGtm5Mnle4pe4" />
     
@@ -57,13 +54,9 @@
 {
   "@context": "https://schema.org",
   "@type": "LodgingBusiness",
-  "@id": "https://homestead-hill.com/#organization",
+  "@id": "https://homestead-hill.com/#lodging",
   "name": "Homestead Hill",
-  "description": "Fully furnished apartments and cottages in Vincennes, Indiana. Perfect for traveling nurses, contractors, and business travelers seeking extended stays.",
-  "url": "https://homestead-hill.com",
-  "telephone": "+1-812-768-3108",
-  "email": "booking@homestead-hill.com",
-  "image": "https://homestead-hill.com/og-image.jpg",
+  "url": "https://homestead-hill.com/",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "2818 Washington Ave",
@@ -72,11 +65,24 @@
     "postalCode": "47591",
     "addressCountry": "US"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 38.6773,
-    "longitude": -87.5286
-  },
+  "numberOfRooms": 15,
+  "petsAllowed": false,
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:00",
+      "closes": "17:00"
+    }
+  ],
   "amenityFeature": [
     {
       "@type": "LocationFeatureSpecification",
@@ -119,40 +125,23 @@
       "value": true
     }
   ],
-  "priceRange": "$$",
-  "paymentAccepted": "Credit Card",
-  "currenciesAccepted": "USD",
-  "checkinTime": "14:00",
-  "checkoutTime": "11:00",
-  "petsAllowed": false,
-  "numberOfRooms": 11,
-  "areaServed": [
-    "Vincennes",
-    "Knox County",
-    "Indiana"
-  ],
-  "audience": {
-    "@type": "Audience",
-    "audienceType": [
-      "Travel Nurses",
-      "Contractors",
-      "Business Travelers",
-      "Relocating Professionals"
-    ]
-  },
   "containsPlace": [
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-1#accommodation",
-      "name": "Unit 1",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-1#unit",
+      "name": "Unit 1 · 1BR Apartment · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-1",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 1 — per night",
+          "name": "Unit 1 · 1BR Apartment · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-1",
           "price": 95,
           "priceCurrency": "USD",
@@ -171,7 +160,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 1 — per week",
+          "name": "Unit 1 · 1BR Apartment · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-1",
           "price": 520,
           "priceCurrency": "USD",
@@ -190,7 +179,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 1 — per month",
+          "name": "Unit 1 · 1BR Apartment · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-1",
           "price": 1650,
           "priceCurrency": "USD",
@@ -211,16 +200,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-2#accommodation",
-      "name": "Unit 2",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-2#unit",
+      "name": "Unit 2 · 1BR Apartment · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-2",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 2 — per night",
+          "name": "Unit 2 · 1BR Apartment · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-2",
           "price": 95,
           "priceCurrency": "USD",
@@ -239,7 +232,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 2 — per week",
+          "name": "Unit 2 · 1BR Apartment · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-2",
           "price": 520,
           "priceCurrency": "USD",
@@ -258,7 +251,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 2 — per month",
+          "name": "Unit 2 · 1BR Apartment · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-2",
           "price": 1650,
           "priceCurrency": "USD",
@@ -279,16 +272,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-3#accommodation",
-      "name": "Unit 3",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-3#unit",
+      "name": "Unit 3 · 1BR Apartment · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-3",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 3 — per night",
+          "name": "Unit 3 · 1BR Apartment · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-3",
           "price": 95,
           "priceCurrency": "USD",
@@ -307,7 +304,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 3 — per week",
+          "name": "Unit 3 · 1BR Apartment · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-3",
           "price": 520,
           "priceCurrency": "USD",
@@ -326,7 +323,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 3 — per month",
+          "name": "Unit 3 · 1BR Apartment · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-3",
           "price": 1650,
           "priceCurrency": "USD",
@@ -347,16 +344,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-4#accommodation",
-      "name": "Unit 4",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-4#unit",
+      "name": "Unit 4 · 1BR Apartment · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-4",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 4 — per night",
+          "name": "Unit 4 · 1BR Apartment · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-4",
           "price": 95,
           "priceCurrency": "USD",
@@ -375,7 +376,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 4 — per week",
+          "name": "Unit 4 · 1BR Apartment · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-4",
           "price": 520,
           "priceCurrency": "USD",
@@ -394,7 +395,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 4 — per month",
+          "name": "Unit 4 · 1BR Apartment · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-4",
           "price": 1650,
           "priceCurrency": "USD",
@@ -415,16 +416,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-5#accommodation",
-      "name": "Unit 5",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-5#unit",
+      "name": "Unit 5 · 2BR Apartment · Sleeps 4",
       "url": "https://homestead-hill.com/units/unit-5",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 2,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 4
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 5 — per night",
+          "name": "Unit 5 · 2BR Apartment · Sleeps 4 — per night",
           "url": "https://homestead-hill.com/units/unit-5",
           "price": 105,
           "priceCurrency": "USD",
@@ -443,7 +448,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 5 — per week",
+          "name": "Unit 5 · 2BR Apartment · Sleeps 4 — per week",
           "url": "https://homestead-hill.com/units/unit-5",
           "price": 580,
           "priceCurrency": "USD",
@@ -462,7 +467,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 5 — per month",
+          "name": "Unit 5 · 2BR Apartment · Sleeps 4 — per month",
           "url": "https://homestead-hill.com/units/unit-5",
           "price": 1850,
           "priceCurrency": "USD",
@@ -483,16 +488,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-6#accommodation",
-      "name": "Unit 6",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-6#unit",
+      "name": "Unit 6 · 2BR Apartment · Sleeps 4",
       "url": "https://homestead-hill.com/units/unit-6",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 2,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 4
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 6 — per night",
+          "name": "Unit 6 · 2BR Apartment · Sleeps 4 — per night",
           "url": "https://homestead-hill.com/units/unit-6",
           "price": 105,
           "priceCurrency": "USD",
@@ -511,7 +520,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 6 — per week",
+          "name": "Unit 6 · 2BR Apartment · Sleeps 4 — per week",
           "url": "https://homestead-hill.com/units/unit-6",
           "price": 580,
           "priceCurrency": "USD",
@@ -530,7 +539,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 6 — per month",
+          "name": "Unit 6 · 2BR Apartment · Sleeps 4 — per month",
           "url": "https://homestead-hill.com/units/unit-6",
           "price": 1850,
           "priceCurrency": "USD",
@@ -551,16 +560,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-7#accommodation",
-      "name": "Unit 7 - 1 Bedroom Queen Apartment",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-7#unit",
+      "name": "Unit 7 · 1BR Apartment · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-7",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 7 - 1 Bedroom Queen Apartment — per night",
+          "name": "Unit 7 · 1BR Apartment · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-7",
           "price": 95,
           "priceCurrency": "USD",
@@ -579,7 +592,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 7 - 1 Bedroom Queen Apartment — per week",
+          "name": "Unit 7 · 1BR Apartment · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-7",
           "price": 520,
           "priceCurrency": "USD",
@@ -598,7 +611,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 7 - 1 Bedroom Queen Apartment — per month",
+          "name": "Unit 7 · 1BR Apartment · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-7",
           "price": 1650,
           "priceCurrency": "USD",
@@ -619,16 +632,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-9#accommodation",
-      "name": "Unit 9 - 1 Bedroom Queen Apartment",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-9#unit",
+      "name": "Unit 9 · 1BR Apartment · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-9",
+      "accommodationCategory": "Apartment",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 9 - 1 Bedroom Queen Apartment — per night",
+          "name": "Unit 9 · 1BR Apartment · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-9",
           "price": 95,
           "priceCurrency": "USD",
@@ -647,7 +664,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 9 - 1 Bedroom Queen Apartment — per week",
+          "name": "Unit 9 · 1BR Apartment · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-9",
           "price": 520,
           "priceCurrency": "USD",
@@ -666,7 +683,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 9 - 1 Bedroom Queen Apartment — per month",
+          "name": "Unit 9 · 1BR Apartment · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-9",
           "price": 1650,
           "priceCurrency": "USD",
@@ -687,16 +704,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-11#accommodation",
-      "name": "Unit 11 - Cottage",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-11#unit",
+      "name": "Unit 11 · 1BR Cottage · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-11",
+      "accommodationCategory": "Cottage",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 11 - Cottage — per night",
+          "name": "Unit 11 · 1BR Cottage · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-11",
           "price": 100,
           "priceCurrency": "USD",
@@ -715,7 +736,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 11 - Cottage — per week",
+          "name": "Unit 11 · 1BR Cottage · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-11",
           "price": 550,
           "priceCurrency": "USD",
@@ -734,7 +755,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 11 - Cottage — per month",
+          "name": "Unit 11 · 1BR Cottage · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-11",
           "price": 1750,
           "priceCurrency": "USD",
@@ -755,16 +776,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-13#accommodation",
-      "name": "Unit 13 - Cottage",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-13#unit",
+      "name": "Unit 13 · 1BR Cottage · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-13",
+      "accommodationCategory": "Cottage",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 13 - Cottage — per night",
+          "name": "Unit 13 · 1BR Cottage · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-13",
           "price": 100,
           "priceCurrency": "USD",
@@ -783,7 +808,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 13 - Cottage — per week",
+          "name": "Unit 13 · 1BR Cottage · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-13",
           "price": 550,
           "priceCurrency": "USD",
@@ -802,7 +827,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 13 - Cottage — per month",
+          "name": "Unit 13 · 1BR Cottage · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-13",
           "price": 1750,
           "priceCurrency": "USD",
@@ -823,16 +848,20 @@
     },
     {
       "@type": "Accommodation",
-      "@id": "https://homestead-hill.com/units/unit-14#accommodation",
-      "name": "Unit 14 - Premium Cottage",
-      "petsAllowed": false,
+      "@id": "https://homestead-hill.com/units/unit-14#unit",
+      "name": "Unit 14 · 1BR Cottage · Sleeps 2",
       "url": "https://homestead-hill.com/units/unit-14",
+      "accommodationCategory": "Cottage",
       "numberOfBedrooms": 1,
-      "numberOfBathroomsTotal": 1,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 2
+      },
+      "petsAllowed": false,
       "offers": [
         {
           "@type": "Offer",
-          "name": "Unit 14 - Premium Cottage — per night",
+          "name": "Unit 14 · 1BR Cottage · Sleeps 2 — per night",
           "url": "https://homestead-hill.com/units/unit-14",
           "price": 130,
           "priceCurrency": "USD",
@@ -851,7 +880,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 14 - Premium Cottage — per week",
+          "name": "Unit 14 · 1BR Cottage · Sleeps 2 — per week",
           "url": "https://homestead-hill.com/units/unit-14",
           "price": 640,
           "priceCurrency": "USD",
@@ -870,7 +899,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Unit 14 - Premium Cottage — per month",
+          "name": "Unit 14 · 1BR Cottage · Sleeps 2 — per month",
           "url": "https://homestead-hill.com/units/unit-14",
           "price": 1850,
           "priceCurrency": "USD",

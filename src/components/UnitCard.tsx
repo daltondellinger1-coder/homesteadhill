@@ -1,3 +1,4 @@
+import { getUnitDisplayName } from "@/lib/siteMeta";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -35,12 +36,12 @@ export function UnitCard({ unit }: UnitCardProps) {
         <button
           onClick={() => galleryImages.length > 0 && setLightboxOpen(true)}
           className="w-full aspect-[4/3] bg-navy-light relative overflow-hidden cursor-pointer"
-          aria-label={`View ${unit.name} photos`}
+          aria-label={`View ${getUnitDisplayName(unit)} photos`}
         >
           {primaryImage ? (
             <img
               src={primaryImage}
-              alt={unit.name}
+              alt={getUnitDisplayName(unit)}
               className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 ${
                 unit.id === "unit-9" ? primaryPresentation.className : "group-hover:scale-105"
               }`}
@@ -72,7 +73,7 @@ export function UnitCard({ unit }: UnitCardProps) {
         <div className="p-6">
           <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2 mb-2">
             <h3 className="font-serif text-xl font-semibold text-foreground">
-              {unit.name}
+              {getUnitDisplayName(unit)}
             </h3>
             {/* Pricing */}
             <div className="ml-auto text-right text-xs space-y-0.5 whitespace-nowrap" aria-label="Unit prices">

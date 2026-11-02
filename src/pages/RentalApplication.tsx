@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, pageSEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -219,10 +219,7 @@ const RentalApplication = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO
-        title="Rental Application | Homestead Hill"
-        description="Complete your rental application for extended stay at Homestead Hill furnished rentals in Vincennes, Indiana."
-      />
+      <SEO {...pageSEO.rentalApplication} />
       <Header />
 
       <main className="pt-24 md:pt-28 pb-16 md:pb-24">

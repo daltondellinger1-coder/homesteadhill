@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,17 +14,17 @@ import Location from "./pages/Location";
 
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
-import Admin from "./pages/Admin";
-import OpsFunnel from "./pages/OpsFunnel";
-import { AdminAuthGate } from "@/components/AdminAuthGate";
 import RentalApplication from "./pages/RentalApplication";
 import ExtendStay from "./pages/ExtendStay";
-import ContractorOfficeLaundry from "./pages/ContractorOfficeLaundry";
-import HomesteadHillDraws from "./pages/HomesteadHillDraws";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 import BookRedirect from "./pages/BookRedirect";
+const HomesteadHillDraws = lazy(() => import("./pages/HomesteadHillDraws"));
+const ContractorOfficeLaundry = lazy(() => import("./pages/ContractorOfficeLaundry"));
+const AdminAuthGate = lazy(() => import("@/components/AdminAuthGate").then((m) => ({ default: m.AdminAuthGate })));
+const OpsFunnel = lazy(() => import("./pages/OpsFunnel"));
+const Admin = lazy(() => import("./pages/Admin"));
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <ScrollToTop />
+      <Suspense fallback={null}>
       <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/units" element={<Units />} />
@@ -79,6 +81,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
     </TooltipProvider>
   </QueryClientProvider>
 );

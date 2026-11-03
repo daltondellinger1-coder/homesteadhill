@@ -1,7 +1,7 @@
 // One-time migration: copies the embedded draw snapshot into draw_snapshots.
 // Idempotent: does nothing if any row already exists. Deleted after use.
 import { createClient } from 'npm:@supabase/supabase-js@2'
-import snapshot from '../homestead-hill-draws/snapshot.json' with { type: 'json' }
+import snapshot from './snapshot.json' with { type: 'json' }
 
 Deno.serve(async () => {
   const admin = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)

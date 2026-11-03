@@ -19,3 +19,4 @@ Rules:
 - /book is a replace redirect that preserves query/hash to retain contact preselection; do not include redirect, private or noindex routes in the sitemap.
 - FAQ answers are force-mounted for initial HTML and hidden only while closed via a page-scoped accordion selector, preserving single-open interaction and avoiding changes to other accordions.
 - Per-route titles/descriptions/canonicals, unit display names and the sitemap come from src/lib/siteMeta.ts; prerender.mjs reads them via entry-server and writes dist/sitemap.xml so new units are added automatically.
+- Private business data (budgets, draws, owner cash) lives only in admin-only RLS tables (e.g. draw_snapshots) and admin/ops/contractor pages are React.lazy chunks wrapped in per-route Suspense, so nothing private ships in the public bundle and public prerendered HTML stays unchanged.

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { ArrowLeft, AlertTriangle, Banknote, ExternalLink, FileSpreadsheet, RefreshCw, TrendingDown, Wallet } from "lucide-react";
@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { homesteadHillDrawSnapshot } from "@/data/homesteadHillDrawSnapshot";
+import { supabase } from "@/integrations/supabase/client";
 
 type UnitSummaryRow = {
   unit: string;
@@ -69,8 +69,6 @@ type DrawDashboardData = {
   recommendedNextActions: string[];
 };
 
-const fallbackData = homesteadHillDrawSnapshot as unknown as DrawDashboardData;
-const LIVE_CSV_URL = "https://docs.google.com/spreadsheets/d/1O4QXwt5SxDRf9c8FLaqyvK6813DAvO1pb5eiD77fW50/gviz/tq?tqx=out:csv&gid=949151202";
 
 const money = (value: number) =>
   new Intl.NumberFormat("en-US", {
@@ -93,149 +91,15 @@ const dateTime = (value: string) => {
   return date.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
 };
 
-const parseCsv = (text: string) => {
-  const rows: string[][] = [];
-  let row: string[] = [];
-  let cell = "";
-  let inQuotes = false;
-
-  for (let i = 0; i < text.length; i += 1) {
-    const char = text[i];
-    const next = text[i + 1];
-
-    if (char === '"' && inQuotes && next === '"') {
-      cell += '"';
-      i += 1;
-      continue;
-    }
-
-    if (char === '"') {
-      inQuotes = !inQuotes;
-      continue;
-    }
-
-    if (char === "," && !inQuotes) {
-      row.push(cell);
-      cell = "";
-      continue;
-    }
-
-    if ((char === "\n" || char === "\r") && !inQuotes) {
-      if (char === "\r" && next === "\n") i += 1;
-      row.push(cell);
-      rows.push(row);
-      row = [];
-      cell = "";
-      continue;
-    }
-
-    cell += char;
-  }
-
-  if (cell || row.length) {
-    row.push(cell);
-    rows.push(row);
-  }
-
-  return rows;
-};
-
-const parseNumber = (value: unknown) => {
-  if (typeof value === "number") return value;
-  const parsed = Number(String(value ?? "").replace(/[$,]/g, ""));
-  return Number.isFinite(parsed) ? parsed : 0;
-};
-
-const getCell = (row: string[], index: number) => row[index] ?? "";
-
-const buildDashboardDataFromParsedRows = (rows: string[][]): DrawDashboardData => {
-  const summaryRow = rows[1] ?? [];
-  const unitRows = rows.slice(5, 12).filter((row) => getCell(row, 0) && getCell(row, 0) !== "Unit / Area");
-  const ledgerRows = rows.slice(13).filter((row) => getCell(row, 0) && getCell(row, 2));
-
-  const unitSummary = unitRows.map((row) => ({
-    unit: getCell(row, 0),
-    budget: parseNumber(getCell(row, 1)),
-    actual: parseNumber(getCell(row, 2)),
-    drawsApplied: parseNumber(getCell(row, 3)),
-    ownerCashApplied: parseNumber(getCell(row, 4)),
-    openCommitted: parseNumber(getCell(row, 5)),
-    variance: parseNumber(getCell(row, 6)),
-    fundingPosition: parseNumber(getCell(row, 7)),
-    notes: getCell(row, 8),
-  }));
-
-  const ledger = ledgerRows.map((row, index) => {
-    const item = {
-      row: index + 14,
-      unit: getCell(row, 0),
-      category: getCell(row, 1),
-      scope: getCell(row, 2),
-      actualCostToDate: parseNumber(getCell(row, 4)),
-      paidFromDraws: parseNumber(getCell(row, 5)),
-      paidFromOwnerCash: parseNumber(getCell(row, 6)),
-      openCommitted: parseNumber(getCell(row, 7)),
-      vendor: getCell(row, 10),
-      sourceLink: getCell(row, 11),
-      drawNumber: getCell(row, 12),
-      status: getCell(row, 13),
-      sourceAccount: getCell(row, 14),
-      notes: getCell(row, 15),
-    };
-
-    const drawMatch = `${item.scope} ${item.notes}`.match(/80% of \$?([0-9,]+(?:\.\d{2})?)/i);
-    const requestedAmount = drawMatch ? parseNumber(drawMatch[1]) : 0;
-    return {
-      ...item,
-      requestedAmount,
-      holdbackAmount: requestedAmount && item.paidFromDraws ? Number((requestedAmount - item.paidFromDraws).toFixed(2)) : 0,
-    };
-  });
-
-  const draws = ledger.filter((row) => row.paidFromDraws || row.drawNumber || `${row.category} ${row.scope} ${row.notes}`.toLowerCase().includes("draw"));
-  const ledgerActualCostToDate = ledger.reduce((total, row) => total + row.actualCostToDate, 0);
-  const ledgerDrawsReceived = ledger.reduce((total, row) => total + row.paidFromDraws, 0);
-  const ledgerOwnerCash = ledger.reduce((total, row) => total + row.paidFromOwnerCash, 0);
-  const ledgerOpenCommitted = ledger.reduce((total, row) => total + row.openCommitted, 0);
-  const openCommitted = parseNumber(getCell(summaryRow, 9));
-  const summaryPaidFromDraws = parseNumber(getCell(summaryRow, 5));
-
-  return {
-    ...fallbackData,
-    source: "live-google-sheet-csv",
-    refreshedAt: new Date().toISOString(),
-    summary: {
-      totalBudget: parseNumber(getCell(summaryRow, 1)),
-      totalActual: parseNumber(getCell(summaryRow, 3)),
-      summaryPaidFromDraws,
-      totalPaidFromOwnerCash: parseNumber(getCell(summaryRow, 7)),
-      openCommitted,
-      netFundingPosition: parseNumber(getCell(summaryRow, 11)),
-      status: getCell(summaryRow, 13),
-      ledgerActualCostToDate: Number(ledgerActualCostToDate.toFixed(2)),
-      ledgerDrawsReceived: Number(ledgerDrawsReceived.toFixed(2)),
-      ledgerOwnerCash: Number(ledgerOwnerCash.toFixed(2)),
-      ledgerOpenCommitted: Number(ledgerOpenCommitted.toFixed(2)),
-      paidOutVsLedgerDrawGap: Number((ledgerActualCostToDate - ledgerDrawsReceived - ledgerOwnerCash).toFixed(2)),
-      cashNeededForActualsAndOpenCommitted: Number((ledgerActualCostToDate + openCommitted - ledgerDrawsReceived - ledgerOwnerCash).toFixed(2)),
-      summaryDrawMismatch: Number((summaryPaidFromDraws - ledgerDrawsReceived).toFixed(2)),
-    },
-    unitSummary,
-    draws,
-    ledger,
-    dataQuality: [
-      `Top summary says paid from draws is ${exactMoney(summaryPaidFromDraws)}, but ledger rows currently prove ${exactMoney(ledgerDrawsReceived)}; mismatch ${exactMoney(summaryPaidFromDraws - ledgerDrawsReceived)}.`,
-      "Draw request/holdback amounts are only populated where the row notes include request math, e.g. 80% of $20,384.26.",
-      "Actuals include imported Unit 14 placeholders marked needs receipt/QBO verification; do not treat all actuals as receipt-proven yet.",
-    ],
-  };
-};
-
-const fetchLiveDashboardData = async () => {
-  const response = await fetch(`${LIVE_CSV_URL}&_=${Date.now()}`, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Google Sheet CSV fetch failed: ${response.status}`);
-  const text = await response.text();
-  return buildDashboardDataFromParsedRows(parseCsv(text));
+const fetchDashboardData = async (): Promise<DrawDashboardData | null> => {
+  const { data, error } = await supabase
+    .from("draw_snapshots")
+    .select("data")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  return (data?.data as unknown as DrawDashboardData) ?? null;
 };
 
 function MetricCard({
@@ -277,26 +141,35 @@ const HomesteadHillDraws = () => {
 
   const query = useQuery({
     queryKey: ["homestead-hill-draws"],
-    queryFn: fetchLiveDashboardData,
+    queryFn: fetchDashboardData,
     retry: 1,
     staleTime: 60 * 1000,
   });
 
-  const data = query.data ?? fallbackData;
-  const usingFallback = !query.data;
+  const data = query.data;
+
+  if (!data) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100">
+        <Header />
+        <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <p>{query.isLoading ? "Loading draw dashboard…" : query.isError ? "Could not load draw data." : "No draw snapshot found."}</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
   const s = data.summary;
   const visibleUnits = showAllUnits ? data.unitSummary : data.unitSummary.filter((unit) => unit.actual || unit.drawsApplied || unit.openCommitted || unit.fundingPosition);
 
-  const drawTotals = useMemo(() => {
-    return data.draws.reduce(
-      (totals, draw) => ({
-        requested: totals.requested + (draw.requestedAmount || 0),
-        received: totals.received + (draw.paidFromDraws || 0),
-        holdback: totals.holdback + (draw.holdbackAmount || 0),
-      }),
-      { requested: 0, received: 0, holdback: 0 },
-    );
-  }, [data.draws]);
+  const drawTotals = data.draws.reduce(
+    (totals, draw) => ({
+      requested: totals.requested + (draw.requestedAmount || 0),
+      received: totals.received + (draw.paidFromDraws || 0),
+      holdback: totals.holdback + (draw.holdbackAmount || 0),
+    }),
+    { requested: 0, received: 0, holdback: 0 },
+  );
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
@@ -335,17 +208,6 @@ const HomesteadHillDraws = () => {
             </div>
           </div>
         </section>
-
-        {usingFallback && (
-          <div className="mt-5 rounded-2xl border border-amber-400/40 bg-amber-500/10 p-4 text-sm text-amber-100">
-            <div className="flex gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-none" />
-              <div>
-                <strong>Using embedded fallback snapshot.</strong> The permanent page is in place, but the Supabase live feed needs deployment/configuration before this refreshes directly from a hosted JSON feed. The numbers below are from the latest verified Sheet snapshot.
-              </div>
-            </div>
-          </div>
-        )}
 
         <section className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <MetricCard title="Paid out / actuals" value={exactMoney(s.ledgerActualCostToDate)} description="Actual cost entered in the ledger to date." icon={Wallet} tone="neutral" />
@@ -453,7 +315,7 @@ const HomesteadHillDraws = () => {
             </CardHeader>
             <CardContent className="space-y-3 text-sm text-slate-700">
               <code className="block rounded-xl bg-slate-100 p-3 text-slate-950">/admin/draws</code>
-              <p>Use this route as the saved link on desktop or phone after the app deployment picks up this change. The page will fetch the Edge Function first and fall back to the embedded Sheet snapshot if the live feed is not configured yet.</p>
+              <p>Use this route as the saved link on desktop or phone after the app deployment picks up this change. Data loads from the private database after admin sign-in.</p>
             </CardContent>
           </Card>
         </section>

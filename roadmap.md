@@ -30,3 +30,9 @@ Optional follow-ups (not blocking):
 - Booking emails come from the currently deployed email code and print the weekly total as "$585.2" rather than "$585.20" until that email code is updated and redeployed.
 - Unit 13 video playback could not be verified in the test browser (common H.264 decode unavailable there); duration and framing were confirmed from the file itself, so one live check on a phone is still worthwhile.
 - Nine units (1, 2, 3, 4, 5, 6, 11, 13, 14) have feeds configured and sync every six hours; no action needed there.
+
+## Private data lockdown (2026-11-03)
+- [x] Draw snapshot moved to admin-only `draw_snapshots` table (exact copy verified); embedded file and Google Sheet CSV link removed from site code.
+- [x] Admin, draws, ops funnel, admin gate and contractor pages load as separate chunks; none in main bundle.
+- [ ] Blocked on owner: no admin accounts exist yet, so /admin pages can't be opened until Dalton signs up and is added to the allowlist.
+- [ ] Blocked on owner: set the Google Sheet's sharing to private (already exposed by link).

@@ -125,6 +125,30 @@ export type Database = {
         }
         Relationships: []
       }
+      draw_snapshots: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          refreshed_at: string | null
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          data: Json
+          id?: string
+          refreshed_at?: string | null
+          source?: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          refreshed_at?: string | null
+          source?: string
+        }
+        Relationships: []
+      }
       rental_applications: {
         Row: {
           additional_info: string | null

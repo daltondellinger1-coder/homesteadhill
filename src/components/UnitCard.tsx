@@ -128,7 +128,20 @@ export function UnitCard({ unit }: UnitCardProps) {
               <Link to={`/units/${unit.id}`}>View Details</Link>
             </Button>
             <Button asChild size="sm" className="flex-1">
-              <Link to={`/contact?unit=${unit.id}`}>Book Now</Link>
+              <Link
+                to={`/contact?unit=${unit.id}`}
+                onClick={() => {
+                  if (typeof window.gtag === "function") {
+                    window.gtag("event", "booking_click", {
+                      link_text: "Book Now",
+                      unit_id: unit.id,
+                      page_path: window.location.pathname,
+                    });
+                  }
+                }}
+              >
+                Book Now
+              </Link>
             </Button>
           </div>
         </div>

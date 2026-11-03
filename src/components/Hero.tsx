@@ -54,7 +54,20 @@ export function Hero() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up" style={{ animationDelay: "0.2s" }}>
             <Button asChild variant="hero" size="xl">
-              <Link to="/contact">Book Direct</Link>
+              <Link
+                to="/contact"
+                onClick={() => {
+                  if (typeof window.gtag === "function") {
+                    window.gtag("event", "booking_click", {
+                      link_text: "Book Direct",
+                      unit_id: "",
+                      page_path: window.location.pathname,
+                    });
+                  }
+                }}
+              >
+                Book Direct
+              </Link>
             </Button>
             <Button asChild variant="heroOutline" size="xl">
               <Link to="/units">View Units</Link>

@@ -63,7 +63,20 @@ export function Header() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <Button asChild variant="default" size="default">
-            <Link to="/contact">Book Direct</Link>
+            <Link
+              to="/contact"
+              onClick={() => {
+                if (typeof window.gtag === "function") {
+                  window.gtag("event", "booking_click", {
+                    link_text: "Book Direct",
+                    unit_id: "",
+                    page_path: window.location.pathname,
+                  });
+                }
+              }}
+            >
+              Book Direct
+            </Link>
           </Button>
         </div>
 
@@ -98,7 +111,19 @@ export function Header() {
             ))}
             <div className="pt-4 mt-2 border-t border-border">
               <Button asChild variant="default" size="lg" className="w-full">
-                <Link to="/contact" onClick={() => setIsOpen(false)}>
+                <Link
+                  to="/contact"
+                  onClick={() => {
+                    setIsOpen(false);
+                    if (typeof window.gtag === "function") {
+                      window.gtag("event", "booking_click", {
+                        link_text: "Book Direct – No Platform Fees",
+                        unit_id: "",
+                        page_path: window.location.pathname,
+                      });
+                    }
+                  }}
+                >
                   Book Direct – No Platform Fees
                 </Link>
               </Button>

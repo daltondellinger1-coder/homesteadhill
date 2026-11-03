@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { ArrowLeft, AlertTriangle, Banknote, ExternalLink, FileSpreadsheet, RefreshCw, TrendingDown, Wallet } from "lucide-react";
@@ -162,16 +162,14 @@ const HomesteadHillDraws = () => {
   const s = data.summary;
   const visibleUnits = showAllUnits ? data.unitSummary : data.unitSummary.filter((unit) => unit.actual || unit.drawsApplied || unit.openCommitted || unit.fundingPosition);
 
-  const drawTotals = useMemo(() => {
-    return data.draws.reduce(
-      (totals, draw) => ({
-        requested: totals.requested + (draw.requestedAmount || 0),
-        received: totals.received + (draw.paidFromDraws || 0),
-        holdback: totals.holdback + (draw.holdbackAmount || 0),
-      }),
-      { requested: 0, received: 0, holdback: 0 },
-    );
-  }, [data.draws]);
+  const drawTotals = data.draws.reduce(
+    (totals, draw) => ({
+      requested: totals.requested + (draw.requestedAmount || 0),
+      received: totals.received + (draw.paidFromDraws || 0),
+      holdback: totals.holdback + (draw.holdbackAmount || 0),
+    }),
+    { requested: 0, received: 0, holdback: 0 },
+  );
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">

@@ -104,7 +104,20 @@ const Index = () => {
 
             <div className="text-center mt-10">
               <Button asChild size="lg">
-                <Link to="/contact">Book Direct Today</Link>
+                <Link
+                  to="/contact"
+                  onClick={() => {
+                    if (typeof window.gtag === "function") {
+                      window.gtag("event", "booking_click", {
+                        link_text: "Book Direct Today",
+                        unit_id: "",
+                        page_path: window.location.pathname,
+                      });
+                    }
+                  }}
+                >
+                  Book Direct Today
+                </Link>
               </Button>
             </div>
           </div>

@@ -34,7 +34,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <ScrollToTop />
-      <Suspense fallback={null}>
       <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/units" element={<Units />} />
@@ -49,31 +48,37 @@ const App = () => (
           <Route
             path="/admin"
             element={
+              <Suspense fallback={null}>
               <AdminAuthGate>
                 <Admin />
               </AdminAuthGate>
+              </Suspense>
             }
           />
           <Route
             path="/admin/draws"
             element={
+              <Suspense fallback={null}>
               <AdminAuthGate>
                 <HomesteadHillDraws />
               </AdminAuthGate>
+              </Suspense>
             }
           />
           <Route
             path="/ops/funnel"
             element={
+              <Suspense fallback={null}>
               <AdminAuthGate>
                 <OpsFunnel />
               </AdminAuthGate>
+              </Suspense>
             }
           />
           <Route path="/rental-application" element={<RentalApplication />} />
           <Route path="/extend-stay" element={<ExtendStay />} />
           <Route path="/extend/:unitId" element={<ExtendStay />} />
-          <Route path="/contractors/office-laundry" element={<ContractorOfficeLaundry />} />
+          <Route path="/contractors/office-laundry" element={<Suspense fallback={null}><ContractorOfficeLaundry /></Suspense>} />
           <Route path="/contractor/office-laundry" element={<Navigate to="/contractors/office-laundry" replace />} />
           <Route path="/contractor/office-laundry-bid-a7k29" element={<Navigate to="/contractors/office-laundry" replace />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -81,7 +86,6 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
       </Routes>
-      </Suspense>
     </TooltipProvider>
   </QueryClientProvider>
 );

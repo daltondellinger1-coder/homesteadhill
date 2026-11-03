@@ -278,7 +278,20 @@ const UnitDetail = () => {
                 </div>
 
                 <Button asChild size="lg" className="w-full mb-3">
-                  <Link to={`/contact?unit=${unit.id}`}>Book Now</Link>
+                  <Link
+                    to={`/contact?unit=${unit.id}`}
+                    onClick={() => {
+                      if (typeof window.gtag === "function") {
+                        window.gtag("event", "booking_click", {
+                          link_text: "Book Now",
+                          unit_id: unit.id,
+                          page_path: window.location.pathname,
+                        });
+                      }
+                    }}
+                  >
+                    Book Now
+                  </Link>
                 </Button>
 
                 <p className="text-center text-xs text-primary font-medium">

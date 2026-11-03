@@ -90,7 +90,20 @@ const Amenities = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg">
-                <Link to="/contact">Book Direct</Link>
+                <Link
+                  to="/contact"
+                  onClick={() => {
+                    if (typeof window.gtag === "function") {
+                      window.gtag("event", "booking_click", {
+                        link_text: "Book Direct",
+                        unit_id: "",
+                        page_path: window.location.pathname,
+                      });
+                    }
+                  }}
+                >
+                  Book Direct
+                </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link to="/units">View Units</Link>

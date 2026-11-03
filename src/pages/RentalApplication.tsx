@@ -166,6 +166,12 @@ const RentalApplication = () => {
       }
 
       setIsSubmitted(true);
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          form_name: "rental_application",
+          unit_id: unitId || "",
+        });
+      }
       toast.success("Application submitted successfully!");
     } catch (err) {
       console.error("Error:", err);

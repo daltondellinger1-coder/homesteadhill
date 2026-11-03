@@ -71,7 +71,20 @@ const Units = () => {
               short-term and extended stays.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link to="/contact">Book Direct</Link>
+              <Link
+                to="/contact"
+                onClick={() => {
+                  if (typeof window.gtag === "function") {
+                    window.gtag("event", "booking_click", {
+                      link_text: "Book Direct",
+                      unit_id: "",
+                      page_path: window.location.pathname,
+                    });
+                  }
+                }}
+              >
+                Book Direct
+              </Link>
             </Button>
           </div>
         </div>

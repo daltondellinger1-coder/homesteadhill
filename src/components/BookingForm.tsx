@@ -237,6 +237,12 @@ export function BookingForm() {
 
       setIsSubmitting(false);
       setIsSubmitted(true);
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          form_name: "contact",
+          unit_id: formData.unit || "",
+        });
+      }
       toast.success("Booking request submitted! We'll be in touch soon.");
       
       // For 30+ night stays, redirect to rental application

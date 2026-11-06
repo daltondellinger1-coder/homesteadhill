@@ -410,28 +410,46 @@ export type Database = {
       vacancies: {
         Row: {
           available_from: string
+          bedrooms: number | null
           created_at: string
+          furnished: boolean | null
           has_detail_page: boolean
           label: string
           note: string | null
+          notes_internal: string | null
+          product: string | null
+          source: string | null
+          status: string
           unit_id: string
           updated_at: string
         }
         Insert: {
           available_from: string
+          bedrooms?: number | null
           created_at?: string
+          furnished?: boolean | null
           has_detail_page?: boolean
           label: string
           note?: string | null
+          notes_internal?: string | null
+          product?: string | null
+          source?: string | null
+          status?: string
           unit_id: string
           updated_at?: string
         }
         Update: {
           available_from?: string
+          bedrooms?: number | null
           created_at?: string
+          furnished?: boolean | null
           has_detail_page?: boolean
           label?: string
           note?: string | null
+          notes_internal?: string | null
+          product?: string | null
+          source?: string | null
+          status?: string
           unit_id?: string
           updated_at?: string
         }

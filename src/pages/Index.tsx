@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { PerfectFor } from "@/components/PerfectFor";
+import { NextAvailable } from "@/components/NextAvailable";
 import { UnitCard } from "@/components/UnitCard";
 import { Button } from "@/components/ui/button";
 import { SEO, pageSEO } from "@/components/SEO";
@@ -24,7 +25,10 @@ const Index = () => {
         
         {/* Perfect For Section */}
         <PerfectFor />
-        
+
+        {/* Next Available Section */}
+        <NextAvailable />
+
         {/* Featured Units Section */}
         <section className="py-16 md:py-24">
           <div className="container">

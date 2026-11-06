@@ -1,0 +1,29 @@
+[
+  {
+    "unitId": "unit-3",
+    "availableFrom": "2026-11-10",
+    "label": "1BR short-stay"
+  },
+  {
+    "unitId": "unit-7",
+    "availableFrom": "2026-11-14",
+    "label": "1BR"
+  },
+  {
+    "unitId": "unit-11",
+    "availableFrom": "2026-11-20",
+    "label": "cottage"
+  },
+  {
+    "unitId": "unit-4",
+    "availableFrom": "2026-11-25",
+    "label": "1BR"
+  },
+  {
+    "unitId": "unit-15",
+    "availableFrom": "2026-12-01",
+    "label": "4BR/1BA unfurnished long-term",
+    "note": "Water included. Tenant pays gas & electric.",
+    "hasDetailPage": false
+  }
+]

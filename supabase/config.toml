@@ -23,3 +23,6 @@ verify_jwt = false
 
 [functions.unit-ical]
 verify_jwt = false
+
+[functions.vacancies-ingest]
+verify_jwt = false

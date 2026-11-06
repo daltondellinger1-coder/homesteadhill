@@ -21,7 +21,8 @@ export function NextAvailable() {
       try {
         const { data, error } = await supabase
           .from("vacancies")
-          .select("unit_id, available_from, label, note, has_detail_page")
+          .select("unit_id, available_from, label, note, has_detail_page, bedrooms, furnished, product")
+          .or("status.eq.open,status.is.null")
           .order("available_from", { ascending: true });
 
         if (!active || error || !data?.length) return;

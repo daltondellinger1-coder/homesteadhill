@@ -59,6 +59,7 @@ const EXPECTED_UNIT_IDS = [
   'unit-4',
   'unit-5',
   'unit-6',
+  'unit-7',
   'unit-11',
   'unit-13',
   'unit-14',

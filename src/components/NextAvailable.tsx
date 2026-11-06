@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import {
   findCatalogUnit,
   formatAvailableFrom,
@@ -10,7 +12,36 @@ import {
 } from "@/lib/vacancies";
 
 export function NextAvailable() {
-  const vacancies = getVacancies();
+  const [vacancies, setVacancies] = useState(getVacancies);
+
+  useEffect(() => {
+    let active = true;
+
+    async function loadVacancies() {
+      try {
+        const { data, error } = await supabase
+          .from("vacancies")
+          .select("unit_id, available_from, label, note, has_detail_page")
+          .order("available_from", { ascending: true });
+
+        if (!active || error || !data?.length) return;
+
+        setVacancies(data.map((row) => ({
+          unitId: row.unit_id,
+          availableFrom: row.available_from,
+          label: row.label,
+          note: row.note ?? undefined,
+          hasDetailPage: row.has_detail_page,
+        })).sort((a, b) => a.availableFrom.localeCompare(b.availableFrom)));
+      } catch {
+        // Keep the prerender/offline seed when the request cannot complete.
+      }
+    }
+
+    void loadVacancies();
+    return () => { active = false; };
+  }, []);
+
   if (vacancies.length === 0) return null;
 
   return (

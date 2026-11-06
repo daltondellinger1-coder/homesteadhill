@@ -407,6 +407,36 @@ export type Database = {
         }
         Relationships: []
       }
+      vacancies: {
+        Row: {
+          available_from: string
+          created_at: string
+          has_detail_page: boolean
+          label: string
+          note: string | null
+          unit_id: string
+          updated_at: string
+        }
+        Insert: {
+          available_from: string
+          created_at?: string
+          has_detail_page?: boolean
+          label: string
+          note?: string | null
+          unit_id: string
+          updated_at?: string
+        }
+        Update: {
+          available_from?: string
+          created_at?: string
+          has_detail_page?: boolean
+          label?: string
+          note?: string | null
+          unit_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

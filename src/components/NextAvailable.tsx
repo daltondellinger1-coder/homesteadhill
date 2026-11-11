@@ -9,10 +9,14 @@ import {
   getVacancies,
   vacancyCta,
   vacancyHref,
+  type Vacancy,
 } from "@/lib/vacancies";
 
 export function NextAvailable() {
-  const [vacancies, setVacancies] = useState(getVacancies);
+  // Start empty: the prerendered HTML must never carry seed dates, which go
+  // stale as soon as the vacancies table changes.
+  const [vacancies, setVacancies] = useState<Vacancy[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
@@ -25,7 +29,12 @@ export function NextAvailable() {
           .or("status.eq.open,status.is.null")
           .order("available_from", { ascending: true });
 
-        if (!active || error || !data?.length) return;
+        if (!active) return;
+
+        if (error || !data?.length) {
+          setLoading(false);
+          return;
+        }
 
         setVacancies(data.map((row) => ({
           unitId: row.unit_id,
@@ -35,13 +44,51 @@ export function NextAvailable() {
           hasDetailPage: row.has_detail_page,
         })).sort((a, b) => a.availableFrom.localeCompare(b.availableFrom)));
       } catch {
-        // Keep the prerender/offline seed when the request cannot complete.
+        // Request could not complete: fall back to the empty state, never dates.
+      } finally {
+        if (active) setLoading(false);
       }
     }
 
     void loadVacancies();
     return () => { active = false; };
   }, []);
+
+  if (loading) {
+    // Same card layout, no dates, until the query returns.
+    return (
+      <section className="py-16 md:py-24" aria-busy="true">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">
+              Next Available
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Upcoming openings at Homestead Hill. Dates update as units fill.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {getVacancies().map((vacancy) => (
+              <div
+                key={vacancy.unitId}
+                aria-hidden="true"
+                className="flex flex-col p-5 bg-gradient-card rounded-2xl border border-border animate-pulse"
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="h-5 w-20 rounded bg-muted" />
+                  <span className="h-3 w-12 rounded bg-muted" />
+                </div>
+                <span className="mt-2 h-3.5 w-16 rounded bg-muted" />
+                <span className="mt-4 h-4 w-32 rounded bg-muted" />
+                <span className="mt-5 h-4 w-24 rounded bg-muted" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (vacancies.length === 0) return null;
 

@@ -6,11 +6,14 @@ import {
   findCatalogUnit,
   formatAvailableFrom,
   getUnitNumber,
-  getVacancies,
   vacancyCta,
   vacancyHref,
   type Vacancy,
 } from "@/lib/vacancies";
+
+// Fixed, anonymous placeholder count: the skeleton must not read the offline
+// seed file, or its stale dates would ship inside the client bundle.
+const SKELETON_CARDS = [0, 1, 2, 3, 4];
 
 export function NextAvailable() {
   // Start empty: the prerendered HTML must never carry seed dates, which go
@@ -69,9 +72,9 @@ export function NextAvailable() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {getVacancies().map((vacancy) => (
+            {SKELETON_CARDS.map((index) => (
               <div
-                key={vacancy.unitId}
+                key={index}
                 aria-hidden="true"
                 className="flex flex-col p-5 bg-gradient-card rounded-2xl border border-border animate-pulse"
               >

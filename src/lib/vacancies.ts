@@ -1,4 +1,3 @@
-import vacanciesData from "@/data/vacancies.json";
 import { units, type Unit } from "@/data/units";
 
 export interface Vacancy {
@@ -8,13 +7,6 @@ export interface Vacancy {
   label: string;
   note?: string;
   hasDetailPage?: boolean;
-}
-
-/** Sort ascending by availableFrom so the soonest opening always leads. */
-export function getVacancies(): Vacancy[] {
-  return [...(vacanciesData as Vacancy[])].sort((a, b) =>
-    a.availableFrom.localeCompare(b.availableFrom),
-  );
 }
 
 export function findCatalogUnit(unitId: string): Unit | undefined {
